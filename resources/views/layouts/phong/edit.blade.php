@@ -52,11 +52,11 @@
                         <strong>Loại phòng:</strong>
                         <select data-placeholder="Select Loại Phòng" class="chosen-select" name="loaiphongid" id="loaiphongid">
                             @foreach ($loaiphongs as $loaiphong)
+                            <option value="{{ $loaiphong->ma }}" 
                                 @if($loaiphong->ma === $phong->loaiphongid)
-                                    <option value="{{ $loaiphong->ma }}" selected>{{ $loaiphong->ten }}</option>
-                                @else 
-                                    <option value="{{ $loaiphong->ma }}">{{ $loaiphong->ten }}</option>
+                                    selected
                                 @endif
+                            >{{ $loaiphong->ten }}</option>
                             @endforeach
                         </select>
                         @error('loaiphongid')

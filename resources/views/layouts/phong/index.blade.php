@@ -14,7 +14,7 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-    <table class="table table-hover">
+    <table class="table table-hover table-responsive">
         <thead>
             <tr class="thead-dark">
                 <th>Số phòng</th>
@@ -27,7 +27,7 @@
             @foreach ($phongs as $phong)
             <tr>
                 <td>{{ $phong->so_phong }}</td>
-                <td><img src="admin/img/phong/{{ $phong->hinh }}" width="20%"></td>
+                <td><img src="admin/img/phong/{{ $phong->hinh }}" width="15%"></td>
                 <td>{{ $phong->loaiphongid }}</td>
                 <td>
                     <form action="{{ route('phongs.destroy',$phong->so_phong) }}" method="Post">
@@ -41,4 +41,5 @@
             @endforeach
         </tbody>
     </table>
+    {!! $phongs->links("pagination::bootstrap-4") !!}
 </div>

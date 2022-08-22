@@ -8,45 +8,9 @@
         <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
     </a>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <!-- Nav item -->
+    @include('layouts.navitem')
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('companies.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-    <!-- Nav Item - Loại phòng -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('loaiphongs.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Loại phòng</span></a>
-    </li>
-
-    <!-- Nav Item - Phòng -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('phongs.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Phòng</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li>
-
-    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
@@ -57,8 +21,10 @@
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
         <img class="sidebar-card-illustration mb-2" src="/admin/img/undraw_rocket.svg" alt="...">
-        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+        <p class="text-center mb-2">Họ tên: Lý Nhựt Nam</p>
+        <p class="text-center mb-2">MSSV: B1910261</p>
+        <p class="text-center mb-2">SĐT: 0787887155</p>
+        <p class="text-center mb-2">Email: namB1910261@gmail.com</p>
     </div>
 
 </ul>

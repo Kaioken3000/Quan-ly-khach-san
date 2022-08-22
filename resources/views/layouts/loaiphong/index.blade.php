@@ -14,7 +14,7 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-    <table class="table table-hover">
+    <table class="table table-hover table-responsive-sm">
         <thead>
             <tr class="thead-dark">
                 <th>Mã loại phòng</th>
@@ -43,4 +43,5 @@
             @endforeach
         </tbody>
     </table>
+    {!! $loaiphongs->links("pagination::bootstrap-4") !!}
 </div>

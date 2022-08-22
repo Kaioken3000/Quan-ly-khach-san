@@ -43,5 +43,5 @@
             @endforeach
         </tbody>
     </table>
-    {!! $companies->links() !!}
+    {!! $companies->links("pagination::bootstrap-4") !!}
 </div>
