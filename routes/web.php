@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoaiphongController;
+use App\Http\Controllers\PhongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::resource('companies', CompanyController::class);
 Route::resource('loaiphongs', LoaiphongController::class);
+Route::resource('phongs', PhongController::class);

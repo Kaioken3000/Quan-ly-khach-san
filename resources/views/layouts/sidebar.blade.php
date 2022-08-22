@@ -17,11 +17,18 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Loại phòng -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('loaiphongs.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Loại phòng</span></a>
+    </li>
+    
+    <!-- Nav Item - Phòng -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('phongs.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Phòng</span></a>
     </li>
 
     <!-- Divider -->

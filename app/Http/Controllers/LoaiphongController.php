@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Loaiphong;
 
 class LoaiphongController extends Controller
@@ -42,7 +43,7 @@ class LoaiphongController extends Controller
             'gia' => 'required',
             'mieuTa' => 'required',
         ]);
-        
+
         Loaiphong::create($request->post());
 
         return redirect()->route('loaiphongs.index')->with('success','Loaiphong has been created successfully.');
