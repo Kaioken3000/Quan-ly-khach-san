@@ -1,46 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="/adminresource/assets/"
+  data-template="vertical-menu-template-free"
+>
+<!-- Head -->
 @include('layouts.head')
 
-<body id="page-top">
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        @include('layouts.menu')
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">  
+        <!-- Layout container -->
+        <div class="layout-page">
 
-        <!-- Sidebar -->
-        @include('layouts.sidebar')
+          @include('layouts.navbar')
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
 
-            <!-- Top bar -->
-            @include('layouts.topbar')
+            <!-- Content -->
+            @include('layouts.phong.edit')
+            <!-- Content -->
 
-            <!-- Main Content -->
-            <div id="content">
-
-                @include('layouts.phong.edit')
-
-            </div>
-
-            <!-- Footer -->
-            @include('layouts.footer')
+          </div>
+          
+          <!-- Footer -->
+          @include('layouts.footer')            
 
         </div>
-
+      </div>
     </div>
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    @include('layouts.logoutmodal')
-
-    @include('layouts.scripts')
-
-</body>
-
+    
+    <!-- Script -->
+    @include('layouts.script')
+  </body>
 </html>
