@@ -103,4 +103,19 @@ class LoaiphongController extends Controller
         $loaiphong->delete();
         return redirect()->route('loaiphongs.index')->with('success','Loaiphong has been deleted successfully');
     }
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function search(Request $request)
+    {
+        $loaiphongs = Loaiphong::where('ma','LIKE','%'.$request->search."%")
+                                ->orWhere('ten','LIKE','%'.$request->search."%")
+                                ->orWhere('gia','LIKE','%'.$request->search."%")
+                                ->orWhere('mieuTa','LIKE','%'.$request->search."%")
+                                ->get();
+        return view('loaiphongs.search', compact('loaiphongs'));
+    }
 }

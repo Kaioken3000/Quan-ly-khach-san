@@ -23,3 +23,7 @@ Route::get('/', function () {
 Route::resource('companies', CompanyController::class);
 Route::resource('loaiphongs', LoaiphongController::class);
 Route::resource('phongs', PhongController::class);
+Route::post('loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
+Route::post('loaiphongs/loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
+Route::post('phongs-search', '\App\Http\Controllers\phongController@search');
+Route::post('phongs/phongs-search', '\App\Http\Controllers\phongController@search');

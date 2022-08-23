@@ -106,4 +106,18 @@ class PhongController extends Controller
         $phong->delete();
         return redirect()->route('phongs.index')->with('success','Phong has been deleted successfully');
     }
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function search(Request $request)
+    {
+        $phongs = Phong::where('so_phong','LIKE','%'.$request->search."%")
+                                ->orWhere('hinh','LIKE','%'.$request->search."%")
+                                ->orWhere('loaiphongid','LIKE','%'.$request->search."%")
+                                ->get();
+        return view('phongs.search', compact('phongs'));
+    }
 }
