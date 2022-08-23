@@ -35,7 +35,7 @@
                             data-popup="tooltip-custom"
                             data-bs-placement="top"
                             title="{{ $phong->hinh }}"
-                            src="admin/img/phong/{{ $phong->hinh }}" width="15%"></td>
+                            src="/adminresource/img/phong/{{ $phong->hinh }}" width="15%"></td>
                         <td>{{ $phong->loaiphongid }}</td>
                         <td>
                             <form action="{{ route('phongs.destroy',$phong->so_phong) }}" method="Post">
