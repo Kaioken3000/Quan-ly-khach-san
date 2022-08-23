@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('phongs', function (Blueprint $table) {
             $table->integer('so_phong')->primary();
             $table->string('hinh');
-            $table->string('loaiphongid');
-            $table->foreign('loaiphongid')->references('ma')->on('loaiphongs');
+            $table->string('loaiphongid')->nullable();
+            $table->foreign('loaiphongid')->references('ma')->on('loaiphongs')->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->timestamps();
         });
     }
