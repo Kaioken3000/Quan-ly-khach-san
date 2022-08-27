@@ -24,8 +24,10 @@
         <thead>
           <tr class="thead-dark">
             <th>Số phòng</th>
-            <th>Hinh phòng</th>
             <th>Loại phòng</th>
+            <th>Ngày đặt</th>
+            <th>Ngày trả</th>
+            <th>Số lượng</th>
             <th width="280px">Action</th>
           </tr>
         </thead>
@@ -33,8 +35,10 @@
           @foreach ($phongs as $phong)
           <tr>
             <td>{{ $phong->so_phong }}</td>
-            <td><img data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $phong->hinh }}" src="/adminresource/img/phong/{{ $phong->hinh }}" width="15%"></td>
             <td>{{ $phong->loaiphongid }}</td>
+            <td>{{ $phong->ngaydat }}</td>
+            <td>{{ $phong->ngaytra }}</td>
+            <td>{{ $phong->soluong }}</td>
             <td>
               <form action="{{ route('phongs.destroy',$phong->so_phong) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('phongs.edit',$phong->so_phong) }}">Edit</a>

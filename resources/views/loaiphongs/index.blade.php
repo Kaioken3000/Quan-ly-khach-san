@@ -25,7 +25,9 @@
           <tr class="thead-dark">
             <th>Mã loại phòng</th>
             <th>Tên loại phòng</th>
-            <th>Giá loại phòng</th>
+            <th>Giá </th>
+            <th>Hinh</th>
+            <th>Số lượng</th>
             <th>Miêu tả loại phòng</th>
             <th width="280px">Action</th>
           </tr>
@@ -35,7 +37,14 @@
           <tr>
             <td>{{ $loaiphong->ma }}</td>
             <td>{{ $loaiphong->ten }}</td>
-            <td>{{ $loaiphong->gia }}</td>
+            <td>{{ $loaiphong->gia }} VND</td>
+            <td><img data-bs-toggle="tooltip" 
+                     data-popup="tooltip-custom" 
+                     data-bs-placement="top" 
+                     title="{{ $loaiphong->hinh }}" 
+                     src="/client/images/{{ $loaiphong->hinh }}" 
+                     width="30%"></td>
+            <td>{{ $loaiphong->soluong }}</td>
             <td>{{ $loaiphong->mieuTa }}</td>
             <td>
               <form action="{{ route('loaiphongs.destroy',$loaiphong->ma) }}" method="Post">
@@ -55,4 +64,6 @@
         </tbody>
       </table>
     </div>
-    @endsection
+  </div>
+</div>
+@endsection

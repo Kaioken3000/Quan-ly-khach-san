@@ -41,6 +41,8 @@ class LoaiphongController extends Controller
             'ma' => 'required|unique:loaiphongs',
             'ten' => 'required',
             'gia' => 'required',
+            'hinh' => 'required',
+            'soluong' => 'required',
             'mieuTa' => 'required',
         ]);
 
@@ -84,6 +86,8 @@ class LoaiphongController extends Controller
             'ma' => 'required|unique:loaiphongs',
             'ten' => 'required',
             'gia' => 'required',
+            'hinh' => 'required',
+            'soluong' => 'required',
             'mieuTa' => 'required',
         ]);
         
@@ -114,6 +118,7 @@ class LoaiphongController extends Controller
         $loaiphongs = Loaiphong::where('ma','LIKE','%'.$request->search."%")
                                 ->orWhere('ten','LIKE','%'.$request->search."%")
                                 ->orWhere('gia','LIKE','%'.$request->search."%")
+                                ->orWhere('hinh','LIKE','%'.$request->search."%")
                                 ->orWhere('mieuTa','LIKE','%'.$request->search."%")
                                 ->get();
         return view('loaiphongs.search', compact('loaiphongs'));

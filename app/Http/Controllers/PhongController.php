@@ -42,8 +42,10 @@ class PhongController extends Controller
     {
         $request->validate([
             'so_phong' => 'required|unique:phongs',
-            'hinh' => 'required',
-            'loaiphongid' => 'required'
+            'loaiphongid' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required'
         ]);
 
         Phong::create($request->post());
@@ -85,8 +87,10 @@ class PhongController extends Controller
     {
         $request->validate([
             'so_phong' => 'required|unique:phongs',
-            'hinh' => 'required',
-            'loaiphongid' => 'required'
+            'loaiphongid' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required'
         ]);
         
         $phong->fill($request->post())->save();
@@ -115,7 +119,9 @@ class PhongController extends Controller
     public function search(Request $request)
     {
         $phongs = Phong::where('so_phong','LIKE','%'.$request->search."%")
-                                ->orWhere('hinh','LIKE','%'.$request->search."%")
+                                ->orWhere('ngaydat','LIKE','%'.$request->search."%")
+                                ->orWhere('ngaytra','LIKE','%'.$request->search."%")
+                                ->orWhere('soluong','LIKE','%'.$request->search."%")
                                 ->orWhere('loaiphongid','LIKE','%'.$request->search."%")
                                 ->get();
         return view('phongs.search', compact('phongs'));

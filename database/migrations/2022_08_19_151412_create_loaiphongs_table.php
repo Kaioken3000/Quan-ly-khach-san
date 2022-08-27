@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('ma')->primary();
             $table->string('ten');
             $table->double('gia');
+            $table->string('hinh');
+            $table->integer('soluong');
             $table->string('mieuTa');
             $table->timestamps();
         });

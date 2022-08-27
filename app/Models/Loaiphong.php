@@ -13,6 +13,8 @@ class Loaiphong extends Model
         'ma',
         'ten',
         'gia',
+        'hinh',
+        'soluong',
         'mieuTa'
     ];
 

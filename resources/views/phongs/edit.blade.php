@@ -32,13 +32,6 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="hinh">Hình phòng</label>
-              <input type="file" name="hinh" class="form-control" id="hinh" />
-              @error('hinh')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
               <label class="form-label" for="loaiphongid">Loại phòng</label>
               <select class="form-select" id="loaiphongid" name="loaiphongid">
                 @foreach ($loaiphongs as $loaiphong)
@@ -49,6 +42,27 @@
                 @endforeach
               </select>
               @error('loaiphongid')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="ngaydat">Ngày đặt</label>
+              <input type="date" name="ngaydat" class="form-control" id="ngaydat" value="{{ $phong->ngaydat }}"/>
+              @error('ngaydat')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="ngaytra">Ngày trả</label>
+              <input type="date" name="ngaytra" class="form-control" id="ngaytra" value="{{ $phong->ngaytra }}"/>
+              @error('ngaytra')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="soluong">Số lượng</label>
+              <input type="number" name="soluong" class="form-control" id="soluong" value="{{ $phong->soluong }}"/>
+              @error('soluong')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>

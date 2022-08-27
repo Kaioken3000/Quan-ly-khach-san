@@ -11,8 +11,10 @@ class Phong extends Model
 
     protected $fillable = [
         'so_phong',
-        'hinh',
-        'loaiphongid'
+        'loaiphongid',
+        'ngaydat',
+        'ngaytra',
+        'soluong'
     ];
 
     protected $primaryKey = 'so_phong';
