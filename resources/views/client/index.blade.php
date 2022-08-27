@@ -6,9 +6,8 @@
   @include('client.layouts.header')
   <!-- END head -->
   
-  
+    <!-- Session -->
     @include('client.layouts.session')
-    <!-- END section -->
     
     <!-- Book -->
     @include('client.layouts.book')
@@ -22,22 +21,8 @@
     <!-- Photo -->
     @include('client.layouts.photo')
     
-    <!-- END section -->
-    
-    <!-- Restaurant -->
-    @include('client.layouts.restaurant')
-    
-    <!-- END section -->
-    <!-- Pepple -->
-    @include('client.layouts.people')
-    
-    
-    <!-- Event -->
-    <!-- @include('client.layouts.event') -->
-    
     <!-- Reserve -->
     @include('client.layouts.reserve')
-    
     
     <!-- Footer -->
     @include('client.layouts.footer')

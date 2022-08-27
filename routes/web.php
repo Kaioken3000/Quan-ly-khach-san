@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\IndexController;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +69,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
  * Client Routes
  */
 
-Route::get('/', '\App\Http\Controllers\IndexController@index');
+Route::get('client/index', '\App\Http\Controllers\IndexController@index');
+
+Route::get('/', function(){
+    return redirect('client/index');
+});
+
 
 Route::get('client/rooms', '\App\Http\Controllers\IndexController@room');
+
+Route::get('client/check', '\App\Http\Controllers\IndexController@check');
 
 Route::get('client/about', function () {
     return view('client.about');
