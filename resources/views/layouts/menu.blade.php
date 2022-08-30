@@ -11,8 +11,8 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item {{ Request::is('/') ? 'active':'' }}">
-            <a href="/" class="menu-link">
+        <li class="menu-item {{ Request::is('dashboard') ? 'active':'' }}">
+            <a href="/dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -48,6 +48,12 @@
 
         <!-- Tác vụ -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Tác vụ</span></li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-report"></i>
+                <div data-i18n="Support">Đặt phòng</div>
+            </a>
+        </li>   
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-report"></i>

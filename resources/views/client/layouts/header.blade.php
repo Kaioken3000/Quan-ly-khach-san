@@ -21,7 +21,6 @@
                                         <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="index">Home</a></li>
                                         <li class="{{ Request::is('client/rooms') ? 'active':'' }}"><a href="rooms">Rooms</a></li>
                                         <li class="{{ Request::is('client/about') ? 'active':'' }}"><a href="about">About</a></li>
-                                        <li class="{{ Request::is('client/events') ? 'active':'' }}"><a href="events">Events</a></li>
                                         <li class="{{ Request::is('client/contact') ? 'active':'' }}"><a href="contact">Contact</a></li>
                                         <li class="{{ Request::is('client/reservation') ? 'active':'' }}"><a href="reservation">Reservation</a></li>
                                         <li class="{{ Request::is('client/check') ? 'active':'' }}"><a href="check">Check</a></li>

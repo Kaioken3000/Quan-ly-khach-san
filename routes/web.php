@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\KhachhangController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
@@ -20,13 +21,7 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
-    /**
-     * Dashboard Routes
-     */
-    Route::get('/dashboard', function () {
-        return view('index');
-    });
-
+    
     Route::group(['middleware' => ['guest']], function () {
         /**
          * Register Routes
@@ -40,18 +35,27 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/login', 'LoginController@show')->name('login.show');
         Route::post('/login', 'LoginController@login')->name('login.perform');
 
+        
+    });
+    
+    Route::group(['middleware' => ['auth']], function () {
+        
+        /**
+         * Dashboard Routes
+         */
+        Route::get('/dashboard', function () {
+            return view('index');
+        });
+        
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
         Route::post('loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
         Route::post('loaiphongs/loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
-
+        
         // Phong Routes
         Route::resource('phongs', PhongController::class);
         Route::post('phongs-search', '\App\Http\Controllers\phongController@search');
         Route::post('phongs/phongs-search', '\App\Http\Controllers\phongController@search');
-    });
-
-    Route::group(['middleware' => ['auth']], function () {
 
 
         // Companies Routes
@@ -80,10 +84,11 @@ Route::get('client/rooms', '\App\Http\Controllers\IndexController@room');
 
 Route::get('client/check', '\App\Http\Controllers\IndexController@check');
 
+Route::get('client/reservation', '\App\Http\Controllers\IndexController@reservation');
+
 Route::get('client/about', function () {
     return view('client.about');
 });
 
-Route::get('client/reservation', function () {
-    return view('client.reservation');
-});
+// Phong Routes
+Route::resource('khachhangs', KhachhangController::class);

@@ -25,9 +25,6 @@
           <tr class="thead-dark">
             <th>Số phòng</th>
             <th>Loại phòng</th>
-            <th>Ngày đặt</th>
-            <th>Ngày trả</th>
-            <th>Số lượng</th>
             <th width="280px">Action</th>
           </tr>
         </thead>
@@ -36,9 +33,6 @@
           <tr>
             <td>{{ $phong->so_phong }}</td>
             <td>{{ $phong->loaiphongid }}</td>
-            <td>{{ $phong->ngaydat }}</td>
-            <td>{{ $phong->ngaytra }}</td>
-            <td>{{ $phong->soluong }}</td>
             <td>
               <form action="{{ route('phongs.destroy',$phong->so_phong) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('phongs.edit',$phong->so_phong) }}">Edit</a>

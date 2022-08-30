@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use App\Models\Loaiphong;
 
 class LoaiphongController extends Controller
@@ -83,7 +84,8 @@ class LoaiphongController extends Controller
     public function update(Request $request, Loaiphong $loaiphong)
     {
         $request->validate([
-            'ma' => 'required|unique:loaiphongs',
+            'ma' => ['required',
+                    Rule::unique('loaiphongs')->ignore($loaiphong->ma, 'ma')],
             'ten' => 'required',
             'gia' => 'required',
             'hinh' => 'required',

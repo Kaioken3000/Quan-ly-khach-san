@@ -41,27 +41,6 @@
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
-            <div class="mb-3">
-              <label class="form-label" for="ngaydat">Ngày đặt</label>
-              <input type="date" name="ngaydat" class="form-control" id="ngaydat" />
-              @error('ngaydat')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="ngaytra">Ngày trả</label>
-              <input type="date" name="ngaytra" class="form-control" id="ngaytra" />
-              @error('ngaytra')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="soluong">Số lượng</label>
-              <input type="number" name="soluong" class="form-control" id="soluong" />
-              @error('soluong')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>
         </div>
