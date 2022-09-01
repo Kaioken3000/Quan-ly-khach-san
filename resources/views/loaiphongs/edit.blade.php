@@ -17,7 +17,7 @@
   <!-- Basic Layout -->
   <div class="row">
     <div class="col-xl">
-      <div class="card mb-4">
+      <div class="card mb-4 col-4">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="mb-0">From nhập liệu</h5>
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>

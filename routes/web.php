@@ -6,6 +6,7 @@ use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\KhachhangController;
+use App\Http\Controllers\DatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
@@ -18,6 +19,17 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function(){
+    return redirect('/dashboard');
+});
+
+/**
+ * Dashboard Routes
+ */
+Route::get('/dashboard', function () {
+    return view('index');
+});
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
@@ -40,12 +52,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     Route::group(['middleware' => ['auth']], function () {
         
-        /**
-         * Dashboard Routes
-         */
-        Route::get('/dashboard', function () {
-            return view('index');
-        });
         
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
@@ -56,6 +62,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('phongs', PhongController::class);
         Route::post('phongs-search', '\App\Http\Controllers\phongController@search');
         Route::post('phongs/phongs-search', '\App\Http\Controllers\phongController@search');
+        
+        // Datphong Routes
+        Route::resource('datphongs', DatphongController::class);
+        Route::get('datphongs-kiemtra', '\App\Http\Controllers\DatphongController@kiemtra');
+        Route::post('datphongs-search', '\App\Http\Controllers\DatphongController@search');
+        Route::post('datphongs/datphongs-search', '\App\Http\Controllers\DatphongController@search');
 
 
         // Companies Routes
@@ -74,11 +86,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
  */
 
 Route::get('client/index', '\App\Http\Controllers\IndexController@index');
-
-Route::get('/', function(){
-    return redirect('client/index');
-});
-
 
 Route::get('client/rooms', '\App\Http\Controllers\IndexController@room');
 

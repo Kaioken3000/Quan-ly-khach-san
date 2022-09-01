@@ -4,7 +4,7 @@
 <div class="container mt-2">
   <br>
   <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('phongs.index') }}">Back</a>
+    <a class="btn btn-primary" href="{{ route('khachhangs.index') }}">Back</a>
   </div>
   <h4 class="fw-bold py-3"><span class="text-muted fw-light">Thêm/</span> Phòng</h4>
   @if(session('status'))
@@ -21,29 +21,28 @@
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="{{ route('phongs.update',$phong->so_phong) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+          <form action="/datphongs-kiemtra" method="GET">
             <div class="mb-3">
-              <label class="form-label" for="so_phong">Sô phòng</label>
-              <input type="number" name="so_phong" class="form-control" id="so_phong" value="{{ $phong->so_phong }}" placeholder="VD: 001" />
-              @error('so_phong')
+              <label class="form-label" for="ngayvao">Ngày vào</label>
+              <input type="date" name="ngayvao" class="form-control" id="ngayvao" placeholder="VD: Lý Nhựt Nam" />
+              @error('ngayvao')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="loaiphongid">Loại phòng</label>
-              <select class="form-select" id="loaiphongid" name="loaiphongid">
-                @foreach ($loaiphongs as $loaiphong)
-                <option value="{{ $loaiphong->ma }}" @if($loaiphong->ma === $phong->loaiphongid)
-                  selected
-                  @endif
-                  >{{ $loaiphong->ten }}</option>
-                @endforeach
-              </select>
-              @error('loaiphongid')
+              <label class="form-label" for="ngayra">Ngày ra</label>
+              <input type="date" name="ngayra" class="form-control" id="ngayra" placeholder="VD: Lý Nhựt Nam" />
+              @error('ngayra')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="soluong">Số lượng</label>
+              <input type="number" name="soluong" class="form-control" id="soluong" placeholder="VD: 001"/>
+              @error('soluong')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+              <input type="hidden" name="khachhangs" value="{{$khachhangs}}">
             </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>

@@ -4,7 +4,7 @@
 <div class="container mt-2">
   <br>
   <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('phongs.index') }}">Back</a>
+    <a class="btn btn-primary" href="{{ route('khachhangs.index') }}">Back</a>
   </div>
   <h4 class="fw-bold py-3"><span class="text-muted fw-light">Thêm/</span> Phòng</h4>
   @if(session('status'))
@@ -21,27 +21,26 @@
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="{{ route('phongs.update',$phong->so_phong) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('khachhangs.store') }}" method="POST">
             @csrf
-            @method('PUT')
             <div class="mb-3">
-              <label class="form-label" for="so_phong">Sô phòng</label>
-              <input type="number" name="so_phong" class="form-control" id="so_phong" value="{{ $phong->so_phong }}" placeholder="VD: 001" />
-              @error('so_phong')
+              <label class="form-label" for="ten">Họ tên</label>
+              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Lý Nhựt Nam" />
+              @error('ten')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="loaiphongid">Loại phòng</label>
-              <select class="form-select" id="loaiphongid" name="loaiphongid">
-                @foreach ($loaiphongs as $loaiphong)
-                <option value="{{ $loaiphong->ma }}" @if($loaiphong->ma === $phong->loaiphongid)
-                  selected
-                  @endif
-                  >{{ $loaiphong->ten }}</option>
-                @endforeach
-              </select>
-              @error('loaiphongid')
+              <label class="form-label" for="sdt">Số điện thoại</label>
+              <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: 001" />
+              @error('sdt')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="VD: 001"/>
+              @error('email')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>

@@ -17,6 +17,7 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+        
         <!-- Loại phòng -->
         <li class="menu-item {{ Request::is('loaiphongs') || Request::is('loaiphongs/*') ? 'active':'' }}">
             <a href="{{ route('loaiphongs.index') }}" class="menu-link">
@@ -24,6 +25,7 @@
                 <div data-i18n="Analytics">Loại phòng</div>
             </a>
         </li>
+        
         <!-- Phòng -->
         <li class="menu-item {{ Request::is('phongs') || Request::is('phongs/*') ? 'active':'' }}">
             <a href="{{ route('phongs.index') }}" class="menu-link">
@@ -31,13 +33,23 @@
                 <div data-i18n="Analytics">Phòng</div>
             </a>
         </li>
+        
         <!-- Khách hàng -->
         <li class="menu-item {{ Request::is('khachhangs') || Request::is('khachhangs/*') ? 'active':'' }}">
-            <a href="{{ route('phongs.index') }}" class="menu-link">
+            <a href="{{ route('khachhangs.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Khách hàng</div>
             </a>
         </li>
+        
+        <!-- Phòng đã đặt -->
+        <li class="menu-item {{ Request::is('datphongs') || Request::is('datphongs/*') ? 'active':'' }}">
+            <a href="{{ route('datphongs.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-bed"></i>
+                <div data-i18n="Analytics">Phòng đặt</div>
+            </a>
+        </li>
+
         <!-- Nhân viên -->
         <li class="menu-item {{ Request::is('nhanviens') || Request::is('nhanviens/*') ? 'active':'' }}">
             <a href="{{ route('phongs.index') }}" class="menu-link">
@@ -45,15 +57,17 @@
                 <div data-i18n="Analytics">Nhân viên</div>
             </a>
         </li>
+        
 
         <!-- Tác vụ -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Tác vụ</span></li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-report"></i>
+            <a href="{{ route('khachhangs.create') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-edit-alt"></i>
                 <div data-i18n="Support">Đặt phòng</div>
             </a>
         </li>   
+        
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-report"></i>
