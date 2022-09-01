@@ -56,7 +56,7 @@
                     value="{{ $request->soluong }}"/>
                 <input type="hidden" name="khachhangid" value="{{$request->khachhangs}}">
                 <input type="hidden" name="phongid" value="{{$phong->so_phong}}">
-                <button type="submit" class="btn btn-success">Đặt phòng</button>
+                <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đặt phòng</button>
               </form>
             </td>
           </tr>

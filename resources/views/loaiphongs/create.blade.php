@@ -4,9 +4,9 @@
 <div class="container mt-2">
   <br>
   <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('loaiphongs.index') }}">Back</a>
+    <a class="btn btn-primary" href="{{ route('loaiphongs.index') }}"> <i class="bx bx-chevron-left mb-1"></i> Back</a>
   </div>
-  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Thêm/</span> Loại phòng</h4>
+  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Loại phòng/</span> Create</h4>
   @if(session('status'))
   <div class="alert alert-success mb-1 mt-1">
     {{ session('status') }}

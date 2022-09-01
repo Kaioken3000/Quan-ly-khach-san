@@ -36,10 +36,10 @@
                 <td>{{ $company->address }}</td>
                 <td>
                     <form action="{{ route('companies.destroy',$company->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('companies.edit',$company->id) }}">Edit</a>
+                        <a class="btn btn-primary" href="{{ route('companies.edit',$company->id) }}"><i class="bx bx-editmb-1mb-1mb-1mb-1mb-1"></i> Edit</a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger"><i class="bx bx-trash mb-1"></i> Delete</button>
                     </form>
                 </td>
             </tr>

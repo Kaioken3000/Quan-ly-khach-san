@@ -8,7 +8,7 @@
                 <h2>Add Company</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('companies.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('companies.index') }}"> <i class="bx bx-chevron-left mb-1"></i> Back</a>
             </div>
         </div>
     </div>

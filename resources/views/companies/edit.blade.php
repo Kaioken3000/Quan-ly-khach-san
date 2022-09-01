@@ -10,7 +10,7 @@
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('companies.index') }}" enctype="multipart/form-data">
-                    Back</a>
+                    <i class="bx bx-chevron-left mb-1"></i> Back</a>
             </div>
         </div>
     </div>
