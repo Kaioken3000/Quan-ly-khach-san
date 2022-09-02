@@ -49,7 +49,7 @@ class DatphongController extends Controller
 
         Datphong::create($request->post());
 
-        return redirect()->route('khachhangs.index')->with('success','Datphong has been created successfully.');
+        return redirect()->route('datphongs.index')->with('success','Datphong has been created successfully.');
     }
 
     /**
@@ -120,7 +120,7 @@ class DatphongController extends Controller
                                 ->orWhere('soluong','LIKE','%'.$request->search."%")
                                 ->orWhere('phongid','LIKE','%'.$request->search."%")
                                 ->orWhere('khachhangid','LIKE','%'.$request->search."%")
-                                ->get();
+                                ->orderBy('id','asc')->paginate(5);
         return view('datphongs.search', compact('datphongs'));
     }
 
@@ -132,26 +132,28 @@ class DatphongController extends Controller
     public function kiemtra(Request $request)
     {
         $request->validate([
-            'ngayvao' => 'required',
-            'ngayra' => 'required',
-            'soluong' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required'
         ]);
+            
         $phongslist = Phong::get();
         $phongs = array();
         foreach($phongslist as $phong){
             $xacnhan=0;
             $datphongs = Datphong::where('phongid',$phong->so_phong)->get();
+            Log::info($datphongs);
             if(count($datphongs)!=0){
                 foreach($datphongs as $datphong){
                     if($datphong->phongid == $phong->so_phong){
-                        if($request->ngayra >= $request->ngayvao){
-                            if($request->ngayvao < $datphong->ngayvao){
-                                if($request->ngayra < $datphong->ngayvao){
+                        if($request->ngaytra >= $request->ngaydat){
+                            if($request->ngaydat < $datphong->ngaydat){
+                                if($request->ngaytra < $datphong->ngaydat){
                                     $xacnhan++;
                                 }
                             }
-                            else if($request->ngayvao > $datphong->ngayvao){
-                                if($request->ngayvao > $datphong->ngayra){
+                            else if($request->ngaydat > $datphong->ngaydat){
+                                if($request->ngaydat > $datphong->ngaytra){
                                     $xacnhan++;
                                 }
                             }
@@ -165,5 +167,49 @@ class DatphongController extends Controller
             else array_push($phongs, $phong);
         }
         return view('datphongs.kiemtra',compact('request','phongs'));
+    }
+    /**
+     * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function kiemtra_capnhat(Request $request)
+    {
+        $request->validate([
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required'
+        ]);
+
+        $phongslist = Phong::get();
+        $phongs = array();
+        foreach($phongslist as $phong){
+            $xacnhan=0;
+            $datphongs = Datphong::where('phongid',$phong->so_phong)->get();
+            Log::info($datphongs);
+            if(count($datphongs)!=0){
+                foreach($datphongs as $datphong){
+                    if($datphong->phongid == $phong->so_phong){
+                        if($request->ngaytra >= $request->ngaydat){
+                            if($request->ngaydat < $datphong->ngaydat){
+                                if($request->ngaytra < $datphong->ngaydat){
+                                    $xacnhan++;
+                                }
+                            }
+                            else if($request->ngaydat > $datphong->ngaydat){
+                                if($request->ngaydat > $datphong->ngaytra){
+                                    $xacnhan++;
+                                }
+                            }
+                        }
+                    }
+                }
+                if($xacnhan == count($datphongs)){
+                    array_push($phongs, $phong);
+                }
+            }   
+            else array_push($phongs, $phong);
+        }
+        return view('datphongs.kiemtra-capnhat',compact('request','phongs'));
     }
 }

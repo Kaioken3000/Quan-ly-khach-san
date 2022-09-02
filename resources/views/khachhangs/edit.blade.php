@@ -6,7 +6,7 @@
   <div class="pull-right">
     <a class="btn btn-primary" href="{{ route('khachhangs.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
   </div>
-  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Đặt phòng/</span> Create</h4>
+  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Khách hàng/</span> Create</h4>
   @if(session('status'))
   <div class="alert alert-success mb-1 mt-1">
     {{ session('status') }}
@@ -21,28 +21,32 @@
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="/datphongs-kiemtra" method="GET">
+          <form action="{{ route('khachhangs.update', $khachhang->id) }}" method="POST">
+            @csrf
+            @method('PUT')
             <div class="mb-3">
-              <label class="form-label" for="ngaydat">Ngày vào</label>
-              <input type="date" name="ngaydat" class="form-control" id="ngaydat"/>
-              @error('ngaydat')
+              <label class="form-label" for="ten">Họ tên</label>
+              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Lý Nhựt Nam" 
+                    value="{{ $khachhang->ten }}"/>
+              @error('ten')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="ngaytra">Ngày ra</label>
-              <input type="date" name="ngaytra" class="form-control" id="ngaytra"/>
-              @error('ngaytra')
+              <label class="form-label" for="sdt">Số điện thoại</label>
+              <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: 001" 
+                    value="{{ $khachhang->sdt }}"/>
+              @error('sdt')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="soluong">Số lượng</label>
-              <input type="number" name="soluong" class="form-control" id="soluong"/>
-              @error('soluong')
+              <label class="form-label" for="email">Email</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="VD: 001"
+                    value="{{ $khachhang->email }}"/>
+              @error('email')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
-              <input type="hidden" name="khachhangid" value="{{$khachhangs}}">
             </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>

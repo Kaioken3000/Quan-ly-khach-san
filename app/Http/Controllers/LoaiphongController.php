@@ -122,7 +122,7 @@ class LoaiphongController extends Controller
                                 ->orWhere('gia','LIKE','%'.$request->search."%")
                                 ->orWhere('hinh','LIKE','%'.$request->search."%")
                                 ->orWhere('mieuTa','LIKE','%'.$request->search."%")
-                                ->get();
+                                ->orderBy('ma','asc')->paginate(5);
         return view('loaiphongs.search', compact('loaiphongs'));
     }
 }

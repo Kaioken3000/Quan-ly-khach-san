@@ -46,8 +46,9 @@
             <td>{{ $phong->so_phong }}</td>
             <td>{{ $phong->loaiphongid }}</td>
             <td>
-              <form action="{{ route('datphongs.store') }}" method="Post">
+              <form action="{{ route('datphongs.update', $request->id) }}" method="Post">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="ngaydat" id="ngaydat" 
                     value="{{ $request->ngaydat }}"/>
                 <input type="hidden" name="ngaytra" id="ngaytra" 
@@ -56,7 +57,7 @@
                     value="{{ $request->soluong }}"/>
                 <input type="hidden" name="khachhangid" value="{{$request->khachhangid}}">
                 <input type="hidden" name="phongid" value="{{$phong->so_phong}}">
-                <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đặt phòng</button>
+                <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi phòng</button>
               </form>
             </td>
           </tr>

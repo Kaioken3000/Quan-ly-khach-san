@@ -55,19 +55,25 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
-        Route::post('loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
-        Route::post('loaiphongs/loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
+        Route::get('loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
+        Route::get('loaiphongs/loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
         
         // Phong Routes
         Route::resource('phongs', PhongController::class);
-        Route::post('phongs-search', '\App\Http\Controllers\phongController@search');
-        Route::post('phongs/phongs-search', '\App\Http\Controllers\phongController@search');
+        Route::get('phongs-search', '\App\Http\Controllers\phongController@search');
+        Route::get('phongs/phongs-search', '\App\Http\Controllers\phongController@search');
         
         // Datphong Routes
         Route::resource('datphongs', DatphongController::class);
         Route::get('datphongs-kiemtra', '\App\Http\Controllers\DatphongController@kiemtra');
-        Route::post('datphongs-search', '\App\Http\Controllers\DatphongController@search');
-        Route::post('datphongs/datphongs-search', '\App\Http\Controllers\DatphongController@search');
+        Route::get('datphongs-kiemtra-capnhat', '\App\Http\Controllers\DatphongController@kiemtra_capnhat');
+        Route::get('datphongs-search', '\App\Http\Controllers\DatphongController@search');
+        Route::get('datphongs/datphongs-search', '\App\Http\Controllers\DatphongController@search');
+        
+        // Khachhang Routes
+        Route::resource('khachhangs', KhachhangController::class);
+        Route::get('khachhangs-search', '\App\Http\Controllers\KhachhangController@search');
+        Route::get('khachhangs/khachhangs-search', '\App\Http\Controllers\KhachhangController@search');
 
 
         // Companies Routes
@@ -96,6 +102,3 @@ Route::get('client/reservation', '\App\Http\Controllers\IndexController@reservat
 Route::get('client/about', function () {
     return view('client.about');
 });
-
-// Phong Routes
-Route::resource('khachhangs', KhachhangController::class);

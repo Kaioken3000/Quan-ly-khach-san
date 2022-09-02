@@ -115,7 +115,8 @@ class KhachhangController extends Controller
         $khachhangs = Khachhang::where('ten','LIKE','%'.$request->search."%")
                                 ->orWhere('sdt','LIKE','%'.$request->search."%")
                                 ->orWhere('email','LIKE','%'.$request->search."%")
-                                ->get();
+                                ->orWhere('id','LIKE','%'.$request->search."%")
+                                ->orderBy('id','asc')->paginate(5);
         return view('khachhangs.search', compact('khachhangs'));
     }
 }

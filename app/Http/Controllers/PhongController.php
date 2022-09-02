@@ -116,7 +116,7 @@ class PhongController extends Controller
     {
         $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
             ->orWhere('loaiphongid', 'LIKE', '%' . $request->search . "%")
-            ->get();
+            ->orderBy('so_phong','asc')->paginate(5);
         return view('phongs.search', compact('phongs'));
     }
 }
