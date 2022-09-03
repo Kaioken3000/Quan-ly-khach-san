@@ -45,6 +45,7 @@
               @enderror
             </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
+            <a href="{{ route('khachhangs.index') }}" class="btn btn-primary"> Chọn từ khách hàng có sẵn</a>
           </form>
         </div>
       </div>

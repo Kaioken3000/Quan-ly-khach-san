@@ -42,7 +42,7 @@
               @error('soluong')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
-              <input type="hidden" name="khachhangid" value="{{$khachhangs}}">
+              <input type="hidden" name="khachhangid" value="{{ $khachhangs }}">
             </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>

@@ -29,7 +29,12 @@
             <td>{{ $khachhang->ten }}</td>
             <td>{{ $khachhang->sdt }}</td>
             <td>{{ $khachhang->email }}</td>
-            <td>
+            <td class="d-flex gap-1">
+              <form action="{{ route('datphongs.create', $khachhang->id) }}" method="GET">
+                @csrf
+                <input type="hidden" value="{{ $khachhang->id }}" name="khachhangs">
+                <button type="submit" class="btn btn-success"><i class="bx bx-key mb-1"></i> Đặt phòng</button>
+              </form>
               <form action="{{ route('khachhangs.destroy',$khachhang->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('khachhangs.edit',$khachhang->id) }}"><i class="bx bx-edit mb-1"></i> Edit</a>
                 @csrf

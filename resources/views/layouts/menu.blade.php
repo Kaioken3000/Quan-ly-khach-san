@@ -43,7 +43,7 @@
         </li>
         
         <!-- Phòng đã đặt -->
-        <li class="menu-item {{ Request::is('datphongs') || Request::is('datphongs/*') ? 'active':'' }}">
+        <li class="menu-item {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active':'' }}">
             <a href="{{ route('datphongs.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bed"></i>
                 <div data-i18n="Analytics">Phòng đặt</div>
@@ -61,19 +61,16 @@
 
         <!-- Tác vụ -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Tác vụ</span></li>
-        <li class="menu-item">
-            <a href="{{ route('khachhangs.create') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-edit-alt"></i>
-                <div data-i18n="Support">Đặt phòng</div>
-            </a>
-        </li>   
         
+        <!-- Báo cáo -->
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-report"></i>
                 <div data-i18n="Support">Báo cáo</div>
             </a>
         </li>   
+
+        <!-- Thống kê -->
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-stats"></i>

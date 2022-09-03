@@ -28,7 +28,9 @@ class DatphongController extends Controller
     */
     public function create(Request $request)
     {
-        return view('datphongs.create', compact('request'));
+        $khachhangs = request()->khachhangs;
+        Log::info($request);
+        return view('datphongs.create', compact('khachhangs'));
     }
 
     /**
