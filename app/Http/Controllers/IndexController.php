@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Loaiphong;
 use App\Models\Phong;
 use App\Models\Khachhang;
+use App\Models\Datphong;
 
 class IndexController extends Controller
 {
@@ -38,29 +39,36 @@ class IndexController extends Controller
     */
     public function check(Request $request)
     {
+        $request->validate([
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required'
+        ]);
+
         $phongslist = Phong::get();
         $phongs = array();
         foreach($phongslist as $phong){
             $xacnhan=0;
-            $khachhangs = Khachhang::where('phongid',$phong->so_phong)->get();
-            if(count($khachhangs)!=0){
-                foreach($khachhangs as $khachhang){
-                    if($khachhang->phongid == $phong->so_phong){
-                        if($request->ngayra >= $request->ngayvao){
-                            if($request->ngayvao < $khachhang->ngayvao){
-                                if($request->ngayra < $khachhang->ngayvao){
+            $datphongs = Datphong::where('phongid',$phong->so_phong)->get();
+            Log::info($datphongs);
+            if(count($datphongs)!=0){
+                foreach($datphongs as $datphong){
+                    if($datphong->phongid == $phong->so_phong){
+                        if($request->ngaytra >= $request->ngaydat){
+                            if($request->ngaydat < $datphong->ngaydat){
+                                if($request->ngaytra < $datphong->ngaydat){
                                     $xacnhan++;
                                 }
                             }
-                            else if($request->ngayvao > $khachhang->ngayvao){
-                                if($request->ngayvao > $khachhang->ngayra){
+                            else if($request->ngaydat > $datphong->ngaydat){
+                                if($request->ngaydat > $datphong->ngaytra){
                                     $xacnhan++;
                                 }
                             }
                         }
                     }
                 }
-                if($xacnhan == count($khachhangs)){
+                if($xacnhan == count($datphongs)){
                     array_push($phongs, $phong);
                 }
             }   
@@ -78,4 +86,40 @@ class IndexController extends Controller
     {
         return view('client.reservation', compact('request'));
     }
+    
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function index_store(Request $request)
+    {
+        $request->validate([
+            'ten' => 'required',
+            'sdt' => 'required',
+            'email' => 'required',
+        ]);
+
+        Khachhang::create($request->post());
+
+        $khachhangs = Khachhang::max('id');
+        
+        
+        $request->validate([
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required',
+            'phongid' => 'required',
+            'khachhangid' => 'required'
+        ]);
+
+        $request["khachhangid"] = $khachhangs;
+
+        Log::info($request);
+
+        Datphong::create($request->post());        
+
+        return redirect('client/index');
+    }
+
 }

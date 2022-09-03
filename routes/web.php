@@ -91,6 +91,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
  * Client Routes
  */
 
+
 Route::get('client/index', '\App\Http\Controllers\IndexController@index');
 
 Route::get('client/rooms', '\App\Http\Controllers\IndexController@room');
@@ -98,6 +99,8 @@ Route::get('client/rooms', '\App\Http\Controllers\IndexController@room');
 Route::get('client/check', '\App\Http\Controllers\IndexController@check');
 
 Route::get('client/reservation', '\App\Http\Controllers\IndexController@reservation');
+
+Route::post('/index-store', '\App\Http\Controllers\IndexController@index_store');
 
 Route::get('client/about', function () {
     return view('client.about');

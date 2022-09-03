@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             
-            <form action="{{ route('khachhangs.store') }}" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/index-store" method="post" class="bg-white p-md-5 p-4 mb-5 border">
             @csrf
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -45,7 +45,6 @@
                   <input type="text" id="sdt" name="sdt" class="form-control ">
                 </div>
               </div>
-          
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
@@ -55,24 +54,25 @@
 
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="ngayvao">Date Check In</label>
-                  <input type="date" id="ngayvao" name="ngayvao" class="form-control" value="{{ $request->ngayvao }}">
+                  <label class="text-black font-weight-bold" for="ngaydat">Date Check In</label>
+                  <input type="date" id="ngaydat" name="ngaydat" class="form-control" value="{{ $request->ngaydat }}">
                 </div>
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="ngayra">Date Check Out</label>
-                  <input type="date" id="ngayra" name="ngayra" class="form-control" value="{{ $request->ngayra }}">
+                  <label class="text-black font-weight-bold" for="ngaytra">Date Check Out</label>
+                  <input type="date" id="ngaytra" name="ngaytra" class="form-control" value="{{ $request->ngaytra }}">
                 </div>
               </div>
              
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="soluong">Number</label>
-                  <input type="number" id="soluong" name="soluong" class="form-control" value="{{ $request->number }}">
+                  <input type="number" id="soluong" name="soluong" class="form-control" value="{{ $request->soluong }}">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phongid">Phong</label>
                   <input type="text" id="phongid" name="phongid" class="form-control" value="{{ $request->sophong }}">
                 </div>
+                <input type="hidden" name="khachhangid" value="1">
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -80,7 +80,6 @@
                 </div>
               </div>
             </form>
-
           </div>
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">

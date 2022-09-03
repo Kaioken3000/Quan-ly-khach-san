@@ -18,23 +18,23 @@
                     <form action="check" method="get">
                         <div class="row">
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                                <label for="ngayvao" class="font-weight-bold text-black">Check In</label>
+                                <label for="ngaydat" class="font-weight-bold text-black">Check In</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" name="ngayvao" id="ngayvao" class="form-control" value="{{ $request->ngayvao }}">
+                                    <input type="date" name="ngaydat" id="ngaydat" class="form-control" value="{{ $request->ngaydat }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                                <label for="ngayra" class="font-weight-bold text-black">Check Out</label>
+                                <label for="ngaytra" class="font-weight-bold text-black">Check Out</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" name="ngayra" id="ngayra" class="form-control" value="{{ $request->ngayra }}">
+                                    <input type="date" name="ngaytra" id="ngaytra" class="form-control" value="{{ $request->ngaytra }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                                <label for="number" class="font-weight-bold text-black">Number</label>
+                                <label for="soluong" class="font-weight-bold text-black">Number</label>
                                 <div class="field-icon-wrap">
-                                    <input type="number" name="number" id="number" class="form-control" value="{{ $request->number }}" min=1>
+                                    <input type="number" name="soluong" id="soluong" class="form-control" value="{{ $request->soluong }}" min=1>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3 align-self-end">
@@ -64,10 +64,10 @@
                             <td>{{ $phong->so_phong }}</td>
                             <td>{{ $phong->loaiphongid }}</td>
                             <td>
-                                <form action="reservation" method="get">
-                                    <input hidden type="date" name="ngayvao" value="{{ $request->ngayvao }}">
-                                    <input hidden type="date" name="ngayra" value="{{ $request->ngayra }}">
-                                    <input hidden type="number" name="number" value="{{ $request->number }}" min=1>
+                                <form action="/client/reservation" method="get">
+                                    <input hidden type="date" name="ngaydat" value="{{ $request->ngaydat }}">
+                                    <input hidden type="date" name="ngaytra" value="{{ $request->ngaytra }}">
+                                    <input hidden type="number" name="soluong" value="{{ $request->soluong }}" min=1>
                                     <input hidden type="int" name="sophong" value="{{ $phong->so_phong }}">
                                     <button type="submit" class="btn btn-primary">Đặt phòng</button>
                                 </form>
