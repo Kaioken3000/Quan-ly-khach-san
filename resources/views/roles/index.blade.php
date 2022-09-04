@@ -15,7 +15,7 @@
       <table class="table">
         <thead>
           <tr class="thead-dark">
-            <th>No</th>
+            <th>Id</th>
             <th>Name</th>
             <th width="280px">Action</th>
           </tr>
@@ -23,7 +23,7 @@
         <tbody>
         @foreach ($roles as $key => $role)
           <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $role->id }}</td>
             <td>{{ $role->name }}</td>
             <td>            
             @can('role-delete')    

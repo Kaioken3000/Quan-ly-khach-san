@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
     
 class RoleController extends Controller
 {
@@ -18,10 +19,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        //  $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-        //  $this->middleware('permission:role-create', ['only' => ['create','store']]);
-        //  $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-        //  $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:role-create', ['only' => ['create','store']]);
+         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
     
     /**
@@ -106,14 +107,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => ['required',
+                Rule::unique('roles')->ignore($role->name, 'name')],
             'permission' => 'required',
         ]);
     
-        $role = Role::find($id);
+        $role = Role::find($role->id);
         $role->name = $request->input('name');
         $role->save();
     
