@@ -55,26 +55,29 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
-        Route::get('loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
-        Route::get('loaiphongs/loaiphongs-search', '\App\Http\Controllers\LoaiphongController@search');
+        Route::get('loaiphongs-search', 'LoaiphongController@search');
+        Route::get('loaiphongs/loaiphongs-search', 'LoaiphongController@search');
         
         // Phong Routes
         Route::resource('phongs', PhongController::class);
-        Route::get('phongs-search', '\App\Http\Controllers\phongController@search');
-        Route::get('phongs/phongs-search', '\App\Http\Controllers\phongController@search');
+        Route::get('phongs-search', 'phongController@search');
+        Route::get('phongs/phongs-search', 'phongController@search');
         
         // Datphong Routes
         Route::resource('datphongs', DatphongController::class);
-        Route::get('datphongs-kiemtra', '\App\Http\Controllers\DatphongController@kiemtra');
-        Route::get('datphongs-kiemtra-capnhat', '\App\Http\Controllers\DatphongController@kiemtra_capnhat');
-        Route::get('datphongs-search', '\App\Http\Controllers\DatphongController@search');
-        Route::get('datphongs/datphongs-search', '\App\Http\Controllers\DatphongController@search');
+        Route::get('datphongs-kiemtra', 'DatphongController@kiemtra');
+        Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat');
+        Route::get('datphongs-search', 'DatphongController@search');
+        Route::get('datphongs/datphongs-search', 'DatphongController@search');
         
         // Khachhang Routes
         Route::resource('khachhangs', KhachhangController::class);
-        Route::get('khachhangs-search', '\App\Http\Controllers\KhachhangController@search');
-        Route::get('khachhangs/khachhangs-search', '\App\Http\Controllers\KhachhangController@search');
-
+        Route::get('khachhangs-search', 'KhachhangController@search');
+        Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
+        
+        Route::group(['middleware' => ['role:Admin']], function () {
+            Route::resource('roles', RoleController::class);
+        });
 
         // Companies Routes
         Route::resource('companies', CompanyController::class);

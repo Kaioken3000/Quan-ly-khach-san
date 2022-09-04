@@ -34,8 +34,12 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-semibold d-block">{{ Auth::check() ? Auth::user()->username : '' }}</span>
+                                    @hasrole('Admin')
+                                        <small class="text-muted">Admin</small>
+                                    @else
+                                        <small class="text-muted">User</small>
+                                    @endhasrole
                                 </div>
                             </div>
                         </a>

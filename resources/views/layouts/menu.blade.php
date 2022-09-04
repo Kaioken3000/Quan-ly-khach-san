@@ -50,6 +50,11 @@
             </a>
         </li>
 
+        
+        
+        <!-- Quản lý -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lý</span></li>
+        
         <!-- Nhân viên -->
         <li class="menu-item {{ Request::is('nhanviens') || Request::is('nhanviens/*') ? 'active':'' }}">
             <a href="{{ route('phongs.index') }}" class="menu-link">
@@ -57,8 +62,23 @@
                 <div data-i18n="Analytics">Nhân viên</div>
             </a>
         </li>
-        
 
+        <!-- Account -->
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Support"> Account</div>
+            </a>
+        </li>   
+
+        <!-- Role -->
+        <li class="menu-item {{ Request::is('roles') || Request::is('roles/*') ? 'active':'' }}">
+            <a href="{{ route('roles.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons fa fa-gear"></i>
+                <div data-i18n="Support">Role</div>
+            </a>
+        </li>   
+        
         <!-- Tác vụ -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Tác vụ</span></li>
         
