@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
@@ -29,7 +31,9 @@ class RegisterController extends Controller
     {
         $user = User::create($request->validated());
 
-        $user->assignRole('User');
+        $role = Role::where('name','User')->first();
+
+        $user->assignRole($role);
 
         auth()->login($user);
 

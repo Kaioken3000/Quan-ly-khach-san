@@ -19,7 +19,7 @@
         </li>
         
         <!-- Loại phòng -->
-        <li class="menu-item {{ Request::is('loaiphongs') || Request::is('loaiphongs/*') ? 'active':'' }}">
+        <li class="menu-item {{ Request::is('loaiphongs') || Request::is('loaiphongs*') ? 'active':'' }}">
             <a href="{{ route('loaiphongs.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Analytics">Loại phòng</div>
@@ -27,7 +27,7 @@
         </li>
         
         <!-- Phòng -->
-        <li class="menu-item {{ Request::is('phongs') || Request::is('phongs/*') ? 'active':'' }}">
+        <li class="menu-item {{ Request::is('phongs') || Request::is('phongs*') ? 'active':'' }}">
             <a href="{{ route('phongs.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-hotel"></i>
                 <div data-i18n="Analytics">Phòng</div>
@@ -35,7 +35,7 @@
         </li>
         
         <!-- Khách hàng -->
-        <li class="menu-item {{ Request::is('khachhangs') || Request::is('khachhangs/*') ? 'active':'' }}">
+        <li class="menu-item {{ Request::is('khachhangs') || Request::is('khachhangs*') ? 'active':'' }}">
             <a href="{{ route('khachhangs.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Khách hàng</div>
@@ -56,7 +56,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lý</span></li>
         
         <!-- Nhân viên -->
-        <li class="menu-item {{ Request::is('nhanviens') || Request::is('nhanviens/*') ? 'active':'' }}">
+        <li class="menu-item {{ Request::is('nhanviens') || Request::is('nhanviens*') ? 'active':'' }}">
             <a href="{{ route('nhanviens.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Analytics">Nhân viên</div>
@@ -64,15 +64,15 @@
         </li>
 
         <!-- Account -->
-        <li class="menu-item">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ Request::is('users') || Request::is('users*') ? 'active':'' }}">
+            <a href="{{ route('users.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Support"> Account</div>
             </a>
         </li>   
 
         <!-- Role -->
-        <li class="menu-item {{ Request::is('roles') || Request::is('roles/*') ? 'active':'' }}">
+        <li class="menu-item {{ Request::is('roles') || Request::is('roles*') ? 'active':'' }}">
             <a href="{{ route('roles.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons fa fa-gear"></i>
                 <div data-i18n="Support">Role</div>

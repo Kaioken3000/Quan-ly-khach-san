@@ -8,6 +8,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
+use App\Http\Controllers\UserController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
@@ -79,6 +80,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::group(['middleware' => ['role:Admin']], function () {
             Route::resource('roles', RoleController::class);
             Route::resource('nhanviens', NhanvienController::class);
+            Route::resource('users', UserController::class);
         });
 
         // Companies Routes
@@ -107,6 +109,6 @@ Route::get('client/reservation', '\App\Http\Controllers\IndexController@reservat
 
 Route::post('/index-store', '\App\Http\Controllers\IndexController@index_store');
 
-Route::get('client/about', function () {
+Route::get('/client/about', function () {
     return view('client.about');
 });
