@@ -57,7 +57,7 @@
         
         <!-- Nhân viên -->
         <li class="menu-item {{ Request::is('nhanviens') || Request::is('nhanviens/*') ? 'active':'' }}">
-            <a href="{{ route('phongs.index') }}" class="menu-link">
+            <a href="{{ route('nhanviens.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Analytics">Nhân viên</div>
             </a>

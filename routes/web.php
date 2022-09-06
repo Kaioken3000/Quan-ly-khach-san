@@ -7,6 +7,7 @@ use App\Http\Controllers\PhongController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\DatphongController;
+use App\Http\Controllers\NhanvienController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
@@ -77,6 +78,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         
         Route::group(['middleware' => ['role:Admin']], function () {
             Route::resource('roles', RoleController::class);
+            Route::resource('nhanviens', NhanvienController::class);
         });
 
         // Companies Routes

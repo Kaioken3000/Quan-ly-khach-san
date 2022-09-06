@@ -4,9 +4,9 @@
 <div class="container mt-2">
   <br>
   <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('roles.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
+    <a class="btn btn-primary" href="{{ route('nhanviens.index') }}"> <i class="bx bx-chevron-left mb-1"></i> Back</a>
   </div>
-  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Role/</span> Edit</h4>
+  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Nhân viên/</span> Create</h4>
   @if(session('status'))
   <div class="alert alert-success mb-1 mt-1">
     {{ session('status') }}
@@ -21,26 +21,26 @@
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="{{ route('roles.update', $role->id) }}" method="POST">
+          <form action="{{ route('nhanviens.store') }}" method="POST" >
             @csrf
-            @method('PUT')
             <div class="mb-3">
-              <label class="form-label" for="name">Name</label>
-              <input type="text" name="name" class="form-control" id="name" placeholder="VD: Admin" value="{{ $role->name }}"/>
-              @error('name')
+              <label class="form-label" for="ma">Mã nhân viên</label>
+              <input type="text" name="ma" class="form-control" id="ma" placeholder="VD: NV1" require="require"/>
+              @error('ma')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="loaiphongid">Permission:</label>
-              @foreach($permission as $value)
-                <div class="form-check">
-                    <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name form-check-input')) }}
-                        {{ $value->name }}
-                    </label>
-                </div>
-              @endforeach
-              @error('permission')
+              <label class="form-label" for="ten">Tên nhân viên</label>
+              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Phòng VIP" require="require"/>
+              @error('ten')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="luong">Lương nhân viên</label>
+              <input type="number" name="luong" class="form-control" id="luong" min=0 require="require"/>
+              @error('luong')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>

@@ -4,9 +4,9 @@
 <div class="container mt-2">
   <br>
   <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('khachhangs.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
+    <a class="btn btn-primary" href="{{ route('nhanviens.index') }}"> <i class="bx bx-chevron-left mb-1"></i> Back</a>
   </div>
-  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Khách hàng/</span> Edit</h4>
+  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Nhân viên/</span> Edit</h4>
   @if(session('status'))
   <div class="alert alert-success mb-1 mt-1">
     {{ session('status') }}
@@ -21,30 +21,30 @@
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="{{ route('khachhangs.update', $khachhang->id) }}" method="POST">
+          <form action="{{ route('nhanviens.update',$nhanvien->ma) }}" method="POST" >
             @csrf
             @method('PUT')
             <div class="mb-3">
-              <label class="form-label" for="ten">Họ tên</label>
-              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Lý Nhựt Nam" 
-                    value="{{ $khachhang->ten }}"/>
+              <label class="form-label" for="ma">Mã nhân viên</label>
+              <input type="text" name="ma" class="form-control" id="ma" placeholder="VD: NV1" require="require"
+                value="{{ $nhanvien->ma }}"/>
+              @error('ma')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="ten">Tên nhân viên</label>
+              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Phòng VIP" require="require"
+                value="{{ $nhanvien->ten }}"/>
               @error('ten')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label" for="sdt">Số điện thoại</label>
-              <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: 001" 
-                    value="{{ $khachhang->sdt }}"/>
-              @error('sdt')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="email">Email</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="VD: 001"
-                    value="{{ $khachhang->email }}"/>
-              @error('email')
+              <label class="form-label" for="luong">Lương nhân viên</label>
+              <input type="number" name="luong" class="form-control" id="luong" min=0 require="require"
+                value="{{ $nhanvien->luong }}"/>
+              @error('luong')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
