@@ -15,5 +15,6 @@ class Datphong extends Model
         'soluong',
         'phongid',
         'khachhangid',
+        'tinhtrangthanhtoan',
     ];
 }

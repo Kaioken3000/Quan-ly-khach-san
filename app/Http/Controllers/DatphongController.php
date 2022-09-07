@@ -40,6 +40,7 @@ class DatphongController extends Controller
     */
     public function store(Request $request)
     {
+        $request->tinhtrangthanhtoan=0;
         $request->validate([
             'ngaydat' => 'required',
             'ngaytra' => 'required',
@@ -90,6 +91,7 @@ class DatphongController extends Controller
             'soluong' => 'required',
             'phongid' => 'required',
             'khachhangid' => 'required',
+            'tinhtrangthanhtoan' => 'required'
         ]);
         
         $datphong->fill($request->post())->save();
@@ -123,6 +125,31 @@ class DatphongController extends Controller
                                 ->orWhere('khachhangid','LIKE','%'.$request->search."%")
                                 ->orderBy('id','asc')->paginate(5);
         return view('datphongs.search', compact('datphongs'));
+    }
+
+    /**
+    * Thanh toán.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function thanhtoan(Request $request, Datphong $datphong)
+    {
+        $datphong = Datphong::find($request->id);
+        $datphong->tinhtrangthanhtoan = 1;
+        $datphong->save();
+        return redirect()->route('datphongs.index')->with('success','Datphong Has Been updated successfully');
+    }
+    /**
+    * Chinh thanh toán.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function chinhthanhtoan(Request $request, Datphong $datphong)
+    {
+        $datphong = Datphong::find($request->id);
+        $datphong->tinhtrangthanhtoan = 0;
+        $datphong->save();
+        return redirect()->route('datphongs.index')->with('success','Datphong Has Been updated successfully');
     }
 
     /**

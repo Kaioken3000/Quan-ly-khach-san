@@ -4,7 +4,7 @@
 <div class="container mt-2">
   <br>
   <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('khachhangs.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
+    <a class="btn btn-primary" href="{{ route('datphongs.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
   </div>
   <h4 class="fw-bold py-3"><span class="text-muted fw-light">Đặt phòng/</span> Edit</h4>
   @if(session('status'))
@@ -47,6 +47,15 @@
               @enderror
               <input type="hidden" name="khachhangid" value="{{ $datphong->khachhangid }}">
               <input type="hidden" name="id" value="{{ $datphong->id }}">
+            </div>
+            <div class="form-check mb-3">
+              <label class="form-check-label" for="tinhtrangthanhtoan">Thanh toán</label>
+              <input type="checkbox" name="tinhtrangthanhtoan" class="form-check-input" id="tinhtrangthanhtoan"
+                value="{{ $datphong->tinhtrangthanhtoan }}"
+                {{ ($datphong->tinhtrangthanhtoan==1) ? 'checked':'' }}/>
+              @error('tinhtrang')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
             </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>

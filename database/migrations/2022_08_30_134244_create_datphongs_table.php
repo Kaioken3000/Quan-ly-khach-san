@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Boolean;
 
 return new class extends Migration
 {
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->integer('phongid')->nullable();
             $table->foreign('phongid')->references('so_phong')->on('phongs')->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->foreignId('khachhangid')->constrained('khachhangs')->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('tinhtrangthanhtoan');
             $table->timestamps();
         });
     }

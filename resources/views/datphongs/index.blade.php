@@ -21,6 +21,7 @@
             <th>Số luọng</th>
             <th>Phòng</th>
             <th>Khách hàng</th>
+            <th>Thanh toán</th>
             <th width="280px">Action</th>
           </tr>
         </thead>
@@ -34,12 +35,35 @@
             <td>{{ $datphong->phongid }}</td>
             <td>{{ $datphong->khachhangid }}</td>
             <td>
+              <label class="badge {{ ($datphong->tinhtrangthanhtoan == 0) ? 'bg-warning' : 'bg-success' }}">
+              {{ ($datphong->tinhtrangthanhtoan == 0) ? 'Chưa' : 'Rồi' }}
+              </label>
+            </td>
+            <td class="d-flex gap-1">
+              @if($datphong->tinhtrangthanhtoan == 0)
               <form action="{{ route('datphongs.destroy',$datphong->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('datphongs.edit',$datphong->id) }}"><i class="bx bx-edit mb-1"></i> Edit</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger"><i class="bx bx-trash mb-1"></i> Delete</button>
               </form>
+              <form action="{{ route('datphongs.thanhtoan',$datphong->id) }}" method="Post">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="id" value="{{ $datphong->id }}">
+                <button type="submit" class="btn btn-warning"><i class="bx bx-coin mb-1"></i> Thanh toán</button>
+              </form>
+              @else
+                @can('role-edit')
+                <form action="{{ route('datphongs.chinhthanhtoan',$datphong->id) }}" method="Post">
+                  @csrf
+                  @method('PUT')
+                  <input type="hidden" name="id" value="{{ $datphong->id }}">
+                  <button type="submit" class="btn btn-warning"><i class="bx bx-coin mb-1"></i> Chỉnh sửa thanh toán</button>
+                </form>
+                @endcan
+              @endif  
+              <br>
             </td>
           </tr>
           @endforeach

@@ -71,6 +71,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat');
         Route::get('datphongs-search', 'DatphongController@search');
         Route::get('datphongs/datphongs-search', 'DatphongController@search');
+        Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan');
+        Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan');
         
         // Khachhang Routes
         Route::resource('khachhangs', KhachhangController::class);
