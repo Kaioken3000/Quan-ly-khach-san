@@ -30,9 +30,7 @@ Route::get('/', function(){
 /**
  * Dashboard Routes
  */
-Route::get('/dashboard', function () {
-    return view('index');
-});
+Route::get('/dashboard', '\App\Http\Controllers\IndexController@dashboard');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Loaiphong;
 use App\Models\Phong;
 use App\Models\Khachhang;
+use App\Models\Nhanvien;
+use App\Models\User;
 use App\Models\Datphong;
 
 class IndexController extends Controller
@@ -120,6 +122,22 @@ class IndexController extends Controller
         Datphong::create($request->post());        
 
         return redirect('client/index');
+    }
+
+    public function dashboard(){
+        $phong = Phong::get();
+        $sophong = $phong->count();
+
+        $khachhang = Khachhang::get();
+        $sokhachhang = $khachhang->count();
+
+        $nhanvien = Nhanvien::get();
+        $sonhanvien = $nhanvien->count();
+
+        $user = User::get();
+        $souser = $user->count();
+
+        return view('index', compact('sophong','sokhachhang','sonhanvien','souser'));
     }
 
 }
