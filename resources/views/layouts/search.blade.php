@@ -18,6 +18,16 @@
         @csrf
         <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
     </form>
+@elseif(Request::is('nhanviens') || Request::is('nhanviens*'))
+    <form action="nhanviens-search" method="GET">
+        @csrf
+        <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+    </form>
+@elseif(Request::is('users') || Request::is('users*'))
+    <form action="users-search" method="GET">
+        @csrf
+        <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+    </form>
 @else
     <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
 @endif

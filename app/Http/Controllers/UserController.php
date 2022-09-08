@@ -121,7 +121,7 @@ class UserController extends Controller
     {
         $users = User::where('email','LIKE','%'.$request->search."%")
                                 ->orWhere('username','LIKE','%'.$request->search."%")
-                                ->orderBy('ma','asc')->paginate(5);
+                                ->orderBy('id','asc')->paginate(5);
         return view('users.search', compact('users'));
     }
 }

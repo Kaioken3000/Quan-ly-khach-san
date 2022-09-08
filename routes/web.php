@@ -81,9 +81,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
         
         Route::group(['middleware' => ['role:Admin']], function () {
+            //Role
             Route::resource('roles', RoleController::class);
+            
+            //Nhân viên
             Route::resource('nhanviens', NhanvienController::class);
+            Route::get('nhanviens-search', 'NhanvienController@search');
+            Route::get('nhanviens/nhanviens-search', 'NhanvienController@search');
+            
+            //User
             Route::resource('users', UserController::class);
+            Route::get('users-search', 'UserController@search');
+            Route::get('users/nhanviens-search', 'UserController@search');
         });
 
         // Companies Routes
