@@ -35,7 +35,7 @@
                      data-bs-placement="top" 
                      title="{{ $loaiphong->hinh }}" 
                      src="/client/images/{{ $loaiphong->hinh }}" 
-                     width="30%"></td>
+                     width="100%"></td>
             <td>{{ $loaiphong->soluong }}</td>
             <td>{{ $loaiphong->mieuTa }}</td>
             <td>
