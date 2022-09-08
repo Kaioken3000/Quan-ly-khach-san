@@ -61,6 +61,11 @@
                   <input type="hidden" name="id" value="{{ $datphong->id }}">
                   <button type="submit" class="btn btn-warning"><i class="bx bx-coin mb-1"></i> Chỉnh sửa thanh toán</button>
                 </form>
+                <form action="generate-invoice-pdf" method="get">
+                  @csrf
+                  <input type="hidden" name="id" value="{{ $datphong->id }}">
+                  <button type="submit" class="btn btn-info"><i class="bx bx-spreadsheet mb-1"></i> In hoá đơn</button>
+                </form>
                 @endcan
               @endif  
               <br>

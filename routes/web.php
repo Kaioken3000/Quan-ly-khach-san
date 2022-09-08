@@ -9,6 +9,7 @@ use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PDFController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
@@ -88,6 +89,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Companies Routes
         Route::resource('companies', CompanyController::class);
 
+        Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 
         /**
          * Logout Routes
