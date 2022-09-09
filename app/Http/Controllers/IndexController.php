@@ -137,7 +137,30 @@ class IndexController extends Controller
         $user = User::get();
         $souser = $user->count();
 
-        return view('index', compact('sophong','sokhachhang','sonhanvien','souser'));
+        //thanh toan
+        $datphong = Datphong::get();
+        
+        $chuathanhtoan = collect();
+        $dathanhtoan = collect();
+        foreach($datphong as $d){
+            $temp = $d->tinhtrangthanhtoan;
+            if($temp == 0){
+                $chuathanhtoan->add($temp);
+            }
+            else{
+                $dathanhtoan->add($temp);
+            }
+        }
+        
+        $thanhtoan = collect();
+        $thanhtoan->add(array(
+            'chuathanhtoan' => 'chuathanhtoan',
+            'sochuathanhtoan' => $chuathanhtoan->count(),
+            'dathanhtoan' => 'dathanhtoan',
+            'sodathanhtoan' => $dathanhtoan->count(),
+        ));
+        
+        return view('index', compact('sophong','sokhachhang','sonhanvien','souser','thanhtoan'));
     }
 
 }

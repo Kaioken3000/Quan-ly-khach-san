@@ -33,5 +33,5 @@
         </g>
     </svg>
 </span>
-<span class="app-brand-text demo text-body fw-bolder">Nam</span>
+<span class="app-brand-text demo text-body fw-bolder">nam</span>
 </a>
