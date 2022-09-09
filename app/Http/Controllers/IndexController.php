@@ -10,6 +10,7 @@ use App\Models\Khachhang;
 use App\Models\Nhanvien;
 use App\Models\User;
 use App\Models\Datphong;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -161,6 +162,11 @@ class IndexController extends Controller
         ));
         
         return view('index', compact('sophong','sokhachhang','sonhanvien','souser','thanhtoan'));
+    }
+
+    public function profile(){
+        $user = Auth::user();
+        return view('profile',compact('user'));
     }
 
 }

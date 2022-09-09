@@ -49,10 +49,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/login', 'LoginController@login')->name('login.perform');
 
         
+        
     });
     
     Route::group(['middleware' => ['auth']], function () {
         
+        Route::get('/profile', 'IndexController@profile');
         
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
