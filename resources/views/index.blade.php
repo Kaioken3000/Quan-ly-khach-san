@@ -2,8 +2,10 @@
 
 @section('content')
 @guest
-<h1>Homepage</h1>
-<p class="lead">Your viewing the home page. Please login to view the restricted data.</p>
+<div class="bg-light p-5 text-center">
+    <h1>💖💖💖💖💖💖Dashboard💖💖💖💖💖💖</h1>
+    <p class="lead">Hãy đăng nhập để vào hệ thống</p>
+</div>
 @endguest
 
 

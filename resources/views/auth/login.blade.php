@@ -23,7 +23,7 @@
                   @include('layouts.logo')
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+              <h4 class="mb-2">Welcome to Nam.inc! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
               <form id="formAuthentication" class="mb-3" method="post" action="{{ route('login.perform') }}">

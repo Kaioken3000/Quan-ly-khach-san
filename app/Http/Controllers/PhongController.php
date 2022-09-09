@@ -17,7 +17,7 @@ class PhongController extends Controller
      */
     public function index()
     {
-        $phongs = Phong::orderBy('so_phong', 'asc')->paginate(4);
+        $phongs = Phong::orderBy('so_phong', 'asc')->paginate(5);
         $loaiphongs = Loaiphong::all();
         return view('phongs.index', compact('phongs'), compact('loaiphongs'));
     }
