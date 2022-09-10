@@ -16,5 +16,11 @@ class Datphong extends Model
         'phongid',
         'khachhangid',
         'tinhtrangthanhtoan',
+        'tinhtrangnhanphong',
     ];
+
+    public function khachhangs()
+    {
+        return $this->belongsTo(Khachhang::class, 'khachhangid', 'id');
+    }
 }

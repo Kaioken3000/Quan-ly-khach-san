@@ -15,4 +15,9 @@ class Khachhang extends Model
         'email'
     ];
 
+    public function datphongs()
+    {
+        return $this->hasMany(Datphong::class, 'khachhangid', 'id');
+    }
+
 }

@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -90,7 +91,6 @@ class UserController extends Controller
             'username' => 'required',
             'roles' => 'required',
         ]);
-        
         $user->fill($request->post())->save();
 
         DB::table('model_has_roles')->where('model_id',$user->id)->delete();

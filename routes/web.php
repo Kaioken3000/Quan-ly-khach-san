@@ -54,7 +54,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     Route::group(['middleware' => ['auth']], function () {
         
-        Route::get('/profile', 'IndexController@profile');
         
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
@@ -68,12 +67,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         
         // Datphong Routes
         Route::resource('datphongs', DatphongController::class);
-        Route::get('datphongs-kiemtra', 'DatphongController@kiemtra');
-        Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat');
-        Route::get('datphongs-search', 'DatphongController@search');
-        Route::get('datphongs/datphongs-search', 'DatphongController@search');
-        Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan');
-        Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan');
+        Route::get('datphongs-kiemtra', 'DatphongController@kiemtra');//kiem tra dat phong
+        Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat');//kiem tra dat phong khi thay doi
+        Route::get('datphongs-search', 'DatphongController@search');//tim kiem
+        Route::get('datphongs/datphongs-search', 'DatphongController@search');//tim kiem
+        Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan');//thanh toán
+        Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan');//thanh toán khi thay doi
+        Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong');//nhan phong
         
         // Khachhang Routes
         Route::resource('khachhangs', KhachhangController::class);
@@ -95,8 +95,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('users/nhanviens-search', 'UserController@search');
         });
 
-        // Companies Routes
-        Route::resource('companies', CompanyController::class);
+        //Profile
+        Route::get('/profile', 'IndexController@profile');
+        Route::get('/profiles/vieweditprofile', 'IndexController@vieweditprofile');
+        Route::match(['put', 'patch'],'/profiles/{user}/editprofile', 'IndexController@editprofile')->name('profile.editprofile');
 
         Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 

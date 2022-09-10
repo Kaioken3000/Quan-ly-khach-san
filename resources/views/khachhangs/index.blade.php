@@ -19,6 +19,7 @@
             <th>Ten</th>
             <th>sdt</th>
             <th>email</th>
+            <th>Mã đặt phòng</th>
             <th width="280px">Action</th>
           </tr>
         </thead>
@@ -29,12 +30,18 @@
             <td>{{ $khachhang->ten }}</td>
             <td>{{ $khachhang->sdt }}</td>
             <td>{{ $khachhang->email }}</td>
+            <td>{{ $khachhang->datphongid }}</td>
             <td class="d-flex gap-1">
+              @if( $khachhang->datphongid == null )
               <form action="{{ route('datphongs.create', $khachhang->id) }}" method="GET">
                 @csrf
                 <input type="hidden" value="{{ $khachhang->id }}" name="khachhangs">
                 <button type="submit" class="btn btn-success"><i class="bx bx-key mb-1"></i> Đặt phòng</button>
               </form>
+              @else
+              <input type="hidden" value="{{ $datphong = App\Models\Datphong::find($khachhang->datphongid) }}">
+              <a class=" btn btn-warning" href="{{ route('datphongs.edit',$datphong->id) }}"><i class="bx bx-key mb-1"></i> Đổi phòng</a>
+              @endif
               <form action="{{ route('khachhangs.destroy',$khachhang->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('khachhangs.edit',$khachhang->id) }}"><i class="bx bx-edit mb-1"></i> Edit</a>
                 @csrf

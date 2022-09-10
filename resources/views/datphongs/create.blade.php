@@ -45,6 +45,7 @@
             </div>
             <input type="hidden" name="khachhangid" value="{{ $khachhangs }}">
             <input type="hidden" name="tinhtrangthanhtoan" value=0>
+            <input type="hidden" name="tinhtrangnhanphong" value=0>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>
         </div>

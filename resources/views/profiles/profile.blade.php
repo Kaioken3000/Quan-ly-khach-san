@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="container-xxl flex-grow-1 container-p-y">
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
     <div class="card col-4">
         <h3 class="card-header">Thông tin tài khoản</h3>
         <img class="w-50 rounded-circle m-auto  " src="/adminresource/assets/img/avatars/blank.jpeg" alt="">
@@ -15,7 +20,7 @@
             @else
             <p>Role: User</p>
             @endhasrole
-            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}"><i class="bx bx-edit mb-1"></i> Edit</a>
+            <a class="btn btn-primary" href="/profiles/vieweditprofile"><i class="bx bx-edit mb-1"></i> Edit</a>
         </div>
     </div>
 </div>

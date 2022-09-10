@@ -27,7 +27,7 @@ class PDFController extends Controller
         $loaiphong = Loaiphong::find($phong->loaiphongid);
         $khachhang = Khachhang::find($datphong->khachhangid);
 
-        $tonggia = $songay*$loaiphong->gia;
+        $tonggia = $songay*$loaiphong->gia*$loaiphong->soluong;
 
         $pdf = PDF::loadView('Hoadon', compact('datphong', 'phong', 'loaiphong', 'khachhang', 'songay', 'tonggia'));
 

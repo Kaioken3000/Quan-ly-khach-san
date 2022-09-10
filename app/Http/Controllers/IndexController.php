@@ -10,6 +10,7 @@ use App\Models\Khachhang;
 use App\Models\Nhanvien;
 use App\Models\User;
 use App\Models\Datphong;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -44,7 +45,7 @@ class IndexController extends Controller
     {
         $request->validate([
             'ngaydat' => 'required',
-            'ngaytra' => 'required',
+            'ngaytra' => 'required|gt:ngaydat',
             'soluong' => 'required'
         ]);
 
@@ -166,7 +167,25 @@ class IndexController extends Controller
 
     public function profile(){
         $user = Auth::user();
-        return view('profile',compact('user'));
+        return view('profiles.profile',compact('user'));
     }
 
+    public function vieweditprofile()
+    {
+        $user = Auth::user();
+        return view('profiles.edit',compact('user'));
+    }
+
+    public function editprofile(Request $request, User $user)
+    {
+        $request->validate([
+            'email' => ['required','email',
+                    Rule::unique('users')->ignore($user->email, 'email')],
+            'username' => 'required',
+        ]);
+        
+        $user->fill($request->post())->save();
+
+        return redirect('/profile')->with('success','User Has Been updated successfully');
+    }
 }

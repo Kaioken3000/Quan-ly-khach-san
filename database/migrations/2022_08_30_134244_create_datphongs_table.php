@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreign('phongid')->references('so_phong')->on('phongs')->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->foreignId('khachhangid')->constrained('khachhangs')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('tinhtrangthanhtoan');
+            $table->boolean('tinhtrangnhanphong');
+            $table->foreignId('datphongid')->nullable()->constrained('datphongs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -5,36 +5,38 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Khachhang;
+use App\Models\Datphong;
 
 class KhachhangController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $khachhangs = Khachhang::orderBy('id','asc')->paginate(5);
-        return view('khachhangs.index', compact('khachhangs'));
+        $datphong = Datphong::get();
+        $khachhangs = Khachhang::orderBy('id', 'asc')->paginate(5);
+        return view('khachhangs.index', compact('khachhangs', 'datphong'));
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('khachhangs.create');
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -52,34 +54,34 @@ class KhachhangController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\khachhang  $khachhang
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\khachhang  $khachhang
+     * @return \Illuminate\Http\Response
+     */
     public function show(Khachhang $khachhang)
     {
-        return view('khachhangs.show',compact('khachhang'));
+        return view('khachhangs.show', compact('khachhang'));
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Khachhang  $khachhang
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Khachhang  $khachhang
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Khachhang $khachhang)
     {
-        return view('khachhangs.edit',compact('khachhang'));
+        return view('khachhangs.edit', compact('khachhang'));
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\khachhang  $khachhang
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\khachhang  $khachhang
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Khachhang $khachhang)
     {
         $request->validate([
@@ -87,36 +89,36 @@ class KhachhangController extends Controller
             'sdt' => 'required',
             'email' => 'required',
         ]);
-        
+
         $khachhang->fill($request->post())->save();
 
-        return redirect()->route('khachhangs.index')->with('success','Khachhang Has Been updated successfully');
+        return redirect()->route('khachhangs.index')->with('success', 'Khachhang Has Been updated successfully');
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Khachhang  $khachhang
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Khachhang  $khachhang
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Khachhang $khachhang)
     {
         $khachhang->delete();
-        return redirect()->route('khachhangs.index')->with('success','Khachhang has been deleted successfully');
+        return redirect()->route('khachhangs.index')->with('success', 'Khachhang has been deleted successfully');
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function search(Request $request)
     {
-        $khachhangs = Khachhang::where('ten','LIKE','%'.$request->search."%")
-                                ->orWhere('sdt','LIKE','%'.$request->search."%")
-                                ->orWhere('email','LIKE','%'.$request->search."%")
-                                ->orWhere('id','LIKE','%'.$request->search."%")
-                                ->orderBy('id','asc')->paginate(5);
+        $khachhangs = Khachhang::where('ten', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('sdt', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('email', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('id', 'LIKE', '%' . $request->search . "%")
+            ->orderBy('id', 'asc')->paginate(5);
         return view('khachhangs.search', compact('khachhangs'));
     }
 }
