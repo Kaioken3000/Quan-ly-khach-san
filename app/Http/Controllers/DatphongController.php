@@ -17,7 +17,7 @@ class DatphongController extends Controller
      */
     public function index()
     {
-        $datphongs = Datphong::orderBy('id', 'asc')->paginate(5);
+        $datphongs = Datphong::orderBy('id', 'desc')->paginate(5);
         return view('datphongs.index', compact('datphongs'));
     }
 

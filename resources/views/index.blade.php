@@ -74,8 +74,82 @@
     {{ Html::script('https://code.highcharts.com/highcharts.js') }}
     {{ Html::script('https://code.highcharts.com/modules/exporting.js') }}
     {{ Html::script('https://code.highcharts.com/modules/export-data.js') }}
-    <div class="row">
-        <div class="card col-5 m-1">
+    <div class="d-flex">
+        <div class="card m-1">
+            <div id="container2" data-order="{{ $thanhtoan }}"></div>
+            <script>
+                $(document).ready(function() {
+                    var order = $('#container2').data('order');
+                    var listOfValue = [];
+                    var listOfYear = [];
+                    order.forEach(function(element) {
+                        listOfYear.push(element.chuathanhtoan);
+                        listOfYear.push(element.dathanhtoan);
+                        listOfValue.push(element.sochuathanhtoan);
+                        listOfValue.push(element.sodathanhtoan);
+                    });
+                    console.log(listOfValue);
+                    var chart = Highcharts.chart('container2', {
+
+                        title: {
+                            text: 'Thanh toán'
+                        },
+
+                        subtitle: {
+                            text: 'Tình trạng thanh toán'
+                        },
+
+                        xAxis: {
+                            categories: listOfYear,
+                        },
+
+                        series: [{
+                            type: 'column',
+                            colorByPoint: true,
+                            data: listOfValue,
+                            showInLegend: false
+                        }]
+                    });
+
+                    $('#plain').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: false,
+                                polar: false
+                            },
+                            subtitle: {
+                                text: 'Plain'
+                            }
+                        });
+                    });
+
+                    $('#inverted').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: true,
+                                polar: false
+                            },
+                            subtitle: {
+                                text: 'Inverted'
+                            }
+                        });
+                    });
+
+                    $('#polar').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: false,
+                                polar: true
+                            },
+                            subtitle: {
+                                text: 'Polar'
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+        <div class="card m-1">
             <div id="container" data-order="{{ $thanhtoan }}"></div>
             <script>
                 $(document).ready(function() {
@@ -126,81 +200,80 @@
                 });
             </script>
         </div>
-    
-        <div class="card col-6 m-1">
-            <div id="container2" data-order="{{ $thanhtoan }}"></div>
-            <script>
-                $(document).ready(function() {
-                    var order = $('#container2').data('order');
-                    var listOfValue = [];
-                    var listOfYear = [];
-                    order.forEach(function(element) {
-                        listOfYear.push(element.chuathanhtoan);
-                        listOfYear.push(element.dathanhtoan);
-                        listOfValue.push(element.sochuathanhtoan);
-                        listOfValue.push(element.sodathanhtoan);
-                    });
-                    console.log(listOfValue);
-                    var chart = Highcharts.chart('container2', {
-    
-                        title: {
-                            text: 'Thanh toán'
+    </div>
+    <div class="card m-1">
+        <div id="container3" data-order="{{ $nhanphong }}"></div>
+        <script>
+            $(document).ready(function() {
+                var order = $('#container3').data('order');
+                var listOfValue = [];
+                var listOfYear = [];
+                order.forEach(function(element) {
+                    listOfYear.push(element.chuanhanphong);
+                    listOfYear.push(element.danhanphong);
+                    listOfValue.push(element.sochuanhanphong);
+                    listOfValue.push(element.sodanhanphong);
+                });
+                console.log(listOfValue);
+                var chart = Highcharts.chart('container3', {
+
+                    title: {
+                        text: 'Nhận phòng'
+                    },
+
+                    subtitle: {
+                        text: 'Tình trạng nhận phòng'
+                    },
+
+                    xAxis: {
+                        categories: listOfYear,
+                    },
+
+                    series: [{
+                        type: 'column',
+                        colorByPoint: true,
+                        data: listOfValue,
+                        showInLegend: false
+                    }]
+                });
+
+                $('#plain').click(function() {
+                    chart.update({
+                        chart: {
+                            inverted: false,
+                            polar: false
                         },
-    
                         subtitle: {
-                            text: 'Tình trạng thanh toán'
-                        },
-    
-                        xAxis: {
-                            categories: listOfYear,
-                        },
-    
-                        series: [{
-                            type: 'column',
-                            colorByPoint: true,
-                            data: listOfValue,
-                            showInLegend: false
-                        }]
-                    });
-    
-                    $('#plain').click(function() {
-                        chart.update({
-                            chart: {
-                                inverted: false,
-                                polar: false
-                            },
-                            subtitle: {
-                                text: 'Plain'
-                            }
-                        });
-                    });
-    
-                    $('#inverted').click(function() {
-                        chart.update({
-                            chart: {
-                                inverted: true,
-                                polar: false
-                            },
-                            subtitle: {
-                                text: 'Inverted'
-                            }
-                        });
-                    });
-    
-                    $('#polar').click(function() {
-                        chart.update({
-                            chart: {
-                                inverted: false,
-                                polar: true
-                            },
-                            subtitle: {
-                                text: 'Polar'
-                            }
-                        });
+                            text: 'Plain'
+                        }
                     });
                 });
-            </script>
-        </div>
+
+                $('#inverted').click(function() {
+                    chart.update({
+                        chart: {
+                            inverted: true,
+                            polar: false
+                        },
+                        subtitle: {
+                            text: 'Inverted'
+                        }
+                    });
+                });
+
+                $('#polar').click(function() {
+                    chart.update({
+                        chart: {
+                            inverted: false,
+                            polar: true
+                        },
+                        subtitle: {
+                            text: 'Polar'
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
 </div>
 

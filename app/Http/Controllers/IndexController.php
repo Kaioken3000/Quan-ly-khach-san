@@ -144,13 +144,22 @@ class IndexController extends Controller
         
         $chuathanhtoan = collect();
         $dathanhtoan = collect();
+        $chuanhanphong = collect();
+        $danhanphong = collect();
         foreach($datphong as $d){
             $temp = $d->tinhtrangthanhtoan;
+            $temp2 = $d->tinhtrangnhanphong;
             if($temp == 0){
                 $chuathanhtoan->add($temp);
             }
             else{
                 $dathanhtoan->add($temp);
+            }
+            if($temp2 == 0){
+                $chuanhanphong->add($temp);
+            }
+            else{
+                $danhanphong->add($temp);
             }
         }
         
@@ -161,8 +170,15 @@ class IndexController extends Controller
             'dathanhtoan' => 'dathanhtoan',
             'sodathanhtoan' => $dathanhtoan->count(),
         ));
+        $nhanphong = collect();
+        $nhanphong->add(array(
+            'chuanhanphong' => 'chuanhanphong',
+            'sochuanhanphong' => $chuanhanphong->count(),
+            'danhanphong' => 'danhanphong',
+            'sodanhanphong' => $danhanphong->count(),
+        ));
         
-        return view('index', compact('sophong','sokhachhang','sonhanvien','souser','thanhtoan'));
+        return view('index', compact('sophong','sokhachhang','sonhanvien','souser','thanhtoan','nhanphong'));
     }
 
     public function profile(){
