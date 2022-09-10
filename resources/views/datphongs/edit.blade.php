@@ -45,22 +45,8 @@
               <input type="hidden" name="khachhangid" value="{{ $datphong->khachhangid }}">
               <input type="hidden" name="id" value="{{ $datphong->id }}">
             </div>
-            <div class="row m-3">
-              <div class="col-xl-6 form-check">
-                <label class="form-check-label" for="tinhtrangthanhtoan">Thanh toán</label>
-                <input type="checkbox" name="tinhtrangthanhtoan" class="form-check-input" id="tinhtrangthanhtoan" value="{{ $datphong->tinhtrangthanhtoan }}" {{ ($datphong->tinhtrangthanhtoan==1) ? 'checked':'' }} />
-                @error('tinhtrangthanhtoan')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                @enderror
-              </div>
-              <div class="col-xl-6 form-check">
-                <label class="form-check-label" for="tinhtrangthanhtoan">Nhận phòng</label>
-                <input type="checkbox" name="tinhtrangnhanphong" class="form-check-input" id="tinhtrangnhanphong" value="{{ $datphong->tinhtrangnhanphong }}" {{ ($datphong->tinhtrangnhanphong==1) ? 'checked':'' }} />
-                @error('tinhtrangnhanphong')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                @enderror
-              </div>
-            </div>
+            <input type="hidden" name="tinhtrangthanhtoan" class="form-check-input" id="tinhtrangthanhtoan" value="{{ $datphong->tinhtrangthanhtoan }}" {{ ($datphong->tinhtrangthanhtoan==1) ? 'checked':'' }} />
+            <input type="hidden" name="tinhtrangnhanphong" class="form-check-input" id="tinhtrangnhanphong" value="{{ $datphong->tinhtrangnhanphong }}" {{ ($datphong->tinhtrangnhanphong==1) ? 'checked':'' }} />
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>
         </div>

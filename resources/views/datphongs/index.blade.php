@@ -70,7 +70,8 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $datphong->id }}">
-                <button type="submit" class="w-100 btn btn-secondary"><i class="bx bx-hotel mb-1"></i>{{ ($datphong->tinhtrangnhanphong == 0) ? 'Nhận phòng' : 'Sửa nhận phòng' }}</button>
+                <button type="submit" class="w-100 btn btn-secondary"><i class="bx bx-hotel mb-1"></i>
+                {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}</button>
               </form>
 
               <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->

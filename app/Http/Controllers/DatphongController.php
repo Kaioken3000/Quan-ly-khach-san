@@ -103,6 +103,7 @@ class DatphongController extends Controller
             'tinhtrangthanhtoan' => 'required',
             'tinhtrangnhanphong' => 'required'
         ]);
+        Log::info($request);
 
         $datphong->fill($request->post())->save();
 
