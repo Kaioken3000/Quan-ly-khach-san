@@ -54,11 +54,14 @@
 
               <!-- các chức năng sửa, xoá, thanh toán, nhận phòng khi chưa thanh toán -->
               @if($datphong->tinhtrangthanhtoan == 0)
+              <form class="mb-1" action="/datphongs-kiemtra-capnhat" method="get">
+                <input type="hidden" name="datphongid" value="{{ $datphong->id }}">
+                <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i> Đổi phòng</button>
+              </form>
               <form class="mb-1" action="{{ route('datphongs.destroy',$datphong->id) }}" method="Post">
-                <a class=" btn btn-primary" href="{{ route('datphongs.edit',$datphong->id) }}"><i class="bx bx-edit mb-1"></i> </a>
                 @csrf
                 @method('DELETE')
-                <button type="submit" class=" btn btn-danger"><i class="bx bx-trash mb-1"></i> </button>
+                <button type="submit" class="w-100 btn btn-danger"><i class="bx bx-trash mb-1"></i> Xoá phòng</button>
               </form>
               <form class="mb-1" action="{{ route('datphongs.thanhtoan',$datphong->id) }}" method="Post">
                 @csrf

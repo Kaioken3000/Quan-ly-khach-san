@@ -39,7 +39,10 @@
               </form>
               @else
               <input type="hidden" value="{{ $datphong = App\Models\Datphong::find($khachhang->datphongid) }}">
-              <a class=" btn btn-warning" href="{{ route('datphongs.edit',$datphong->id) }}"><i class="bx bx-key mb-1"></i> Đổi phòng</a>
+              <form action="/datphongs-kiemtra-capnhat" method="get">
+                <input type="hidden" name="datphongid" value="{{ $khachhang->datphongid }}">
+                <button class=" btn btn-warning" type="submit"><i class="bx bx-key mb-1"></i> Đổi phòng</button>
+              </form>
               @endif
               <form action="{{ route('khachhangs.destroy',$khachhang->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('khachhangs.edit',$khachhang->id) }}"><i class="bx bx-edit mb-1"></i> Edit</a>

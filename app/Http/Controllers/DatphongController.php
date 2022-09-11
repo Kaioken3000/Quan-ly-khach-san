@@ -224,11 +224,7 @@ class DatphongController extends Controller
      */
     public function kiemtra_capnhat(Request $request)
     {
-        $request->validate([
-            'ngaydat' => 'required',
-            'ngaytra' => 'required',
-            'soluong' => 'required'
-        ]);
+        $dat = Datphong::find($request->datphongid);
 
         $phongslist = Phong::get();
         $phongs = array();
@@ -239,13 +235,13 @@ class DatphongController extends Controller
             if (count($datphongs) != 0) {
                 foreach ($datphongs as $datphong) {
                     if ($datphong->phongid == $phong->so_phong) {
-                        if ($request->ngaytra >= $request->ngaydat) {
-                            if ($request->ngaydat < $datphong->ngaydat) {
-                                if ($request->ngaytra < $datphong->ngaydat) {
+                        if ($dat->ngaytra >= $dat->ngaydat) {
+                            if ($dat->ngaydat < $datphong->ngaydat) {
+                                if ($dat->ngaytra < $datphong->ngaydat) {
                                     $xacnhan++;
                                 }
-                            } else if ($request->ngaydat > $datphong->ngaydat) {
-                                if ($request->ngaydat > $datphong->ngaytra) {
+                            } else if ($dat->ngaydat > $datphong->ngaydat) {
+                                if ($dat->ngaydat > $datphong->ngaytra) {
                                     $xacnhan++;
                                 }
                             }
@@ -257,6 +253,6 @@ class DatphongController extends Controller
                 }
             } else array_push($phongs, $phong);
         }
-        return view('datphongs.kiemtra-capnhat', compact('request', 'phongs'));
+        return view('datphongs.kiemtra-capnhat', compact( 'phongs','dat'));
     }
 }
