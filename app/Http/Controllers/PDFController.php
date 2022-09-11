@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Danhsachdatphong;
 use Illuminate\Http\Request;
 use App\Models\Datphong;
 use App\Models\Phong;
@@ -20,16 +21,29 @@ class PDFController extends Controller
     public function generateInvoicePDF(Request $request)
     {
         $datphong = Datphong::find($request->id);
-        $songay = strtotime($datphong->ngaydat) - strtotime($datphong->ngaytra);
-        $songay = abs(round($songay / 86400));
         
-        $phong = Phong::find($datphong->phongid);
-        $loaiphong = Loaiphong::find($phong->loaiphongid);
         $khachhang = Khachhang::find($datphong->khachhangid);
+        
+        $danhsachdatphongs = Danhsachdatphong::where('datphongid',$datphong->id)->get();
+        
+        $phongs = collect();
+        $loaiphongs = collect();
+        $tonggia=0;
+        foreach($danhsachdatphongs as $danhsachdatphong){
+            $phong = Phong::find($danhsachdatphong->phongid);
 
-        $tonggia = $songay*$loaiphong->gia*$loaiphong->soluong;
+            //tim phong va loai phong
+            $phongs->add($phong);
+            $loaiphong = Loaiphong::find($phong->loaiphongid);
+            
+            //tinh gia tien
+            $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
+            $songay = abs(round($songay / 86400));
+            $tonggia += $songay*$loaiphong->gia*$datphong->soluong;
+        }
+        
 
-        $pdf = PDF::loadView('Hoadon', compact('datphong', 'phong', 'loaiphong', 'khachhang', 'songay', 'tonggia'));
+        $pdf = PDF::loadView('Hoadon', compact('datphong','khachhang', 'tonggia','danhsachdatphongs'));
 
         return $pdf->stream('nicesnippets.pdf');
     }

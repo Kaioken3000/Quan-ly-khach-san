@@ -23,4 +23,5 @@ class Datphong extends Model
     {
         return $this->belongsTo(Khachhang::class, 'khachhangid', 'id');
     }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Khachhang;
 use App\Models\Datphong;
+use App\Models\Danhsachdatphong;
 
 class KhachhangController extends Controller
 {
@@ -39,8 +40,6 @@ class KhachhangController extends Controller
      */
     public function store(Request $request)
     {
-        $request->tinhtrangthanhtoan = 0;
-        $request->tinhtrangnhanphong = 0;
         $request->validate([
             'ten' => 'required',
             'sdt' => 'required',
@@ -51,21 +50,22 @@ class KhachhangController extends Controller
             'phongid' => 'required',
         ]);
 
+        Log::info($request);
+
         Khachhang::create([
             'ten' => $request->ten,
-            'sdt' => $request->ten,
-            'email' => $request->ten,
+            'sdt' => $request->sdt,
+            'email' => $request->email,
         ]);
 
         $khachhangs = Khachhang::max('id');
-
-        Log::info($request->tinhtrangthanhtoan);
-
+        
+        $request->tinhtrangthanhtoan = 0;
+        $request->tinhtrangnhanphong = 0;
         Datphong::create([
             'ngaydat' => $request->ngaydat,
             'ngaytra' => $request->ngaytra,
             'soluong' => $request->soluong,
-            'phongid' => $request->phongid,
             'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
             'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
             'khachhangid' => $khachhangs,
@@ -77,6 +77,13 @@ class KhachhangController extends Controller
         $khachhangs->datphongid = $dat;
         $khachhangs->save();
 
+        Danhsachdatphong::create([
+            'phongid' => $request->phongid,
+            'ngaybatdauo' => $request->ngaydat, 
+            'ngayketthuco' => $request->ngaytra, 
+            'datphongid' => $dat, 
+        ]);
+        
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }
 

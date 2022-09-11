@@ -37,7 +37,12 @@
             <td>{{ $datphong->ngaydat }}</td>
             <td>{{ $datphong->ngaytra }}</td>
             <td>{{ $datphong->soluong }}</td>
-            <td>{{ $datphong->phongid }}</td>
+            <td>|
+              <?php $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get(); ?>
+              @foreach($danhsachdatphongs as $danhsachdatphong)
+              {{ $danhsachdatphong->phongid }} |
+              @endforeach
+            </td>
             <td>{{ $datphong->khachhangid }}</td>
             <td>
               <label class="badge {{ ($datphong->tinhtrangthanhtoan == 0) ? 'bg-warning' : 'bg-success' }}">
