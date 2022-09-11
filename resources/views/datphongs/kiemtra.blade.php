@@ -46,15 +46,13 @@
             <td>{{ $phong->so_phong }}</td>
             <td>{{ $phong->loaiphongid }}</td>
             <td>
-              <form action="{{ route('datphongs.store') }}" method="Post">
-                @csrf
+              <form action="{{ route('khachhangs.create') }}" method="get">
                 <input type="hidden" name="ngaydat" id="ngaydat" 
                     value="{{ $request->ngaydat }}"/>
                 <input type="hidden" name="ngaytra" id="ngaytra" 
                     value="{{ $request->ngaytra }}"/>
                 <input type="hidden" name="soluong" id="soluong"
                     value="{{ $request->soluong }}"/>
-                <input type="hidden" name="khachhangid" value="{{$request->khachhangid}}">
                 <input type="hidden" name="phongid" value="{{$phong->so_phong}}">
                 <input type="hidden" name="tinhtrangthanhtoan" value=0>
                 <input type="hidden" name="tinhtrangnhanphong" value=0>

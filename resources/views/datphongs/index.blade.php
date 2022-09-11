@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đặt phòng /</span> Quản lý</h4>
-  <a class="btn btn-success mb-4" href="{{ route('khachhangs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a>
+  <a class="btn btn-success mb-4" href="{{ route('datphongs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a>
   @if ($message = Session::get('success'))
   <div class="alert alert-success">
     <p>{{ $message }}</p>

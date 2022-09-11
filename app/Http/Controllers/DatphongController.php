@@ -47,10 +47,7 @@ class DatphongController extends Controller
             'ngaytra' => 'required',
             'soluong' => 'required',
             'phongid' => 'required',
-            'khachhangid' => 'required',
         ]);
-
-        Log::info($request);
 
         Datphong::create($request->post());
 
@@ -99,7 +96,6 @@ class DatphongController extends Controller
             'ngaytra' => 'required',
             'soluong' => 'required',
             'phongid' => 'required',
-            'khachhangid' => 'required',
             'tinhtrangthanhtoan' => 'required',
             'tinhtrangnhanphong' => 'required'
         ]);

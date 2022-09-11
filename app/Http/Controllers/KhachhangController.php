@@ -26,9 +26,9 @@ class KhachhangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('khachhangs.create');
+        return view('khachhangs.create', compact('request'));
     }
 
     /**
@@ -39,18 +39,45 @@ class KhachhangController extends Controller
      */
     public function store(Request $request)
     {
+        $request->tinhtrangthanhtoan = 0;
+        $request->tinhtrangnhanphong = 0;
         $request->validate([
             'ten' => 'required',
             'sdt' => 'required',
             'email' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required',
+            'phongid' => 'required',
         ]);
 
-        Khachhang::create($request->post());
+        Khachhang::create([
+            'ten' => $request->ten,
+            'sdt' => $request->ten,
+            'email' => $request->ten,
+        ]);
 
         $khachhangs = Khachhang::max('id');
 
-        // return redirect()->route('khachhangs.index')->with('success','Khachhang has been created successfully.');
-        return view('datphongs.create', compact('khachhangs'));
+        Log::info($request->tinhtrangthanhtoan);
+
+        Datphong::create([
+            'ngaydat' => $request->ngaydat,
+            'ngaytra' => $request->ngaytra,
+            'soluong' => $request->soluong,
+            'phongid' => $request->phongid,
+            'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
+            'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
+            'khachhangid' => $khachhangs,
+        ]);
+
+        $dat = Datphong::max('id');
+
+        $khachhangs = Khachhang::find($khachhangs);
+        $khachhangs->datphongid = $dat;
+        $khachhangs->save();
+
+        return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }
 
     /**

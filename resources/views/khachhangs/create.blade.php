@@ -39,13 +39,18 @@
             </div>
             <div class="mb-3">
               <label class="form-label" for="email">Email</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="VD: 001"/>
+              <input type="email" name="email" class="form-control" id="email" placeholder="VD: 001" />
               @error('email')
               <div class="alert alert-danger" role="alert">{{ $message }}</div>
               @enderror
             </div>
+            <input type="hidden" name="ngaydat" id="ngaydat" value="{{ $request->ngaydat }}" />
+            <input type="hidden" name="ngaytra" id="ngaytra" value="{{ $request->ngaytra }}" />
+            <input type="hidden" name="soluong" id="soluong" value="{{ $request->soluong }}" />
+            <input type="hidden" name="phongid" value="{{$request->phongid}}">
+            <input type="hidden" name="tinhtrangthanhtoan" value=0>
+            <input type="hidden" name="tinhtrangnhanphong" value=0>
             <button type="submit" class="btn btn-primary">Xác nhận</button>
-            <a href="{{ route('khachhangs.index') }}" class="btn btn-primary"> Chọn từ khách hàng có sẵn</a>
           </form>
         </div>
       </div>
