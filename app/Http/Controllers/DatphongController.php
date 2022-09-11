@@ -227,7 +227,7 @@ class DatphongController extends Controller
         $dat = Datphong::find($request->datphongid);
 
         $phongslist = Phong::get();
-        $phongs = array();
+        $phongs = array();  
         foreach ($phongslist as $phong) {
             $xacnhan = 0;
             $datphongs = Datphong::where('phongid', $phong->so_phong)->get();
