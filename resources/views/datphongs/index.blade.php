@@ -7,7 +7,15 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đặt phòng /</span> Quản lý</h4>
-  <a class="btn btn-success mb-4" href="{{ route('khachhangs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a>
+  <div class="d-flex gap-1">
+    <div>
+      <!-- <a class="btn btn-success" href="{{ route('khachhangs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a> -->
+    </div>
+    <form action="{{ route('datphongs.emptyroom') }}" method="get">
+      <input type="date" name="ngaychon" id="current_date">
+      <button type="submit" class="btn btn-success"><i class="bx bx-hotel mb-1"></i> Danh sách phòng trống</button>
+    </form>
+  </div>
   @if ($message = Session::get('success'))
   <div class="alert alert-success">
     <p>{{ $message }}</p>
@@ -71,7 +79,7 @@
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $datphong->id }}">
                 <button type="submit" class="w-100 btn btn-secondary"><i class="bx bx-hotel mb-1"></i>
-                {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}</button>
+                  {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}</button>
               </form>
 
               <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->

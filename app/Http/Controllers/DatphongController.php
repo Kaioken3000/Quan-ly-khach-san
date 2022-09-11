@@ -263,4 +263,10 @@ class DatphongController extends Controller
         }
         return view('datphongs.kiemtra-capnhat', compact('request', 'phongs'));
     }
+
+    public function emptyroom(Request $request)
+    {
+        $phongs = Phong::get();
+        return view('datphongs.emptyroom',compact('phongs','request'));
+    }
 }

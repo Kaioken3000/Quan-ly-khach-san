@@ -46,7 +46,7 @@
         <li class="menu-item {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active':'' }}">
             <a href="{{ route('datphongs.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bed"></i>
-                <div data-i18n="Analytics">Phòng đặt</div>
+                <div data-i18n="Analytics">Quản lý đặt phòng</div>
             </a>
         </li>
 

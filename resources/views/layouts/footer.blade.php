@@ -9,12 +9,9 @@
             <a href="#" class="footer-link fw-bolder">Lý Nhựt Nam</a>
         </div>
         <div>
-            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
-
-            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4">Support</a>
+            <p class="footer-link"> 😍 B1910261 - </p>
+            <p class="footer-link"> 💖 Niên luận cơ sở - </p>
+            <p class="footer-link"> 🤞 Quản lý khách sạn 😘</p>
         </div>
     </div>
 </footer>
