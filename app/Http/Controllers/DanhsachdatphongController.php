@@ -43,4 +43,9 @@ class DanhsachdatphongController extends Controller
 
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }
+
+    public function index(Request $request){
+        $danhsachdatphongs = Danhsachdatphong::where("datphongid",$request->datphongid)->get();
+        return view('danhsachdatphongs.index', compact('danhsachdatphongs'));
+    }
 }

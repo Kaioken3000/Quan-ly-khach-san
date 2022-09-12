@@ -1,9 +1,5 @@
 @extends('layouts.app')
-<style>
-  td:nth-child(1) {
-    width: 5px;
-  }
-</style>
+
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đặt phòng /</span> Quản lý</h4>
@@ -23,7 +19,7 @@
             <th>Ngày đặt</th>
             <th>Ngày trả</th>
             <th>Số luọng</th>
-            <th>Phòng</th>
+            <th colspan="2">Phòng hiện tại</th>
             <th>Khách hàng</th>
             <th>Thanh toán</th>
             <th>Nhận phòng</th>
@@ -37,11 +33,17 @@
             <td>{{ $datphong->ngaydat }}</td>
             <td>{{ $datphong->ngaytra }}</td>
             <td>{{ $datphong->soluong }}</td>
-            <td>|
-              <?php $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get(); ?>
-              @foreach($danhsachdatphongs as $danhsachdatphong)
-              {{ $danhsachdatphong->phongid }} |
-              @endforeach
+            <td>
+              <?php 
+                $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->orderBy('id','desc')->first(); 
+              ?>
+              {{ $phongmax->phongid }}
+            </td>
+            <td>
+                <form class="mb-1" action="{{ route('danhsachdatphongs.index') }}" method="get">
+                  <input type="hidden" name="datphongid" value="{{ $datphong->id }}">
+                  <button class="badge bg-info border-info" type="submit"> Chi tiết</button>
+                </form>
             </td>
             <td>{{ $datphong->khachhangid }}</td>
             <td>

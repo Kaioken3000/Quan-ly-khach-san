@@ -134,7 +134,6 @@
             <p class="m-0 pt-5 text-bold w-100">Ngay dat- <span class="gray-color">{{ $datphong->ngaydat }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Ngay tra- <span class="gray-color">{{ $datphong->ngaytra }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">So luong - <span class="gray-color">{{ $datphong->soluong }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Phong - <span class="gray-color">{{ $datphong->phongid }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Khach hang - <span class="gray-color">{{ $datphong->khachhangid }}</span></p>
         </div>
         <div class="w-50 float-left logo mt-10">

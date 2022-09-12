@@ -31,19 +31,6 @@
             <td>{{ $khachhang->email }}</td>
             <td>{{ $khachhang->datphongid }}</td>
             <td class="d-flex gap-1">
-              @if( $khachhang->datphongid == null )
-              <form action="{{ route('datphongs.create', $khachhang->id) }}" method="GET">
-                @csrf
-                <input type="hidden" value="{{ $khachhang->id }}" name="khachhangs">
-                <button type="submit" class="btn btn-success"><i class="bx bx-key mb-1"></i> Đặt phòng</button>
-              </form>
-              @else
-              <input type="hidden" value="{{ $datphong = App\Models\Datphong::find($khachhang->datphongid) }}">
-              <form action="/datphongs-kiemtra-capnhat" method="get">
-                <input type="hidden" name="datphongid" value="{{ $khachhang->datphongid }}">
-                <button class=" btn btn-warning" type="submit"><i class="bx bx-key mb-1"></i> Đổi phòng</button>
-              </form>
-              @endif
               <form action="{{ route('khachhangs.destroy',$khachhang->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('khachhangs.edit',$khachhang->id) }}"><i class="bx bx-edit mb-1"></i> Edit</a>
                 @csrf

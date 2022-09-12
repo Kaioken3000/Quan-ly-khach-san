@@ -78,6 +78,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         
         //Danh sach dat phong
         Route::post('/danhsahcdatphongs-change', 'DanhsachdatphongController@change')->name('danhsachdatphongs.change');//nhan phong
+        Route::get('/danhsahcdatphongs-index', 'DanhsachdatphongController@index')->name('danhsachdatphongs.index');//nhan phong index
         
         // Khachhang Routes
         Route::resource('khachhangs', KhachhangController::class);
