@@ -52,6 +52,7 @@
 
         
         
+        @hasrole('Admin')
         <!-- Quản lý -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lý</span></li>
         
@@ -78,6 +79,7 @@
                 <div data-i18n="Support">Role</div>
             </a>
         </li>   
+        @endhasrole
         
         <!-- Tác vụ -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Tác vụ</span></li>
