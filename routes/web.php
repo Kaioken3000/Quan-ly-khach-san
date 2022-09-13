@@ -99,12 +99,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('users-search', 'UserController@search');
             Route::get('users/nhanviens-search', 'UserController@search');
         });
-
+        
         //Profile
         Route::get('/profile', 'IndexController@profile');
         Route::get('/profiles/vieweditprofile', 'IndexController@vieweditprofile');
         Route::match(['put', 'patch'],'/profiles/{user}/editprofile', 'IndexController@editprofile')->name('profile.editprofile');
-
+        
+        // Báo cáo
+        Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index');//báo cáo index
+        
         Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 
         /**

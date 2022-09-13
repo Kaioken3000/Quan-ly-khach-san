@@ -86,17 +86,9 @@
         
         <!-- Báo cáo -->
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="{{ route('baocaos.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-report"></i>
                 <div data-i18n="Support">Báo cáo</div>
-            </a>
-        </li>   
-
-        <!-- Thống kê -->
-        <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-stats"></i>
-                <div data-i18n="Support">Thống kê</div>
             </a>
         </li>   
     </ul>
