@@ -34,12 +34,22 @@ class DanhsachdatphongController extends Controller
         $ngaybatdauo = $today;
         $ngayketthuco = $datphong->ngaytra;
 
-        Danhsachdatphong::create([
+        if($datphong->tinhtrangnhanphong == 1){
+            Danhsachdatphong::create([
             'phongid' => $phongid,
             'datphongid' => $datphongid,
             'ngaybatdauo' => $ngaybatdauo,
             'ngayketthuco' => $ngayketthuco,
-        ]);
+            ]);
+        }
+        else {
+            Log::info($datphong);
+            $danhsachdatphong->phongid = $request->phongid;
+            $danhsachdatphong->datphongid = $datphong->id;
+            $danhsachdatphong->ngaybatdauo = $datphong->ngaydat;
+            $danhsachdatphong->ngayketthuco = $datphong->ngaytra;
+            $danhsachdatphong ->save();
+        }
 
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }

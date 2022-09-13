@@ -7,20 +7,20 @@
       <div class="pull-right mb-2 row">
         <div class="col-4 mb-3">
           <label class="form-label" for="ngaydat">Ngày vào</label>
-          <input type="date" name="ngaydat" class="form-control" id="ngaydat" placeholder="VD: Lý Nhựt Nam" 
+          <input disabled type="date" name="ngaydat" class="form-control" id="ngaydat" placeholder="VD: Lý Nhựt Nam" 
               value="{{ $dat->ngaydat }}"/>
         </div>
         <div class="col-4 mb-3">
           <label class="form-label" for="ngaytra">Ngày ra</label>
-          <input type="date" name="ngaytra" class="form-control" id="ngaytra" placeholder="VD: Lý Nhựt Nam" 
+          <input disabled type="date" name="ngaytra" class="form-control" id="ngaytra" placeholder="VD: Lý Nhựt Nam" 
               value="{{ $dat->ngaytra }}"/>
         </div>
         <div class="col-4 mb-3">
           <label class="form-label" for="soluong">Số lượng</label>
-          <input type="number" name="soluong" class="form-control" id="soluong" placeholder="VD: 001" 
+          <input disabled type="number" name="soluong" class="form-control" id="soluong" placeholder="VD: 001" 
               value="{{ $dat->soluong }}"/>
         </div>
-        <input type="hidden" name="khachhangid" value="{{$dat->khachhangid}}">
+        <input disabled type="hidden" name="khachhangid" value="{{$dat->khachhangid}}">
       </div>
     </div>
   </div>
