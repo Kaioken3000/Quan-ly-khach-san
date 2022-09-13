@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Datphong;
 use App\Models\Phong;
+use App\Models\Loaiphong;
 use App\Models\Khachhang;
 
 class DatphongController extends Controller
@@ -127,7 +128,6 @@ class DatphongController extends Controller
         $datphongs = Datphong::where('ngaydat', 'LIKE', '%' . $request->search . "%")
             ->orWhere('ngaytra', 'LIKE', '%' . $request->search . "%")
             ->orWhere('soluong', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('phongid', 'LIKE', '%' . $request->search . "%")
             ->orWhere('khachhangid', 'LIKE', '%' . $request->search . "%")
             ->orderBy('id', 'asc')->paginate(5);
         return view('datphongs.search', compact('datphongs'));
@@ -212,7 +212,9 @@ class DatphongController extends Controller
         } else {
             $phongs = $phongslist;
         }
-        return view('datphongs.kiemtra', compact('request', 'phongs'));
+
+        $loaiphongs = Loaiphong::get();
+        return view('datphongs.kiemtra', compact('request', 'phongs','loaiphongs'));
     }
     /**
      * Display a listing of the resource.
@@ -247,6 +249,7 @@ class DatphongController extends Controller
                 } else array_push($phongs, $phong);
             } else array_push($phongs, $phong);
         }
-        return view('datphongs.kiemtra-capnhat', compact('phongs', 'dat'));
+        $loaiphongs = Loaiphong::get();
+        return view('datphongs.kiemtra-capnhat', compact('phongs', 'dat','loaiphongs'));
     }
 }
