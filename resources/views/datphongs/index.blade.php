@@ -70,6 +70,7 @@
                 </form>
 
                 <!-- Xoá -->
+                @if($datphong->tinhtrangnhanphong == 0)
                 <div class="m-1">
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->id }}">
                     <i class="bx bx-trash mb-1"></i>
@@ -98,7 +99,9 @@
                     </div>
                   </div>
                 </div>
+                @endif
               </div>
+
 
               <!-- Thanh toán -->
               <div class="m-1">
@@ -132,13 +135,50 @@
               </div>
 
               <!-- Nhận phòng, sửa nhận phòng -->
-              <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->id) }}" method="Post">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="id" value="{{ $datphong->id }}">
-                <button type="submit" class="w-100 btn btn-secondary"><i class="bx bx-hotel mb-1"></i>
-                  {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}</button>
-              </form>
+              @hasrole('Admin')
+              <div class="m-1">
+                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
+                  <i class="bx bx-hotel mb-1">
+                  {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
+                  </i>
+                </button>
+              </div>
+              @else
+                @if($datphong->tinhtrangnhanphong == 0)
+                <div class="m-1">
+                  <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
+                    <i class="bx bx-hotel mb-1">
+                    Nhận phòng
+                    </i>
+                  </button>
+                </div>
+                @endif
+              @endhasrole
+              <!-- Modal xoá phòng -->
+              <div class="modal fade" id="nhanphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel1"> Xác nhận</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="d-flex gap-1">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          No
+                        </button>
+                        <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->id) }}" method="Post">
+                          @csrf
+                          @method('PUT')
+                          <input type="hidden" name="id" value="{{ $datphong->id }}">
+                          <button type="submit" class="w-100 btn btn-secondary">Yes</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
 
               <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
               @else
