@@ -118,15 +118,15 @@
                 </div>
               </div>
               <!-- Delete-->
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal{{ $phong->so_phong }}">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalXoa{{ $phong->so_phong }}">
                 <i class="bx bx-trash mb-1"></i>
               </button>
               <!-- Modal xoá  -->
-              <div class="modal fade" id="basicModal{{ $phong->so_phong }}" tabindex="-1" aria-hidden="true">
+              <div class="modal fade" id="ModalXoa{{ $phong->so_phong }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá phòng {{ $phong->so_phong }}</h5>
+                      <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

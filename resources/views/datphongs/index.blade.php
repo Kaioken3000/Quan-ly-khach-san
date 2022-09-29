@@ -178,7 +178,7 @@
               </div>
               @endif
               @endhasrole
-              <!-- Modal xoá phòng -->
+              <!-- Modal nhan phòng -->
               <div class="modal fade" id="nhanphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                   <div class="modal-content">
