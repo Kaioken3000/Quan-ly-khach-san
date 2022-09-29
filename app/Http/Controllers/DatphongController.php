@@ -21,7 +21,8 @@ class DatphongController extends Controller
     public function index()
     {
         $datphongs = DB::table('datphongs')
-        ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')->select('*')
+        ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        ->select('*')
         ->orderBy('datphongs.id', 'desc')->paginate(5);
         return view('datphongs.index', compact('datphongs'));
     }

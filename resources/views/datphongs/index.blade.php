@@ -40,10 +40,34 @@
               {{ $phongmax->phongid }}
             </td>
             <td>
-              <form action="{{ route('danhsachdatphongs.index') }}" method="get">
-                <input type="hidden" name="datphongid" value="{{ $datphong->id }}">
-                <button class="badge bg-info border-info" type="submit"> Lịch sử</button>
-              </form>
+              <?php
+              $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->get();
+              ?>
+              <!-- Button trigger modal -->
+              <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->id }}">
+                Lịch sử
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="basicModal{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel1">Lịch sử đặt phòng</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      @foreach($danhsachdatphongs as $danhsachdatphong)
+                      <p>Phòng: {{ $danhsachdatphong->phongid }}</p>
+                      <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
+                      <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
+                      @endforeach
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>{{ $datphong->ten }}</td>
             <td>
@@ -139,20 +163,20 @@
               <div class="m-1">
                 <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
                   <i class="bx bx-hotel mb-1">
-                  {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
+                    {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
                   </i>
                 </button>
               </div>
               @else
-                @if($datphong->tinhtrangnhanphong == 0)
-                <div class="m-1">
-                  <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
-                    <i class="bx bx-hotel mb-1">
+              @if($datphong->tinhtrangnhanphong == 0)
+              <div class="m-1">
+                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
+                  <i class="bx bx-hotel mb-1">
                     Nhận phòng
-                    </i>
-                  </button>
-                </div>
-                @endif
+                  </i>
+                </button>
+              </div>
+              @endif
               @endhasrole
               <!-- Modal xoá phòng -->
               <div class="modal fade" id="nhanphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
