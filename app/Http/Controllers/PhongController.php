@@ -21,7 +21,8 @@ class PhongController extends Controller
         $phongs = DB::table('phongs')
         ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')->select('*')
         ->orderBy('phongs.so_phong', 'desc')->paginate(5);
-        return view('phongs.index', compact('phongs'));
+        $loaiphongs = Loaiphong::all();
+        return view('phongs.index', compact('phongs','loaiphongs'));
     }
 
     /**

@@ -44,12 +44,12 @@
               $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->get();
               ?>
               <!-- Button trigger modal -->
-              <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->id }}">
+              <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->id }}">
                 Lịch sử
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="basicModal{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal fade" id="LichsuModal{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
