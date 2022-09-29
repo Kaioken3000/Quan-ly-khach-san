@@ -45,7 +45,7 @@
                 <button class="badge bg-info border-info" type="submit"> Lịch sử</button>
               </form>
             </td>
-            <td>{{ $datphong->khachhangid }}</td>
+            <td>{{ $datphong->ten }}</td>
             <td>
               <label class="badge {{ ($datphong->tinhtrangthanhtoan == 0) ? 'bg-danger' : 'bg-success' }}">
                 {{ ($datphong->tinhtrangthanhtoan == 0) ? 'Chưa' : 'Xác nhận' }}

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use App\Models\Phong;
+use Illuminate\Support\Facades\DB;
 
 class PhongController extends Controller
 {
@@ -17,9 +18,10 @@ class PhongController extends Controller
      */
     public function index()
     {
-        $phongs = Phong::orderBy('so_phong', 'asc')->paginate(5);
-        $loaiphongs = Loaiphong::all();
-        return view('phongs.index', compact('phongs'), compact('loaiphongs'));
+        $phongs = DB::table('phongs')
+        ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')->select('*')
+        ->orderBy('phongs.so_phong', 'desc')->paginate(5);
+        return view('phongs.index', compact('phongs'));
     }
 
     /**

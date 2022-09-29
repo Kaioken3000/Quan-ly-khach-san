@@ -9,6 +9,7 @@ use App\Models\Datphong;
 use App\Models\Phong;
 use App\Models\Loaiphong;
 use App\Models\Khachhang;
+use Illuminate\Support\Facades\DB;
 
 class DatphongController extends Controller
 {
@@ -19,7 +20,9 @@ class DatphongController extends Controller
      */
     public function index()
     {
-        $datphongs = Datphong::orderBy('id', 'desc')->paginate(5);
+        $datphongs = DB::table('datphongs')
+        ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')->select('*')
+        ->orderBy('datphongs.id', 'desc')->paginate(5);
         return view('datphongs.index', compact('datphongs'));
     }
 

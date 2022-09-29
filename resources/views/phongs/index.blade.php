@@ -24,7 +24,7 @@
           @foreach ($phongs as $phong)
           <tr>
             <td>{{ $phong->so_phong }}</td>
-            <td>{{ $phong->loaiphongid }}</td>
+            <td>{{ $phong->ten }}</td>
             <td>
               <form action="{{ route('phongs.destroy',$phong->so_phong) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('phongs.edit',$phong->so_phong) }}"><i class="bx bx-edit mb-1"></i> Edit</a>
