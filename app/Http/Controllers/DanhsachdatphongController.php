@@ -22,11 +22,11 @@ class DanhsachdatphongController extends Controller
         
         //get current date
         $today = date('y-m-d h:i:s');
-        $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
+        // $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
 
         //cap nhap ngay ket thuc cho phong truoc do
         $danhsachdatphong = Danhsachdatphong::orderBy('id','desc')->first();
-        $danhsachdatphong->ngayketthuco = $todaysub;
+        $danhsachdatphong->ngayketthuco = $today;
         $danhsachdatphong->save();
 
         $phongid = $request->phongid;
@@ -38,7 +38,7 @@ class DanhsachdatphongController extends Controller
             Danhsachdatphong::create([
             'phongid' => $phongid,
             'datphongid' => $datphongid,
-            'ngaybatdauo' => $ngaybatdauo,
+            'ngaybatdauo' => $today,
             'ngayketthuco' => $ngayketthuco,
             ]);
         }
