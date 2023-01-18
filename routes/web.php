@@ -124,14 +124,24 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 Route::get('client/index', '\App\Http\Controllers\IndexController@index');
 
-Route::get('client/rooms', '\App\Http\Controllers\IndexController@room');
+// Kiem tra phong trong tao moi
+Route::get('client/check', '\App\Http\Controllers\IndexController@checkroom');
 
-Route::get('client/check', '\App\Http\Controllers\IndexController@check');
-
+// Nhap thong tin khách hang de dat phong
 Route::get('client/reservation', '\App\Http\Controllers\IndexController@reservation');
 
+// Danh sách các phòng đã đặt
+Route::get('client/danhsachdatphong', '\App\Http\Controllers\IndexController@danhsachdatphong');
+
+// hien đổi phòng đã đặt
+Route::get('client/hiendoiphongclient', '\App\Http\Controllers\IndexController@hiendoiphongclient');
+
+// doi phong
+Route::post('client/doiphongclient', '\App\Http\Controllers\IndexController@doiphongclient');
+
+// xoa dat phong
+Route::delete('client/xoadatphong/{datphong}', '\App\Http\Controllers\IndexController@xoadatphong')->name('client.xoadatphong');
+
+// dat phong
 Route::post('/index-store', '\App\Http\Controllers\IndexController@index_store');
 
-Route::get('/client/about', function () {
-    return view('client.about');
-});

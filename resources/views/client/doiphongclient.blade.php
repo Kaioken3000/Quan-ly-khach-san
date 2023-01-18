@@ -21,20 +21,20 @@
                                 <label for="ngaydat" class="font-weight-bold text-black">Check In</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" name="ngaydat" id="ngaydat" class="form-control" value="{{ $request->ngaydat }}">
+                                    <input type="date" name="ngaydat" id="ngaydat" class="form-control" value="{{ $dat->ngaydat }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                                 <label for="ngaytra" class="font-weight-bold text-black">Check Out</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" name="ngaytra" id="ngaytra" class="form-control" value="{{ $request->ngaytra }}">
+                                    <input type="date" name="ngaytra" id="ngaytra" class="form-control" value="{{ $dat->ngaytra }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                                 <label for="soluong" class="font-weight-bold text-black">Number</label>
                                 <div class="field-icon-wrap">
-                                    <input type="number" name="soluong" id="soluong" class="form-control" min=1 value="{{ $request->soluong }}">
+                                    <input type="number" name="soluong" id="soluong" class="form-control" min=1 value="{{ $dat->soluong }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3 align-self-end">
@@ -46,14 +46,14 @@
             </div>
         </div>
     </section>
-    
+
     <section class="section">
         <div class="container" data-aos="fade-up" data-aos-offset="-200">
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="myTable">
                     <thead>
                         <tr class="thead-dark">
-                            <th>Số phòng {{ $request->input('ngaydat') }}</th>
+                            <th>Số phòng</th>
                             <th>Loại phòng</th>
                             <th width="280px">Action</th>
                         </tr>
@@ -62,14 +62,17 @@
                         @foreach ($phongs as $phong)
                         <tr>
                             <td>{{ $phong->so_phong }}</td>
-                            <td>{{ $phong->loaiphongid }}</td>
+                            @foreach ($loaiphongs as $loaiphong)
+                                @if($loaiphong->ma == $phong->loaiphongid)
+                                    <td>{{ $loaiphong->ten }}</td>
+                                @endif
+                            @endforeach
                             <td>
-                                <form action="/client/reservation" method="get">
-                                    <input hidden type="date" name="ngaydat" value="{{ $request->ngaydat }}">
-                                    <input hidden type="date" name="ngaytra" value="{{ $request->ngaytra }}">
-                                    <input hidden type="number" name="soluong" value="{{ $request->soluong }}" min=1>
-                                    <input hidden type="int" name="sophong" value="{{ $phong->so_phong }}">
-                                    <button type="submit" class="btn btn-primary">Đặt phòng</button>
+                                <form action="doiphongclient" method="Post">
+                                    @csrf
+                                    <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
+                                    <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
+                                    <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi phòng</button>
                                 </form>
                             </td>
                         </tr>

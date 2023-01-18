@@ -72,7 +72,6 @@
                   <label class="text-black font-weight-bold" for="phongid">Phong</label>
                   <input type="text" id="phongid" name="phongid" class="form-control" value="{{ $request->sophong }}">
                 </div>
-                <input type="hidden" name="khachhangid" value="1">
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">

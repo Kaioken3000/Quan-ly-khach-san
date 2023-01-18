@@ -29,27 +29,27 @@
         <tbody>
           @foreach ($datphongs as $datphong)
           <tr>
-            <td>{{ $datphong->id }}</td>
+            <td>{{ $datphong->datphongid }}</td>
             <td>{{ $datphong->ngaydat }}</td>
             <td>{{ $datphong->ngaytra }}</td>
             <td>{{ $datphong->soluong }}</td>
             <td>
               <?php
-              $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->orderBy('id', 'desc')->first();
+              $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->orderBy('id', 'desc')->first();
               ?>
-              {{ $phongmax->phongid }}
+              {{ $phongmax->datphongid }}
             </td>
             <td>
               <?php
-              $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->get();
+              $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->datphongid)->get();
               ?>
               <!-- Button trigger modal -->
-              <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->id }}">
+              <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->datphongid }}">
                 Lịch sử
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="LichsuModal{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal fade" id="LichsuModal{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -89,19 +89,19 @@
 
                 <!-- Đổi phòng -->
                 <form class="m-1" action="/datphongs-kiemtra-capnhat" method="get">
-                  <input type="hidden" name="datphongid" value="{{ $datphong->id }}">
+                  <input type="hidden" name="datphongid" value="{{ $datphong->datphongid }}">
                   <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i> Đổi phòng</button>
                 </form>
 
                 <!-- Xoá -->
                 @if($datphong->tinhtrangnhanphong == 0)
                 <div class="m-1">
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->id }}">
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->datphongid }}">
                     <i class="bx bx-trash mb-1"></i>
                   </button>
                 </div>
                 <!-- Modal xoá phòng -->
-                <div class="modal fade" id="basicModal{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal fade" id="basicModal{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -113,7 +113,7 @@
                           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             No
                           </button>
-                          <form action="{{ route('datphongs.destroy',$datphong->id) }}" method="Post">
+                          <form action="{{ route('datphongs.destroy',$datphong->datphongid) }}" method="Post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"> Yes</button>
@@ -129,12 +129,12 @@
 
               <!-- Thanh toán -->
               <div class="m-1">
-                <button type="button" class="w-100 btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->id }}">
+                <button type="button" class="w-100 btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
                   <i class="bx bx-coin mb-1"></i> Thanh toán
                 </button>
               </div>
               <!-- Modal thanh toán -->
-              <div class="modal fade" id="modalthanhtoan{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -146,10 +146,10 @@
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                           No
                         </button>
-                        <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->id) }}" method="Post">
+                        <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post">
                           @csrf
                           @method('PUT')
-                          <input type="hidden" name="id" value="{{ $datphong->id }}">
+                          <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
                           <button type="submit" class="w-100 btn btn-warning"> Yes</button>
                         </form>
                       </div>
@@ -161,7 +161,7 @@
               <!-- Nhận phòng, sửa nhận phòng -->
               @hasrole('Admin')
               <div class="m-1">
-                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
+                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
                   <i class="bx bx-hotel mb-1">
                     {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
                   </i>
@@ -170,7 +170,7 @@
               @else
               @if($datphong->tinhtrangnhanphong == 0)
               <div class="m-1">
-                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
+                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
                   <i class="bx bx-hotel mb-1">
                     Nhận phòng
                   </i>
@@ -179,7 +179,7 @@
               @endif
               @endhasrole
               <!-- Modal nhan phòng -->
-              <div class="modal fade" id="nhanphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -191,10 +191,10 @@
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                           No
                         </button>
-                        <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->id) }}" method="Post">
+                        <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->datphongid) }}" method="Post">
                           @csrf
                           @method('PUT')
-                          <input type="hidden" name="id" value="{{ $datphong->id }}">
+                          <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
                           <button type="submit" class="w-100 btn btn-secondary">Yes</button>
                         </form>
                       </div>
@@ -207,16 +207,16 @@
               <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
               @else
               @can('role-edit')
-              <form class="mb-1" action="{{ route('datphongs.chinhthanhtoan',$datphong->id) }}" method="Post">
+              <form class="mb-1" action="{{ route('datphongs.chinhthanhtoan',$datphong->datphongid) }}" method="Post">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $datphong->id }}">
+                <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
                 <button type="submit" class="w-100 btn btn-warning"><i class="bx bx-coin mb-1"></i> Sửa thanh toán</button>
               </form>
               @endcan
               <form action="generate-invoice-pdf" method="get">
                 @csrf
-                <input type="hidden" name="id" value="{{ $datphong->id }}">
+                <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
                 <button type="submit" class="w-100 btn btn-info"><i class="bx bx-spreadsheet mb-1"></i> In hoá đơn</button>
               </form>
               @endif

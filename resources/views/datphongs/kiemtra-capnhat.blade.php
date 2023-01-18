@@ -61,7 +61,7 @@
   </div>
   @endif
   <div class="card">
-    <h5 class="card-header">Quản lý phòng</h5>
+    <h5 class="card-header">Quản lý đổi phòng</h5>
     <div class="table-responsive text-nowrap">
       <table class="table" id="myTable">
         <thead>

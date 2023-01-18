@@ -10,13 +10,15 @@ use App\Models\Khachhang;
 use App\Models\Nhanvien;
 use App\Models\User;
 use App\Models\Datphong;
+use App\Models\Danhsachdatphong;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
     /**
-    * Display a listing of the resource.
+    * Hien trang index cua client
     *
     * @return \Illuminate\Http\Response
     */
@@ -25,64 +27,9 @@ class IndexController extends Controller
         $loaiphongs = Loaiphong::orderBy('ma','asc')->paginate(3);
         return view('client.index', compact('loaiphongs'));
     }
-
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function room()
-    {
-        $loaiphongs = Loaiphong::orderBy('ma','asc')->get();
-        return view('client.rooms', compact('loaiphongs'));
-    }
-    /**
-     * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function check(Request $request)
-    {
-        $request->validate([
-            'ngaydat' => 'required',
-            'ngaytra' => 'required|gt:ngaydat',
-            'soluong' => 'required'
-        ]);
-
-        $phongslist = Phong::get();
-        $phongs = array();
-        foreach($phongslist as $phong){
-            $xacnhan=0;
-            $datphongs = Datphong::where('phongid',$phong->so_phong)->get();
-            Log::info($datphongs);
-            if(count($datphongs)!=0){
-                foreach($datphongs as $datphong){
-                    if($datphong->phongid == $phong->so_phong){
-                        if($request->ngaytra >= $request->ngaydat){
-                            if($request->ngaydat < $datphong->ngaydat){
-                                if($request->ngaytra < $datphong->ngaydat){
-                                    $xacnhan++;
-                                }
-                            }
-                            else if($request->ngaydat > $datphong->ngaydat){
-                                if($request->ngaydat > $datphong->ngaytra){
-                                    $xacnhan++;
-                                }
-                            }
-                        }
-                    }
-                }
-                if($xacnhan == count($datphongs)){
-                    array_push($phongs, $phong);
-                }
-            }   
-            else array_push($phongs, $phong);
-        }
-        return view('client.check',compact('request','phongs'));
-    }
     
     /**
-    * Display a listing of the resource.
+    * hien trang nhap thong tin dat phong tren client
     *
     * @return \Illuminate\Http\Response
     */
@@ -91,41 +38,180 @@ class IndexController extends Controller
         return view('client.reservation', compact('request'));
     }
     
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+    // Hien thi danh sach datphong cua client
+    public function danhsachdatphong()
+    {
+        $datphongs = DB::table('datphongs')
+        ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        ->select('*','datphongs.id as datphongid')
+        ->orderBy('datphongs.id', 'desc')->paginate(5);
+        return view('client.danhsachdatphong', compact('datphongs'));
+    }
+
+    // kiem tra phong trong cua client
+    public function checkroom(Request $request)
+    {
+        
+        $phongslist = Phong::get();
+        $phongs = array();
+        $datphongs = Datphong::get();
+
+        if ($datphongs->count() > 0) {
+            foreach ($phongslist as $phong) {
+                $xacnhan = 0;
+                foreach ($datphongs as $datphong) {
+                    $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->orderBy('id', 'desc')->first();
+                    if ($danhsachdatphong->phongid == $phong->so_phong && $request->ngaytra >= $request->ngaydat) {
+                        if ($request->ngaydat >= $danhsachdatphong->ngaybatdauo && $request->ngaydat <= $danhsachdatphong->ngayketthuco) {
+                            $xacnhan++;
+                        } else if ($request->ngaytra >= $danhsachdatphong->ngaybatdauo && $request->ngaytra <= $danhsachdatphong->ngayketthuco) {
+                            $xacnhan++;
+                        }
+                    }
+                }
+                if ($xacnhan == 0) {
+                    array_push($phongs, $phong);
+                }
+            }
+            Log::info($phongs);
+        } else {
+            $phongs = $phongslist;
+        }
+        return view('client.check', compact('request','phongs'));
+    }
+    
+    // hien phong de doi phong
+    public function hiendoiphongclient(Request $request){
+        $dat = Datphong::find($request->datphongid);
+
+        $phongslist = Phong::get();
+        $phongs = array();
+        foreach ($phongslist as $phong) {
+            $xacnhan = 0;
+            $danhsachdatphong = Danhsachdatphong::where('phongid', $phong->so_phong)->orderBy('id', 'desc')->first();
+            Log::info($danhsachdatphong);
+            if ($danhsachdatphong) {
+                $datphongs = Datphong::where('id', $danhsachdatphong->datphongid)->get();
+                if (count($datphongs) != 0) {
+                    foreach ($datphongs as $datphong) {
+                        if ($dat->ngaytra >= $dat->ngaydat) {
+                            if ($dat->ngaydat < $danhsachdatphong->ngaybatdauo && $dat->ngaytra < $danhsachdatphong->ngaybatdauo) {
+                                $xacnhan++;
+                            } else if ($dat->ngaydat > $danhsachdatphong->ngaybatdauo && $dat->ngaydat > $danhsachdatphong->ngaybatdauo) {
+                                $xacnhan++;
+                            }
+                        }
+                    }
+                    if ($xacnhan == count($datphongs)) {
+                        array_push($phongs, $phong);
+                    }
+                } else array_push($phongs, $phong);
+            } else array_push($phongs, $phong);
+        }
+        $loaiphongs = Loaiphong::get();
+        return view('client.doiphongclient', compact('phongs', 'dat','loaiphongs'));
+    }
+
+    public function doiphongclient(Request $request)
+    {
+        $datphong = Datphong::find($request->datphongid);
+
+        
+        //get current date
+        $today = date('y-m-d h:i:s');
+        // $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
+
+        //cap nhap ngay ket thuc cho phong truoc do
+        $danhsachdatphong = Danhsachdatphong::orderBy('id','desc')->first();
+        $danhsachdatphong->ngayketthuco = $today;
+        $danhsachdatphong->save();
+
+        $phongid = $request->phongid;
+        $datphongid = $datphong->id;
+        $ngaybatdauo = $today;
+        $ngayketthuco = $datphong->ngaytra;
+
+        if($datphong->tinhtrangnhanphong == 1){
+            Danhsachdatphong::create([
+            'phongid' => $phongid,
+            'datphongid' => $datphongid,
+            'ngaybatdauo' => $today,
+            'ngayketthuco' => $ngayketthuco,
+            ]);
+        }
+        else {
+            Log::info($datphong);
+            $danhsachdatphong->phongid = $request->phongid;
+            $danhsachdatphong->datphongid = $datphong->id;
+            $danhsachdatphong->ngaybatdauo = $datphong->ngaydat;
+            $danhsachdatphong->ngayketthuco = $datphong->ngaytra;
+            $danhsachdatphong ->save();
+        }
+
+        return redirect('/client/danhsachdatphong')->with('success', 'Datphong has been change successfully');
+    }
+
+
+    //Xoa dat phong
+
+    public function xoadatphong(Datphong $datphong)
+    {
+        $datphong->delete();
+        return redirect('/client/danhsachdatphong')->with('success', 'Datphong has been deleted successfully');
+    }
+
+    // luu dat phong tren client
     public function index_store(Request $request)
     {
         $request->validate([
             'ten' => 'required',
             'sdt' => 'required',
             'email' => 'required',
-        ]);
-
-        Khachhang::create($request->post());
-
-        $khachhangs = Khachhang::max('id');
-        
-        
-        $request->validate([
             'ngaydat' => 'required',
             'ngaytra' => 'required',
             'soluong' => 'required',
             'phongid' => 'required',
-            'khachhangid' => 'required'
         ]);
-
-        $request["khachhangid"] = $khachhangs;
 
         Log::info($request);
 
-        Datphong::create($request->post());        
+        Khachhang::create([
+            'ten' => $request->ten,
+            'sdt' => $request->sdt,
+            'email' => $request->email,
+        ]);
 
-        return redirect('client/index');
+        $khachhangs = Khachhang::max('id');
+        
+        $request->tinhtrangthanhtoan = 0;
+        $request->tinhtrangnhanphong = 0;
+        Datphong::create([
+            'ngaydat' => $request->ngaydat,
+            'ngaytra' => $request->ngaytra,
+            'soluong' => $request->soluong,
+            'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
+            'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
+            'khachhangid' => $khachhangs,
+        ]);
+
+        $dat = Datphong::max('id');
+
+        $khachhangs = Khachhang::find($khachhangs);
+        $khachhangs->datphongid = $dat;
+        $khachhangs->save();
+
+        Danhsachdatphong::create([
+            'phongid' => $request->phongid,
+            'ngaybatdauo' => $request->ngaydat, 
+            'ngayketthuco' => $request->ngaytra, 
+            'datphongid' => $dat, 
+        ]);
+
+        return redirect('client/index')->with('success', 'Datphong has been created successfully.');
     }
 
+
+    // cua nhan vien
     public function dashboard(){
         $phong = Phong::get();
         $sophong = $phong->count();

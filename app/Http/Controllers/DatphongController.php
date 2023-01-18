@@ -22,7 +22,7 @@ class DatphongController extends Controller
     {
         $datphongs = DB::table('datphongs')
         ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-        ->select('*')
+        ->select('*','datphongs.id as datphongid')
         ->orderBy('datphongs.id', 'desc')->paginate(5);
         return view('datphongs.index', compact('datphongs'));
     }
