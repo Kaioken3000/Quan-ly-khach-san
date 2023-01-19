@@ -19,8 +19,30 @@
                                 <div class="col-md-6 mx-auto">
                                     <ul class="list-unstyled menu">
                                         <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
-                                        <li class="{{ Request::is('client/reservation') ? 'active':'' }}"><a href="/client/reservation">Reservation</a></li>
-                                        <li class="{{ Request::is('client/danhsachdatphong') ? 'active':'' }}"><a href="/client/danhsachdatphong">Your booking</a></li>
+                                        @auth
+                                        <li>
+                                            <form action="/client/danhsachdatphong" method="post">
+                                                @csrf
+                                                <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
+                                                <a href="#" class="btn btn-link">
+                                                    <input class="border-0 bg-white pe-auto m-0 p-0 
+                                                    {{ Request::is('client/danhsachdatphong') ? 'text-primary':'' }}" 
+                                                    type="submit" value="Your booking">
+                                                </a>
+                                            </form>
+                                        </li>
+                                        <br>
+                                        <li><a href="#">{{auth()->user()->username}}</a></li>
+                                        <li> 
+                                            <a href="{{ route('logout.perform') }}"> 
+                                                <i class="fas fa-sign-out-alt"></i><span class="align-middle"> Log out</span>
+                                            </a>
+                                        </li>
+                                        @endauth
+                                        @guest
+                                        <li class="{{ Request::is('client/login') ? 'active':'' }}"><a href="/client/login"> Login </a></li>
+                                        <li class="{{ Request::is('client/register') ? 'active':'' }}"><a href="/client/register"> Register </a></li>
+                                        @endguest
                                     </ul>
                                 </div>
                             </div>

@@ -18,6 +18,11 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+    
+    public function showclient()
+    {
+        return view('client.login');
+    }
 
     /**
      * Handle account login request
@@ -40,6 +45,22 @@ class LoginController extends Controller
         Auth::login($user);
 
         return $this->authenticated($request, $user);
+    }
+
+    public function loginclient(LoginRequest $request)
+    {
+        $credentials = $request->getCredentials();
+
+        if(!Auth::validate($credentials)):
+            return redirect()->to('login')
+                ->withErrors(trans('auth.failed'));
+        endif;
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+
+        Auth::login($user);
+
+        return redirect('/client/index');
     }
 
     /**

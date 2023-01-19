@@ -12,8 +12,13 @@ class Khachhang extends Model
     protected $fillable = [
         'ten',
         'sdt',
-        'email'
+        'email',
+        'userid'
     ];
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 
     public function datphongs()
     {

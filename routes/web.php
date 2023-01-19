@@ -24,7 +24,7 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 |
 */
 
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect('/dashboard');
 });
 
@@ -35,7 +35,10 @@ Route::get('/dashboard', '\App\Http\Controllers\IndexController@dashboard');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
-    
+    /**
+     * Logout Routes
+     */
+    Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     Route::group(['middleware' => ['guest']], function () {
         /**
          * Register Routes
@@ -48,100 +51,101 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
         Route::get('/login', 'LoginController@show')->name('login.show');
         Route::post('/login', 'LoginController@login')->name('login.perform');
-
-        
-        
     });
-    
-    Route::group(['middleware' => ['auth']], function () {
-        
-        
+
+    Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
+
+
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
         Route::get('loaiphongs-search', 'LoaiphongController@search');
         Route::get('loaiphongs/loaiphongs-search', 'LoaiphongController@search');
-        
+
         // Phong Routes
         Route::resource('phongs', PhongController::class);
         Route::get('phongs-search', 'phongController@search');
         Route::get('phongs/phongs-search', 'phongController@search');
-        
+
         // Datphong Routes
         Route::resource('datphongs', DatphongController::class);
-        Route::get('datphongs-kiemtra', 'DatphongController@kiemtra');//kiem tra dat phong
-        Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat');//kiem tra dat phong khi thay doi
-        Route::get('datphongs-search', 'DatphongController@search');//tim kiem
-        Route::get('datphongs/datphongs-search', 'DatphongController@search');//tim kiem
-        Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan');//thanh toán
-        Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan');//thanh toán khi thay doi
-        Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong');//nhan phong
-        
+        Route::get('datphongs-kiemtra', 'DatphongController@kiemtra'); //kiem tra dat phong
+        Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat'); //kiem tra dat phong khi thay doi
+        Route::get('datphongs-search', 'DatphongController@search'); //tim kiem
+        Route::get('datphongs/datphongs-search', 'DatphongController@search'); //tim kiem
+        Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan'); //thanh toán
+        Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
+        Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong'); //nhan phong
+
         //Danh sach dat phong
-        Route::post('/danhsahcdatphongs-change', 'DanhsachdatphongController@change')->name('danhsachdatphongs.change');//nhan phong
-        Route::get('/danhsahcdatphongs-index', 'DanhsachdatphongController@index')->name('danhsachdatphongs.index');//nhan phong index
-        
+        Route::post('/danhsahcdatphongs-change', 'DanhsachdatphongController@change')->name('danhsachdatphongs.change'); //nhan phong
+        Route::get('/danhsahcdatphongs-index', 'DanhsachdatphongController@index')->name('danhsachdatphongs.index'); //nhan phong index
+
         // Khachhang Routes
         Route::resource('khachhangs', KhachhangController::class);
         Route::get('khachhangs-search', 'KhachhangController@search');
         Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
-        
+
         Route::group(['middleware' => ['role:Admin']], function () {
             //Role
             Route::resource('roles', RoleController::class);
-            
+
             //Nhân viên
             Route::resource('nhanviens', NhanvienController::class);
             Route::get('nhanviens-search', 'NhanvienController@search');
             Route::get('nhanviens/nhanviens-search', 'NhanvienController@search');
-            
+
             //User
             Route::resource('users', UserController::class);
             Route::get('users-search', 'UserController@search');
             Route::get('users/nhanviens-search', 'UserController@search');
         });
-        
+
         //Profile
         Route::get('/profile', 'IndexController@profile');
         Route::get('/profiles/vieweditprofile', 'IndexController@vieweditprofile');
-        Route::match(['put', 'patch'],'/profiles/{user}/editprofile', 'IndexController@editprofile')->name('profile.editprofile');
-        
+        Route::match(['put', 'patch'], '/profiles/{user}/editprofile', 'IndexController@editprofile')->name('profile.editprofile');
+
         // Báo cáo
-        Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index');//báo cáo index
-        
+        Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index'); //báo cáo index
+
         Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
-
-        /**
-         * Logout Routes
-         */
-        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
+
+    /**
+     * Client Routes
+     */
+    
+    
+    Route::get('client/index', 'IndexController@index');
+    
+    // Kiem tra phong trong tao moi
+    Route::get('client/check', 'IndexController@checkroom');
+    
+    // Nhap thong tin khách hang de dat phong
+    Route::get('client/reservation', 'IndexController@reservation');
+    
+    // Danh sách các phòng đã đặt
+    Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
+    
+    // hien đổi phòng đã đặt
+    Route::get('client/hiendoiphongclient', 'IndexController@hiendoiphongclient');
+    
+    // doi phong
+    Route::post('client/doiphongclient', 'IndexController@doiphongclient');
+    
+    // xoa dat phong
+    Route::delete('client/xoadatphong/{datphong}', 'IndexController@xoadatphong')->name('client.xoadatphong');
+    
+    // dat phong
+    Route::post('/index-store', 'IndexController@index_store');
+    
+    // Thuc hien dang ky o nguoi dung
+    Route::get('client/register', 'RegisterController@showclient')->name('client.registershow');
+    Route::post('client/register', 'RegisterController@registerclient')->name('client.register');
+    
+    // Thuc hien dang nhap o nguoi dung
+    Route::get('client/login', 'LoginController@showclient')->name('client.showclient');
+    Route::post('client/login', 'LoginController@loginclient')->name('client.loginclient');
+
 });
-
-/**
- * Client Routes
- */
-
-
-Route::get('client/index', '\App\Http\Controllers\IndexController@index');
-
-// Kiem tra phong trong tao moi
-Route::get('client/check', '\App\Http\Controllers\IndexController@checkroom');
-
-// Nhap thong tin khách hang de dat phong
-Route::get('client/reservation', '\App\Http\Controllers\IndexController@reservation');
-
-// Danh sách các phòng đã đặt
-Route::get('client/danhsachdatphong', '\App\Http\Controllers\IndexController@danhsachdatphong');
-
-// hien đổi phòng đã đặt
-Route::get('client/hiendoiphongclient', '\App\Http\Controllers\IndexController@hiendoiphongclient');
-
-// doi phong
-Route::post('client/doiphongclient', '\App\Http\Controllers\IndexController@doiphongclient');
-
-// xoa dat phong
-Route::delete('client/xoadatphong/{datphong}', '\App\Http\Controllers\IndexController@xoadatphong')->name('client.xoadatphong');
-
-// dat phong
-Route::post('/index-store', '\App\Http\Controllers\IndexController@index_store');
 

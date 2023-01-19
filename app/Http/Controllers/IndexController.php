@@ -39,11 +39,12 @@ class IndexController extends Controller
     }
     
     // Hien thi danh sach datphong cua client
-    public function danhsachdatphong()
+    public function danhsachdatphong(Request $request)
     {
         $datphongs = DB::table('datphongs')
         ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
         ->select('*','datphongs.id as datphongid')
+        ->where('khachhangs.userid',$request->clientid)
         ->orderBy('datphongs.id', 'desc')->paginate(5);
         return view('client.danhsachdatphong', compact('datphongs'));
     }
@@ -179,6 +180,7 @@ class IndexController extends Controller
             'ten' => $request->ten,
             'sdt' => $request->sdt,
             'email' => $request->email,
+            'userid' => $request->clientid
         ]);
 
         $khachhangs = Khachhang::max('id');

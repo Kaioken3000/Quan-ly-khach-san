@@ -38,17 +38,17 @@
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="ten">Name</label>
-                  <input type="text" id="ten" name="ten" class="form-control ">
+                  <input type="text" id="ten" name="ten" class="form-control " value="{{auth()->user()->username}}">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="sdt">Phone</label>
-                  <input type="text" id="sdt" name="sdt" class="form-control ">
+                  <input type="text" id="sdt" name="sdt" class="form-control " value="{{auth()->user()->sdt}}">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" name="email" class="form-control ">
+                  <input type="email" id="email" name="email" class="form-control " value="{{auth()->user()->email}}">
                 </div>
               </div>
 
@@ -75,6 +75,7 @@
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
+                  <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
                   <input type="submit" value="Reserve Now" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                 </div>
               </div>

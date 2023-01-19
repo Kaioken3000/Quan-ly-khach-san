@@ -21,4 +21,7 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="/client/css/style.css">
+
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/da4e510802.js" crossorigin="anonymous"></script>
 </head>

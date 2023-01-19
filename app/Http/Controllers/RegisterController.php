@@ -20,6 +20,10 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    public function showclient(){
+        return view('client.register');
+    }
+
     /**
      * Handle account registration request
      * 
@@ -39,4 +43,20 @@ class RegisterController extends Controller
 
         return redirect('/dashboard')->with('success', "Account successfully registered.");
     }
+
+    // Register for client
+    public function registerclient(RegisterRequest $request)
+    {
+        $user = User::create($request->validated());
+
+        $role = Role::where('name','Khachhang')->first();
+
+        $user->assignRole($role);
+
+        auth()->login($user);
+
+        return redirect('/client/index')->with('success', "Account successfully registered.");
+    }
+
+
 }
