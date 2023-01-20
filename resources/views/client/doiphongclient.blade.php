@@ -68,8 +68,9 @@
                                 @endif
                             @endforeach
                             <td>
-                                <form action="doiphongclient" method="Post">
+                                <form action="doiphongclient" method="POST">
                                     @csrf
+                                    @method('POST')
                                     <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
                                     <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
                                     <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi phòng</button>

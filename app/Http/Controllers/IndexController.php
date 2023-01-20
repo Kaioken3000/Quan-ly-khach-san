@@ -116,7 +116,6 @@ class IndexController extends Controller
     public function doiphongclient(Request $request)
     {
         $datphong = Datphong::find($request->datphongid);
-
         
         //get current date
         $today = date('y-m-d h:i:s');
@@ -129,7 +128,7 @@ class IndexController extends Controller
 
         $phongid = $request->phongid;
         $datphongid = $datphong->id;
-        $ngaybatdauo = $today;
+        $ngaybatdauo = $today;  
         $ngayketthuco = $datphong->ngaytra;
 
         if($datphong->tinhtrangnhanphong == 1){
@@ -149,16 +148,15 @@ class IndexController extends Controller
             $danhsachdatphong ->save();
         }
 
-        return redirect('/client/danhsachdatphong')->with('success', 'Datphong has been change successfully');
+        return redirect('/client/index')->with('success', 'Datphong has been change successfully');
     }
 
 
     //Xoa dat phong
-
     public function xoadatphong(Datphong $datphong)
     {
         $datphong->delete();
-        return redirect('/client/danhsachdatphong')->with('success', 'Datphong has been deleted successfully');
+        return redirect('/client/index')->with('success', 'Datphong has been deleted successfully');
     }
 
     // luu dat phong tren client

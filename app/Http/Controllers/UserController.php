@@ -44,6 +44,7 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required|unique:users',
             'username' => 'required',
+            'sdt' => 'required|numeric|digits:10',
             'password' => 'required',
         ]);
 
@@ -89,6 +90,7 @@ class UserController extends Controller
             'email' => ['required','email',
                     Rule::unique('users')->ignore($user->email, 'email')],
             'username' => 'required',
+            'sdt' => 'required|numeric|digits:10',
             'roles' => 'required',
         ]);
         $user->fill($request->post())->save();
@@ -121,6 +123,7 @@ class UserController extends Controller
     {
         $users = User::where('email','LIKE','%'.$request->search."%")
                                 ->orWhere('username','LIKE','%'.$request->search."%")
+                                ->orWhere('sdt','LIKE','%'.$request->search."%")
                                 ->orderBy('id','asc')->paginate(5);
         return view('users.search', compact('users'));
     }

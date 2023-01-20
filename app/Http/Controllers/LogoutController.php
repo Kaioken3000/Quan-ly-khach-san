@@ -21,4 +21,13 @@ class LogoutController extends Controller
 
         return redirect('login');
     }
+
+    public function clientperform()
+    {
+        Session::flush();
+        
+        Auth::logout();
+
+        return redirect('/client/login');
+    }
 }

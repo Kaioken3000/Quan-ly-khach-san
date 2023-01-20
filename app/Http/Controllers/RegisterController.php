@@ -47,7 +47,19 @@ class RegisterController extends Controller
     // Register for client
     public function registerclient(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
+        $request->validate([
+            'email' => 'required|unique:users',
+            'username' => 'required',
+            'sdt' => 'required|numeric|digits:10',
+            'password' => 'required',
+        ]);
+
+        $user = User::create([
+            'email'=>$request->email,
+            'username'=>$request->username,
+            'sdt'=>$request->sdt,
+            'password'=>$request->password,
+        ]);
 
         $role = Role::where('name','Khachhang')->first();
 

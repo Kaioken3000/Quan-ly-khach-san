@@ -34,7 +34,7 @@
                                         <br>
                                         <li><a href="#">{{auth()->user()->username}}</a></li>
                                         <li> 
-                                            <a href="{{ route('logout.perform') }}"> 
+                                            <a href="{{ route('client.logout') }}"> 
                                                 <i class="fas fa-sign-out-alt"></i><span class="align-middle"> Log out</span>
                                             </a>
                                         </li>

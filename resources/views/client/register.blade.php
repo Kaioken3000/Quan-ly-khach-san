@@ -56,6 +56,18 @@
                       <div class="alert alert-danger" role="alert">{{ $errors->first('email') }}</div>
                     @endif
                 </div>
+                <div class="mb-3">
+                    <label for="sdt" class="form-label">Phone</label>
+                    <input type="text" class="form-control" 
+                    id="sdt" 
+                    name="sdt" 
+                    value="{{ old('sdt') }}" 
+                    placeholder="Enter your phone number" 
+                    required="required"/>
+                    @if ($errors->has('sdt'))
+                      <div class="alert alert-danger" role="alert">{{ $errors->first('sdt') }}</div>
+                    @endif
+                </div>
                 <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">Password</label>
                   <div class="input-group input-group-merge">
@@ -109,7 +121,7 @@
 
               <p class="text-center">
                 <span>Already have an account?</span>
-                <a href="{{ route('login.perform') }}">
+                <a href="{{ route('client.showclient') }}">
                   <span>Sign in instead</span>
                 </a>
               </p>
