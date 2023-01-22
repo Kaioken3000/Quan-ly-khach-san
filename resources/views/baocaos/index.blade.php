@@ -42,12 +42,11 @@
                     </div>
                     <div class="col-auto d-flex">
                         <input type="text" id="nam" class="form-control mx-1" value="<?php echo date("Y"); ?>">
-                        <select class="form-select" aria-labe="Bao cao nam" id="namselect" name="namselect"
-                        onchange="thaydoitheonamselect(event)">
-                            <option value="<?php echo date("Y");?>"><?php echo date("Y");   ?></option>
-                            <option value="<?php echo date("Y")-1;?>"><?php echo date("Y")-1; ?></option>
-                            <option value="<?php echo date("Y")-2;?>"><?php echo date("Y")-2; ?></option>
-                            <option value="<?php echo date("Y")-3;?>"><?php echo date("Y")-3; ?></option>
+                        <select class="form-select" aria-labe="Bao cao nam" id="namselect" name="namselect" onchange="thaydoitheonamselect(event)">
+                            <option value="<?php echo date("Y"); ?>"><?php echo date("Y");   ?></option>
+                            <option value="<?php echo date("Y") - 1; ?>"><?php echo date("Y") - 1; ?></option>
+                            <option value="<?php echo date("Y") - 2; ?>"><?php echo date("Y") - 2; ?></option>
+                            <option value="<?php echo date("Y") - 3; ?>"><?php echo date("Y") - 3; ?></option>
                         </select>
                     </div>
                     <div class="col-auto">
@@ -389,9 +388,6 @@
             </script>
         </div>
     </div>
-
-
-
 </div>
 <script src="/adminresource/js/myscript.js"></script>
 @endsection

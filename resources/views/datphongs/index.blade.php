@@ -3,7 +3,70 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đặt phòng /</span> Quản lý</h4>
-  <a class="btn btn-success mb-4" href="{{ route('datphongs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a>
+
+  <div class="d-flex align-items-end my-2 ">
+    <div class="me-auto">
+      <a class="btn btn-success" href="{{ route('datphongs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a>
+    </div>
+
+    <!-- Option 1 -->
+    <div class="card">
+      <div class="card-body">
+        <label class="form-check-label">
+          Thanh toán
+        </label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="thanhtoan" id="dathanhtoan" onchange="changeoption()">
+          <label class="form-check-label" for="dathanhtoan">
+            Đã thanh toán
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="thanhtoan" id="chuathanhtoan" onchange="changeoption()">
+          <label class="form-check-label" for="chuathanhtoan">
+            Chưa thanh toán
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="thanhtoan" id="tatcathanhtoan"  onchange="changeoption()">
+          <label class="form-check-label" for="tatcathanhtoan">
+            Tất cả
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- end option1 -->
+
+    <!-- Option 2 -->
+    <div class="card mx-2">
+      <div class="card-body">
+        <label class="form-check-label">
+          Nhận phòng
+        </label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="nhanphong" id="danhanphong" onchange="changeoption()">
+          <label class="form-check-label" for="danhanphong">
+            Đã nhận phòng
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="nhanphong" id="chuanhanphong" onchange="changeoption()">
+          <label class="form-check-label" for="chuanhanphong">
+            Chưa nhận phòng
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="nhanphong" id="tatcanhanphong"  onchange="changeoption()">
+          <label class="form-check-label" for="tatcanhanphong">
+            Tất cả
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- end option2 -->
+
+
+  </div>
   @if ($message = Session::get('success'))
   <div class="alert alert-success">
     <p>{{ $message }}</p>
@@ -12,7 +75,7 @@
   <div class="card">
     <h5 class="card-header">Quản lý phòng</h5>
     <div class="table-responsive text-nowrap">
-      <table class="table">
+      <table class="table" id="datphongtable">
         <thead>
           <tr class="thead-dark">
             <th>id</th>
@@ -233,4 +296,5 @@
     </div>
   </div>
 </div>
+<script src="/adminresource/js/optiondatphong.js"></script>
 @endsection
