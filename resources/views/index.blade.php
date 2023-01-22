@@ -8,8 +8,6 @@
 </div>
 @endguest
 
-
-
 @auth
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
@@ -199,7 +197,7 @@
                     });
                 });
             </script>
-        </div>
+        </div>  
     </div>
     <div class="card m-1">
         <div id="container3" data-order="{{ $nhanphong }}"></div>

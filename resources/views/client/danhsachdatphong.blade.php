@@ -44,7 +44,7 @@
                 <?php
                 $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->orderBy('id', 'desc')->first();
                 ?>
-                {{ $phongmax->datphongid }}
+                {{ $phongmax->phongid }}
               </td>
               <td>
                 <?php

@@ -1,3 +1,7 @@
+function thaydoitheonamselect(e) {
+    document.getElementById("nam").value = e.target.value
+}
+
 function loctheothang() {
     input = document.getElementById("thang");
 
@@ -42,10 +46,10 @@ function loctheothang() {
                 temp = parseInt(temp[56])
                 tongtien += temp;
                 console.log(temp)
-    
+
                 tr[i].style.display = "";
             }
-            
+
         }
     }
     var tongcong = document.getElementById('tongcong');
@@ -70,7 +74,7 @@ function loctheonam() {
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 txtValue = new Date(txtValue).getFullYear();
-                
+
                 tien = tiens.textContent || tiens.innerText;
                 var temp = [];
                 temp = tien.split(' ');
@@ -96,10 +100,10 @@ function loctheonam() {
                 temp = parseInt(temp[56])
                 tongtien += temp;
                 console.log(temp)
-    
+
                 tr[i].style.display = "";
             }
-            
+
         }
     }
     var tongcong = document.getElementById('tongcong');
@@ -125,7 +129,7 @@ function loctheothangvanam() {
             tiens = tr[i].getElementsByTagName("td")[9];
             if (td) {
                 txtValue = td.textContent || td.innerText;
-                txtValuethang = new Date(txtValue).getMonth()+1;
+                txtValuethang = new Date(txtValue).getMonth() + 1;
                 txtValuenam = new Date(txtValue).getFullYear();
 
                 tien = tiens.textContent || tiens.innerText;
@@ -142,22 +146,7 @@ function loctheothangvanam() {
         }
 
     } else {
-        tongtien = 0;
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            tiens = tr[i].getElementsByTagName("td")[9];
-            if (td) {
-                tien = tiens.textContent || tiens.innerText;
-                var temp = [];
-                temp = tien.split(' ');
-                temp = parseInt(temp[56])
-                tongtien += temp;
-                console.log(temp)
-    
-                tr[i].style.display = "";
-            }
-            
-        }
+        loctheonam();
     }
     var tongcong = document.getElementById('tongcong');
     tongcong.textContent = "Tổng cộng: " + tongtien + " VND"

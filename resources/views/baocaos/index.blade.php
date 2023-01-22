@@ -34,14 +34,21 @@
                 </div>
             </div>
         </div>
-        <div class="card my-2 col-7">
+        <div class="card my-2 col-auto">
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-auto">
                         <label for="nam" class="col-form-label">Năm:</label>
                     </div>
-                    <div class="col-3">
-                        <input type="text" id="nam" class="form-control" value="2022">
+                    <div class="col-auto d-flex">
+                        <input type="text" id="nam" class="form-control mx-1" value="<?php echo date("Y"); ?>">
+                        <select class="form-select" aria-labe="Bao cao nam" id="namselect" name="namselect"
+                        onchange="thaydoitheonamselect(event)">
+                            <option value="<?php echo date("Y");?>"><?php echo date("Y");   ?></option>
+                            <option value="<?php echo date("Y")-1;?>"><?php echo date("Y")-1; ?></option>
+                            <option value="<?php echo date("Y")-2;?>"><?php echo date("Y")-2; ?></option>
+                            <option value="<?php echo date("Y")-3;?>"><?php echo date("Y")-3; ?></option>
+                        </select>
                     </div>
                     <div class="col-auto">
                         <input type="submit" class="btn btn-primary" value="Báo cáo theo năm" onclick="loctheonam()">
@@ -51,6 +58,7 @@
             </div>
         </div>
     </Section>
+
     <div class="card">
         <h5 class="card-header">Quản lý phòng</h5>
         <div class="table-responsive text-nowrap">
@@ -128,6 +136,262 @@
             </table>
         </div>
     </div>
+    {{ Html::script('https://code.jquery.com/jquery-3.1.1.min.js') }}
+    {{ Html::script('https://code.highcharts.com/highcharts.js') }}
+    {{ Html::script('https://code.highcharts.com/modules/exporting.js') }}
+    {{ Html::script('https://code.highcharts.com/modules/export-data.js') }}
+    <div class="d-flex">
+        <div class="card m-1">
+            <div id="container2" data-order="{{ $thanhtoan }}"></div>
+            <script>
+                $(document).ready(function() {
+                    var order = $('#container2').data('order');
+                    var listOfValue = [];
+                    var listOfYear = [];
+                    order.forEach(function(element) {
+                        listOfYear.push(element.chuathanhtoan);
+                        listOfYear.push(element.dathanhtoan);
+                        listOfValue.push(element.sochuathanhtoan);
+                        listOfValue.push(element.sodathanhtoan);
+                    });
+                    console.log(listOfValue);
+                    var chart = Highcharts.chart('container2', {
+
+                        title: {
+                            text: 'Thanh toán'
+                        },
+
+                        subtitle: {
+                            text: 'Tình trạng thanh toán'
+                        },
+
+                        xAxis: {
+                            categories: listOfYear,
+                        },
+
+                        series: [{
+                            type: 'column',
+                            colorByPoint: true,
+                            data: listOfValue,
+                            showInLegend: false
+                        }]
+                    });
+
+                    $('#plain').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: false,
+                                polar: false
+                            },
+                            subtitle: {
+                                text: 'Plain'
+                            }
+                        });
+                    });
+
+                    $('#inverted').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: true,
+                                polar: false
+                            },
+                            subtitle: {
+                                text: 'Inverted'
+                            }
+                        });
+                    });
+
+                    $('#polar').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: false,
+                                polar: true
+                            },
+                            subtitle: {
+                                text: 'Polar'
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+        <div class="card m-1">
+            <div id="container" data-order="{{ $thanhtoan }}"></div>
+            <script>
+                $(document).ready(function() {
+                    var productBuy = $('#container').data('order');
+                    var chartData = [];
+                    productBuy.forEach(function(element) {
+                        var ele = {
+                            name: element.chuathanhtoan,
+                            y: parseFloat(element.sochuathanhtoan)
+                        };
+                        chartData.push(ele);
+                        var ele2 = {
+                            name: element.dathanhtoan,
+                            y: parseFloat(element.sodathanhtoan)
+                        };
+                        chartData.push(ele2);
+                    });
+                    console.log(chartData);
+                    Highcharts.chart('container', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Thanh toán'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        series: [{
+                            name: 'Brands',
+                            colorByPoint: true,
+                            data: chartData,
+                        }],
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    <div class="d-flex">
+        <!-- hien so luong o cua cac phong -->
+        <div class="card m-1">
+            <div id="container6"></div>
+            <script>
+                Highcharts.chart('container6', {
+                    chart: {
+                        type: 'spline'
+                        // column
+                    },
+                    title: {
+                        text: 'Số lượng ở các phòng'
+                    },
+                    xAxis: {
+                        categories: <?php echo $phong ?>,
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Số lượng đã ở'
+                        }
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                radius: 4,
+                                lineColor: '#666666',
+                                lineWidth: 1
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Số phòng',
+                        marker: {
+                            symbol: 'circle'
+                        },
+                        data: <?php echo $soluongphong ?>
+
+                    }]
+                });
+            </script>
+        </div>
+
+        <!-- Hien tinh trang nhan phong va chua nhan phong -->
+        <div class="card m-1">
+            <div id="container3" data-order="{{ $nhanphong }}"></div>
+            <script>
+                $(document).ready(function() {
+                    var order = $('#container3').data('order');
+                    var listOfValue = [];
+                    var listOfYear = [];
+                    order.forEach(function(element) {
+                        listOfYear.push(element.chuanhanphong);
+                        listOfYear.push(element.danhanphong);
+                        listOfValue.push(element.sochuanhanphong);
+                        listOfValue.push(element.sodanhanphong);
+                    });
+                    console.log(listOfValue);
+                    var chart = Highcharts.chart('container3', {
+
+                        title: {
+                            text: 'Nhận phòng'
+                        },
+
+                        subtitle: {
+                            text: 'Tình trạng nhận phòng'
+                        },
+
+                        xAxis: {
+                            categories: listOfYear,
+                        },
+
+                        series: [{
+                            type: 'column',
+                            colorByPoint: true,
+                            data: listOfValue,
+                            showInLegend: false
+                        }]
+                    });
+
+                    $('#plain').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: false,
+                                polar: false
+                            },
+                            subtitle: {
+                                text: 'Plain'
+                            }
+                        });
+                    });
+
+                    $('#inverted').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: true,
+                                polar: false
+                            },
+                            subtitle: {
+                                text: 'Inverted'
+                            }
+                        });
+                    });
+
+                    $('#polar').click(function() {
+                        chart.update({
+                            chart: {
+                                inverted: false,
+                                polar: true
+                            },
+                            subtitle: {
+                                text: 'Polar'
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+
+
 </div>
 <script src="/adminresource/js/myscript.js"></script>
 @endsection
