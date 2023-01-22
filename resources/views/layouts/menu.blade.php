@@ -85,7 +85,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Tác vụ</span></li>
         
         <!-- Báo cáo -->
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('baocaos') || Request::is('baocaos*') ? 'active':'' }}">
             <a href="{{ route('baocaos.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-report"></i>
                 <div data-i18n="Support">Báo cáo</div>
