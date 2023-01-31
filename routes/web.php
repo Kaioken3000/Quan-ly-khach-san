@@ -119,6 +119,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     Route::get('client/index', 'IndexController@index');
     
+    // Hien lai thong tin khách hang
+    Route::get('client/khachhang', 'IndexController@hienkhachhang');
+    // Xoa thong tin khách hang
+    Route::delete('client/khachhang/{user}', 'IndexController@xoakhachhang')->name('client.xoakhachhang');
+    // Sua thong tin khách hang
+    Route::put('client/khachhang/{user}', 'IndexController@khachhangedit')->name('client.khachhangedit');
+    
     // Kiem tra phong trong tao moi
     Route::get('client/check', 'IndexController@checkroom');
     

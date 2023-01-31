@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- <style>
+    @import 'https://code.highcharts.com/css/highcharts.css';
+
+    .highcharts-color-0 {
+        fill: #0dcaf0;
+        stroke: #0dcaf0;
+    }
+
+    /* Titles */
+    .highcharts-title {
+        fill: black;
+        font-size: 26px;
+        font-weight: bold;
+    }
+</style> -->
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Báo cáo</h4> -->
     <!-- bao cao theo thang nam -->

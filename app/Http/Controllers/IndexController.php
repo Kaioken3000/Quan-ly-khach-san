@@ -18,41 +18,80 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     /**
-    * Hien trang index cua client
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Hien trang index cua client
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $loaiphongs = Loaiphong::orderBy('ma','asc')->paginate(3);
+        $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(3);
         return view('client.index', compact('loaiphongs'));
     }
-    
+
     /**
-    * hien trang nhap thong tin dat phong tren client
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Hien thong tin khach hang
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hienkhachhang()
+    {
+        return view('client.thongtinkhachhang');
+    }
+
+    /**
+     * Xoá thong tin khach hang
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function xoakhachhang(User $user)
+    {
+        $user->delete();
+        return redirect('/client/login');
+    }
+
+    /**
+     * Xoá thong tin khach hang
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function khachhangedit(Request $request, User $user)
+    {
+        $request->validate([
+            'email' => ['required','email',
+                    Rule::unique('users')->ignore($user->email, 'email')],
+            'username' => 'required',
+            'sdt' => 'required|numeric|digits:10',
+        ]);
+        $user->fill($request->post())->save();
+
+        return redirect('/client/khachhang')->with('success','Khách hàng Has Been updated successfully');
+    }
+
+    /**
+     * hien trang nhap thong tin dat phong tren client
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function reservation(Request $request)
     {
         return view('client.reservation', compact('request'));
     }
-    
+
     // Hien thi danh sach datphong cua client
     public function danhsachdatphong(Request $request)
     {
         $datphongs = DB::table('datphongs')
-        ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-        ->select('*','datphongs.id as datphongid')
-        ->where('khachhangs.userid',$request->clientid)
-        ->orderBy('datphongs.id', 'desc')->paginate(5);
+            ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+            ->select('*', 'datphongs.id as datphongid')
+            ->where('khachhangs.userid', $request->clientid)
+            ->orderBy('datphongs.id', 'desc')->paginate(5);
         return view('client.danhsachdatphong', compact('datphongs'));
     }
 
     // kiem tra phong trong cua client
     public function checkroom(Request $request)
     {
-        
+
         $phongslist = Phong::get();
         $phongs = array();
         $datphongs = Datphong::get();
@@ -78,11 +117,12 @@ class IndexController extends Controller
         } else {
             $phongs = $phongslist;
         }
-        return view('client.check', compact('request','phongs'));
+        return view('client.check', compact('request', 'phongs'));
     }
-    
+
     // hien phong de doi phong
-    public function hiendoiphongclient(Request $request){
+    public function hiendoiphongclient(Request $request)
+    {
         $dat = Datphong::find($request->datphongid);
 
         $phongslist = Phong::get();
@@ -110,42 +150,41 @@ class IndexController extends Controller
             } else array_push($phongs, $phong);
         }
         $loaiphongs = Loaiphong::get();
-        return view('client.doiphongclient', compact('phongs', 'dat','loaiphongs'));
+        return view('client.doiphongclient', compact('phongs', 'dat', 'loaiphongs'));
     }
 
     public function doiphongclient(Request $request)
     {
         $datphong = Datphong::find($request->datphongid);
-        
+
         //get current date
         $today = date('y-m-d h:i:s');
         // $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
 
         //cap nhap ngay ket thuc cho phong truoc do
-        $danhsachdatphong = Danhsachdatphong::orderBy('id','desc')->first();
+        $danhsachdatphong = Danhsachdatphong::orderBy('id', 'desc')->first();
         $danhsachdatphong->ngayketthuco = $today;
         $danhsachdatphong->save();
 
         $phongid = $request->phongid;
         $datphongid = $datphong->id;
-        $ngaybatdauo = $today;  
+        $ngaybatdauo = $today;
         $ngayketthuco = $datphong->ngaytra;
 
-        if($datphong->tinhtrangnhanphong == 1){
+        if ($datphong->tinhtrangnhanphong == 1) {
             Danhsachdatphong::create([
-            'phongid' => $phongid,
-            'datphongid' => $datphongid,
-            'ngaybatdauo' => $today,
-            'ngayketthuco' => $ngayketthuco,
+                'phongid' => $phongid,
+                'datphongid' => $datphongid,
+                'ngaybatdauo' => $today,
+                'ngayketthuco' => $ngayketthuco,
             ]);
-        }
-        else {
+        } else {
             Log::info($datphong);
             $danhsachdatphong->phongid = $request->phongid;
             $danhsachdatphong->datphongid = $datphong->id;
             $danhsachdatphong->ngaybatdauo = $datphong->ngaydat;
             $danhsachdatphong->ngayketthuco = $datphong->ngaytra;
-            $danhsachdatphong ->save();
+            $danhsachdatphong->save();
         }
 
         return redirect('/client/index')->with('success', 'Datphong has been change successfully');
@@ -182,7 +221,7 @@ class IndexController extends Controller
         ]);
 
         $khachhangs = Khachhang::max('id');
-        
+
         $request->tinhtrangthanhtoan = 0;
         $request->tinhtrangnhanphong = 0;
         Datphong::create([
@@ -202,9 +241,9 @@ class IndexController extends Controller
 
         Danhsachdatphong::create([
             'phongid' => $request->phongid,
-            'ngaybatdauo' => $request->ngaydat, 
-            'ngayketthuco' => $request->ngaytra, 
-            'datphongid' => $dat, 
+            'ngaybatdauo' => $request->ngaydat,
+            'ngayketthuco' => $request->ngaytra,
+            'datphongid' => $dat,
         ]);
 
         return redirect('client/index')->with('success', 'Datphong has been created successfully.');
@@ -212,7 +251,8 @@ class IndexController extends Controller
 
 
     // cua nhan vien
-    public function dashboard(){
+    public function dashboard()
+    {
         $phong = Phong::get();
         $sophong = $phong->count();
 
@@ -227,28 +267,26 @@ class IndexController extends Controller
 
         //thanh toan
         $datphong = Datphong::get();
-        
+
         $chuathanhtoan = collect();
         $dathanhtoan = collect();
         $chuanhanphong = collect();
         $danhanphong = collect();
-        foreach($datphong as $d){
+        foreach ($datphong as $d) {
             $temp = $d->tinhtrangthanhtoan;
             $temp2 = $d->tinhtrangnhanphong;
-            if($temp == 0){
+            if ($temp == 0) {
                 $chuathanhtoan->add($temp);
-            }
-            else{
+            } else {
                 $dathanhtoan->add($temp);
             }
-            if($temp2 == 0){
+            if ($temp2 == 0) {
                 $chuanhanphong->add($temp);
-            }
-            else{
+            } else {
                 $danhanphong->add($temp);
             }
         }
-        
+
         $thanhtoan = collect();
         $thanhtoan->add(array(
             'chuathanhtoan' => 'chuathanhtoan',
@@ -263,31 +301,34 @@ class IndexController extends Controller
             'danhanphong' => 'danhanphong',
             'sodanhanphong' => $danhanphong->count(),
         ));
-        
-        return view('index', compact('sophong','sokhachhang','sonhanvien','souser','thanhtoan','nhanphong'));
+
+        return view('index', compact('sophong', 'sokhachhang', 'sonhanvien', 'souser', 'thanhtoan', 'nhanphong'));
     }
 
-    public function profile(){
+    public function profile()
+    {
         $user = Auth::user();
-        return view('profiles.profile',compact('user'));
+        return view('profiles.profile', compact('user'));
     }
 
     public function vieweditprofile()
     {
         $user = Auth::user();
-        return view('profiles.edit',compact('user'));
+        return view('profiles.edit', compact('user'));
     }
 
     public function editprofile(Request $request, User $user)
     {
         $request->validate([
-            'email' => ['required','email',
-                    Rule::unique('users')->ignore($user->email, 'email')],
+            'email' => [
+                'required', 'email',
+                Rule::unique('users')->ignore($user->email, 'email')
+            ],
             'username' => 'required',
         ]);
-        
+
         $user->fill($request->post())->save();
 
-        return redirect('/profile')->with('success','User Has Been updated successfully');
+        return redirect('/profile')->with('success', 'User Has Been updated successfully');
     }
 }
