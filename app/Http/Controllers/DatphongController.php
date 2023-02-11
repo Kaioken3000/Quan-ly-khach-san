@@ -10,6 +10,7 @@ use App\Models\Phong;
 use App\Models\Loaiphong;
 use App\Models\Khachhang;
 use App\Models\Nhanphong;
+use App\Models\Traphong;
 use Illuminate\Support\Facades\DB;
 
 class DatphongController extends Controller
@@ -148,6 +149,13 @@ class DatphongController extends Controller
         $datphong = Datphong::find($request->id);
         $datphong->tinhtrangthanhtoan = 1;
         $datphong->tinhtrangnhanphong = 1;
+
+        $traphongs = array();
+        $traphongs['ten'] = $datphong->khachhangs->ten;
+        $traphongs['datphongid'] = $datphong->id;
+
+        Traphong::create($traphongs);
+
         $datphong->save();
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }
@@ -160,6 +168,7 @@ class DatphongController extends Controller
     {
         $datphong = Datphong::find($request->id);
         $datphong->tinhtrangthanhtoan = 0;
+        Traphong::where('datphongid',$datphong->id)->delete();
         $datphong->save();
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }

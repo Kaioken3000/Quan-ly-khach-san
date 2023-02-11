@@ -106,6 +106,7 @@
               <?php
               $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->datphongid)->get();
               $nhanphongs = App\Models\Nhanphong::where("datphongid", $datphong->datphongid)->get();
+              $traphongs = App\Models\Traphong::where("datphongid", $datphong->datphongid)->get();
               ?>
               <!-- Button trigger modal -->
               <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->datphongid }}">
@@ -127,11 +128,22 @@
                       <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
                       @endforeach
                       <br>
+                      
                       @if(count($nhanphongs)>0)
                       <b>Nhận phòng</b>
                       @foreach($nhanphongs as $nhanphong)
                       <p>Họ tên người nhận: {{ $nhanphong->ten }}</p>
                       <p>Thời gian nhận: {{ $nhanphong->created_at }}</p>
+                      @endforeach
+                      @endif
+                      <br>
+
+                      @if(count($traphongs)>0)
+                      <b>Trả phòng</b>
+                      @foreach($traphongs as $traphong)
+                      <p>Số trả phòng: {{ $traphong->so }}</p>
+                      <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
+                      <p>Thời gian trả phòng: {{ $traphong->created_at }}</p>
                       @endforeach
                       @endif
                     </div>
