@@ -57,14 +57,16 @@ class IndexController extends Controller
     public function khachhangedit(Request $request, User $user)
     {
         $request->validate([
-            'email' => ['required','email',
-                    Rule::unique('users')->ignore($user->email, 'email')],
+            'email' => [
+                'required', 'email',
+                Rule::unique('users')->ignore($user->email, 'email')
+            ],
             'username' => 'required',
             'sdt' => 'required|numeric|digits:10',
         ]);
         $user->fill($request->post())->save();
 
-        return redirect('/client/khachhang')->with('success','Khách hàng Has Been updated successfully');
+        return redirect('/client/khachhang')->with('success', 'Khách hàng Has Been updated successfully');
     }
 
     /**
@@ -84,6 +86,7 @@ class IndexController extends Controller
             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
             ->select('*', 'datphongs.id as datphongid')
             ->where('khachhangs.userid', $request->clientid)
+            ->where('huydatphong', 0)
             ->orderBy('datphongs.id', 'desc')->paginate(5);
         return view('client.danhsachdatphong', compact('datphongs'));
     }
@@ -194,7 +197,9 @@ class IndexController extends Controller
     //Xoa dat phong
     public function xoadatphong(Datphong $datphong)
     {
-        $datphong->delete();
+        $datphong = Datphong::find($datphong->id);
+        $datphong->huydatphong = 1;
+        $datphong->save();
         return redirect('/client/index')->with('success', 'Datphong has been deleted successfully');
     }
 

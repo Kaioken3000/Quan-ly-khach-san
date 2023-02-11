@@ -79,8 +79,8 @@
         <thead>
           <tr class="thead-dark">
             <th>id</th>
-            <th>Ngày đặt</th>
-            <th>Ngày trả</th>
+            <!-- <th>Ngày đặt</th>
+            <th>Ngày trả</th> -->
             <th>Số luọng</th>
             <th colspan="2">Phòng hiện tại</th>
             <th>Khách hàng</th>
@@ -93,8 +93,8 @@
           @foreach ($datphongs as $datphong)
           <tr>
             <td>{{ $datphong->datphongid }}</td>
-            <td>{{ $datphong->ngaydat }}</td>
-            <td>{{ $datphong->ngaytra }}</td>
+            <!-- <td>{{ $datphong->ngaydat }}</td>
+            <td>{{ $datphong->ngaytra }}</td> -->
             <td>{{ $datphong->soluong }}</td>
             <td>
               <?php
