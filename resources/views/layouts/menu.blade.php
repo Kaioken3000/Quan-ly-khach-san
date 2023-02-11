@@ -33,6 +33,14 @@
                 <div data-i18n="Analytics">Phòng</div>
             </a>
         </li>
+
+        <!-- Dịch vụ -->
+        <li class="menu-item {{ Request::is('dichvus') || Request::is('dichvus*') ? 'active':'' }}">
+            <a href="{{ route('dichvus.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div data-i18n="Analytics">Dịch vụ</div>
+            </a>
+        </li>
         
         <!-- Khách hàng -->
         <li class="menu-item {{ Request::is('khachhangs') || Request::is('khachhangs*') ? 'active':'' }}">
