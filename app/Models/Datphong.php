@@ -17,6 +17,7 @@ class Datphong extends Model
         'khachhangid',
         'tinhtrangthanhtoan',
         'tinhtrangnhanphong',
+        'huydatphong',
     ];
 
     public function khachhangs()

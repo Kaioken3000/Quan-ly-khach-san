@@ -12,6 +12,7 @@ use App\Models\Khachhang;
 use App\Models\Nhanphong;
 use App\Models\Traphong;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DatphongController extends Controller
 {
@@ -21,11 +22,22 @@ class DatphongController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $datphongs = DB::table('datphongs')
-        ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-        ->select('*','datphongs.id as datphongid')
-        ->orderBy('datphongs.id', 'desc')->paginate(5);
+    {   
+        foreach (Auth::user()->roles as $role){
+            if($role->name == 'Admin'){
+                $datphongs = DB::table('datphongs')
+                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                ->select('*','datphongs.id as datphongid')
+                ->orderBy('datphongs.id', 'desc')->paginate(5);
+            }
+            else{
+                $datphongs = DB::table('datphongs')
+                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                ->where('huydatphong',0)
+                ->select('*','datphongs.id as datphongid')
+                ->orderBy('datphongs.id', 'desc')->paginate(5);
+            }
+        }
         return view('datphongs.index', compact('datphongs'));
     }
 

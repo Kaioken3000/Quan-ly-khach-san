@@ -76,6 +76,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan'); //thanh toán
         Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
         Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong'); //nhan phong
+        
+        //Huỷ đặt phòng
+        Route::delete('/huydatphongs/{datphong}', 'HuydatphongController@store')->name('huydatphongs.store'); //huỷ đặt phong
 
         //Danh sach dat phong
         Route::post('/danhsahcdatphongs-change', 'DanhsachdatphongController@change')->name('danhsachdatphongs.change'); //nhan phong
