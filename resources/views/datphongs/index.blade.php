@@ -105,6 +105,7 @@
             <td>
               <?php
               $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->datphongid)->get();
+              $nhanphongs = App\Models\Nhanphong::where("datphongid", $datphong->datphongid)->get();
               ?>
               <!-- Button trigger modal -->
               <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->datphongid }}">
@@ -125,6 +126,14 @@
                       <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
                       <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
                       @endforeach
+                      <br>
+                      @if(count($nhanphongs)>0)
+                      <b>Nhận phòng</b>
+                      @foreach($nhanphongs as $nhanphong)
+                      <p>Họ tên người nhận: {{ $nhanphong->ten }}</p>
+                      <p>Thời gian nhận: {{ $nhanphong->created_at }}</p>
+                      @endforeach
+                      @endif
                     </div>
                     <div class="modal-footer">
                     </div>

@@ -9,6 +9,7 @@ use App\Models\Datphong;
 use App\Models\Phong;
 use App\Models\Loaiphong;
 use App\Models\Khachhang;
+use App\Models\Nhanphong;
 use Illuminate\Support\Facades\DB;
 
 class DatphongController extends Controller
@@ -170,11 +171,22 @@ class DatphongController extends Controller
     public function nhanphong(Request $request, Datphong $datphong)
     {
         $datphong = Datphong::find($request->id);
-        if ($datphong->tinhtrangnhanphong == 1)
+        
+        $nhanphongs = array();
+        $nhanphongs['ten'] = $datphong->khachhangs->ten;
+        $nhanphongs['datphongid'] = $datphong->id;
+        
+        if ($datphong->tinhtrangnhanphong == 1){
             $datphong->tinhtrangnhanphong = 0;
-        else
+            Nhanphong::where('datphongid',$datphong->id)->delete();
+        }
+        else{
             $datphong->tinhtrangnhanphong = 1;
+            Nhanphong::create($nhanphongs);
+        }
+
         $datphong->save();
+
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }
 
