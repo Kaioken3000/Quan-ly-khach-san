@@ -68,6 +68,38 @@
                           <div class="alert alert-danger" role="alert">{{ $message }}</div>
                           @enderror
                         </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="diachi">Địa chỉ</label>
+                          <input type="diachi" name="diachi" class="form-control" id="diachi" placeholder="VD: Q.Ninh Kiều, TP.Cần Thơ" 
+                          value="{{ $khachhang->diachi }}" />
+                          @error('diachi')
+                          <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="gioitinh">Giới tính</label> <br>
+                          <input class="form-check-input" type="radio" name="gioitinh" id="gioitinnam" value="nam"
+                          {{ ($khachhang->gioitinh=="nam")? "checked" : "" }}>
+                          <label class="form-check-label" for="gioitinhnam">
+                            Nam
+                          </label>
+                          <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhnu" value="nu"
+                          {{ ($khachhang->gioitinh=="nu")? "checked" : "" }}>
+                          <label class="form-check-label" for="gioitinhnu">
+                            Nữ
+                          </label>
+                          @error('gioitinh')
+                          <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="vanbang">Số CMND hoặc Passport (hoặc các văn bằng khác có hình).</label>
+                          <input type="vanbang" name="vanbang" class="form-control" id="vanbang" placeholder="VD: 01234567891000" 
+                          value="{{ $khachhang->vanbang }}" />
+                          @error('vanbang')
+                          <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                          @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

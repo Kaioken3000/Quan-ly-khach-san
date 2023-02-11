@@ -15,34 +15,66 @@
   <!-- Basic Layout -->
   <div class="row">
     <div class="col-xl">
-      <div class="card mb-4 col-xl-4">
+      <div class="card mb-4 col-xl-7">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="mb-0">From nhập liệu</h5>
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="{{ route('khachhangs.store') }}" method="POST">
+          <form action="{{ route('khachhangs.store') }}" method="POST" class="row">
             @csrf
-            <div class="mb-3">
-              <label class="form-label" for="ten">Họ tên</label>
-              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Lý Nhựt Nam" />
-              @error('ten')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label" for="ten">Họ tên</label>
+                <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Lý Nhựt Nam" />
+                @error('ten')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="sdt">Số điện thoại</label>
+                <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: 0123456789" />
+                @error('sdt')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="example@mail.com" />
+                @error('email')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
-            <div class="mb-3">
-              <label class="form-label" for="sdt">Số điện thoại</label>
-              <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: 001" />
-              @error('sdt')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="email">Email</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="VD: 001" />
-              @error('email')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label" for="diachi">Địa chỉ</label>
+                <input type="diachi" name="diachi" class="form-control" id="diachi" placeholder="VD: Q.Ninh Kiều, TP.Cần Thơ" />
+                @error('diachi')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="gioitinh">Giới tính</label> <br>
+                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinnam" checked value="nam">
+                  <label class="form-check-label" for="gioitinhnam">
+                    Nam
+                  </label>
+                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhnu" value="nu">
+                  <label class="form-check-label" for="gioitinhnu">
+                    Nữ  
+                  </label>
+                @error('gioitinh')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="vanbang">Số CMND hoặc Passport (hoặc các văn bằng khác có hình).</label>
+                <input type="vanbang" name="vanbang" class="form-control" id="vanbang" placeholder="VD: 01234567891000" />
+                @error('vanbang')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
             <input type="hidden" name="ngaydat" id="ngaydat" value="{{ $request->ngaydat }}" />
             <input type="hidden" name="ngaytra" id="ngaytra" value="{{ $request->ngaytra }}" />

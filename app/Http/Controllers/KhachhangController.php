@@ -44,6 +44,8 @@ class KhachhangController extends Controller
             'ten' => 'required',
             'sdt' => 'required',
             'email' => 'required',
+            'diachi' => 'required',
+            'vanbang' => 'required',
             'ngaydat' => 'required',
             'ngaytra' => 'required',
             'soluong' => 'required',
@@ -56,6 +58,9 @@ class KhachhangController extends Controller
             'ten' => $request->ten,
             'sdt' => $request->sdt,
             'email' => $request->email,
+            'diachi' => $request->diachi,
+            'gioitinh' => $request->gioitinh,
+            'vanbang' => $request->vanbang,
         ]);
 
         $khachhangs = Khachhang::max('id');
@@ -122,6 +127,8 @@ class KhachhangController extends Controller
             'ten' => 'required',
             'sdt' => 'required',
             'email' => 'required',
+            'diachi' => 'required',
+            'vanbang' => 'required',
         ]);
 
         $khachhang->fill($request->post())->save();
@@ -151,6 +158,8 @@ class KhachhangController extends Controller
         $khachhangs = Khachhang::where('ten', 'LIKE', '%' . $request->search . "%")
             ->orWhere('sdt', 'LIKE', '%' . $request->search . "%")
             ->orWhere('email', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('diachi', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('vanbang', 'LIKE', '%' . $request->search . "%")
             ->orWhere('id', 'LIKE', '%' . $request->search . "%")
             ->orderBy('id', 'asc')->paginate(5);
         return view('khachhangs.search', compact('khachhangs'));

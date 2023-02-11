@@ -13,6 +13,9 @@ class Khachhang extends Model
         'ten',
         'sdt',
         'email',
+        'diachi',
+        'gioitinh',
+        'vanbang',
         'userid'
     ];
 
