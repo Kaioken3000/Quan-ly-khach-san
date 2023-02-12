@@ -140,6 +140,17 @@
         </div>
         <div style="clear: both;"></div>
     </div>
+    <div class="add-detail mt-10">
+        <div class="w-50 float-left mt-10">
+            <h3>Dich vu su dung:</h3>
+            @foreach($dichvudatphongs as $dichvudatphong)
+            <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}: {{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
+            @endforeach
+        </div>
+        <div class="w-50 float-left logo mt-10">
+        </div>
+        <div style="clear: both;"></div>
+    </div>
     <div class="table-section bill-tbl w-100 mt-10">
         <table class="table w-100 mt-10">
             <tr>

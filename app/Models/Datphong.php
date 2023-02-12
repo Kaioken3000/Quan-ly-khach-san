@@ -25,4 +25,8 @@ class Datphong extends Model
         return $this->belongsTo(Khachhang::class, 'khachhangid', 'id');
     }
 
+    public function dichvus(){
+        return $this->belongsToMany(Datphong::class,'dichvu_dichvu','datphongid','dichvuid');
+    }
+
 }

@@ -8,6 +8,7 @@ use App\Models\Datphong;
 use App\Models\Phong;
 use App\Models\Loaiphong;
 use App\Models\Khachhang;
+use App\Models\DichvuDatphong;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Log;
 
@@ -25,6 +26,8 @@ class PDFController extends Controller
         $khachhang = Khachhang::find($datphong->khachhangid);
         
         $danhsachdatphongs = Danhsachdatphong::where('datphongid',$datphong->id)->get();
+
+        $dichvudatphongs = DichvuDatphong::where('datphongid',$datphong->id)->get();
         
         $phongs = collect();
         $loaiphongs = collect();
@@ -41,9 +44,12 @@ class PDFController extends Controller
             $songay = abs(round($songay / 86400));
             $tonggia += $songay*$loaiphong->gia*$datphong->soluong;
         }
-        
 
-        $pdf = PDF::loadView('Hoadon', compact('datphong','khachhang', 'tonggia','danhsachdatphongs'));
+        foreach($dichvudatphongs as $dichvudatphong){
+            $tonggia += $dichvudatphong->dichvus->giatien;
+        }
+
+        $pdf = PDF::loadView('Hoadon', compact('datphong','khachhang', 'tonggia','danhsachdatphongs','dichvudatphongs'));
 
         return $pdf->stream('nicesnippets.pdf');
     }

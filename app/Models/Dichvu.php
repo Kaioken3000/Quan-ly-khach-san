@@ -14,4 +14,8 @@ class Dichvu extends Model
         'giatien',
         'donvi',
     ];
+
+    public function datphongs(){
+        return $this->belongsToMany(Datphong::class,'dichvu_datphong','datphongid','dichvuid');
+    }
 }

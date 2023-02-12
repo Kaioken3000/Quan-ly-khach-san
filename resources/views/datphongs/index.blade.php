@@ -28,7 +28,7 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="thanhtoan" id="tatcathanhtoan"  onchange="changeoption()">
+          <input class="form-check-input" type="radio" name="thanhtoan" id="tatcathanhtoan" onchange="changeoption()">
           <label class="form-check-label" for="tatcathanhtoan">
             Tất cả
           </label>
@@ -56,7 +56,7 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="nhanphong" id="tatcanhanphong"  onchange="changeoption()">
+          <input class="form-check-input" type="radio" name="nhanphong" id="tatcanhanphong" onchange="changeoption()">
           <label class="form-check-label" for="tatcanhanphong">
             Tất cả
           </label>
@@ -107,6 +107,7 @@
               $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->datphongid)->get();
               $nhanphongs = App\Models\Nhanphong::where("datphongid", $datphong->datphongid)->get();
               $traphongs = App\Models\Traphong::where("datphongid", $datphong->datphongid)->get();
+              $dichvudatphongs = App\Models\DichvuDatphong::where("datphongid", $datphong->datphongid)->get();
               ?>
               <!-- Button trigger modal -->
               <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->datphongid }}">
@@ -123,17 +124,17 @@
                     </div>
                     <div class="modal-body">
                       @foreach($danhsachdatphongs as $danhsachdatphong)
-                      <p>Phòng: {{ $danhsachdatphong->phongid }}</p>
-                      <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
-                      <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
+                      <p>Phòng: <b>{{ $danhsachdatphong->phongid }}</b></p>
+                      <p>Ngày bắt đầu ở: <b>{{ $danhsachdatphong->ngaybatdauo }}</b></p>
+                      <p>Ngày kết thúc ở: <b>{{ $danhsachdatphong->ngayketthuco }}</b></p>
                       @endforeach
                       <br>
-                      
+
                       @if(count($nhanphongs)>0)
                       <b>Nhận phòng</b>
                       @foreach($nhanphongs as $nhanphong)
-                      <p>Họ tên người nhận: {{ $nhanphong->ten }}</p>
-                      <p>Thời gian nhận: {{ $nhanphong->created_at }}</p>
+                      <p>Họ tên người nhận: <b>{{ $nhanphong->ten }}</b></p>
+                      <p>Thời gian nhận: <b>{{ $nhanphong->created_at }}</b></p>
                       @endforeach
                       @endif
                       <br>
@@ -144,6 +145,14 @@
                       <p>Số trả phòng: {{ $traphong->so }}</p>
                       <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
                       <p>Thời gian trả phòng: {{ $traphong->created_at }}</p>
+                      @endforeach
+                      @endif
+                      <br>
+
+                      @if(count($dichvudatphongs)>0)
+                      <b>Dịch vụ sử dụng</b>
+                      @foreach($dichvudatphongs as $dichvudatphong)
+                      <p>{{ $dichvudatphong->dichvus->ten }}: <b>{{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</b></p>
                       @endforeach
                       @endif
                     </div>
@@ -211,10 +220,10 @@
                 @endhasrole
 
                 <!-- Huỷ đặt phòng -->
-                
+
                 <div class="m-1">
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#huydatphong{{ $datphong->datphongid }}">
-                  {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt phòng' : ' Hoàn tác' }}
+                    {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt phòng' : ' Hoàn tác' }}
                   </button>
                 </div>
                 <!-- Modal huỷ đặt phòng -->
@@ -240,86 +249,134 @@
                     </div>
                   </div>
                 </div>
-                @endif
-              </div>
 
-
-              <!-- Thanh toán -->
-              <div class="m-1">
-                <button type="button" class="w-100 btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
-                  <i class="bx bx-coin mb-1"></i> Thanh toán
-                </button>
-              </div>
-              <!-- Modal thanh toán -->
-              <div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="d-flex gap-1">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                          No
-                        </button>
-                        <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post">
-                          @csrf
-                          @method('PUT')
-                          <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                          <button type="submit" class="w-100 btn btn-warning"> Yes</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Nhận phòng, sửa nhận phòng -->
-              @hasrole('Admin')
-              <div class="m-1">
-                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
-                  <i class="bx bx-hotel mb-1">
-                    {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
-                  </i>
-                </button>
               </div>
               @else
-              @if($datphong->tinhtrangnhanphong == 0)
-              <div class="m-1">
-                <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
-                  <i class="bx bx-hotel mb-1">
-                    Nhận phòng
-                  </i>
-                </button>
-              </div>
-              @endif
-              @endhasrole
-              <!-- Modal nhan phòng -->
-              <div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel1"> Xác nhận</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="d-flex gap-1">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                          No
-                        </button>
-                        <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->datphongid) }}" method="Post">
+              <div>
+                <!-- Dịch vụ -->
+                <div class="m-1">
+                  <button type="button" class="w-100 btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldichvu{{ $datphong->datphongid }}">
+                    <i class="bx bx-box mb-1"></i> Dịch vụ
+                  </button>
+                </div>
+                <!-- Modal dịch vụ -->
+                <div class="modal fade" id="modaldichvu{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('dichvu_datphong.store') }}" method="POST">
                           @csrf
-                          @method('PUT')
-                          <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                          <button type="submit" class="w-100 btn btn-secondary">Yes</button>
-                        </form>
+                          <input hidden type="text" value="{{$datphong->datphongid}}" id="datphongid" name="datphongid">
+                          <div class="mb-3">
+                            <label class="form-label" for="ten">Dịch vụ</label><br>
+                            @foreach($dichvus as $dichvu)
+                            <div class="d-block">
+                              <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}"
+                              name="dichvuid[]" value="{{$dichvu->id}}" >
+                              <label class="form-check-label" for="dichvu{{$dichvu->id}}">
+                                {{$dichvu->ten}}:
+                              </label>
+                              <label class="form-check-label" for="dichvu{{$dichvu->id}}">
+                                {{$dichvu->giatien}} {{$dichvu->donvi}}
+                              </label>
+                            </div>
+                            @endforeach
+                            @error('ten')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                @endif
+
+                <!-- Thanh toán -->
+                <div class="m-1">
+                  <button type="button" class="w-100 btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
+                    <i class="bx bx-coin mb-1"></i> Thanh toán
+                  </button>
+                </div>
+                <!-- Modal thanh toán -->
+                <div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="d-flex gap-1">
+                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            No
+                          </button>
+                          <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                            <button type="submit" class="w-100 btn btn-warning"> Yes</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Nhận phòng, sửa nhận phòng -->
+                @hasrole('Admin')
+                <div class="m-1">
+                  <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+                    <i class="bx bx-hotel mb-1">
+                      {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
+                    </i>
+                  </button>
+                </div>
+                @else
+                @if($datphong->tinhtrangnhanphong == 0)
+                <div class="m-1">
+                  <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+                    <i class="bx bx-hotel mb-1">
+                      Nhận phòng
+                    </i>
+                  </button>
+                </div>
+                @endif
+                @endhasrole
+                <!-- Modal nhan phòng -->
+                <div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1"> Xác nhận</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="d-flex gap-1">
+                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            No
+                          </button>
+                          <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->datphongid) }}" method="Post">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                            <button type="submit" class="w-100 btn btn-secondary">Yes</button>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
 
               <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
               @else

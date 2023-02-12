@@ -11,6 +11,8 @@ use App\Models\Loaiphong;
 use App\Models\Khachhang;
 use App\Models\Nhanphong;
 use App\Models\Traphong;
+use App\Models\Dichvu;
+use App\Models\DichvuDatphong;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +40,8 @@ class DatphongController extends Controller
                 ->orderBy('datphongs.id', 'desc')->paginate(5);
             }
         }
-        return view('datphongs.index', compact('datphongs'));
+        $dichvus = Dichvu::get();
+        return view('datphongs.index', compact('datphongs','dichvus'));
     }
 
     /**

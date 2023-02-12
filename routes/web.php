@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\DanhsachdatphongController;
 use App\Http\Controllers\DichvuController;
+use App\Http\Controllers\DichvuDatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
@@ -72,7 +73,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('dichvus', DichvuController::class);
         Route::get('dichvus-search', 'dichvuController@search');
         Route::get('dichvus/dichvus-search', 'dichvuController@search');
-
+        
+        // Dichvu Routes
+        Route::resource('dichvu_datphong', DichvuDatphongController::class);
+       
         // Datphong Routes
         Route::resource('datphongs', DatphongController::class);
         Route::get('datphongs-kiemtra', 'DatphongController@kiemtra'); //kiem tra dat phong
