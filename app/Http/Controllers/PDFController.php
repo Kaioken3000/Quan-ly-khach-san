@@ -22,34 +22,34 @@ class PDFController extends Controller
     public function generateInvoicePDF(Request $request)
     {
         $datphong = Datphong::find($request->id);
-        
-        $khachhang = Khachhang::find($datphong->khachhangid);
-        
-        $danhsachdatphongs = Danhsachdatphong::where('datphongid',$datphong->id)->get();
 
-        $dichvudatphongs = DichvuDatphong::where('datphongid',$datphong->id)->get();
-        
+        $khachhang = Khachhang::find($datphong->khachhangid);
+
+        $danhsachdatphongs = Danhsachdatphong::where('datphongid', $datphong->id)->get();
+
+        $dichvudatphongs = DichvuDatphong::where('datphongid', $datphong->id)->get();
+
         $phongs = collect();
         $loaiphongs = collect();
-        $tonggia=0;
-        foreach($danhsachdatphongs as $danhsachdatphong){
+        $tonggia = 0;
+        foreach ($danhsachdatphongs as $danhsachdatphong) {
             $phong = Phong::find($danhsachdatphong->phongid);
 
             //tim phong va loai phong
             $phongs->add($phong);
             $loaiphong = Loaiphong::find($phong->loaiphongid);
-            
+
             //tinh gia tien
             $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
             $songay = abs(round($songay / 86400));
-            $tonggia += $songay*$loaiphong->gia*$datphong->soluong;
+            $tonggia += $songay * $loaiphong->gia * $datphong->soluong;
         }
 
-        foreach($dichvudatphongs as $dichvudatphong){
+        foreach ($dichvudatphongs as $dichvudatphong) {
             $tonggia += $dichvudatphong->dichvus->giatien;
         }
 
-        $pdf = PDF::loadView('Hoadon', compact('datphong','khachhang', 'tonggia','danhsachdatphongs','dichvudatphongs'));
+        $pdf = PDF::loadView('Hoadon', compact('datphong', 'khachhang', 'tonggia', 'danhsachdatphongs', 'dichvudatphongs'));
 
         return $pdf->stream('nicesnippets.pdf');
     }

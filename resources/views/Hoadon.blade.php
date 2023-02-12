@@ -2,12 +2,12 @@
 <html>
 
 <head>
-    <title>Larave Generate Invoice PDF - Nicesnippest.com</title>
+    <title>Hoá đơn khách sạn</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <style type="text/css">
     body {
-        font-family: 'Roboto Condensed', sans-serif;
+        font-family: DejaVu Sans, sans-serif;
     }
 
     .m-0 {
@@ -117,10 +117,10 @@
     </div>
     <div class="add-detail mt-10">
         <div class="w-50 float-left mt-10">
-            <h3>Thong tin khach hang:</h3>
-            <p class="m-0 pt-5 text-bold w-100">Khach hang Id - <span class="gray-color">{{ $khachhang->id }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Ten khach hang- <span class="gray-color">{{ $khachhang->ten }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">So dien thoai - <span class="gray-color">{{ $khachhang->sdt }}</span></p>
+            <h3>Thông tin khách hang:</h3>
+            <p class="m-0 pt-5 text-bold w-100">Khách hàng Id - <span class="gray-color">{{ $khachhang->id }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Tên khách hàng- <span class="gray-color">{{ $khachhang->ten }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Số điện thoại - <span class="gray-color">{{ $khachhang->sdt }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Email - <span class="gray-color">{{ $khachhang->email }}</span></p>
         </div>
         <div class="w-50 float-left logo mt-10">
@@ -129,12 +129,12 @@
     </div>
     <div class="add-detail mt-10">
         <div class="w-50 float-left mt-10">
-            <h3>Thong tin dat phong:</h3>
+            <h3>Thông tin đặt phòng:</h3>
             <p class="m-0 pt-5 text-bold w-100">Id - <span class="gray-color">{{ $datphong->id }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Ngay dat- <span class="gray-color">{{ $datphong->ngaydat }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Ngay tra- <span class="gray-color">{{ $datphong->ngaytra }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">So luong - <span class="gray-color">{{ $datphong->soluong }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Khach hang - <span class="gray-color">{{ $datphong->khachhangid }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Ngày đặt- <span class="gray-color">{{ $datphong->ngaydat }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Ngày trả- <span class="gray-color">{{ $datphong->ngaytra }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Số lượng - <span class="gray-color">{{ $datphong->soluong }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Khách hàng - <span class="gray-color">{{ $datphong->khachhangid }}</span></p>
         </div>
         <div class="w-50 float-left logo mt-10">
         </div>
@@ -142,7 +142,7 @@
     </div>
     <div class="add-detail mt-10">
         <div class="w-50 float-left mt-10">
-            <h3>Dich vu su dung:</h3>
+            <h3>Dịch vụ sử dụng:</h3>
             @foreach($dichvudatphongs as $dichvudatphong)
             <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}: {{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
             @endforeach
@@ -154,18 +154,18 @@
     <div class="table-section bill-tbl w-100 mt-10">
         <table class="table w-100 mt-10">
             <tr>
-                <th class="w-50">Phong</th>
-                <th class="w-50">Loai phong</th>
+                <th class="w-50">Phòng</th>
+                <th class="w-50">Loại phòng</th>
             </tr>
             <tr>
                 <td>
                     <div class="box-text">
                         @foreach($danhsachdatphongs as $danhsachdatphong)
                         <?php $phong = App\Models\Phong::find($danhsachdatphong->phongid); ?>
-                        <p>So phong: {{ $phong->so_phong }}</p>
-                        <p>Loai phong: {{ $phong->loaiphongid }}</p>
-                        <p>Ngày bat dau o: {{ $danhsachdatphong->ngaybatdauo }}</p>
-                        <p>Ngày ket thuc o: {{ $danhsachdatphong->ngayketthuco }}</p>
+                        <p>Sô phòng: {{ $phong->so_phong }}</p>
+                        <p>Loại phòng: {{ $phong->loaiphongid }}</p>
+                        <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
+                        <p>Ngày kết thúc ỏ: {{ $danhsachdatphong->ngayketthuco }}</p>
                         <?php 
                             $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
                             $songay = abs(round($songay / 86400));
@@ -180,11 +180,11 @@
                         @foreach($danhsachdatphongs as $danhsachdatphong)
                         <?php $p = App\Models\Phong::find($danhsachdatphong->phongid);
                         $loaiphong = App\Models\LoaiPhong::find($p->loaiphongid); ?>
-                        <p>Ma: {{ $loaiphong->ma }}</p>
-                        <p>Ten: {{ $loaiphong->ten }}</p>
-                        <p>Gia: {{ $loaiphong->gia }}VND</p>
-                        <p>So luong: {{ $loaiphong->soluong }}</p>
-                        <p>Mieu ta: {{ $loaiphong->mieuta }}</p>
+                        <p>Mã: {{ $loaiphong->ma }}</p>
+                        <p>Tên: {{ $loaiphong->ten }}</p>
+                        <p>Giá: {{ $loaiphong->gia }}VND</p>
+                        <p>Sô lượng: {{ $loaiphong->soluong }}</p>
+                        <p>Miêu tả: {{ $loaiphong->mieuta }}</p>
                         <hr>
                         @endforeach
                     </div>
@@ -198,7 +198,7 @@
                 <td colspan="7">
                     <div class="total-part">
                         <div class="total-left w-85 float-left" align="right">
-                            <p>Tong cong:</p>
+                            <p>Tổng cộng:</p>
                         </div>
                         <div class="total-right w-15 float-left text-bold" align="right">
                             <p>{{ $tonggia }}VND</p>
