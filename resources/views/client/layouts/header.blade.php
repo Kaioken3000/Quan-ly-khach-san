@@ -19,6 +19,7 @@
                                 <div class="col-md-6 mx-auto">
                                     <ul class="list-unstyled menu">
                                         <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
+                                        <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
                                         @auth
                                         <li>
                                             <form action="/client/danhsachdatphong" method="post">

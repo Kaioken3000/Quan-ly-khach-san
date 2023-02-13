@@ -26,7 +26,21 @@ class IndexController extends Controller
     {
         $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(3);
         return view('client.index', compact('loaiphongs'));
+   
     }
+    /**
+     * Hien trang phong cua client
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hientrangphong()
+    {
+        $loaiphongs = Loaiphong::orderBy('ma', 'asc')->get();
+        $phongs = Phong::get();
+        return view('client.phong', compact('loaiphongs','phongs'));
+    }
+
+    
 
     /**
      * Hien thong tin khach hang

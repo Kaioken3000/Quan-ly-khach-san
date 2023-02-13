@@ -131,6 +131,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     
     Route::get('client/index', 'IndexController@index');
+
+    // Giao dien trang phong
+    Route::get('client/phong', 'IndexController@hientrangphong');
     
     // Hien lai thong tin khách hang
     Route::get('client/khachhang', 'IndexController@hienkhachhang');
