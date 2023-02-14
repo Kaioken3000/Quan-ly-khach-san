@@ -22,8 +22,8 @@ function loctheooption(xacnhanthanhtoan, xacnhannhanphong) {
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
-        tdthanhtoan = tr[i].getElementsByTagName("td")[7];
-        tdnhanphong = tr[i].getElementsByTagName("td")[8];
+        tdthanhtoan = tr[i].getElementsByTagName("td")[5];
+        tdnhanphong = tr[i].getElementsByTagName("td")[6];
         if (tdthanhtoan && tdnhanphong) {
             txtValuethanhtoan = tdthanhtoan.textContent || tdthanhtoan.innerText;
             txtValuenhanphong = tdnhanphong.textContent || tdnhanphong.innerText;
