@@ -164,6 +164,7 @@ class KhachhangController extends Controller
             ->orWhere('vanbang', 'LIKE', '%' . $request->search . "%")
             ->orWhere('id', 'LIKE', '%' . $request->search . "%")
             ->orderBy('id', 'asc')->paginate(5);
-        return view('khachhangs.search', compact('khachhangs'));
+        $datphong = Datphong::get();
+        return view('khachhangs.search', compact('khachhangs','datphong'));
     }
 }
