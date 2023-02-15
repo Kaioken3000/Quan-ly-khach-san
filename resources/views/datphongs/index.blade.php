@@ -128,31 +128,45 @@
                       <p>Ngày bắt đầu ở: <b>{{ $danhsachdatphong->ngaybatdauo }}</b></p>
                       <p>Ngày kết thúc ở: <b>{{ $danhsachdatphong->ngayketthuco }}</b></p>
                       @endforeach
-                      <br>
 
                       @if(count($nhanphongs)>0)
+                      <hr>
                       <b>Nhận phòng</b>
                       @foreach($nhanphongs as $nhanphong)
                       <p>Họ tên người nhận: <b>{{ $nhanphong->ten }}</b></p>
                       <p>Thời gian nhận: <b>{{ $nhanphong->created_at }}</b></p>
                       @endforeach
                       @endif
-                      <br>
 
                       @if(count($traphongs)>0)
+                      <hr>
                       <b>Trả phòng</b>
                       @foreach($traphongs as $traphong)
                       <p>Số trả phòng: {{ $traphong->so }}</p>
                       <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
-                      <p>Thời gian trả phòng: {{ $traphong->created_at }}</p>
+                      <p>Thời gian trả phòng: {{ $traphong->created_at }}
+                        <hr>
+                      </p>
                       @endforeach
                       @endif
-                      <br>
 
                       @if(count($dichvudatphongs)>0)
+                      <hr>
                       <b>Dịch vụ sử dụng</b>
                       @foreach($dichvudatphongs as $dichvudatphong)
-                      <p>{{ $dichvudatphong->dichvus->ten }}: <b>{{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</b></p>
+                      <div class="row mt-2">
+                        <div class="col-10">
+                          {{ $dichvudatphong->dichvus->ten }}: <b>{{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</b>
+                        </div>
+                        @hasrole('Admin')
+                        <!-- xoa dich vu -->
+                        <div class="col-2">
+                          <button type="button" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#dichvudatphongxoa{{ $dichvudatphong->id }}">
+                            delete
+                          </button>
+                        </div>
+                        @endhasrole
+                      </div>
                       @endforeach
                       @endif
                     </div>
@@ -161,6 +175,33 @@
                   </div>
                 </div>
               </div>
+              @hasrole('Admin')
+                @foreach($dichvudatphongs as $dichvudatphong)
+                <!-- Modal xoá dichvu -->
+                <div class="modal fade" id="dichvudatphongxoa{{ $dichvudatphong->id }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="d-flex gap-1">
+                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            No
+                          </button>
+                          <form action="{{ route('dichvu_datphong.destroy',$dichvudatphong->id) }}" method="Post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"> Yes</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                @endforeach
+              @endhasrole
             </td>
             <td>{{ $datphong->ten }}</td>
             <td>
@@ -275,8 +316,7 @@
                             <label class="form-label" for="ten">Dịch vụ</label><br>
                             @foreach($dichvus as $dichvu)
                             <div class="d-block">
-                              <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}"
-                              name="dichvuid[]" value="{{$dichvu->id}}" >
+                              <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}" name="dichvuid[]" value="{{$dichvu->id}}">
                               <label class="form-check-label" for="dichvu{{$dichvu->id}}">
                                 {{$dichvu->ten}}:
                               </label>

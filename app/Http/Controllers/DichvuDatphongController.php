@@ -31,4 +31,16 @@ class DichvuDatphongController extends Controller
 
         return redirect()->route('datphongs.index')->with('success','Dich vu dat phong has been created successfully.');
     }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\DichvuDatphong  $dichvu_datphong
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy(DichvuDatphong $dichvu_datphong)
+    {
+        $dichvu_datphong->delete();
+        return redirect()->route('datphongs.index')->with('success','Loaiphong has been deleted successfully');
+    }
 }
