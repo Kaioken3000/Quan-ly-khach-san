@@ -67,7 +67,7 @@
           @foreach ($phongs as $phong)
           <tr>
             <td>{{ $phong->so_phong }}</td>
-            <td>{{ $phong->ten }}</td>
+            <td>{{ $phong->loaiphongs->ten }}</td>
             <td>
               <!-- edit -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEdit{{ $phong->so_phong }}">

@@ -18,9 +18,10 @@ class PhongController extends Controller
      */
     public function index()
     {
-        $phongs = DB::table('phongs')
-        ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')->select('*')
-        ->orderBy('phongs.so_phong', 'desc')->paginate(5);
+        // $phongs = DB::table('phongs')
+        // ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')->select('*')
+        // ->orderBy('phongs.so_phong', 'desc')->paginate(5);
+        $phongs = Phong::orderBy('so_phong','desc')->paginate(5);
         $loaiphongs = Loaiphong::all();
         return view('phongs.index', compact('phongs','loaiphongs'));
     }
@@ -118,8 +119,8 @@ class PhongController extends Controller
     public function search(Request $request)
     {
         $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('loaiphongid', 'LIKE', '%' . $request->search . "%")
-            ->orderBy('so_phong','asc')->paginate(5);
-        return view('phongs.search', compact('phongs'));
+                        ->orderBy('so_phong','asc')->paginate(5);
+        $loaiphongs = Loaiphong::all();
+        return view('phongs.search', compact('phongs','loaiphongs'));
     }
 }

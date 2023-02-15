@@ -22,6 +22,6 @@ class Phong extends Model
 
     public function loaiphongs()
     {
-        return $this->belongsTo(Loaiphong::class);
+        return $this->belongsTo(Loaiphong::class, 'loaiphongid','ma');
     }
 }

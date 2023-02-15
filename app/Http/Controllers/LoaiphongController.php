@@ -16,7 +16,7 @@ class LoaiphongController extends Controller
     */
     public function index()
     {
-        $loaiphongs = Loaiphong::orderBy('ma','asc')->paginate(5);
+        $loaiphongs = Loaiphong::orderBy('ma','desc')->paginate(5);
         return view('loaiphongs.index', compact('loaiphongs'));
     }
 
