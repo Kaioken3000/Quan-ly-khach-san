@@ -162,7 +162,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     // dat phong
     Route::post('/index-store', 'IndexController@index_store');
-    
+
     // Thuc hien dang ky o nguoi dung
     Route::get('client/register', 'RegisterController@showclient')->name('client.registershow');
     Route::post('client/register', 'RegisterController@registerclient')->name('client.register');
@@ -171,5 +171,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('client/login', 'LoginController@showclient')->name('client.showclient');
     Route::post('client/login', 'LoginController@loginclient')->name('client.loginclient');
 
+    // dich vu dat phong
+    Route::post('/client/dichvu_satphong_store', 'IndexController@dichvu_satphong_store')->name('client.dichvu_satphong_store');
 });
 

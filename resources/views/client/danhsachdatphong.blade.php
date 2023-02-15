@@ -49,6 +49,9 @@
               <td>
                 <?php
                 $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->datphongid)->get();
+                $nhanphongs = App\Models\Nhanphong::where("datphongid", $datphong->datphongid)->get();
+                $traphongs = App\Models\Traphong::where("datphongid", $datphong->datphongid)->get();
+                $dichvudatphongs = App\Models\DichvuDatphong::where("datphongid", $datphong->datphongid)->get();
                 ?>
                 <!-- Button trigger modal -->
                 <button type="button" class="badge bg-info border-info" data-toggle="modal" data-target="#LichsuModal{{ $datphong->datphongid }}">
@@ -69,6 +72,32 @@
                         <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
                         <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
                         @endforeach
+
+                        @if(count($nhanphongs)>0)
+                        <b class="font-weight-bold">Nhận phòng</b>
+                        @foreach($nhanphongs as $nhanphong)
+                        <p>Họ tên người nhận: <b>{{ $nhanphong->ten }}</b></p>
+                        <p>Thời gian nhận: <b>{{ $nhanphong->created_at }}</b></p>
+                        @endforeach
+                        @endif
+                        <br>
+
+                        @if(count($traphongs)>0)
+                        <b class="font-weight-bold">Trả phòng</b>
+                        @foreach($traphongs as $traphong)
+                        <p>Số trả phòng: {{ $traphong->so }}</p>
+                        <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
+                        <p>Thời gian trả phòng: {{ $traphong->created_at }}</p>
+                        @endforeach
+                        @endif
+                        <br>
+
+                        @if(count($dichvudatphongs)>0)
+                        <b class="font-weight-bold">Dịch vụ sử dụng</b>
+                        @foreach($dichvudatphongs as $dichvudatphong)
+                        <p>{{ $dichvudatphong->dichvus->ten }}: <b>{{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</b></p>
+                        @endforeach
+                        @endif
                       </div>
                       <div class="modal-footer">
                       </div>
@@ -126,6 +155,54 @@
                             </form>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  @else
+                  <!-- Dịch vụ -->
+                  <div class="m-1">
+                    <button type="button" class="w-100 btn btn-success" data-toggle="modal" data-target="#modaldichvu{{ $datphong->datphongid }}">
+                      <i class="bx bx-box mb-1"></i> Dịch vụ
+                    </button>
+                  </div>
+                  <!-- Modal dịch vụ -->
+                  <div class="modal fade" id="modaldichvu{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="{{ route('client.dichvu_satphong_store') }}" method="POST">
+                            @csrf
+                            <input hidden type="text" value="{{$datphong->datphongid}}" id="datphongid" name="datphongid">
+                            <div class="mb-3">
+                              <label class="form-label" for="ten">Dịch vụ</label><br>
+                              @foreach($dichvus as $dichvu)
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}" name="dichvuid[]" value="{{$dichvu->id}}">
+                                <label class="form-check-label" for="dichvu{{$dichvu->id}}">
+                                  {{$dichvu->ten}}:
+                                </label>
+                                <label class="form-check-label" for="dichvu{{$dichvu->id}}">
+                                  {{$dichvu->giatien}} {{$dichvu->donvi}}
+                                </label>
+                              </div>
+                              @endforeach
+                              @error('ten')
+                              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                              @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            Cancel
+                          </button>
+                          <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>

@@ -11,6 +11,8 @@ use App\Models\Nhanvien;
 use App\Models\User;
 use App\Models\Datphong;
 use App\Models\Danhsachdatphong;
+use App\Models\Dichvu;
+use App\Models\DichvuDatphong;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -102,7 +104,8 @@ class IndexController extends Controller
             ->where('khachhangs.userid', $request->clientid)
             ->where('huydatphong', 0)
             ->orderBy('datphongs.id', 'desc')->paginate(5);
-        return view('client.danhsachdatphong', compact('datphongs'));
+        $dichvus = Dichvu::get();
+        return view('client.danhsachdatphong', compact('datphongs','dichvus'));
     }
 
     // kiem tra phong trong cua client
@@ -268,6 +271,24 @@ class IndexController extends Controller
         ]);
 
         return redirect('client/index')->with('success', 'Datphong has been created successfully.');
+    }
+
+    public function dichvu_satphong_store(Request $request)
+    {
+        $request->validate([
+            'datphongid' => 'required',
+            'dichvuid' => 'required',
+        ]);
+
+        foreach($request->dichvuid as $dichvu){
+            $dich = array();
+            $dich['datphongid'] = $request->datphongid;
+            $dich['dichvuid'] = $dichvu;
+            
+            DichvuDatphong::create($dich);
+        }
+
+        return redirect('/client/index');
     }
 
 
