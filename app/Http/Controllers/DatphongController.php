@@ -12,7 +12,7 @@ use App\Models\Khachhang;
 use App\Models\Nhanphong;
 use App\Models\Traphong;
 use App\Models\Dichvu;
-use App\Models\DichvuDatphong;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,24 +24,23 @@ class DatphongController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        foreach (Auth::user()->roles as $role){
-            if($role->name == 'Admin'){
+    {
+        foreach (Auth::user()->roles as $role) {
+            if ($role->name == 'Admin') {
                 $datphongs = DB::table('datphongs')
-                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-                ->select('*','datphongs.id as datphongid')
-                ->orderBy('datphongs.id', 'desc')->paginate(5);
-            }
-            else{
+                    ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                    ->select('*', 'datphongs.id as datphongid')
+                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+            } else {
                 $datphongs = DB::table('datphongs')
-                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-                ->where('huydatphong',0)
-                ->select('*','datphongs.id as datphongid')
-                ->orderBy('datphongs.id', 'desc')->paginate(5);
+                    ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                    ->where('huydatphong', 0)
+                    ->select('*', 'datphongs.id as datphongid')
+                    ->orderBy('datphongs.id', 'desc')->paginate(5);
             }
         }
         $dichvus = Dichvu::get();
-        return view('datphongs.index', compact('datphongs','dichvus'));
+        return view('datphongs.index', compact('datphongs', 'dichvus'));
     }
 
     /**
@@ -152,7 +151,27 @@ class DatphongController extends Controller
             ->orWhere('soluong', 'LIKE', '%' . $request->search . "%")
             ->orWhere('khachhangid', 'LIKE', '%' . $request->search . "%")
             ->orderBy('id', 'asc')->paginate(5);
-        return view('datphongs.search', compact('datphongs'));
+        foreach (Auth::user()->roles as $role) {
+            if ($role->name == 'Admin') {
+                $datphongs = DB::table('datphongs')
+                    ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                    ->where('datphongs.id', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('datphongs.ngaydat', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('datphongs.ngaytra', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('datphongs.soluong', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('datphongs.khachhangid', 'LIKE', '%' . $request->search . "%")
+                    ->select('*', 'datphongs.id as datphongid')
+                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+            } else {
+                $datphongs = DB::table('datphongs')
+                    ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                    ->where('huydatphong', 0)
+                    ->select('*', 'datphongs.id as datphongid')
+                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+            }
+        }
+        $dichvus = Dichvu::get();
+        return view('datphongs.search', compact('datphongs','dichvus'));
     }
 
     /**
@@ -184,7 +203,7 @@ class DatphongController extends Controller
     {
         $datphong = Datphong::find($request->id);
         $datphong->tinhtrangthanhtoan = 0;
-        Traphong::where('datphongid',$datphong->id)->delete();
+        Traphong::where('datphongid', $datphong->id)->delete();
         $datphong->save();
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }
@@ -196,16 +215,15 @@ class DatphongController extends Controller
     public function nhanphong(Request $request, Datphong $datphong)
     {
         $datphong = Datphong::find($request->id);
-        
+
         $nhanphongs = array();
         $nhanphongs['ten'] = $datphong->khachhangs->ten;
         $nhanphongs['datphongid'] = $datphong->id;
-        
-        if ($datphong->tinhtrangnhanphong == 1){
+
+        if ($datphong->tinhtrangnhanphong == 1) {
             $datphong->tinhtrangnhanphong = 0;
-            Nhanphong::where('datphongid',$datphong->id)->delete();
-        }
-        else{
+            Nhanphong::where('datphongid', $datphong->id)->delete();
+        } else {
             $datphong->tinhtrangnhanphong = 1;
             Nhanphong::create($nhanphongs);
         }
@@ -255,7 +273,7 @@ class DatphongController extends Controller
         }
 
         $loaiphongs = Loaiphong::get();
-        return view('datphongs.kiemtra', compact('request', 'phongs','loaiphongs'));
+        return view('datphongs.kiemtra', compact('request', 'phongs', 'loaiphongs'));
     }
     /**
      * Display a listing of the resource.
@@ -291,6 +309,6 @@ class DatphongController extends Controller
             } else array_push($phongs, $phong);
         }
         $loaiphongs = Loaiphong::get();
-        return view('datphongs.kiemtra-capnhat', compact('phongs', 'dat','loaiphongs'));
+        return view('datphongs.kiemtra-capnhat', compact('phongs', 'dat', 'loaiphongs'));
     }
 }
