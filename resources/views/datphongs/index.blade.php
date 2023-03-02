@@ -107,6 +107,7 @@
               $danhsachdatphongs = App\Models\Danhsachdatphong::where("datphongid", $datphong->datphongid)->get();
               $nhanphongs = App\Models\Nhanphong::where("datphongid", $datphong->datphongid)->get();
               $traphongs = App\Models\Traphong::where("datphongid", $datphong->datphongid)->get();
+              $huydatphongs = App\Models\Huydatphong::where("datphongid", $datphong->datphongid)->get();
               $dichvudatphongs = App\Models\DichvuDatphong::where("datphongid", $datphong->datphongid)->get();
               ?>
               <!-- Button trigger modal -->
@@ -128,7 +129,8 @@
                       <p>Ngày bắt đầu ở: <b>{{ $danhsachdatphong->ngaybatdauo }}</b></p>
                       <p>Ngày kết thúc ở: <b>{{ $danhsachdatphong->ngayketthuco }}</b></p>
                       @endforeach
-
+                      <p>Khách hàng: <b>{{ $datphong->ten }}</b></p>
+                      
                       @if(count($nhanphongs)>0)
                       <hr>
                       <b>Nhận phòng</b>
@@ -145,6 +147,18 @@
                       <p>Số trả phòng: {{ $traphong->so }}</p>
                       <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
                       <p>Thời gian trả phòng: {{ $traphong->created_at }}
+                        <hr>
+                      </p>
+                      @endforeach
+                      @endif
+
+                      @if(count($huydatphongs)>0)
+                      <hr>
+                      <b>Huỷ đặt phòng</b>
+                      @foreach($huydatphongs as $huydatphong)
+                      <p>Số trả phòng: <b>{{ $huydatphong->so }}</b></p>
+                      <p>Họ tên người huỷ đặt phòng: <b>{{ $huydatphong->ten }}</b></p>
+                      <p>Thời gian huỷ đặt phòng: <b>{{ $huydatphong->created_at }}</b>
                         <hr>
                       </p>
                       @endforeach

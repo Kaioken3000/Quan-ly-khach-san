@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Khachhang;
 use App\Models\Datphong;
 use App\Models\Danhsachdatphong;
+use App\Models\Phong;
 
 class KhachhangController extends Controller
 {
@@ -29,7 +30,8 @@ class KhachhangController extends Controller
      */
     public function create(Request $request)
     {
-        return view('khachhangs.create', compact('request'));
+        $phongs = Phong::get();
+        return view('khachhangs.create', compact('request','phongs'));
     }
 
     /**

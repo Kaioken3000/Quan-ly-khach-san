@@ -57,13 +57,13 @@
               <div class="mb-3">
                 <label class="form-label" for="gioitinh">Giới tính</label> <br>
                 <input class="form-check-input" type="radio" name="gioitinh" id="gioitinnam" checked value="nam">
-                  <label class="form-check-label" for="gioitinhnam">
-                    Nam
-                  </label>
+                <label class="form-check-label" for="gioitinhnam">
+                  Nam
+                </label>
                 <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhnu" value="nu">
-                  <label class="form-check-label" for="gioitinhnu">
-                    Nữ  
-                  </label>
+                <label class="form-check-label" for="gioitinhnu">
+                  Nữ
+                </label>
                 @error('gioitinh')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
@@ -72,6 +72,40 @@
                 <label class="form-label" for="vanbang">Số CMND hoặc Passport (hoặc các văn bằng khác có hình).</label>
                 <input type="vanbang" name="vanbang" class="form-control" id="vanbang" placeholder="VD: 01234567891000" />
                 @error('vanbang')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="datcoc">Chọn hình thức đặt cọc:</label> <br>
+              <input class="form-check-input" type="radio" name="datcoc" id="tructiep" checked value="tructiep" onchange="doitructiep_chuyenkhoan()">
+              <label class="form-check-label" for="tructiep">
+                Trực tiếp
+              </label>
+              <input class="form-check-input" type="radio" name="datcoc" id="chuyenkhoan" value="chuyenkhoan" onchange="doitructiep_chuyenkhoan()">
+              <label class="form-check-label" for="chuyenkhoan">
+                Chuyển khoản
+              </label>
+            </div>
+            <div class="col-6" id="nhapsotien">
+              <div class="mb-3">
+                <label class="form-label" for="tiendatcoc">Số tiền (Tiền đặt cọc bằng 50% số tiền loại phòng)</label>
+                @foreach($phongs as $phong)
+                @if($phong->so_phong == (int)$request['phongid'])
+                <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc" placeholder="VD: 300" 
+                value="{{$phong->loaiphongs->gia/2}}" readonly/>
+                @endif
+                @endforeach
+                @error('tiendatcoc')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+              </div>
+            </div>
+            <div class="col-6" id="nhapchuyenkhoan">
+              <div class="mb-3">
+                <label class="form-label" for="tienchuyenkhoan">Nhập chuyển khoản</label>
+                <input type="text" name="tienchuyenkhoan" class="form-control" id="tienchuyenkhoan" placeholder="VD: 300" />
+                @error('tienchuyenkhoan')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
               </div>
@@ -89,4 +123,8 @@
     </div>
   </div>
 </div>
+<script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
+<script>
+  doitructiep_chuyenkhoan()
+</script>
 @endsection
