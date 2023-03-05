@@ -12,6 +12,7 @@ class Thanhtoan extends Model
     protected $fillable = [
         'hinhthuc',
         'gia',
+        'loaitien',
         'chuyenkhoan_token',
         'khachhangid',
     ];

@@ -137,6 +137,7 @@
             <input type="hidden" name="phongid" value="{{$request->phongid}}">
             <input type="hidden" name="tinhtrangthanhtoan" value=0>
             <input type="hidden" name="tinhtrangnhanphong" value=0>
+            <input type="hidden" name="loaitien" value="datcoc">
             <button type="submit" class="btn btn-primary">Xác nhận</button>
           </form>
         </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("hinhthuc");
             $table->integer("gia");
+            $table->string("loaitien");
             $table->integer("chuyenkhoan_token");
             $table->foreignId('khachhangid')->nullable()->constrained('khachhangs')->onDelete('set null')->onUpdate('set null');
             $table->timestamps();

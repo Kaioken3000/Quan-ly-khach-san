@@ -15,4 +15,9 @@ class Danhsachdatphong extends Model
         'ngayketthuco',
         'datphongid',
     ];
+
+    public function phongs()
+    {
+        return $this->belongsTo(Phong::class, 'phongid', 'so_phong');
+    }
 }

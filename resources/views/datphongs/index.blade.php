@@ -133,7 +133,11 @@
                       @endforeach
                       <p>Khách hàng: <b>{{ $datphong->ten }}</b></p>
                       @foreach ($thanhtoans as $thanhtoan)
+                      @if ($thanhtoan->loaitien == 'traphong')
+                      <p>Tiền trả phòng: <b>{{$thanhtoan->gia}} VND</b></p>
+                      @else
                       <p>Tiền đặt cọc: <b>{{$thanhtoan->gia}} VND</b></p>
+                      @endif
                       @endforeach
 
                       @if(count($nhanphongs)>0)
@@ -149,9 +153,9 @@
                       <hr>
                       <b>Trả phòng</b>
                       @foreach($traphongs as $traphong)
-                      <p>Số trả phòng: {{ $traphong->so }}</p>
-                      <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
-                      <p>Thời gian trả phòng: {{ $traphong->created_at }}
+                      <p>Số trả phòng: <b>{{ $traphong->so }}</b></p>
+                      <p>Họ tên người trả phòng: <b>{{ $traphong->ten }}</b></p>
+                      <p>Thời gian trả phòng: <b>{{ $traphong->created_at }}</b>
                         <hr>
                       </p>
                       @endforeach
@@ -376,25 +380,95 @@
                 </div>
                 <!-- Modal thanh toán -->
                 <div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <div class="d-flex gap-1">
-                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            No
-                          </button>
-                          <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}"
-                            method="Post">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                            <button type="submit" class="w-100 btn btn-warning"> Yes</button>
-                          </form>
-                        </div>
+                        <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}"
+                          method="Post" id="payment-form">
+                          @csrf
+                          @method('PUT')
+                          {{-- chuyen khoan --}}
+                          <div class="mb-3">
+                            <label class="form-label" for="datcoc">Chọn hình thức đặt cọc:</label> <br>
+                            <input class="form-check-input" type="radio" name="datcoc" id="tructiep" checked
+                              value="tructiep" onclick="doitructiep_chuyenkhoan()">
+                            <label class="form-check-label" for="tructiep">
+                              Trực tiếp
+                            </label>
+                            <input class="form-check-input" type="radio" name="datcoc" id="chuyenkhoan"
+                              value="chuyenkhoan" onclick="doitructiep_chuyenkhoan()">
+                            <label class="form-check-label" for="chuyenkhoan">
+                              Chuyển khoản
+                            </label>
+                          </div>
+                          {{-- Truc tiep --}}
+                          <div class="col-6" id="nhapsotien">
+                            <div class="mb-3">
+                              <label class="form-label" for="tiendatcoc">Số tiền (Tiền đặt cọc bằng 50% số tiền loại
+                                phòng)</label>
+                              @foreach($danhsachdatphongs as $danhsachdatphong)
+                              <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
+                                placeholder="VD: 300" value="{{$danhsachdatphong->phongs->loaiphongs->gia/2}}"
+                                readonly />
+                              @endforeach
+                              @error('tiendatcoc')
+                              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                              @enderror
+                            </div>
+                          </div>
+                          {{-- Chuyen khoan --}}
+                          <div class="col-6" id="nhapchuyenkhoan">
+                            <div class="mb-3">
+                              <label class="form-label" for="tienchuyenkhoan">Nhập thông tin chuyển khoản</label>
+                              <label class="form-label" for="tienchuyenkhoan">(Tiền đặt cọc bằng 50% số tiền loại
+                                phòng)</label>
+                              <!-- chuyen khoan -->
+                              <div class="row">
+                                <div class="card p-2">
+                                  <script src="https://js.stripe.com/v3/"></script>
+
+                                  <div class="form-row" id="card_stripe">
+                                    <label for="card-element">
+                                      Credit or debit card
+                                    </label>
+                                    <div id="card-element">
+                                      <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                  </div>
+                                  <br>
+                                  <!-- </form> -->
+                                </div>
+                              </div>
+                              <!-- KT chuyen khoan -->
+                            </div>
+                          </div>  
+                          {{-- KT chuyen khoan --}}
+                          <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                          <input type="hidden" name="khachhang_id" value="{{$datphong->id}}">
+                          <input type="hidden" name="loaitien" value="traphong">
+
+                          {{-- btn xac nhan, cancel --}}
+                          <div class="d-flex gap-1">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                              Cancel
+                            </button>
+                            <div>
+                              <button type="submit" class="w-100 btn btn-warning"> Yes</button>
+                            </div>
+                          </div>
+                          {{-- KT btn xac nhan, cancel --}}
+                        </form>
+                        <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
+                        <script>
+                          doitructiep_chuyenkhoan()
+                        </script>
                       </div>
                     </div>
                   </div>
@@ -455,6 +529,7 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                <input type="hidden" name="khachhang_id" value="{{ $datphong->id }}">
                 <button type="submit" class="w-100 btn btn-warning"><i class="bx bx-coin mb-1"></i> Sửa thanh
                   toán</button>
               </form>

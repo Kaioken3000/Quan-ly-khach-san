@@ -12,7 +12,7 @@ use App\Models\Khachhang;
 use App\Models\Nhanphong;
 use App\Models\Traphong;
 use App\Models\Dichvu;
-use App\Models\Chuyenkhoan;
+use App\Models\Thanhtoan;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +75,8 @@ class DatphongController extends Controller
             }
         }
         $dichvus = Dichvu::get();
-        return view('datphongs.index', compact('datphongs', 'dichvus'));
+        $phongs = Phong::get();
+        return view('datphongs.index', compact('datphongs', 'dichvus', 'phongs'));
     }
 
     /**
@@ -227,6 +228,15 @@ class DatphongController extends Controller
         Traphong::create($traphongs);
 
         $datphong->save();
+
+        // Luu thong tin chuyen khoan
+        Thanhtoan::create(array(
+            "hinhthuc" => $request->hinhthucthanhtoan,
+            "gia" => $request->tiendatcoc,
+            "loaitien" => $request->loaitien,
+            "chuyenkhoan_token" => $request->stripeToken,
+            "khachhangid" => $request->khachhang_id,
+        ));
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }
     /**
@@ -239,6 +249,11 @@ class DatphongController extends Controller
         $datphong = Datphong::find($request->id);
         $datphong->tinhtrangthanhtoan = 0;
         Traphong::where('datphongid', $datphong->id)->delete();
+
+        Thanhtoan::where('khachhangid', $request->khachhang_id)
+        ->where('loaitien','traphong')
+        ->delete();
+        
         $datphong->save();
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }
