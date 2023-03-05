@@ -21,7 +21,7 @@
           <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
-          <form action="{{ route('khachhangs.store') }}" method="POST" class="row">
+          <form action="{{ route('khachhangs.store') }}" method="POST" class="row" id="payment-form">
             @csrf
             <div class="col-6">
               <div class="mb-3">
@@ -92,8 +92,7 @@
                 <label class="form-label" for="tiendatcoc">Số tiền (Tiền đặt cọc bằng 50% số tiền loại phòng)</label>
                 @foreach($phongs as $phong)
                 @if($phong->so_phong == (int)$request['phongid'])
-                <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc" placeholder="VD: 300" 
-                value="{{$phong->loaiphongs->gia/2}}" readonly/>
+                <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc" placeholder="VD: 300" value="{{$phong->loaiphongs->gia/2}}" readonly />
                 @endif
                 @endforeach
                 @error('tiendatcoc')
@@ -103,11 +102,33 @@
             </div>
             <div class="col-6" id="nhapchuyenkhoan">
               <div class="mb-3">
-                <label class="form-label" for="tienchuyenkhoan">Nhập chuyển khoản</label>
-                <input type="text" name="tienchuyenkhoan" class="form-control" id="tienchuyenkhoan" placeholder="VD: 300" />
-                @error('tienchuyenkhoan')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                @enderror
+                <label class="form-label" for="tienchuyenkhoan">Nhập thông tin chuyển khoản</label>
+                <label class="form-label" for="tienchuyenkhoan">(Tiền đặt cọc bằng 50% số tiền loại phòng)</label>
+                <!-- chuyen khoan -->
+                <div class="row">
+                  <div class="card p-2">
+                    <script src="https://js.stripe.com/v3/"></script>
+
+                      <div class="form-row" id="card_stripe">
+                        <label for="card-element">
+                          Credit or debit card
+                        </label>
+                        <div id="card-element">
+                          <!-- A Stripe Element will be inserted here. -->
+                        </div>
+
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                      </div>
+                      <br>
+                      <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
+                      <script>
+                        // chuyenkhoan()
+                      </script>
+                    <!-- </form> -->
+                  </div>
+                </div>
+                <!-- KT chuyen khoan -->
               </div>
             </div>
             <input type="hidden" name="ngaydat" id="ngaydat" value="{{ $request->ngaydat }}" />

@@ -28,4 +28,9 @@ class Khachhang extends Model
         return $this->hasMany(Datphong::class, 'khachhangid', 'id');
     }
 
+    public function chuyenkhoans()
+    {
+        return $this->hasMany(Chuyenkhoan::class, 'khachhangid', 'id');
+    }
+
 }

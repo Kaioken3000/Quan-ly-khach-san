@@ -173,5 +173,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // dich vu dat phong
     Route::post('/client/dichvu_satphong_store', 'IndexController@dichvu_satphong_store')->name('client.dichvu_satphong_store');
+
+    // Thanh toan chuyen khoan
+    Route::post('/thanhtoanchuyenkhoan', 'ChuyenkhoanController@create')->name('chuyenkhoan.create');
 });
 

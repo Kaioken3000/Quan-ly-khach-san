@@ -8,6 +8,8 @@ use App\Models\Khachhang;
 use App\Models\Datphong;
 use App\Models\Danhsachdatphong;
 use App\Models\Phong;
+use App\Models\Chuyenkhoan;
+use App\Models\Thanhtoan;
 
 class KhachhangController extends Controller
 {
@@ -31,7 +33,7 @@ class KhachhangController extends Controller
     public function create(Request $request)
     {
         $phongs = Phong::get();
-        return view('khachhangs.create', compact('request','phongs'));
+        return view('khachhangs.create', compact('request', 'phongs'));
     }
 
     /**
@@ -66,7 +68,7 @@ class KhachhangController extends Controller
         ]);
 
         $khachhangs = Khachhang::max('id');
-        
+
         $request->tinhtrangthanhtoan = 0;
         $request->tinhtrangnhanphong = 0;
         $request->huydatphong = 0;
@@ -88,11 +90,19 @@ class KhachhangController extends Controller
 
         Danhsachdatphong::create([
             'phongid' => $request->phongid,
-            'ngaybatdauo' => $request->ngaydat, 
-            'ngayketthuco' => $request->ngaytra, 
-            'datphongid' => $dat, 
+            'ngaybatdauo' => $request->ngaydat,
+            'ngayketthuco' => $request->ngaytra,
+            'datphongid' => $dat,
         ]);
-        
+
+        // Luu thong tin chuyen khoan
+        Thanhtoan::create(array(
+            "hinhthuc" => $request->hinhthucthanhtoan,
+            "gia" => $request->tiendatcoc,
+            "chuyenkhoan_token" => $request->stripeToken,
+            "khachhangid" => $khachhangs->id,
+        ));
+
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }
 
@@ -167,6 +177,6 @@ class KhachhangController extends Controller
             ->orWhere('id', 'LIKE', '%' . $request->search . "%")
             ->orderBy('id', 'asc')->paginate(5);
         $datphong = Datphong::get();
-        return view('khachhangs.search', compact('khachhangs','datphong'));
+        return view('khachhangs.search', compact('khachhangs', 'datphong'));
     }
 }
