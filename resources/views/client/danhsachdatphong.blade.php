@@ -26,7 +26,7 @@
               <th>id</th>
               <th>Ngày đặt</th>
               <th>Ngày trả</th>
-              <th>Số luọng</th>
+              <th>Số lượng</th>
               <th colspan="2">Phòng hiện tại</th>
               <th>Thanh toán</th>
               <th>Nhận phòng</th>

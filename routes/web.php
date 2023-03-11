@@ -122,8 +122,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Báo cáo
         Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index'); //báo cáo index
 
-        Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
     });
+    Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 
     /**
      * Client Routes

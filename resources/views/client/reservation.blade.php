@@ -37,11 +37,11 @@
             @csrf
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="ten">Name</label>
+                  <label class="text-black font-weight-bold" for="ten">Tên</label>
                   <input type="text" id="ten" name="ten" class="form-control " value="{{auth()->user()->username}}">
                 </div>
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="sdt">Phone</label>
+                  <label class="text-black font-weight-bold" for="sdt">Số điện thoại</label>
                   <input type="text" id="sdt" name="sdt" class="form-control " value="{{auth()->user()->sdt}}">
                 </div>
               </div>
@@ -54,22 +54,22 @@
 
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="ngaydat">Date Check In</label>
+                  <label class="text-black font-weight-bold" for="ngaydat">Ngày vào</label>
                   <input type="date" id="ngaydat" name="ngaydat" class="form-control" value="{{ $request->ngaydat }}">
                 </div>
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="ngaytra">Date Check Out</label>
+                  <label class="text-black font-weight-bold" for="ngaytra">Ngày ra</label>
                   <input type="date" id="ngaytra" name="ngaytra" class="form-control" value="{{ $request->ngaytra }}">
                 </div>
               </div>
              
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="soluong">Number</label>
+                  <label class="text-black font-weight-bold" for="soluong">Số lượng</label>
                   <input type="number" id="soluong" name="soluong" class="form-control" value="{{ $request->soluong }}">
                 </div>
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="phongid">Phong</label>
+                  <label class="text-black font-weight-bold" for="phongid">Phòng</label>
                   <input type="text" id="phongid" name="phongid" class="form-control" value="{{ $request->sophong }}">
                 </div>
               </div>
@@ -84,8 +84,8 @@
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">Address:</span> <span class="text-black"> 98 West 21th Street, Suite 721 New York NY 10016</span></p>
-                <p><span class="d-block">Phone:</span> <span class="text-black"> (+1) 435 3533</span></p>
+                <p><span class="d-block">Địa chỉ:</span> <span class="text-black"> 98 West 21th Street, Suite 721 New York NY 10016</span></p>
+                <p><span class="d-block">Số điện thoại:</span> <span class="text-black"> (+1) 435 3533</span></p>
                 <p><span class="d-block">Email:</span> <span class="text-black"> info@yourdomain.com</span></p>
               </div>
             </div>

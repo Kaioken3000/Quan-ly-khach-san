@@ -18,8 +18,7 @@
         <div class="container">
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-md-7">
-                    <h2 class="heading" data-aos="fade-up">Rooms &amp; Suites</h2>
-                    <p data-aos="fade-up" data-aos-delay="100">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                    <h2 class="heading" data-aos="fade-up">Loại phòng</h2>
                 </div>
             </div>
             <div class="row">
@@ -31,7 +30,7 @@
                         </figure>
                         <div class="p-3 text-center room-info">
                             <h2>{{ $loaiphong->ten }}</h2>
-                            <span class="text-uppercase letter-spacing-1">{{ $loaiphong->gia }}$/PER NIGHT</span>
+                            <span class="text-uppercase letter-spacing-1">{{ $loaiphong->gia }}$/đêm</span>
                         </div>
                     </div>
                 </div>

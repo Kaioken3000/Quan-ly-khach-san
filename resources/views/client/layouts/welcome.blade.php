@@ -8,9 +8,9 @@
                 <img src="/client/images/img_1.jpg" alt="Image" class="img-fluid rounded">
             </div>
             <div class="col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
-                <h2 class="heading">Welcome!</h2>
-                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                <p><a href="#" class="btn btn-primary text-white py-2 mr-3">Learn More</a> <span class="mr-3 font-family-serif"><em>or</em></span> <a href="https://vimeo.com/channels/staffpicks/93951774" data-fancybox class="text-uppercase letter-spacing-1">See video</a></p>
+                <h2 class="heading">Xin chào!</h2>
+                <p class="mb-4">Xa xôi, đằng sau những ngọn núi, xa các quốc gia Vokalia và Consonantia, có những văn bản mù quáng. Bị tách ra, họ sống ở Bookmarksgrove ngay bờ biển Semantics, một đại dương ngôn ngữ rộng lớn.</p>
+                <p><a href="#" class="btn btn-primary text-white py-2 mr-3">Tìm hiểu thêm</a> <span class="mr-3 font-family-serif"><em>hoặc</em></span> <a href="https://vimeo.com/channels/staffpicks/93951774" data-fancybox class="text-uppercase letter-spacing-1">Xem video</a></p>
             </div>
 
         </div>

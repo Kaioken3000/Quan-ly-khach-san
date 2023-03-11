@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
             <div class="col-md-10 text-center" data-aos="fade-up">
-                <span class="custom-caption text-uppercase text-white d-block  mb-3">Welcome To 5 <span class="fa fa-star text-primary"></span> Hotel</span>
-                <h1 class="heading">A Best Place To Stay</h1>
+                <span class="custom-caption text-uppercase text-white d-block  mb-3">Chào mừng đến với khách sạn 5 <span class="fa fa-star text-primary"></span></span>
+                <h1 class="heading">Nơi Tốt Nhất Cho Bạn</h1>
             </div>
         </div>
     </div>

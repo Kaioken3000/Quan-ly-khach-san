@@ -18,8 +18,8 @@
                             <div class="row full-height align-items-center">
                                 <div class="col-md-6 mx-auto">
                                     <ul class="list-unstyled menu">
-                                        <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
-                                        <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
+                                        <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Trang chủ</a></li>
+                                        <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Phòng</a></li>
                                         @auth
                                         <li>
                                             <form action="/client/danhsachdatphong" method="post">
@@ -28,7 +28,7 @@
                                                 <a href="#" class="btn btn-link">
                                                     <input class="border-0 bg-white pe-auto m-0 p-0 
                                                     {{ Request::is('client/danhsachdatphong') ? 'text-primary':'' }}" 
-                                                    type="submit" value="Your booking">
+                                                    type="submit" value="Phòng đã đặt">
                                                 </a>
                                             </form>
                                         </li>
@@ -36,13 +36,13 @@
                                         <li><a href="/client/khachhang">{{auth()->user()->username}}</a></li>
                                         <li> 
                                             <a href="{{ route('client.logout') }}"> 
-                                                <i class="fas fa-sign-out-alt"></i><span class="align-middle"> Log out</span>
+                                                <i class="fas fa-sign-out-alt"></i><span class="align-middle"> Thoát</span>
                                             </a>
                                         </li>
                                         @endauth
                                         @guest
-                                        <li class="{{ Request::is('client/login') ? 'active':'' }}"><a href="/client/login"> Login </a></li>
-                                        <li class="{{ Request::is('client/register') ? 'active':'' }}"><a href="/client/register"> Register </a></li>
+                                        <li class="{{ Request::is('client/login') ? 'active':'' }}"><a href="/client/login"> Đăng nhập </a></li>
+                                        <li class="{{ Request::is('client/register') ? 'active':'' }}"><a href="/client/register"> Đăng ký </a></li>
                                         @endguest
                                     </ul>
                                 </div>

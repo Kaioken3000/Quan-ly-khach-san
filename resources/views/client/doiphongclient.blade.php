@@ -18,27 +18,30 @@
                     <form action="check" method="get">
                         <div class="row">
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                                <label for="ngaydat" class="font-weight-bold text-black">Check In</label>
+                                <label for="ngaydat" class="font-weight-bold text-black">Ngày vào</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" name="ngaydat" id="ngaydat" class="form-control" value="{{ $dat->ngaydat }}">
+                                    <input type="date" name="ngaydat" id="ngaydat" class="form-control"
+                                        value="{{ $dat->ngaydat }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                                <label for="ngaytra" class="font-weight-bold text-black">Check Out</label>
+                                <label for="ngaytra" class="font-weight-bold text-black">Ngày ra</label>
                                 <div class="field-icon-wrap">
                                     <div class="icon"><span class="icon-calendar"></span></div>
-                                    <input type="date" name="ngaytra" id="ngaytra" class="form-control" value="{{ $dat->ngaytra }}">
+                                    <input type="date" name="ngaytra" id="ngaytra" class="form-control"
+                                        value="{{ $dat->ngaytra }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                                <label for="soluong" class="font-weight-bold text-black">Number</label>
+                                <label for="soluong" class="font-weight-bold text-black">Số lượng</label>
                                 <div class="field-icon-wrap">
-                                    <input type="number" name="soluong" id="soluong" class="form-control" min=1 value="{{ $dat->soluong }}">
+                                    <input type="number" name="soluong" id="soluong" class="form-control" min=1
+                                        value="{{ $dat->soluong }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3 align-self-end">
-                                <button class="btn btn-primary btn-block text-white">Check Availabilty</button>
+                                <button class="btn btn-primary btn-block text-white">Kiểm tra</button>
                             </div>
                         </div>
                     </form>
@@ -62,18 +65,18 @@
                         @foreach ($phongs as $phong)
                         <tr>
                             <td>{{ $phong->so_phong }}</td>
-                            @foreach ($loaiphongs as $loaiphong)
-                                @if($loaiphong->ma == $phong->loaiphongid)
-                                    <td>{{ $loaiphong->ten }}</td>
-                                @endif
-                            @endforeach
+                            <td><button class="btn btn link" data-toggle="modal"
+                                    data-target="#LoaiphongModal{{ $phong->loaiphongs->ma }}">
+                                    {{ $phong->loaiphongs->ten }}
+                                </button></td>
                             <td>
                                 <form action="doiphongclient" method="POST">
                                     @csrf
                                     @method('POST')
                                     <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
                                     <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
-                                    <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi phòng</button>
+                                    <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi
+                                        phòng</button>
                                 </form>
                             </td>
                         </tr>
@@ -86,7 +89,45 @@
                 </table>
             </div>
     </section>
-
+    @foreach ($phongs as $phong)
+    <!-- Modal -->
+    <div class="modal fade" id="LoaiphongModal{{ $phong->loaiphongs->ma }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Chi tiết loại phòng</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <figure class="img-wrap col-6">
+                            <img src="/client/images/{{ $phong->loaiphongs->hinh }}" alt="Free website template"
+                                class="img-fluid mb-3">
+                        </figure>
+                        <div class="col-6">
+                            <div class="d-flex">
+                                <h5>Loại phòng: </h5>
+                                <p>{{$phong->loaiphongs->ten}}</p>
+                            </div>
+                            <div class="d-flex">
+                                <h5>Giá: </h5>
+                                <p>{{$phong->loaiphongs->gia }}</p> /đêm
+                            </div>
+                            <div class="d-flex">
+                                <h5>Số lượng ở tối đa: </h5>
+                                <p>{{$phong->loaiphongs->soluong}}</p>
+                            </div>
+                            <div class="d-flex">
+                                <h5>Miêu tả: </h5>
+                                <p>{{$phong->loaiphongs->mieuTa}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
     <!-- Footer -->
     @include('client.layouts.footer')
 
