@@ -134,6 +134,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // Giao dien trang phong
     Route::get('client/phong', 'IndexController@hientrangphong');
+    // Hien chi tiet phong
+    Route::get('client/chitietphong/{phongid}', 'IndexController@hientrangchitietphong');
     
     // Hien lai thong tin khách hang
     Route::get('client/khachhang', 'IndexController@hienkhachhang');
@@ -162,6 +164,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     // dat phong
     Route::post('/index-store', 'IndexController@index_store');
+    // Kiem tra dat phong trong chi tiet phong
+    Route::post('/kiemtra-index-store', 'IndexController@kiemtra_index_store');
+    
 
     // Thuc hien dang ky o nguoi dung
     Route::get('client/register', 'RegisterController@showclient')->name('client.registershow');

@@ -26,6 +26,27 @@
               @enderror
             </div>
             <div class="mb-3">
+              <label class="form-label" for="picture_1">Hinh phòng 1</label>
+              <input type="file" name="picture_1" class="form-control" id="picture_1" require="require" />
+              @error('picture_1')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="picture_2">Hinh phòng 2</label>
+              <input type="file" name="picture_2" class="form-control" id="picture_2" require="require" />
+              @error('picture_2')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="picture_3">Hinh phòng 3</label>
+              <input type="file" name="picture_3" class="form-control" id="picture_3" require="require" />
+              @error('picture_3')
+              <div class="alert alert-danger" role="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
               <label class="form-label" for="loaiphongid">Loại phòng</label>
               <select class="form-select" id="loaiphongid" name="loaiphongid">
                 @foreach ($loaiphongs as $loaiphong)
@@ -51,6 +72,10 @@
   <div class="alert alert-success">
     <p>{{ $message }}</p>
   </div>
+  @else
+  <div class="alert alert-error">
+    <p>{{ $message }}</p>
+  </div>
   @endif
   <div class="card">
     <h5 class="card-header">Quản lý phòng</h5>
@@ -59,6 +84,7 @@
         <thead>
           <tr class="thead-dark">
             <th>Số phòng</th>
+            <th colspan="3">Hình</th>
             <th>Loại phòng</th>
             <th width="280px">Action</th>
           </tr>
@@ -67,10 +93,17 @@
           @foreach ($phongs as $phong)
           <tr>
             <td>{{ $phong->so_phong }}</td>
+            <td><img data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                title="{{ $phong->picture_1 }}" src="/client/images/{{ $phong->picture_1 }}" width="100%"></td>
+            <td><img data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                title="{{ $phong->picture_2 }}" src="/client/images/{{ $phong->picture_2 }}" width="100%"></td>
+            <td><img data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                title="{{ $phong->picture_3 }}" src="/client/images/{{ $phong->picture_3 }}" width="100%"></td>
             <td>{{ $phong->loaiphongs->ten }}</td>
             <td>
               <!-- edit -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEdit{{ $phong->so_phong }}">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#ModalEdit{{ $phong->so_phong }}">
                 <i class="bx bx-edit mb-1"></i>
               </button>
               <!-- Modal edit -->
@@ -82,13 +115,35 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="{{ route('phongs.update',$phong->so_phong) }}" method="POST" enctype="multipart/form-data">
+                      <form action="{{ route('phongs.update',$phong->so_phong) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
                           <label class="form-label" for="so_phong">Sô phòng</label>
-                          <input type="number" name="so_phong" class="form-control" id="so_phong" value="{{ $phong->so_phong }}" placeholder="VD: 001" />
+                          <input type="number" name="so_phong" class="form-control" id="so_phong"
+                            value="{{ $phong->so_phong }}" placeholder="VD: 001" />
                           @error('so_phong')
+                          <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="picture_1">Hinh phòng 2</label>
+                          <input type="file" name="picture_1" class="form-control" id="picture_1" require="require" />
+                          @error('picture_1')
+                          <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="picture_2">Hinh phòng 2</label>
+                          <input type="file" name="picture_2" class="form-control" id="picture_2" require="require" />
+                          @error('picture_2')
+                          <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="picture_3">Hinh phòng 3</label>
+                          <input type="file" name="picture_3" class="form-control" id="picture_3" require="require" />
+                          @error('picture_3')
                           <div class="alert alert-danger" role="alert">{{ $message }}</div>
                           @enderror
                         </div>
@@ -118,7 +173,8 @@
                 </div>
               </div>
               <!-- Delete-->
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalXoa{{ $phong->so_phong }}">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                data-bs-target="#ModalXoa{{ $phong->so_phong }}">
                 <i class="bx bx-trash mb-1"></i>
               </button>
               <!-- Modal xoá  -->

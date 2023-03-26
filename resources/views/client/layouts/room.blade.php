@@ -14,7 +14,7 @@
                     </figure>
                     <div class="p-3 text-center room-info">
                         <h2>{{ $loaiphong->ten }}</h2>
-                        <span class="text-uppercase letter-spacing-1">{{ $loaiphong->gia }}$/đêm</span>
+                        <span class="text-uppercase letter-spacing-1">{{ $loaiphong->gia }} VND/đêm</span>
                     </div>
                 </a>
             </div>

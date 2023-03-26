@@ -47,6 +47,9 @@ class PhongController extends Controller
     {
         $request->validate([
             'so_phong' => 'required|unique:phongs',
+            'picture_1' => 'required',
+            'picture_2' => 'required',
+            'picture_3' => 'required',
             'loaiphongid' => 'required'
         ]);
 
@@ -90,6 +93,9 @@ class PhongController extends Controller
         $request->validate([
             'so_phong' => ['required',
                             Rule::unique('phongs')->ignore($phong->so_phong, 'so_phong')],
+            'picture_1' => 'required',
+            'picture_2' => 'required',
+            'picture_3' => 'required',
             'loaiphongid' => 'required'
         ]);
 

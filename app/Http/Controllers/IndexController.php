@@ -28,7 +28,6 @@ class IndexController extends Controller
     {
         $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(3);
         return view('client.index', compact('loaiphongs'));
-   
     }
     /**
      * Hien trang phong cua client
@@ -39,10 +38,27 @@ class IndexController extends Controller
     {
         $loaiphongs = Loaiphong::orderBy('ma', 'asc')->get();
         $phongs = Phong::get();
-        return view('client.phong', compact('loaiphongs','phongs'));
+        return view('client.phong', compact('loaiphongs', 'phongs'));
     }
 
-    
+    /**
+     * Hien trang chi tiet phong cua client
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hientrangchitietphong(Request $request)
+    {
+        $phong = DB::table('phongs')
+            ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+            ->where('phongs.so_phong', $request->phongid)
+            ->select('*')
+            ->first();
+        return view('client.roomdetail', compact('request', 'phong'));
+    }
+
+
+
+
 
     /**
      * Hien thong tin khach hang
@@ -105,7 +121,7 @@ class IndexController extends Controller
             ->where('huydatphong', 0)
             ->orderBy('datphongs.id', 'desc')->paginate(5);
         $dichvus = Dichvu::get();
-        return view('client.danhsachdatphong', compact('datphongs','dichvus'));
+        return view('client.danhsachdatphong', compact('datphongs', 'dichvus'));
     }
 
     // kiem tra phong trong cua client
@@ -273,6 +289,62 @@ class IndexController extends Controller
         return redirect('client/index')->with('success', 'Datphong has been created successfully.');
     }
 
+    // Kiem tra trong chi tiet phong. Neu phong trong thi dat phong thanh cong khong thi tra ve la khong thanh cong
+    public function kiemtra_index_store(Request $request)
+    {
+        // Kiem tra khong co truong nao trong
+        $request->validate([
+            'ten' => 'required',
+            'sdt' => 'required',
+            'email' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required',
+            'phongid' => 'required',
+        ]);
+
+        // Kiem tra la phong do trong
+        $phongslist = Phong::get();
+        $phongs = array();
+        $datphongs = Datphong::get();
+
+        if ($datphongs->count() > 0) {
+            foreach ($phongslist as $phong) {
+                $xacnhan = 0;
+                foreach ($datphongs as $datphong) {
+                    $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->orderBy('id', 'desc')->first();
+                    if ($danhsachdatphong->phongid == $phong->so_phong && $request->ngaytra >= $request->ngaydat) {
+                        if ($request->ngaydat >= $danhsachdatphong->ngaybatdauo && $request->ngaydat <= $danhsachdatphong->ngayketthuco) {
+                            $xacnhan++;
+                        } else if ($request->ngaytra >= $danhsachdatphong->ngaybatdauo && $request->ngaytra <= $danhsachdatphong->ngayketthuco) {
+                            $xacnhan++;
+                        }
+                    }
+                }
+                if ($xacnhan == 0) {
+                    array_push($phongs, $phong);
+                }
+            }
+        } else {
+            $phongs = $phongslist;
+        }
+
+        $i=0;
+        $sus = "Đặt phòng thành công";
+        $fail = "Đặt phòng không thành công do đã có khách khác đặt phòng này";
+        foreach ($phongs as $p){
+            if($p->so_phong == $request->phongid){
+                $i++;
+                break;
+            }
+        }
+        if($i>0){
+            $this->index_store($request);
+            return redirect('client/chitietphong/'.$request->phongid)->with('success', $sus);
+        }
+        else return redirect('client/chitietphong/'.$request->phongid)->with('success', $fail);
+    }
+
     public function dichvu_satphong_store(Request $request)
     {
         $request->validate([
@@ -280,11 +352,11 @@ class IndexController extends Controller
             'dichvuid' => 'required',
         ]);
 
-        foreach($request->dichvuid as $dichvu){
+        foreach ($request->dichvuid as $dichvu) {
             $dich = array();
             $dich['datphongid'] = $request->datphongid;
             $dich['dichvuid'] = $dichvu;
-            
+
             DichvuDatphong::create($dich);
         }
 

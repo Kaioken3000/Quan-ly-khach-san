@@ -11,6 +11,9 @@ class Phong extends Model
 
     protected $fillable = [
         'so_phong',
+        'picture_1',
+        'picture_2',
+        'picture_3',
         'loaiphongid'
     ];
 
