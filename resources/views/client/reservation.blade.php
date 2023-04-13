@@ -76,7 +76,7 @@
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
-                  <input type="submit" value="Reserve Now" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                  <input type="submit" value="Đặt phòng" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                 </div>
               </div>
             </form>
