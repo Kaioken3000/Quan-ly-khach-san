@@ -32,7 +32,7 @@
                         <div class="p-3 text-center room-info">
                             <h2>{{ $phong->so_phong }}</h2>
                             <span class="text-uppercase letter-spacing-1">{{ $phong->loaiphongs->gia }}
-                                NVD/đêm</span>
+                                VND/đêm</span>
 
                         </div>
                     </div>
