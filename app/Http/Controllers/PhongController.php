@@ -112,7 +112,6 @@ class PhongController extends Controller
      */
     public function destroy(Phong $phong)
     {
-        $phong->loaiphongs()->delete();
         $phong->delete();
         return redirect()->route('phongs.index')->with('success', 'Phong has been deleted successfully');
     }
