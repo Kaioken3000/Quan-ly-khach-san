@@ -54,6 +54,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
         Route::get('/login', 'LoginController@show')->name('login.show');
         Route::post('/login', 'LoginController@login')->name('login.perform');
+
+        /**
+         * Google Login Routes
+         */
+        Route::controller(GoogleController::class)->group(function () {
+            Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+            Route::get('auth/google/callback', 'handleGoogleCallback');
+        });
+        
     });
 
     Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
@@ -73,10 +82,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('dichvus', DichvuController::class);
         Route::get('dichvus-search', 'dichvuController@search');
         Route::get('dichvus/dichvus-search', 'dichvuController@search');
-        
+
         // Dichvu Routes
         Route::resource('dichvu_datphong', DichvuDatphongController::class);
-       
+
         // Datphong Routes
         Route::resource('datphongs', DatphongController::class);
         Route::get('datphongs-kiemtra', 'DatphongController@kiemtra'); //kiem tra dat phong
@@ -86,7 +95,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan'); //thanh toán
         Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
         Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong'); //nhan phong
-        
+
         //Huỷ đặt phòng
         Route::delete('/huydatphongs/{datphong}', 'HuydatphongController@store')->name('huydatphongs.store'); //huỷ đặt phong
 
@@ -128,50 +137,50 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     /**
      * Client Routes
      */
-    
-    
+
+
     Route::get('client/index', 'IndexController@index');
 
     // Giao dien trang phong
     Route::get('client/phong', 'IndexController@hientrangphong');
     // Hien chi tiet phong
     Route::get('client/chitietphong/{phongid}', 'IndexController@hientrangchitietphong');
-    
+
     // Hien lai thong tin khách hang
     Route::get('client/khachhang', 'IndexController@hienkhachhang');
     // Xoa thong tin khách hang
     Route::delete('client/khachhang/{user}', 'IndexController@xoakhachhang')->name('client.xoakhachhang');
     // Sua thong tin khách hang
     Route::put('client/khachhang/{user}', 'IndexController@khachhangedit')->name('client.khachhangedit');
-    
+
     // Kiem tra phong trong tao moi
     Route::get('client/check', 'IndexController@checkroom');
-    
+
     // Nhap thong tin khách hang de dat phong
     Route::get('client/reservation', 'IndexController@reservation');
-    
+
     // Danh sách các phòng đã đặt
     Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
-    
+
     // hien đổi phòng đã đặt
     Route::get('client/hiendoiphongclient', 'IndexController@hiendoiphongclient');
-    
+
     // doi phong
     Route::post('client/doiphongclient', 'IndexController@doiphongclient');
-    
+
     // xoa dat phong
     Route::delete('client/xoadatphong/{datphong}', 'IndexController@xoadatphong')->name('client.xoadatphong');
-    
+
     // dat phong
     Route::post('/index-store', 'IndexController@index_store');
     // Kiem tra dat phong trong chi tiet phong
     Route::post('/kiemtra-index-store', 'IndexController@kiemtra_index_store');
-    
+
 
     // Thuc hien dang ky o nguoi dung
     Route::get('client/register', 'RegisterController@showclient')->name('client.registershow');
     Route::post('client/register', 'RegisterController@registerclient')->name('client.register');
-    
+
     // Thuc hien dang nhap o nguoi dung
     Route::get('client/login', 'LoginController@showclient')->name('client.showclient');
     Route::post('client/login', 'LoginController@loginclient')->name('client.loginclient');
@@ -182,4 +191,3 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Thanh toan chuyen khoan
     Route::post('/thanhtoanchuyenkhoan', 'ChuyenkhoanController@create')->name('chuyenkhoan.create');
 });
-

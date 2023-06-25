@@ -11,6 +11,7 @@
         "laravel/cashier": "^14.9",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "^6.3",
         "spatie/laravel-permission": "^5.5"
