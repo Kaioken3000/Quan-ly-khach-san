@@ -13,6 +13,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\DanhsachdatphongController;
 use App\Http\Controllers\DichvuController;
 use App\Http\Controllers\DichvuDatphongController;
+use App\Http\Controllers\MessageController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Http\Request;
 
@@ -77,31 +78,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('chat.view');
         Route::get('/getUserLogin', function () {
             return Auth::user();
-        })->middleware('auth');
-        Route::get('/messages', function (Request $request) {
-            $user = Auth::user();
-            return App\Models\Message::where(function (Builder $query) use ($user, $request) {
-                $query->where('user_id_receiver', $request->useridreceiver)
-                    ->where('user_id_sender', $user->id);
-            })
-                ->orWhere(function (Builder $query) use ($user, $request) {
-                    $query->where('user_id_receiver', $user->id)
-                        ->where('user_id_sender', $request->useridreceiver);
-                })
-                ->get();
-            // return App\Models\Message::with('user')->get();
-        })->middleware('auth');
-        Route::post('/messages', function () {
-            $user = Auth::user();
-            $message = new App\Models\Message();
-            $message->message = request()->get('message', '');
-            $message->user_id_sender = $user->id;
-            $message->user_id_receiver = request()->get('useridreceiver', '');
-            $message->save();
-
-            broadcast(new App\Events\MessagePosted($message, $user))->toOthers();
-            return ['message' => $message->load('user')];
-        })->middleware('auth');
+        });
+        Route::get('/messages', 'MessageController@index');
+        Route::post('/messages', 'MessageController@store');
 
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
