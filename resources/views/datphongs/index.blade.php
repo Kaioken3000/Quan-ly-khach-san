@@ -127,7 +127,8 @@
                     </div>
                     <div class="modal-body">
                       @foreach($danhsachdatphongs as $danhsachdatphong)
-                      <p>Phòng: <b>{{ $danhsachdatphong->phongid }}</b></p>
+                      <p>Phòng: <b>{{ $danhsachdatphong->phongid }} - {{ $danhsachdatphong->phongs->loaiphongs->ten }} -
+                          {{ $danhsachdatphong->phongs->loaiphongs->gia }}</b></p>
                       <p>Ngày bắt đầu ở: <b>{{ $danhsachdatphong->ngaybatdauo }}</b></p>
                       <p>Ngày kết thúc ở: <b>{{ $danhsachdatphong->ngayketthuco }}</b></p>
                       @endforeach
@@ -387,45 +388,32 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}"
-                          method="Post" id="payment-form">
+                        <form class="m-1 payment-form" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}"
+                          method="Post" id="">
                           @csrf
                           @method('PUT')
                           {{-- chuyen khoan --}}
                           <div class="mb-3">
                             <label class="form-label" for="datcoc">Chọn hình thức đặt cọc:</label> <br>
-                            <input class="form-check-input" type="radio" name="datcoc" id="tructiep" checked
+                            <input class="form-check-input tructiep" type="radio" name="datcoc" id="" checked
                               value="tructiep" onclick="doitructiep_chuyenkhoan()">
                             <label class="form-check-label" for="tructiep">
                               Trực tiếp
                             </label>
-                            <input class="form-check-input" type="radio" name="datcoc" id="chuyenkhoan"
+                            <input class="form-check-input chuyenkhoan" type="radio" name="datcoc" id=""
                               value="chuyenkhoan" onclick="doitructiep_chuyenkhoan()">
                             <label class="form-check-label" for="chuyenkhoan">
                               Chuyển khoản
                             </label>
                           </div>
                           {{-- Truc tiep --}}
-                          <div class="col-6" id="nhapsotien">
-                            <div class="mb-3">
-                              <label class="form-label" for="tiendatcoc">Số tiền (Tiền đặt cọc bằng 50% số tiền loại
-                                phòng)</label>
-                              @foreach($danhsachdatphongs as $danhsachdatphong)
-                              <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
-                                placeholder="VD: 300" value="{{$danhsachdatphong->phongs->loaiphongs->gia/2}}"
-                                readonly />
-                              @endforeach
-                              @error('tiendatcoc')
-                              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                              @enderror
-                            </div>
+                          <div class="col-6" name="nhapsotien">
+
                           </div>
                           {{-- Chuyen khoan --}}
-                          <div class="col-6" id="nhapchuyenkhoan">
+                          <div class="col-6 mx-1 px-2" name="nhapchuyenkhoan">
                             <div class="mb-3">
                               <label class="form-label" for="tienchuyenkhoan">Nhập thông tin chuyển khoản</label>
-                              <label class="form-label" for="tienchuyenkhoan">(Tiền đặt cọc bằng 50% số tiền loại
-                                phòng)</label>
                               <!-- chuyen khoan -->
                               <div class="row">
                                 <div class="card p-2">
@@ -448,11 +436,64 @@
                               </div>
                               <!-- KT chuyen khoan -->
                             </div>
-                          </div>  
+                          </div>
                           {{-- KT chuyen khoan --}}
+                          <div class="mb-3 mt-3">
+                            @php
+                            $i=0;
+                            $tonggia = 0;
+                            $ngayhomnay = date("Y/m/d");
+                            foreach($danhsachdatphongs as $danhsachdatphong){
+                            $ngaybatdau = $danhsachdatphong->ngaybatdauo;
+                            $ngayketthuc = $danhsachdatphong->ngayketthuco;
+                            $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
+                            $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
+                            if($i==0){
+                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia/2)*($songay1);
+                            } else if($i!=(count($danhsachdatphongs)-1)) {
+                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
+                            } else {
+                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
+                            }
+                            echo '
+                            <p class="form-label">'
+                              .$danhsachdatphong->phongid.
+                              "-"
+                              .$danhsachdatphong->phongs->loaiphongs->ten.
+                              "-"
+                              .$danhsachdatphong->phongs->loaiphongs->gia.
+                              '</p>';
+                            echo '<p class="form-label"> Ngày bắt đầu ở: '
+                              .$danhsachdatphong->ngaybatdauo.
+                              '</p>';
+                            echo '<p class="form-label"> Ngày kết thúc ở: '
+                              .$danhsachdatphong->ngayketthuco.
+                              '</p>';
+                            if($i!=(count($danhsachdatphongs)-1)) {
+                            echo '<p class="form-label"> Số ngày ở: '
+                              .$songay1.
+                              '</p>';
+                            } else {
+                            echo '<p class="form-label"> Số ngày ở: '
+                              .$songay2.
+                              '</p>';
+                            }
+                            echo '
+                            <p type="text" class="badge bg-primary" />'.$tonggia.'</p><br>';
+                            $i++;
+                            }
+                            @endphp
+                            <label class="form-label" for="tiendatcoc">Tổng số tiền</label>
+                            <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
+                              placeholder="VD: 300" value="{{$tonggia}}" readonly />
+                            @error('tiendatcoc')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                          </div>
                           <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
                           <input type="hidden" name="khachhang_id" value="{{$datphong->id}}">
                           <input type="hidden" name="loaitien" value="traphong">
+                          <input type="hidden" name="hinhthucthanhtoan" value="tructiep">
 
                           {{-- btn xac nhan, cancel --}}
                           <div class="d-flex gap-1">
@@ -465,7 +506,7 @@
                           </div>
                           {{-- KT btn xac nhan, cancel --}}
                         </form>
-                        <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
+                        <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script> 
                         <script>
                           doitructiep_chuyenkhoan()
                         </script>

@@ -1,41 +1,40 @@
-var tructiepid = document.getElementById("tructiep")
-var chuyenkhoanid = document.getElementById("chuyenkhoan")
-var nhapsotien = document.getElementById("nhapsotien")
-var nhappchuyenkhoan = document.getElementById("nhapchuyenkhoan")
+var tructiepid = document.getElementsByClassName("tructiep")
+var chuyenkhoanid = document.getElementsByClassName("chuyenkhoan")
+var nhapsotien = document.getElementsByName("nhapsotien")
+var nhappchuyenkhoan = document.getElementsByName("nhapchuyenkhoan")
 
-var form2 = document.getElementById('payment-form');
+var form2 = document.getElementsByClassName('payment-form');
+var hiddenInput2 = document.getElementsByName('hinhthucthanhtoan');
 
-var hiddenInput2 = document.createElement('input');
 function doitructiep_chuyenkhoan() {
-    hiddenInput2.setAttribute('type', 'hidden');
-    hiddenInput2.setAttribute('name', 'hinhthucthanhtoan');
-    hiddenInput2.setAttribute('value', 'tructiep');
-
     var card_element = document.getElementById('card-element');
     var card_stripe = document.getElementById('card_stripe');
-    if (tructiepid.checked) {
-        nhappchuyenkhoan.style.display = "none"
-        nhapsotien.style.display = ""
 
-        hiddenInput2.setAttribute('value', 'tructiep');
-        if (card_element) {
-            // card.destroy()
-            card_element.remove();
+
+    for (var i = 0; i < nhapsotien.length; i++) {
+        if (tructiepid[i].checked) {
+            nhappchuyenkhoan[i].style.display = "none"
+            nhapsotien[i].style.display = ""
+
+            hiddenInput2[i].setAttribute('value', 'tructiep');
+            if (card_element) {
+                // card.destroy()
+                card_element.remove();
+            }
+        }
+        if (chuyenkhoanid[i].checked) {
+            nhappchuyenkhoan[i].style.display = ""
+            nhapsotien[i].style.display = "none"
+
+            hiddenInput2[i].setAttribute('value', 'chuyenkhoan');
+            if (!card_element) {
+                var card_element2 = document.createElement('div');
+                card_element2.setAttribute('id', 'card-element');
+                card_stripe.appendChild(card_element2);
+            }
+            chuyenkhoan()
         }
     }
-    if (chuyenkhoanid.checked) {
-        nhappchuyenkhoan.style.display = ""
-        nhapsotien.style.display = "none"
-
-        hiddenInput2.setAttribute('value', 'chuyenkhoan');
-        if (!card_element) {
-            var card_element2 = document.createElement('div');
-            card_element2.setAttribute('id', 'card-element');
-            card_stripe.appendChild(card_element2);
-        }
-        chuyenkhoan()
-    }
-    form2.appendChild(hiddenInput2);
 }
 
 var stripe, elements, card, form;

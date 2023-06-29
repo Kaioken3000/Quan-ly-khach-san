@@ -22,25 +22,29 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($users as $key => $user)
+          @foreach ($users as $key => $user)
           <tr>
             <td>{{ $user->id }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->username }}</td>
             <td>
-            @if(!empty($user->getRoleNames()))
+              @if(!empty($user->getRoleNames()))
               @foreach($user->getRoleNames() as $v)
-                <label class="badge {{ ($v=='Admin') ? 'bg-success' : 'bg-warning' }}">{{ $v }}</label>
+              <label class="badge {{ ($v=='Admin') ? 'bg-success' : 'bg-warning' }}">{{ $v }}</label>
               @endforeach
-            @endif
+              @endif
             </td>
-            <td>            
+            <td>
               <form action="{{ route('users.destroy',$user->id) }}" method="Post">
-              <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}"><i class="bx bx-edit mb-1"></i> Edit & Change Role</a>
+                <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}"><i class="bx bx-edit mb-1"></i>
+                  Edit & Change Role</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger"><i class="bx bx-trash mb-1"></i> Delete</button>
               </form>
+            </td>
+            <td>
+              <a class="btn btn-primary" href="{{ route('chat.view',$user->id) }}"><i class="bx bx-message"></i></a>
             </td>
           </tr>
           @endforeach
