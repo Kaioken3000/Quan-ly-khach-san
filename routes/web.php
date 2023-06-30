@@ -70,6 +70,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
             Route::get('auth/google/callback', 'handleGoogleCallback');
         });
+
+        /**
+         * Facebook Login Routes
+         */
+        Route::controller(FacebookController::class)->group(function () {
+            Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+            Route::get('auth/facebook/callback', 'handleFacebookCallback');
+        });
     });
 
     Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
