@@ -14,6 +14,7 @@ use App\Http\Controllers\DanhsachdatphongController;
 use App\Http\Controllers\DichvuController;
 use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\BotManChatController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Http\Request;
 
@@ -204,4 +205,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // Thanh toan chuyen khoan
     Route::post('/thanhtoanchuyenkhoan', 'ChuyenkhoanController@create')->name('chuyenkhoan.create');
+
+    // Botman
+    Route::match(['get', 'post'], '/botman', [BotManChatController::class, 'handle']);
 });
