@@ -10,7 +10,7 @@
         </div>
         <div>
             <p class="footer-link"> 😍 B1910261 - </p>
-            <p class="footer-link"> 💖 Niên luận cơ sở - </p>
+            <p class="footer-link"> 💖 Luận văn - </p>
             <p class="footer-link"> 🤞 Quản lý khách sạn 😘</p>
         </div>
     </div>
