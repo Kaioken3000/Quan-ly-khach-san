@@ -118,6 +118,11 @@
             </div>
           </form>
         </div>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous"
+          src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=658955415606544&autoLogAppEvents=1"
+          nonce="sFzhTDa5"></script>
+        <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="5"></div>
       </div>
     </div>
   </section>
