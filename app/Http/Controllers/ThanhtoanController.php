@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Thanhtoan;
+use App\Models\Traphong;
+use App\Models\Datphong;
 use Omnipay\Omnipay;
+
+use Illuminate\Support\Facades\File;
 
 class ThanhtoanController extends Controller
 {
     public function index(Request $request)
     {
-        return view("thanhtoanvnpay");
+        return view("thanhtoanvnpay", compact('request'));
     }
 
     public function create(Request $request)
@@ -21,6 +26,7 @@ class ThanhtoanController extends Controller
         $vnp_Locale = $request->language; //Ngôn ngữ chuyển hướng thanh toán
         $vnp_BankCode = $request->bankCode; //Mã phương thức thanh toán
         $vnp_IpAddr = $request->ip(); //IP Khách hàng thanh toán
+        $vnp_Returnurl = "http://quanlykhachsan-b1910261-new.local/vnpay_return?datphongid=" . $request->datphongid . "&loaitien=" . $request->loaitien . "&khachhangid=" . $request->khachhangid . "";
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -61,6 +67,7 @@ class ThanhtoanController extends Controller
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
+
         return redirect($vnp_Url);
     }
 
@@ -89,7 +96,31 @@ class ThanhtoanController extends Controller
         }
 
         $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+
+        // luu vao database
+        $datphong = Datphong::find($request->datphongid);
+
+        $datphong->tinhtrangthanhtoan = 1;
+        $datphong->tinhtrangnhanphong = 1;
+
+        $traphongs = array();
+        $traphongs['ten'] = $datphong->khachhangs->ten;
+        $traphongs['datphongid'] = $datphong->id;
+
+        Traphong::create($traphongs);
+
+        $datphong->save();
+
+        // Luu thong tin chuyen khoan
+        Thanhtoan::create(array(
+            "hinhthuc" => "chuyenkhoan",
+            "gia" => $request->vnp_Amount,
+            "loaitien" => $request->loaitien,
+            "chuyenkhoan_token" => $request->vnp_TxnRef,
+            "khachhangid" => $request->khachhangid,
+            // chua co thoi gian
+        ));
+
         return view("thanhtoanvnpayreturn", compact('request', 'secureHash', 'vnp_SecureHash'));
     }
-
 }

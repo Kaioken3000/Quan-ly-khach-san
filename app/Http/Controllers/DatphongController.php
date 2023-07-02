@@ -13,7 +13,6 @@ use App\Models\Nhanphong;
 use App\Models\Traphong;
 use App\Models\Dichvu;
 use App\Models\Thanhtoan;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -251,9 +250,9 @@ class DatphongController extends Controller
         Traphong::where('datphongid', $datphong->id)->delete();
 
         Thanhtoan::where('khachhangid', $request->khachhang_id)
-        ->where('loaitien','traphong')
-        ->delete();
-        
+            ->where('loaitien', 'traphong')
+            ->delete();
+
         $datphong->save();
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }

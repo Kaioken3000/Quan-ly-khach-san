@@ -407,7 +407,9 @@
                           </div>
                           {{-- Truc tiep --}}
                           <div class="col-6" name="nhapsotien">
-                            <a href="/thanhtoanvnpayview" class="btn btn-success">Thanh toán VNPAY</a>
+                            <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}"
+                              class="btn btn-success">Thanh toán
+                              VNPAY</a>
                           </div>
                           {{-- Chuyen khoan --}}
                           <div class="col-6 mx-1 px-2" name="nhapchuyenkhoan">

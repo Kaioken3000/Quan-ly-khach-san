@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<?php require_once("config.php"); ?>
+<?php require_once("config.php");?>
 <div class="card m-4">
     <h3 class="card-header">Tạo mới đơn hàng</h3>
     <div class="table-responsive card-body">
@@ -15,7 +15,7 @@
                         data-val-required="The Amount field is required." id="amount" max="100000000" min="1"
                         name="amount" type="number" value="10000" />
                 </div>
-                <h4>Chọn phương thức thanh toán</h4>
+                <h4>Chọn phương thức thanh toán </h4>
                 <div class="mb-3">
                     <h5 class="mt-3">Cách 1: Chuyển hướng sang Cổng VNPAY chọn phương thức thanh toán</h5>
                     <input type="radio" Checked="True" id="bankCode" name="bankCode" value="">
@@ -42,6 +42,10 @@
                 </div>
                 <button type="submit" class="btn btn-success" href>Thanh toán &nbsp; <i
                         class="fas fa-money-check"></i></button>
+
+                <input type="hidden" value="{{$request->datphongid}}" name="datphongid">
+                <input type="hidden" value="{{$request->loaitien}}" name="loaitien">
+                <input type="hidden" value="{{$request->khachhangid}}" name="khachhangid">
             </form>
     </div>
     <p>

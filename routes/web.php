@@ -83,7 +83,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
         // thanh toan vnpay
-        Route::get("/thanhtoanvnpayview", "ThanhtoanController@index");
+        Route::get("/thanhtoanvnpayview/{datphongid}/{loaitien}/{khachhangid}", "ThanhtoanController@index");
         Route::post("/thanhtoanvnpay", "ThanhtoanController@create")->name("thanhtoanvnpay");
         Route::get("/vnpay_return", "ThanhtoanController@return");
 
