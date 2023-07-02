@@ -405,11 +405,54 @@
                               Chuyển khoản
                             </label>
                           </div>
+                          @php
+                          $i=0;
+                          $tonggia = 0;
+                          $ngayhomnay = date("Y/m/d");
+                          foreach($danhsachdatphongs as $danhsachdatphong){
+                          $ngaybatdau = $danhsachdatphong->ngaybatdauo;
+                          $ngayketthuc = $danhsachdatphong->ngayketthuco;
+                          $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
+                          $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
+                          if($i==0){
+                          $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia/2)*($songay1);
+                          } else if($i!=(count($danhsachdatphongs)-1)) {
+                          $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
+                          } else {
+                          $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
+                          }
+                          echo '
+                          <p class="form-label">'
+                            .$danhsachdatphong->phongid.
+                            "-"
+                            .$danhsachdatphong->phongs->loaiphongs->ten.
+                            "-"
+                            .$danhsachdatphong->phongs->loaiphongs->gia.
+                            '</p>';
+                          echo '<p class="form-label"> Ngày bắt đầu ở: '
+                            .$danhsachdatphong->ngaybatdauo.
+                            '</p>';
+                          echo '<p class="form-label"> Ngày kết thúc ở: '
+                            .$danhsachdatphong->ngayketthuco.
+                            '</p>';
+                          if($i!=(count($danhsachdatphongs)-1)) {
+                          echo '<p class="form-label"> Số ngày ở: '
+                            .$songay1.
+                            '</p>';
+                          } else {
+                          echo '<p class="form-label"> Số ngày ở: '
+                            .$songay2.
+                            '</p>';
+                          }
+                          echo '
+                          <p type="text" class="badge bg-primary" />'.$tonggia.'</p><br>';
+                          $i++;
+                          }
+                          @endphp
                           {{-- Truc tiep --}}
                           <div class="col-6" name="nhapsotien">
-                            <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}"
-                              class="btn btn-success">Thanh toán
-                              VNPAY</a>
+                            <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}/{{$tonggia}}"
+                              class="btn btn-success">Thanh toán VNPAY</a>
                           </div>
                           {{-- Chuyen khoan --}}
                           <div class="col-6 mx-1 px-2" name="nhapchuyenkhoan">
@@ -440,50 +483,7 @@
                           </div>
                           {{-- KT chuyen khoan --}}
                           <div class="mb-3 mt-3">
-                            @php
-                            $i=0;
-                            $tonggia = 0;
-                            $ngayhomnay = date("Y/m/d");
-                            foreach($danhsachdatphongs as $danhsachdatphong){
-                            $ngaybatdau = $danhsachdatphong->ngaybatdauo;
-                            $ngayketthuc = $danhsachdatphong->ngayketthuco;
-                            $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
-                            $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
-                            if($i==0){
-                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia/2)*($songay1);
-                            } else if($i!=(count($danhsachdatphongs)-1)) {
-                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
-                            } else {
-                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
-                            }
-                            echo '
-                            <p class="form-label">'
-                              .$danhsachdatphong->phongid.
-                              "-"
-                              .$danhsachdatphong->phongs->loaiphongs->ten.
-                              "-"
-                              .$danhsachdatphong->phongs->loaiphongs->gia.
-                              '</p>';
-                            echo '<p class="form-label"> Ngày bắt đầu ở: '
-                              .$danhsachdatphong->ngaybatdauo.
-                              '</p>';
-                            echo '<p class="form-label"> Ngày kết thúc ở: '
-                              .$danhsachdatphong->ngayketthuco.
-                              '</p>';
-                            if($i!=(count($danhsachdatphongs)-1)) {
-                            echo '<p class="form-label"> Số ngày ở: '
-                              .$songay1.
-                              '</p>';
-                            } else {
-                            echo '<p class="form-label"> Số ngày ở: '
-                              .$songay2.
-                              '</p>';
-                            }
-                            echo '
-                            <p type="text" class="badge bg-primary" />'.$tonggia.'</p><br>';
-                            $i++;
-                            }
-                            @endphp
+
                             <label class="form-label" for="tiendatcoc">Tổng số tiền</label>
                             <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
                               placeholder="VD: 300" value="{{$tonggia}}" readonly />
