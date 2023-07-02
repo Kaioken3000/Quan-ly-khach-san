@@ -1,3 +1,4 @@
+@include('Chatify::layouts.headLinks')
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
     data-assets-path="/adminresource/assets/" data-template="vertical-menu-template-free">
@@ -66,8 +67,7 @@
                 {{-- ---------------------------------------------------------------- --}}
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
-                    @include('layouts.menu')
-                    @include('Chatify::layouts.headLinks')
+
                     <div class="messenger">
                         {{-- ----------------------Users/Groups lists side---------------------- --}}
                         <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
@@ -102,13 +102,14 @@
                                     </div>
                                     {{-- List All User
                                     {{-- Retrieve all User --}}
-                                    <?php $users = App\Models\User::get(); ?>
+                                    <?php $userNhanviens = App\Models\User::role('User')->get(); ?>
                                     {{-- Show all User --}}
-                                    <p class="messenger-title"><span>All User</span></p>
+                                    <p class="messenger-title"><span>Nhân viên</span></p>
                                     <div class="listOfContacts1" style="width: 100%;">
                                         <div class="listOfContacts1" style="width: 100%;">
-                                            @foreach($users as $user)
-                                            <table class="messenger-list-item" data-contact="{{$user->id}}">
+                                            <?php $userAdmins = App\Models\User::role('Admin')->first(); ?>
+                                            @if($userAdmins->id != Auth::user()->id)
+                                            <table class="messenger-list-item" data-contact="{{$userAdmins->id}}">
                                                 <tbody>
                                                     <tr data-action="0">
                                                         <td>
@@ -119,13 +120,35 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <p data-id="{{$user->id}}" data-type="user">
-                                                                {{$user->username}}
+                                                            <p data-id="{{$userAdmins->id}}" data-type="user">
+                                                                {{$userAdmins->username}}
                                                             </p>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            @endif
+                                            @foreach($userNhanviens as $userNhanvien)
+                                            @if($userNhanvien->id != Auth::user()->id)
+                                            <table class="messenger-list-item" data-contact="{{$userNhanvien->id}}">
+                                                <tbody>
+                                                    <tr data-action="0">
+                                                        <td>
+                                                            <div class="saved-messages avatar av-m">
+                                                                <div class="avatar av-m"
+                                                                    style="background-image: url('https://www.gravatar.com/avatar/342c19017566eb360099ffe8093f8a8c?s=200&amp;d=identicon');">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p data-id="{{$userNhanvien->id}}" data-type="user">
+                                                                {{$userNhanvien->username}}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @endif
                                             @endforeach
                                         </div>
                                     </div>
