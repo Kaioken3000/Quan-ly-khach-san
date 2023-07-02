@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Thanhtoan;
 use App\Models\Traphong;
 use App\Models\Datphong;
-use Omnipay\Omnipay;
 
 use Illuminate\Support\Facades\File;
 
