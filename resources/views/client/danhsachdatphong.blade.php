@@ -52,9 +52,11 @@
                 $nhanphongs = App\Models\Nhanphong::where("datphongid", $datphong->datphongid)->get();
                 $traphongs = App\Models\Traphong::where("datphongid", $datphong->datphongid)->get();
                 $dichvudatphongs = App\Models\DichvuDatphong::where("datphongid", $datphong->datphongid)->get();
+                $thanhtoans = App\Models\Thanhtoan::where("khachhangid", $datphong->id)->get();
                 ?>
                 <!-- Button trigger modal -->
-                <button type="button" class="badge bg-info border-info" data-toggle="modal" data-target="#LichsuModal{{ $datphong->datphongid }}">
+                <button type="button" class="badge bg-info border-info" data-toggle="modal"
+                  data-target="#LichsuModal{{ $datphong->datphongid }}">
                   Lịch sử
                 </button>
 
@@ -68,9 +70,18 @@
                       </div>
                       <div class="modal-body">
                         @foreach($danhsachdatphongs as $danhsachdatphong)
-                        <p>Phòng: {{ $danhsachdatphong->phongid }}</p>
+                        <p>Phòng: {{ $danhsachdatphong->phongid }} - {{ $danhsachdatphong->phongs->loaiphongs->ten }} -
+                          {{ $danhsachdatphong->phongs->loaiphongs->gia }}</p>
                         <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
                         <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
+                        <p>Khách hàng: <b>{{ $datphong->ten }}</b></p>
+                        @foreach ($thanhtoans as $thanhtoan)
+                        @if ($thanhtoan->loaitien == 'traphong')
+                        <p>Tiền trả phòng: <b>{{$thanhtoan->gia}} VND</b></p>
+                        @else
+                        <p>Tiền đặt cọc: <b>{{$thanhtoan->gia}} VND</b></p>
+                        @endif
+                        @endforeach
                         @endforeach
 
                         @if(count($nhanphongs)>0)
@@ -95,7 +106,8 @@
                         @if(count($dichvudatphongs)>0)
                         <b class="font-weight-bold">Dịch vụ sử dụng</b>
                         @foreach($dichvudatphongs as $dichvudatphong)
-                        <p>{{ $dichvudatphong->dichvus->ten }}: <b>{{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</b></p>
+                        <p>{{ $dichvudatphong->dichvus->ten }}: <b>{{ $dichvudatphong->dichvus->giatien }} {{
+                            $dichvudatphong->dichvus->donvi }}</b></p>
                         @endforeach
                         @endif
                       </div>
@@ -125,13 +137,15 @@
                   <!-- Đổi phòng -->
                   <form class="m-1" action="hiendoiphongclient" method="get">
                     <input type="hidden" name="datphongid" value="{{ $datphong->datphongid }}">
-                    <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i> Đổi phòng</button>
+                    <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i> Đổi
+                      phòng</button>
                   </form>
 
                   <!-- Xoá -->
                   @if($datphong->tinhtrangnhanphong == 0)
                   <div class="m-1">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicModal{{ $datphong->datphongid }}">
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                      data-target="#basicModal{{ $datphong->datphongid }}">
                       Xoá
                     </button>
                   </div>
@@ -162,7 +176,8 @@
                   @else
                   <!-- Dịch vụ -->
                   <div class="m-1">
-                    <button type="button" class="w-100 btn btn-success" data-toggle="modal" data-target="#modaldichvu{{ $datphong->datphongid }}">
+                    <button type="button" class="w-100 btn btn-success" data-toggle="modal"
+                      data-target="#modaldichvu{{ $datphong->datphongid }}">
                       <i class="bx bx-box mb-1"></i> Dịch vụ
                     </button>
                   </div>
@@ -177,12 +192,14 @@
                         <div class="modal-body">
                           <form action="{{ route('client.dichvu_satphong_store') }}" method="POST">
                             @csrf
-                            <input hidden type="text" value="{{$datphong->datphongid}}" id="datphongid" name="datphongid">
+                            <input hidden type="text" value="{{$datphong->datphongid}}" id="datphongid"
+                              name="datphongid">
                             <div class="mb-3">
                               <label class="form-label" for="ten">Dịch vụ</label><br>
                               @foreach($dichvus as $dichvu)
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}" name="dichvuid[]" value="{{$dichvu->id}}">
+                                <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}"
+                                  name="dichvuid[]" value="{{$dichvu->id}}">
                                 <label class="form-check-label" for="dichvu{{$dichvu->id}}">
                                   {{$dichvu->ten}}:
                                 </label>
@@ -214,9 +231,14 @@
                 <form action="/generate-invoice-pdf" method="get">
                   @csrf
                   <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                  <button type="submit" class="w-100 btn btn-info"><i class="bx bx-spreadsheet mb-1"></i> Xem hoá đơn</button>
+                  <button type="submit" class="w-100 btn btn-info"><i class="bx bx-spreadsheet mb-1"></i> Xem hoá
+                    đơn</button>
                 </form>
                 @endif
+
+                {{-- Đặt cọc --}}
+                <a href="/client/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{$datphong->id}}/{{ $danhsachdatphong->phongs->loaiphongs->gia/2 }}"
+                  class="btn btn-success">Đặt cọc online</a>
               </td>
             </tr>
 

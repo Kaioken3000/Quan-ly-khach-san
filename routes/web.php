@@ -87,7 +87,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post("/thanhtoanvnpay", "ThanhtoanController@create")->name("thanhtoanvnpay");
         Route::get("/vnpay_return", "ThanhtoanController@return");
 
-
         // chat function
         Route::get('/chatview/{useridreceiver}', function () {
             return view('chat');
@@ -162,6 +161,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index'); //báo cáo index
 
     });
+    Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
+        // thanh toan vnpay
+        Route::get("/client/thanhtoanvnpayview/{datphongid}/{loaitien}/{khachhangid}/{sotien}", "ThanhtoanClientController@index");
+        Route::post("/client/thanhtoanvnpay", "ThanhtoanClientController@create")->name("client.thanhtoanvnpay");
+        Route::get("/client/vnpay_return", "ThanhtoanClientController@return");
+    });
+
     Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 
     /**
@@ -217,9 +223,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // dich vu dat phong
     Route::post('/client/dichvu_satphong_store', 'IndexController@dichvu_satphong_store')->name('client.dichvu_satphong_store');
-
-    // Thanh toan chuyen khoan
-    Route::post('/thanhtoanchuyenkhoan', 'ChuyenkhoanController@create')->name('chuyenkhoan.create');
 
     // Botman
     Route::match(['get', 'post'], '/botman', [BotManChatController::class, 'handle']);
