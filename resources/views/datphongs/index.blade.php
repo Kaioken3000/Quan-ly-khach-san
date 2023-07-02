@@ -3,7 +3,6 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đặt phòng /</span> Quản lý</h4>
-
   <div class="d-flex align-items-end my-2 ">
     <div class="me-auto">
       <a class="btn btn-success" href="{{ route('datphongs.create') }}"><i class="bx bx-plus mb-1"></i> Đặt phòng</a>
@@ -408,7 +407,7 @@
                           </div>
                           {{-- Truc tiep --}}
                           <div class="col-6" name="nhapsotien">
-
+                            <a href="/thanhtoanvnpayview" class="btn btn-success">Thanh toán VNPAY</a>
                           </div>
                           {{-- Chuyen khoan --}}
                           <div class="col-6 mx-1 px-2" name="nhapchuyenkhoan">
@@ -506,7 +505,7 @@
                           </div>
                           {{-- KT btn xac nhan, cancel --}}
                         </form>
-                        <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script> 
+                        <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
                         <script>
                           doitructiep_chuyenkhoan()
                         </script>

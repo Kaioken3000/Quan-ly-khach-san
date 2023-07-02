@@ -15,6 +15,7 @@ use App\Http\Controllers\DichvuController;
 use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\BotManChatController;
+use App\Http\Controllers\ThanhtoanController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Http\Request;
 
@@ -81,6 +82,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
+        // thanh toan vnpay
+        Route::get("/thanhtoanvnpayview", "ThanhtoanController@index");
+        Route::post("/thanhtoanvnpay", "ThanhtoanController@create")->name("thanhtoanvnpay");
+        Route::get("/vnpay_return", "ThanhtoanController@return");
+
+
         // chat function
         Route::get('/chatview/{useridreceiver}', function () {
             return view('chat');
