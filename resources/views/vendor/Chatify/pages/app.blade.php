@@ -116,7 +116,6 @@
                                                                 <div class="avatar av-m"
                                                                     style="background-image: url('https://www.gravatar.com/avatar/342c19017566eb360099ffe8093f8a8c?s=200&amp;d=identicon');">
                                                                 </div>
-                                                                <!-- <span class="far fa-bookmark" aria-hidden="true"></span> -->
                                                             </div>
                                                         </td>
                                                         <td>
