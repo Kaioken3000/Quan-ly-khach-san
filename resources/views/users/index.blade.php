@@ -43,9 +43,9 @@
                 <button type="submit" class="btn btn-danger"><i class="bx bx-trash mb-1"></i> Delete</button>
               </form>
             </td>
-            <td>
+            {{-- <td>
               <a class="btn btn-primary" href="{{ route('chat.view',$user->id) }}"><i class="bx bx-message"></i></a>
-            </td>
+            </td> --}}
           </tr>
           @endforeach
           <tr>
