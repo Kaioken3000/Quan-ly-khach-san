@@ -96,13 +96,15 @@ class KhachhangController extends Controller
         ]);
 
         // Luu thong tin chuyen khoan
-        Thanhtoan::create(array(
-            "hinhthuc" => $request->hinhthucthanhtoan,
-            "gia" => $request->tiendatcoc,
-            "loaitien" => $request->loaitien,
-            "chuyenkhoan_token" => $request->stripeToken,
-            "khachhangid" => $khachhangs->id,
-        ));
+        if ($request->hinhthucthanhtoan == "tructiep") {
+            Thanhtoan::create(array(
+                "hinhthuc" => $request->hinhthucthanhtoan,
+                "gia" => $request->tiendatcoc,
+                "loaitien" => $request->loaitien,
+                "chuyenkhoan_token" => $request->stripeToken,
+                "khachhangid" => $khachhangs->id,
+            ));
+        }
 
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }

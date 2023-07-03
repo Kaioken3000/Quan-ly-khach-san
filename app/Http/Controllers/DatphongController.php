@@ -231,7 +231,7 @@ class DatphongController extends Controller
         // Luu thong tin chuyen khoan
         Thanhtoan::create(array(
             "hinhthuc" => $request->hinhthucthanhtoan,
-            "gia" => $request->tiendatcoc,
+            "gia" => $request->sotien,
             "loaitien" => $request->loaitien,
             "chuyenkhoan_token" => $request->stripeToken,
             "khachhangid" => $request->khachhang_id,
