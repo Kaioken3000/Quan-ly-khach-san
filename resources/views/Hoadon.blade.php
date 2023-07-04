@@ -119,8 +119,10 @@
         <div class="w-50 float-left mt-10">
             <h3>Thông tin khách hang:</h3>
             <p class="m-0 pt-5 text-bold w-100">Khách hàng Id - <span class="gray-color">{{ $khachhang->id }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Tên khách hàng- <span class="gray-color">{{ $khachhang->ten }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Số điện thoại - <span class="gray-color">{{ $khachhang->sdt }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Tên khách hàng- <span class="gray-color">{{ $khachhang->ten }}</span>
+            </p>
+            <p class="m-0 pt-5 text-bold w-100">Số điện thoại - <span class="gray-color">{{ $khachhang->sdt }}</span>
+            </p>
             <p class="m-0 pt-5 text-bold w-100">Email - <span class="gray-color">{{ $khachhang->email }}</span></p>
         </div>
         <div class="w-50 float-left logo mt-10">
@@ -134,7 +136,8 @@
             <p class="m-0 pt-5 text-bold w-100">Ngày đặt- <span class="gray-color">{{ $datphong->ngaydat }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Ngày trả- <span class="gray-color">{{ $datphong->ngaytra }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Số lượng - <span class="gray-color">{{ $datphong->soluong }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Khách hàng - <span class="gray-color">{{ $datphong->khachhangid }}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Khách hàng - <span class="gray-color">{{ $datphong->khachhangid}}</span></p>
+            <p class="m-0 pt-5 text-bold w-100">Tiền đặt cọc - <span class="gray-color">{{ $tiendatcoc->gia}}</span></p>
         </div>
         <div class="w-50 float-left logo mt-10">
         </div>
@@ -143,8 +146,11 @@
     <div class="add-detail mt-10">
         <div class="w-50 float-left mt-10">
             <h3>Dịch vụ sử dụng:</h3>
+            <?php $tongtiendv = 0;?>
             @foreach($dichvudatphongs as $dichvudatphong)
-            <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}: {{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
+            <?php $tongtiendv += $dichvudatphong->dichvus->giatien;?>
+            <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}: {{
+                    $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
             @endforeach
         </div>
         <div class="w-50 float-left logo mt-10">
@@ -160,19 +166,36 @@
             <tr>
                 <td>
                     <div class="box-text">
+                        <?php $i=0; $tonggia = 0;?>
                         @foreach($danhsachdatphongs as $danhsachdatphong)
-                        <?php $phong = App\Models\Phong::find($danhsachdatphong->phongid); ?>
+                        <?php $phong = App\Models\Phong::find($danhsachdatphong->phongid); 
+                            $ngayhomnay = date("Y/m/d");
+
+                            $ngaybatdau = $danhsachdatphong->ngaybatdauo;
+                            $ngayketthuc = $danhsachdatphong->ngayketthuco;
+                            $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
+                            $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
+                            if($i==0){
+                                $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
+                            } else if($i!=(count($danhsachdatphongs)-1)) {
+                                $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
+                            } else {
+                                $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
+                            }
+                        ?>
                         <p>Sô phòng: {{ $phong->so_phong }}</p>
                         <p>Loại phòng: {{ $phong->loaiphongid }}</p>
                         <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
                         <p>Ngày kết thúc ỏ: {{ $danhsachdatphong->ngayketthuco }}</p>
-                        <?php 
-                            $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
-                            $songay = abs(round($songay / 86400));
-                        ?>
-                        <p>So ngay o: {{ $songay }}</p>
+                        @if($i!=(count($danhsachdatphongs)-1) || $i==0)
+                            <p>So ngay o: {{ $songay1 }}</p>
+                        @else
+                            <p>So ngay o: {{ $songay2 }}</p>
+                        @endif
                         <hr>
+                        <?php $i++;?>
                         @endforeach
+
                     </div>
                 </td>
                 <td>
@@ -198,10 +221,7 @@
                 <td colspan="7">
                     <div class="total-part">
                         <div class="total-left w-85 float-left" align="right">
-                            <p>Tổng cộng:</p>
-                        </div>
-                        <div class="total-right w-15 float-left text-bold" align="right">
-                            <p>{{ $tonggia }}VND</p>
+                            <p>Tổng cộng: {{ $tonggia + $tongtiendv - $tiendatcoc->gia}}VND</p>
                         </div>
                         <div style="clear: both;"></div>
                     </div>
