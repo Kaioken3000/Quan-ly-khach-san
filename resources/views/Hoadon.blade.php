@@ -137,7 +137,9 @@
             <p class="m-0 pt-5 text-bold w-100">Ngày trả- <span class="gray-color">{{ $datphong->ngaytra }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Số lượng - <span class="gray-color">{{ $datphong->soluong }}</span></p>
             <p class="m-0 pt-5 text-bold w-100">Khách hàng - <span class="gray-color">{{ $datphong->khachhangid}}</span></p>
+            @if($tiendatcoc)
             <p class="m-0 pt-5 text-bold w-100">Tiền đặt cọc - <span class="gray-color">{{ $tiendatcoc->gia}}</span></p>
+            @endif
         </div>
         <div class="w-50 float-left logo mt-10">
         </div>
@@ -221,7 +223,10 @@
                 <td colspan="7">
                     <div class="total-part">
                         <div class="total-left w-85 float-left" align="right">
+                            @if($tiendatcoc)
                             <p>Tổng cộng: {{ $tonggia + $tongtiendv - $tiendatcoc->gia}}VND</p>
+                            @endif
+                            <p>Tổng cộng: {{ $tonggia + $tongtiendv}}VND</p>
                         </div>
                         <div style="clear: both;"></div>
                     </div>
