@@ -311,6 +311,9 @@ class DatphongController extends Controller
                             $xacnhan++;
                         }
                     }
+                    if($request->soluong > $phong->loaiphongs->soluong){
+                        $xacnhan++;
+                    }
                 }
                 if ($xacnhan == 0) {
                     array_push($phongs, $phong);
