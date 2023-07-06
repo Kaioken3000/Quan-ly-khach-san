@@ -11,44 +11,44 @@
             <label class="form-label">Mã đơn hàng:</label>
 
             <label class="form-label">
-                {{ $request->vnp_TxnRef }} ?>
+                {{ $request->vnp_TxnRef }}
             </label>
         </div>
         <div class="mb-3">
 
             <label class="form-label">Số tiền:</label>
             <label class="form-label">
-                {{ $request->vnp_Amount}} ?>
+                {{ $request->vnp_Amount}}
             </label>
         </div>
         <div class="mb-3">
             <label class="form-label">Nội dung thanh toán:</label>
             <label class="form-label">
-                {{ $request->vnp_OrderInfo}} ?>
+                {{ $request->vnp_OrderInfo}}
             </label>
         </div>
         <div class="mb-3">
             <label class="form-label">Mã phản hồi (vnp_ResponseCode):</label>
             <label class="form-label">
-                {{ $request->vnp_ResponseCode}} ?>
+                {{ $request->vnp_ResponseCode}}
             </label>
         </div>
         <div class="mb-3">
             <label class="form-label">Mã GD Tại VNPAY:</label>
             <label class="form-label">
-                {{ $request->vnp_TransactionNo}} ?>
+                {{ $request->vnp_TransactionNo}}
             </label>
         </div>
         <div class="mb-3">
             <label class="form-label">Mã Ngân hàng:</label>
             <label class="form-label">
-                {{ $request->vnp_BankCode}} ?>
+                {{ $request->vnp_BankCode}}
             </label>
         </div>
         <div class="mb-3">
             <label class="form-label">Thời gian thanh toán:</label>
             <label class="form-label">
-                {{ $request->vnp_PayDate}} ?>
+                {{ $request->vnp_PayDate}}
             </label>
         </div>
         <div class="mb-3">

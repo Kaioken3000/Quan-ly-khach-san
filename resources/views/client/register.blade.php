@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html
   lang="en"
   class="light-style customizer-hide"
@@ -10,19 +10,15 @@
   @include('layouts.head')
 
   <body>
-    <!-- Content -->
 
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
-          <!-- Register Card -->
           <div class="card">
             <div class="card-body">
-              <!-- Logo -->
               <div class="app-brand justify-content-center">
                 @include('layouts.logo')
               </div>
-              <!-- /Logo -->
               <h4 class="mb-2">Adventure starts here 🚀</h4>
               <p class="mb-4">Make your app management easy and fun!</p>
 
@@ -127,13 +123,35 @@
               </p>
             </div>
           </div>
-          <!-- Register Card -->
         </div>
       </div>
     </div>
 
-    <!-- / Content -->
-
     @include('layouts.script')
   </body>
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+@include('client.layouts2.head')
+
+<body>
+
+    @include('client.layouts2.loader')
+
+    @include('client.layouts2.header')
+
+    @include('client.layouts2.menu')
+
+    @include('client.layouts2.register')
+
+    @include('client.layouts2.footer')
+
+    @include('client.layouts2.search')
+
+    @include('client.layouts2.script')
+
+</body>
+
 </html>

@@ -1,10 +1,9 @@
-<!DOCTYPE HTML>
+{{-- <!DOCTYPE HTML>
 <html>
   @include('client.layouts.head')
   <body>
     
     @include('client.layouts.header')
-    <!-- END head -->
 
     <section class="site-hero inner-page overlay" style="background-image: url(images/hero_4.jpg)" data-stellar-background-ratio="0.5">
       <div class="container">
@@ -26,7 +25,6 @@
         </div>
       </a>
     </section>
-    <!-- END section -->
 
     <section class="section contact-section" id="next">
       <div class="container">
@@ -103,4 +101,29 @@
     @include('client.layouts.script')
     
   </body>
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+@include('client.layouts2.head')
+
+<body>
+
+    @include('client.layouts2.loader')
+
+    @include('client.layouts2.header')
+
+    @include('client.layouts2.menu')
+
+    @include('client.layouts2.reservation')
+
+    @include('client.layouts2.footer')
+
+    @include('client.layouts2.search')
+
+    @include('client.layouts2.script')
+
+</body>
+
 </html>

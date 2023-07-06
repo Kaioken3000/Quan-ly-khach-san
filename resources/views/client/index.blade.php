@@ -1,38 +1,63 @@
-<!DOCTYPE HTML>
+{{-- <!DOCTYPE HTML>
 <html>
 @include('client.layouts.head')
 
 <body>
 
-  @include('client.layouts.header')
-  <!-- END head -->
+    @include('client.layouts.header')
 
-  <!-- Session -->
-  @include('client.layouts.session')
+    @include('client.layouts.session')
 
-  <!-- Book -->
-  @include('client.layouts.book')
+    @include('client.layouts.book')
 
-  <!-- Welcome -->
-  @include('client.layouts.welcome')
+    @include('client.layouts.welcome')
 
-  <!-- Room -->
-  @include('client.layouts.room')
+    @include('client.layouts.room')
 
-  <!-- Photo -->
-  @include('client.layouts.photo')
+    @include('client.layouts.photo')
 
-  <!-- Reserve -->
-  @include('client.layouts.reserve')
+    @include('client.layouts.reserve')
 
-  <!-- Footer -->
-  @include('client.layouts.footer')
+    @include('client.layouts.footer')
 
-  <!-- Chat bot -->
-  @include('client.layouts.chatbot')
+    @include('client.layouts.chatbot')
 
-  <!-- Script -->
-  @include('client.layouts.script')
+    @include('client.layouts.script')
+
+</body>
+
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+@include('client.layouts2.head')
+
+<body>
+
+    @include('client.layouts2.loader')
+
+    @include('client.layouts2.menu')
+
+    @include('client.layouts2.header')
+
+    @include('client.layouts2.hero')
+
+    @include('client.layouts2.about')
+
+    @include('client.layouts2.service')
+
+    @include('client.layouts2.room')
+
+    @include('client.layouts2.testimonial')
+
+    @include('client.layouts2.blog')
+
+    @include('client.layouts2.footer')
+
+    @include('client.layouts2.search')
+
+    @include('client.layouts2.script')
 
 </body>
 

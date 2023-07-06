@@ -1,19 +1,15 @@
-<!DOCTYPE HTML>
+{{-- <!DOCTYPE HTML>
 <html>
 @include('client.layouts.head')
 
 <body>
 
     @include('client.layouts.header')
-    <!-- END head -->
 
-    <!-- Session -->
     @include('client.layouts.session')
 
-    <!-- Book -->
     @include('client.layouts.book')
 
-    <!-- Room -->
     <section class="section">
         <div class="container">
             <div class="row justify-content-center text-center mb-5">
@@ -42,11 +38,36 @@
         </div>
     </section>
 
-    <!-- Footer -->
     @include('client.layouts.footer')
 
-    <!-- Script -->
     @include('client.layouts.script')
+
+</body>
+
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+@include('client.layouts2.head')
+
+<body>
+
+    @include('client.layouts2.loader')
+
+    @include('client.layouts2.menu')
+
+    @include('client.layouts2.header')
+
+    @include('client.layouts2.hero')
+    
+    @include('client.layouts2.roomList')
+
+    @include('client.layouts2.footer')
+
+    @include('client.layouts2.search')
+
+    @include('client.layouts2.script')
 
 </body>
 

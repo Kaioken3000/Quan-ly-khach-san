@@ -1,11 +1,10 @@
-<!DOCTYPE HTML>
+{{-- <!DOCTYPE HTML>
 <html>
 @include('client.layouts.head')
 
 <body>
 
     @include('client.layouts.header')
-    <!--Begin display -->
     <div class="card m-4">
         <div class="card-header">
             <h3 class="text-muted">VNPAY RESPONSE</h3>
@@ -84,6 +83,31 @@
     @include('client.layouts.footer')
 
     @include('client.layouts.script')
+
+</body>
+
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+@include('client.layouts2.head')
+
+<body>
+
+    @include('client.layouts2.loader')
+
+    @include('client.layouts2.header')
+
+    @include('client.layouts2.menu')
+
+    @include('client.layouts2.paycheckSuccess')
+
+    @include('client.layouts2.footer')
+
+    @include('client.layouts2.search')
+
+    @include('client.layouts2.script')
 
 </body>
 

@@ -26,7 +26,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(3);
+        $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(4);
         return view('client.index', compact('loaiphongs'));
     }
     /**
@@ -36,9 +36,8 @@ class IndexController extends Controller
      */
     public function hientrangphong()
     {
-        $loaiphongs = Loaiphong::orderBy('ma', 'asc')->get();
-        $phongs = Phong::get();
-        return view('client.phong', compact('loaiphongs', 'phongs'));
+        $phongs = Phong::orderBy('so_phong','asc')->paginate(6);
+        return view('client.phong', compact( 'phongs'));
     }
 
     /**
@@ -329,20 +328,19 @@ class IndexController extends Controller
             $phongs = $phongslist;
         }
 
-        $i=0;
+        $i = 0;
         $sus = "Đặt phòng thành công";
         $fail = "Đặt phòng không thành công do đã có khách khác đặt phòng này";
-        foreach ($phongs as $p){
-            if($p->so_phong == $request->phongid){
+        foreach ($phongs as $p) {
+            if ($p->so_phong == $request->phongid) {
                 $i++;
                 break;
             }
         }
-        if($i>0){
+        if ($i > 0) {
             $this->index_store($request);
-            return redirect('client/chitietphong/'.$request->phongid)->with('success', $sus);
-        }
-        else return redirect('client/chitietphong/'.$request->phongid)->with('success', $fail);
+            return redirect('client/chitietphong/' . $request->phongid)->with('success', $sus);
+        } else return redirect('client/chitietphong/' . $request->phongid)->with('success', $fail);
     }
 
     public function dichvu_satphong_store(Request $request)
