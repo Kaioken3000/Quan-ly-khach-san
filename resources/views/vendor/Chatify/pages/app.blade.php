@@ -115,7 +115,7 @@
                                                         <td>
                                                             <div class="saved-messages avatar av-m">
                                                                 <div class="avatar av-m"
-                                                                    style="background-image: url('https://www.gravatar.com/avatar/342c19017566eb360099ffe8093f8a8c?s=200&amp;d=identicon');">
+                                                                    style="background-image: url('{{ Chatify::getUserWithAvatar($userAdmins)->avatar }}');">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -136,7 +136,7 @@
                                                         <td>
                                                             <div class="saved-messages avatar av-m">
                                                                 <div class="avatar av-m"
-                                                                    style="background-image: url('https://www.gravatar.com/avatar/342c19017566eb360099ffe8093f8a8c?s=200&amp;d=identicon');">
+                                                                    style="background-image: url('{{ Chatify::getUserWithAvatar($userNhanvien)->avatar }}');">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -155,7 +155,7 @@
                                     {{-- Saved Messages --}}
                                     <p class="messenger-title"><span>Your Space</span></p>
                                     {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
-
+                                    
                                     {{-- Contact --}}
                                     <p class="messenger-title"><span>All Messages</span></p>
                                     <div class="listOfContacts"
