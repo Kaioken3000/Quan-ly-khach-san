@@ -228,6 +228,12 @@ class DatphongController extends Controller
 
         $datphong->save();
 
+        // Cap nhat ngay o ket thuc thuc te
+        $ngayhomnay = date("Y-m-d");
+        $phongocuoicung = Danhsachdatphong::where("datphongid", $request->id)->latest()->first();
+        $phongocuoicung->ngayketthuco = $ngayhomnay;
+        $phongocuoicung->save();
+
         // Luu thong tin chuyen khoan
         Thanhtoan::create(array(
             "hinhthuc" => $request->hinhthucthanhtoan,
@@ -302,24 +308,33 @@ class DatphongController extends Controller
         if ($datphongs->count() > 0) {
             foreach ($phongslist as $phong) {
                 $xacnhan = 0;
-                foreach ($datphongs as $datphong) {
-                    $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->orderBy('id', 'desc')->first();
-                    if ($danhsachdatphong->phongid == $phong->so_phong && $request->ngaytra >= $request->ngaydat) {
-                        if ($request->ngaydat >= $danhsachdatphong->ngaybatdauo && $request->ngaydat <= $danhsachdatphong->ngayketthuco) {
-                            $xacnhan++;
-                        } else if ($request->ngaytra >= $danhsachdatphong->ngaybatdauo && $request->ngaytra <= $danhsachdatphong->ngayketthuco) {
-                            $xacnhan++;
+                if ($request->soluong > $phong->loaiphongs->soluong) {
+                    $xacnhan++;
+                } else {
+                    foreach ($datphongs as $datphong) {
+                        $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->latest()->first();
+                        if ($danhsachdatphong->phongid == $phong->so_phong) {
+                            // if ($request->ngaydat >= $danhsachdatphong->ngaybatdauo && $request->ngaydat <= $danhsachdatphong->ngayketthuco) {
+                            //     $xacnhan++;
+                            // } else if ($request->ngaytra >= $danhsachdatphong->ngaybatdauo && $request->ngaytra <= $danhsachdatphong->ngayketthuco) {
+                            //     $xacnhan++;
+                            // }
+                            if ($request->ngaydat < $danhsachdatphong->ngaybatdauo && $request->ngaytra < $danhsachdatphong->ngaybatdauo) {
+                                // $xacnhan++;
+                            } else if ($request->ngaydat > $danhsachdatphong->ngayketthuco && $request->ngaytra > $danhsachdatphong->ngayketthuco) {
+                                // $xacnhan++;
+                            } else $xacnhan++;
                         }
                     }
-                    if($request->soluong > $phong->loaiphongs->soluong){
-                        $xacnhan++;
-                    }
+                }
+                if($request->ngaytra < $request->ngaydat){
+                    $xacnhan++;
                 }
                 if ($xacnhan == 0) {
                     array_push($phongs, $phong);
                 }
             }
-            Log::info($phongs);
+            // Log::info($phongs);
         } else {
             $phongs = $phongslist;
         }
@@ -332,35 +347,77 @@ class DatphongController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function kiemtra_capnhat(Request $request)
+    // {
+    //     $dat = Datphong::find($request->datphongid);
+
+    //     $phongslist = Phong::get();
+    //     $phongs = array();
+    //     foreach ($phongslist as $phong) {
+    //         $xacnhan = 0;
+    //         $danhsachdatphong = Danhsachdatphong::where('phongid', $phong->so_phong)->latest()->first();
+    //         // Log::info($danhsachdatphong);
+    //         if ($danhsachdatphong) {
+    //             $datphongs = Datphong::where('id', $danhsachdatphong->datphongid)->get();
+    //             if (count($datphongs) != 0) {
+    //                 foreach ($datphongs as $datphong) {
+    //                     if ($dat->ngaytra >= $dat->ngaydat) {
+    //                         if ($dat->ngaydat < $danhsachdatphong->ngaybatdauo && $dat->ngaytra < $danhsachdatphong->ngaybatdauo) {
+    //                             $xacnhan++;
+    //                         } else if ($dat->ngaydat > $danhsachdatphong->ngaybatdauo && $dat->ngaydat > $danhsachdatphong->ngaybatdauo) {
+    //                             $xacnhan++;
+    //                         }
+    //                     }
+    //                 }
+    //                 if ($xacnhan == count($datphongs)) {
+    //                     array_push($phongs, $phong);
+    //                 }
+    //             } else array_push($phongs, $phong);
+    //         } else array_push($phongs, $phong);
+    //     }
+    //     $loaiphongs = Loaiphong::get();
+    //     return view('datphongs.kiemtra-capnhat', compact('phongs', 'dat', 'loaiphongs'));
+    // }
     public function kiemtra_capnhat(Request $request)
     {
-        $dat = Datphong::find($request->datphongid);
-
         $phongslist = Phong::get();
         $phongs = array();
-        foreach ($phongslist as $phong) {
-            $xacnhan = 0;
-            $danhsachdatphong = Danhsachdatphong::where('phongid', $phong->so_phong)->orderBy('id', 'desc')->first();
-            Log::info($danhsachdatphong);
-            if ($danhsachdatphong) {
-                $datphongs = Datphong::where('id', $danhsachdatphong->datphongid)->get();
-                if (count($datphongs) != 0) {
+        $datphongs = Datphong::get();
+
+        $dat = Danhsachdatphong::where('datphongid', $request->datphongid)->latest()->first();
+        $phongdat = Datphong::find($dat->datphongid)->first();
+
+        if ($datphongs->count() > 0) {
+            foreach ($phongslist as $phong) {
+                $xacnhan = 0;
+                if ($phongdat->soluong > $phong->loaiphongs->soluong) {
+                    $xacnhan++;
+                } else {
                     foreach ($datphongs as $datphong) {
-                        if ($dat->ngaytra >= $dat->ngaydat) {
-                            if ($dat->ngaydat < $danhsachdatphong->ngaybatdauo && $dat->ngaytra < $danhsachdatphong->ngaybatdauo) {
-                                $xacnhan++;
-                            } else if ($dat->ngaydat > $danhsachdatphong->ngaybatdauo && $dat->ngaydat > $danhsachdatphong->ngaybatdauo) {
-                                $xacnhan++;
-                            }
+                        $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->latest()->first();
+                        if ($danhsachdatphong->phongid == $phong->so_phong) {
+                            if ($dat->ngaybatdauo < $danhsachdatphong->ngaybatdauo && $dat->ngayketthuco < $danhsachdatphong->ngaybatdauo) {
+                                // $xacnhan++;
+                            } else if ($dat->ngaybatdauo > $danhsachdatphong->ngayketthuco && $dat->ngayketthuco > $danhsachdatphong->ngayketthuco) {
+                                // $xacnhan++;
+                            } else $xacnhan++;
                         }
                     }
-                    if ($xacnhan == count($datphongs)) {
-                        array_push($phongs, $phong);
-                    }
-                } else array_push($phongs, $phong);
-            } else array_push($phongs, $phong);
+                }
+                if($dat->ngayketthuco < $dat->ngaybatdauo){
+                    $xacnhan++;
+                }
+                if ($xacnhan == 0) {
+                    array_push($phongs, $phong);
+                }
+            }
+            // Log::info($phongs);
+        } else {
+            $phongs = $phongslist;
         }
+
         $loaiphongs = Loaiphong::get();
-        return view('datphongs.kiemtra-capnhat', compact('phongs', 'dat', 'loaiphongs'));
+
+        return view('datphongs.kiemtra-capnhat', compact('phongdat', 'dat', 'phongs', 'loaiphongs'));
     }
 }

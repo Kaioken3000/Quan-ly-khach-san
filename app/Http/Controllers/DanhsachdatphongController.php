@@ -25,7 +25,8 @@ class DanhsachdatphongController extends Controller
         // $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
 
         //cap nhap ngay ket thuc cho phong truoc do
-        $danhsachdatphong = Danhsachdatphong::orderBy('id','desc')->first();
+        // $danhsachdatphong = Danhsachdatphong::orderBy('id','desc')->first();
+        $danhsachdatphong = Danhsachdatphong::where("datphongid", $request->datphongid)->latest()->first();
         $danhsachdatphong->ngayketthuco = $today;
         $danhsachdatphong->save();
 
@@ -43,7 +44,7 @@ class DanhsachdatphongController extends Controller
             ]);
         }
         else {
-            Log::info($datphong);
+            // Log::info($datphong);
             $danhsachdatphong->phongid = $request->phongid;
             $danhsachdatphong->datphongid = $datphong->id;
             $danhsachdatphong->ngaybatdauo = $datphong->ngaydat;

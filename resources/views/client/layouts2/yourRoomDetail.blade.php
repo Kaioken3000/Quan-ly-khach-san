@@ -30,7 +30,9 @@
                             <?php
                             $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->orderBy('id', 'desc')->first();
                             ?>
+                            @if($phongmax)
                             {{ $phongmax->phongid }}
+                            @endif
                         </td>
                         <td>
                             <?php
@@ -60,13 +62,13 @@
                                             <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
                                             <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}</p>
                                             <p>Khách hàng: <b>{{ $datphong->ten }}</b></p>
+                                            @endforeach
                                             @foreach ($thanhtoans as $thanhtoan)
                                             @if ($thanhtoan->loaitien == 'traphong')
                                             <p>Tiền trả phòng: <b>{{$thanhtoan->gia}} VND</b></p>
                                             @else
                                             <p>Tiền đặt cọc: <b>{{$thanhtoan->gia}} VND</b></p>
                                             @endif
-                                            @endforeach
                                             @endforeach
 
                                             @if(count($nhanphongs)>0)
@@ -217,8 +219,21 @@
                             </form>
                             @endif
 
+                            {{-- KT co dat coc --}}
+                            <?php $check=0;?>
+                            @foreach ($thanhtoans as $thanhtoan)
+                            @if ($thanhtoan)
+                            <?php $check++;?>
+                            @endif
+                            @endforeach
+
+                            @if($check==0)
                             {{-- Đặt cọc --}}
-                            <a href="/client/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{$datphong->id}}/{{ $danhsachdatphong->phongs->loaiphongs->gia/2 }}" class="btn btn-success">Đặt cọc online</a>
+                            <div class="mx-1">
+                                <a href="/client/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{$datphong->id}}/{{ $danhsachdatphong->phongs->loaiphongs->gia/2 }}" 
+                                    class="btn btn-success">Đặt cọc online</a>
+                            </div>
+                            @endif
                         </td>
                     </tr>
 

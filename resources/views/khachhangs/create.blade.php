@@ -78,7 +78,7 @@
                 @enderror
               </div>
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
               <label class="form-label" for="datcoc">Chọn hình thức đặt cọc:</label> <br>
               <input class="form-check-input tructiep" type="radio" name="datcoc" id="tructiep" checked value="tructiep"
                 onchange="doitructiep_chuyenkhoan()">
@@ -90,7 +90,7 @@
               <label class="form-check-label" for="chuyenkhoan">
                 Chuyển khoản
               </label>
-            </div>
+            </div> --}}
             <div class="col-6" name="nhapsotien">
               <div class="mb-3">
                 <label class="form-label" for="tiendatcoc">Số tiền (Tiền đặt cọc bằng 50% số tiền loại phòng)</label>
@@ -105,11 +105,10 @@
                 @enderror
               </div>
             </div>
-            <div class="col-6" name="nhapchuyenkhoan">
+            {{-- <div class="col-6" name="nhapchuyenkhoan">
               <div class="mb-3">
                 <label class="form-label" for="tienchuyenkhoan">Nhập thông tin chuyển khoản</label>
                 <label class="form-label" for="tienchuyenkhoan">(Tiền đặt cọc bằng 50% số tiền loại phòng)</label>
-                <!-- chuyen khoan -->
                 <div class="row">
                   <div class="card p-2">
                     <script src="https://js.stripe.com/v3/"></script>
@@ -119,23 +118,19 @@
                         Credit or debit card
                       </label>
                       <div id="card-element">
-                        <!-- A Stripe Element will be inserted here. -->
+                        
                       </div>
 
-                      <!-- Used to display form errors. -->
                       <div id="card-errors" role="alert"></div>
                     </div>
                     <br>
                     <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
                     <script>
-                      // chuyenkhoan()
                     </script>
-                    <!-- </form> -->
                   </div>
                 </div>
-                <!-- KT chuyen khoan -->
               </div>
-            </div>
+            </div> --}}
             <input type="hidden" name="ngaydat" id="ngaydat" value="{{ $request->ngaydat }}" />
             <input type="hidden" name="ngaytra" id="ngaytra" value="{{ $request->ngaytra }}" />
             <input type="hidden" name="soluong" id="soluong" value="{{ $request->soluong }}" />

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Danhsachdatphong;
 use App\Models\Thanhtoan;
 use App\Models\Traphong;
 use App\Models\Datphong;
@@ -97,18 +98,26 @@ class ThanhtoanController extends Controller
         $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
 
         // luu vao database
-        $datphong = Datphong::find($request->datphongid);
+        if ($request->loaitien != 'datcoc') {
+            $datphong = Datphong::find($request->datphongid);
 
-        $datphong->tinhtrangthanhtoan = 1;
-        $datphong->tinhtrangnhanphong = 1;
+            $datphong->tinhtrangthanhtoan = 1;
+            $datphong->tinhtrangnhanphong = 1;
 
-        $traphongs = array();
-        $traphongs['ten'] = $datphong->khachhangs->ten;
-        $traphongs['datphongid'] = $datphong->id;
+            $traphongs = array();
+            $traphongs['ten'] = $datphong->khachhangs->ten;
+            $traphongs['datphongid'] = $datphong->id;
 
-        Traphong::create($traphongs);
+            Traphong::create($traphongs);
 
-        $datphong->save();
+            $datphong->save();
+
+            // Cap nhat ngay o ket thuc thuc te
+            $ngayhomnay = date("Y-m-d");
+            $phongocuoicung = Danhsachdatphong::where("datphongid", $request->datphongid)->latest()->first();
+            $phongocuoicung->ngayketthuco = $ngayhomnay;
+            $phongocuoicung->save();
+        }
 
         // Luu thong tin chuyen khoan
         Thanhtoan::create(array(

@@ -115,7 +115,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Dichvu Routes
         Route::resource('dichvu_datphong', DichvuDatphongController::class);
 
-        // Datphong Routes
+        // Datphong Routess
         Route::resource('datphongs', DatphongController::class);
         Route::get('datphongs-kiemtra', 'DatphongController@kiemtra'); //kiem tra dat phong
         Route::get('datphongs-kiemtra-capnhat', 'DatphongController@kiemtra_capnhat'); //kiem tra dat phong khi thay doi

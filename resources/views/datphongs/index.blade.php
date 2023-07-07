@@ -99,7 +99,9 @@
               <?php
               $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->orderBy('id', 'desc')->first();
               ?>
+              @if($phongmax)
               {{ $phongmax->phongid }}
+              @endif
             </td>
             <td>
               <?php
@@ -371,13 +373,30 @@
                 </div>
                 @endif
 
+                {{-- KT co dat coc --}}
+                <?php $check=0;?>
+                @foreach ($thanhtoans as $thanhtoan)
+                @if ($thanhtoan)
+                <?php $check++;?>
+                @endif
+                @endforeach
+
+                @if($check==0)
+                {{-- Đặt cọc --}}
+                <div class="mx-1">
+                  <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{$datphong->id}}/{{ $danhsachdatphong->phongs->loaiphongs->gia/2 }}" 
+                      class="btn btn-success">Đặt cọc online</a>
+                </div>
+                @endif
                 <!-- Thanh toán -->
+                @if($check!=0)
                 <div class="m-1">
                   <button type="button" class="w-100 btn btn-warning" data-bs-toggle="modal"
                     data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
                     <i class="bx bx-coin mb-1"></i> Thanh toán
                   </button>
                 </div>
+                @endif
                 <!-- Modal thanh toán -->
                 <div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -391,24 +410,10 @@
                           method="Post" id="">
                           @csrf
                           @method('PUT')
-                          {{-- chuyen khoan --}}
-                          <div class="mb-3">
-                            <label class="form-label" for="datcoc">Chọn hình thức đặt cọc:</label> <br>
-                            <input class="form-check-input tructiep" type="radio" name="datcoc" id="" checked
-                              value="tructiep" onclick="doitructiep_chuyenkhoan()">
-                            <label class="form-check-label" for="tructiep">
-                              Trực tiếp
-                            </label>
-                            <input class="form-check-input chuyenkhoan" type="radio" name="datcoc" id=""
-                              value="chuyenkhoan" onclick="doitructiep_chuyenkhoan()">
-                            <label class="form-check-label" for="chuyenkhoan">
-                              Chuyển khoản
-                            </label>
-                          </div>
                           <?php
                             $i=0;
                             $tonggia = 0;
-                            $ngayhomnay = date("Y/m/d");
+                            $ngayhomnay = date("Y-m-d");
                             if(count($danhsachdatphongs)!=1){
                               foreach($danhsachdatphongs as $danhsachdatphong){
                                 $ngaybatdau = $danhsachdatphong->ngaybatdauo;
@@ -438,6 +443,12 @@
                                 echo '<p class="form-label"> Ngày kết thúc ở: '
                                   .$danhsachdatphong->ngayketthuco.
                                   '</p>';
+
+                                if($i == count($danhsachdatphongs)-1){
+                                  echo '<p class="form-label"> Ngày kết thúc ở thực tế: '
+                                    .$ngayhomnay.
+                                    '</p>';
+                                }
   
                                 if($i!=(count($danhsachdatphongs)-1) || $i==0) {
                                   echo '<p class="form-label"> Số ngày ở: '
@@ -486,38 +497,6 @@
                             }
                           ?>
                           {{-- Truc tiep --}}
-                          <div class="col-6" name="nhapsotien">
-                            <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}/{{$tonggia}}"
-                              class="btn btn-success">Thanh toán VNPAY</a>
-                          </div>
-                          {{-- Chuyen khoan --}}
-                          <div class="col-6 mx-1 px-2" name="nhapchuyenkhoan">
-                            <div class="mb-3">
-                              <label class="form-label" for="tienchuyenkhoan">Nhập thông tin chuyển khoản</label>
-                              <!-- chuyen khoan -->
-                              <div class="row">
-                                <div class="card p-2">
-                                  <script src="https://js.stripe.com/v3/"></script>
-
-                                  <div class="form-row" id="card_stripe">
-                                    <label for="card-element">
-                                      Credit or debit card
-                                    </label>
-                                    <div id="card-element">
-                                      <!-- A Stripe Element will be inserted here. -->
-                                    </div>
-
-                                    <!-- Used to display form errors. -->
-                                    <div id="card-errors" role="alert"></div>
-                                  </div>
-                                  <br>
-                                  <!-- </form> -->
-                                </div>
-                              </div>
-                              <!-- KT chuyen khoan -->
-                            </div>
-                          </div>
-                          {{-- KT chuyen khoan --}}
                           <div class="mb-3 mt-3">
                             <?php 
                               $tiendatcoc = App\Models\Thanhtoan::where("khachhangid", $datphong->id)
@@ -581,32 +560,40 @@
                           <input type="hidden" name="hinhthucthanhtoan" value="tructiep">
 
                           {{-- btn xac nhan, cancel --}}
-                          <div class="d-flex gap-1">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                              Cancel
-                            </button>
-                            <div>
-                              <button type="submit" class="w-100 btn btn-warning"> Yes</button>
+                          <div class="d-flex bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                              <button type="submit" class="w-100 btn btn-warning"> Trực tiếp</button>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                              {{-- Thanh toan vnpay --}}
+                              <a
+                                href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}/{{$tonggia}}">
+                                <img
+                                  src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929"
+                                  width="150px" class="shadow-sm">
+                              </a>
+                            </div>
+                            <div class="ml-auto p-2 bd-highlight">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Hủy
+                              </button>
                             </div>
                           </div>
                           {{-- KT btn xac nhan, cancel --}}
                         </form>
-                        <script src="/adminresource/js/tructiep_chuyenkhoan.js"></script>
-                        <script>
-                          doitructiep_chuyenkhoan()
-                        </script>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- Nhận phòng, sửa nhận phòng -->
+                @if($check!=0)
                 @hasrole('Admin')
                 <div class="m-1">
                   <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal"
-                    data-bs-target="#nhanphong{{ $datphong->datphongid }}">
-                    <i class="bx bx-hotel mb-1">
-                      {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
-                    </i>
+                  data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+                  <i class="bx bx-hotel mb-1">
+                    {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
+                  </i>
                   </button>
                 </div>
                 @else
@@ -621,6 +608,7 @@
                 </div>
                 @endif
                 @endhasrole
+                @endif
                 <!-- Modal nhan phòng -->
                 <div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-sm modal-dialog-centered" role="document">

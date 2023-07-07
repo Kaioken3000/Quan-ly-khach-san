@@ -37,8 +37,8 @@ class BaocaoController extends Controller
                 $tonggiatatca += $songay * $loaiphong->gia * $datphong->soluong;
             }
         }
-        Log::info($datphongs);
-        Log::info($tonggiatatca);
+        // Log::info($datphongs);
+        // Log::info($tonggiatatca);
 
 
         // cho phan hien thi do thi giong dashboard

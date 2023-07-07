@@ -148,7 +148,7 @@ class IndexController extends Controller
                     array_push($phongs, $phong);
                 }
             }
-            Log::info($phongs);
+            // Log::info($phongs);
         } else {
             $phongs = $phongslist;
         }
@@ -165,7 +165,7 @@ class IndexController extends Controller
         foreach ($phongslist as $phong) {
             $xacnhan = 0;
             $danhsachdatphong = Danhsachdatphong::where('phongid', $phong->so_phong)->orderBy('id', 'desc')->first();
-            Log::info($danhsachdatphong);
+            // Log::info($danhsachdatphong);
             if ($danhsachdatphong) {
                 $datphongs = Datphong::where('id', $danhsachdatphong->datphongid)->get();
                 if (count($datphongs) != 0) {
@@ -214,7 +214,7 @@ class IndexController extends Controller
                 'ngayketthuco' => $ngayketthuco,
             ]);
         } else {
-            Log::info($datphong);
+            // Log::info($datphong);
             $danhsachdatphong->phongid = $request->phongid;
             $danhsachdatphong->datphongid = $datphong->id;
             $danhsachdatphong->ngaybatdauo = $datphong->ngaydat;
@@ -248,7 +248,7 @@ class IndexController extends Controller
             'phongid' => 'required',
         ]);
 
-        Log::info($request);
+        // Log::info($request);
 
         Khachhang::create([
             'ten' => $request->ten,

@@ -56,7 +56,7 @@ class KhachhangController extends Controller
             'phongid' => 'required',
         ]);
 
-        Log::info($request);
+        // Log::info($request);
 
         Khachhang::create([
             'ten' => $request->ten,
