@@ -120,6 +120,8 @@ class ThanhtoanController extends Controller
         }
 
         // Luu thong tin chuyen khoan
+        $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
+        $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
         Thanhtoan::create(array(
             "hinhthuc" => "chuyenkhoan",
             "gia" => $request->vnp_Amount,

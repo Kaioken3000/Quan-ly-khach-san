@@ -567,7 +567,7 @@
                             <div class="p-2 bd-highlight">
                               {{-- Thanh toan vnpay --}}
                               <a
-                                href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}/{{$tonggia}}">
+                                href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}/{{$tongtien}}">
                                 <img
                                   src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929"
                                   width="150px" class="shadow-sm">

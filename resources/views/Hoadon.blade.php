@@ -225,8 +225,9 @@
                         <div class="total-left w-85 float-left" align="right">
                             @if($tiendatcoc)
                             <p>Tổng cộng: {{ $tonggia + $tongtiendv - $tiendatcoc->gia}}VND</p>
-                            @endif
+                            @else
                             <p>Tổng cộng: {{ $tonggia + $tongtiendv}}VND</p>
+                            @endif
                         </div>
                         <div style="clear: both;"></div>
                     </div>
