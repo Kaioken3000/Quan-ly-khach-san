@@ -59,6 +59,8 @@
 
     @include('client.layouts2.script')
 
+    @include('client.layouts2.chatbot')
+
 </body>
 
 </html>
