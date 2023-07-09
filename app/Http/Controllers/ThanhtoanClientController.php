@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Thanhtoan;
 use App\Models\Traphong;
 use App\Models\Datphong;
+use App\Models\Danhsachdatphong;
+use App\Models\Khachhang;
+
+use App\Http\Controllers\IndexController;
 
 use Illuminate\Support\Facades\File;
 
@@ -25,7 +29,16 @@ class ThanhtoanClientController extends Controller
         $vnp_Locale = $request->language; //Ngôn ngữ chuyển hướng thanh toán
         $vnp_BankCode = $request->bankCode; //Mã phương thức thanh toán
         $vnp_IpAddr = $request->ip(); //IP Khách hàng thanh toán
-        $vnp_Returnurl = "http://quanlykhachsan-b1910261-new.local/client/vnpay_return?datphongid=" . $request->datphongid . "&loaitien=" . $request->loaitien . "&khachhangid=" . $request->khachhangid . "";
+        $vnp_Returnurl = "http://quanlykhachsan-b1910261-new.local/client/vnpay_return?"
+            . "ten=" . $request->ten .
+            "&sdt=" . $request->sdt .
+            "&email=" . $request->email .
+            "&ngaydat=" . $request->ngaydat .
+            "&ngaytra=" . $request->ngaytra .
+            "&soluong=" . $request->soluong .
+            "&phongid=" . $request->phongid .
+            "&loaitien=" . $request->loaitien .
+            "&khachhangid=" . $request->khachhangid . "";
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -110,6 +123,8 @@ class ThanhtoanClientController extends Controller
 
         // $datphong->save();
 
+        $khachhang = $this->index_store($request);
+        Log::info($request);
         // Luu thong tin chuyen khoan
         $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
         $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
@@ -118,10 +133,63 @@ class ThanhtoanClientController extends Controller
             "gia" => $request->vnp_Amount,
             "loaitien" => $request->loaitien,
             "chuyenkhoan_token" => $request->vnp_TxnRef,
-            "khachhangid" => $request->khachhangid,
+            "khachhangid" => $khachhang->id,
             // chua co thoi gian
         ));
 
         return view("client.thanhtoanvnpayreturn", compact('request', 'secureHash', 'vnp_SecureHash'));
+    }
+
+    public function index_store(Request $request)
+    {
+        $request->validate([
+            'ten' => 'required',
+            'sdt' => 'required',
+            'email' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required',
+            'phongid' => 'required',
+        ]);
+
+        // Log::info($request);
+
+        Khachhang::create([
+            'ten' => $request->ten,
+            'sdt' => $request->sdt,
+            'email' => $request->email,
+            'userid' => $request->khachhangid
+        ]);
+
+        $khachhangs = Khachhang::max('id');
+
+        $request->tinhtrangthanhtoan = 0;
+        $request->tinhtrangnhanphong = 0;
+        $request->huydatphong = 0;
+        Datphong::create([
+            'ngaydat' => $request->ngaydat,
+            'ngaytra' => $request->ngaytra,
+            'soluong' => $request->soluong,
+            'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
+            'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
+            'huydatphong' => $request->huydatphong,
+            'khachhangid' => $khachhangs,
+        ]);
+
+        $dat = Datphong::max('id');
+
+        $khachhangs = Khachhang::find($khachhangs);
+        $khachhangs->datphongid = $dat;
+        $khachhangs->save();
+
+        Danhsachdatphong::create([
+            'phongid' => $request->phongid,
+            'ngaybatdauo' => $request->ngaydat,
+            'ngayketthuco' => $request->ngaytra,
+            'datphongid' => $dat,
+        ]);
+
+        // return redirect('client/index')->with('success', 'Datphong has been created successfully.');
+        return $khachhangs;
     }
 }

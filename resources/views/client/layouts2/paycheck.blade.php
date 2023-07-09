@@ -37,7 +37,7 @@
 
                 </div>
                 <button type="submit" class="btn btn-success" href>Thanh toán &nbsp; <i class="fas fa-money-check"></i></button>
-
+                <input type="hidden" value="'{{$request->url()}}'" name="currentUrl">
                 <input type="hidden" value="{{$request->datphongid}}" name="datphongid">
                 <input type="hidden" value="{{$request->loaitien}}" name="loaitien">
                 <input type="hidden" value="{{$request->khachhangid}}" name="khachhangid">

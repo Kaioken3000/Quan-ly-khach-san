@@ -27,7 +27,8 @@ class IndexController extends Controller
     public function index()
     {
         $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(4);
-        return view('client.index', compact('loaiphongs'));
+        $phongs = Phong::orderBy('so_phong', 'asc')->paginate(4);
+        return view('client.index', compact('loaiphongs','phongs'));
     }
     /**
      * Hien trang phong cua client
