@@ -6,6 +6,16 @@
         <div class="row">
             {{-- Room list start --}}
             @foreach ($phongs as $phong)
+            <?php $datphongs = App\Models\Datphong::get();
+                $check = 0;
+                foreach($datphongs as $datphong){
+                    $danhsachdatphong = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->latest()->first();
+                    if($danhsachdatphong->phongid == $phong->so_phong){
+                        $check++;
+                        break;
+                    }
+                }
+                ?>
             <div class="col-lg-4 col-md-6">
                 <div class="room-item">
                     <img src="/client/images/{{$phong->picture_1}}" alt="">
@@ -24,7 +34,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="/client/chitietphong/{{$phong->so_phong}}" class="primary-btn">More Details</a>
+                        @if($check==0)
+                            <a href="/client/chitietphong/{{$phong->so_phong}}" class="primary-btn">More Details</a>
+                        @else  
+                            <p class="mb-0">Booked</p>
+                        @endif
                     </div>
                 </div>
             </div>

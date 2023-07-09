@@ -108,6 +108,15 @@ class IndexController extends Controller
      */
     public function reservation(Request $request)
     {
+        $request->validate([
+            'ten' => 'required',
+            'sdt' => 'required',
+            'email' => 'required',
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required',
+            'phongid' => 'required',
+        ]);
         return view('client.reservation', compact('request'));
     }
 
@@ -127,6 +136,11 @@ class IndexController extends Controller
     // kiem tra phong trong cua client
     public function checkroom(Request $request)
     {
+        $request->validate([
+            'ngaydat' => 'required',
+            'ngaytra' => 'required',
+            'soluong' => 'required',
+        ]);
 
         $phongslist = Phong::get();
         $phongs = array();

@@ -38,6 +38,9 @@ use App\Models\User;
 Route::get('/', function () {
     return redirect('/dashboard');
 });
+Route::get('/home', function () {
+    return redirect('/dashboard');
+});
 
 /**
  * Dashboard Routes
@@ -161,11 +164,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index'); //báo cáo index
 
     });
-    Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
+    Route::group(['middleware' => ['auth', 'role:Khachhang']], function () {
         // thanh toan vnpay
         Route::get("/client/thanhtoanvnpayview/{datphongid}/{loaitien}/{khachhangid}/{sotien}", "ThanhtoanClientController@index");
         Route::post("/client/thanhtoanvnpay", "ThanhtoanClientController@create")->name("client.thanhtoanvnpay");
         Route::get("/client/vnpay_return", "ThanhtoanClientController@return");
+
+        // Nhap thong tin khách hang de dat phong
+        Route::get('client/reservation', 'IndexController@reservation');
+        Route::post('client/reservation', 'IndexController@reservation');
     });
 
     Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
@@ -192,8 +199,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Kiem tra phong trong tao moi
     Route::get('client/check', 'IndexController@checkroom');
 
-    // Nhap thong tin khách hang de dat phong
-    Route::get('client/reservation', 'IndexController@reservation');
+
 
     // Danh sách các phòng đã đặt
     Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');

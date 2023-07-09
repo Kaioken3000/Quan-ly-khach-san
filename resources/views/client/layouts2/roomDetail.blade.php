@@ -72,7 +72,8 @@
                         <p>{{ $message }}</p>
                     </div>
                     @endif
-                    <form action="/kiemtra-index-store" method="post">
+                    {{-- <form action="/kiemtra-index-store" method="post"> --}}
+                    <form action="/client/reservation" method="post">
                         @csrf
                         <div class="check-date">
                             <label for="ngaydat">Ngày vào</label>
@@ -96,11 +97,14 @@
                             @enderror
                         </div>
                         <button type="submit">Đặt phòng</button>
-                        <input type="hidden" id="phongid" name="phongid" class="form-control" value="{{ $phong->so_phong }}">
+                        {{-- <input type="hidden" id="phongid" name="phongid" class="form-control" value="{{ $phong->so_phong }}"> --}}
+                        @auth
+                        <input type="hidden" id="sophong" name="sophong" class="form-control" value="{{ $phong->so_phong }}">
                         <input type="hidden" id="ten" name="ten" class="form-control " value="{{auth()->user()->username}}">
                         <input type="hidden" id="sdt" name="sdt" class="form-control " value="{{auth()->user()->sdt}}">
                         <input type="hidden" id="email" name="email" class="form-control " value="{{auth()->user()->email}}">
                         <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
+                        @endauth
                     </form>
                 </div>
             </div>
