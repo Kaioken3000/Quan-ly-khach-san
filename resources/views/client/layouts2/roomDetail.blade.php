@@ -97,7 +97,7 @@
                             @enderror
                         </div>
                         <button type="submit">Đặt phòng</button>
-                        {{-- <input type="hidden" id="phongid" name="phongid" class="form-control" value="{{ $phong->so_phong }}"> --}}
+                        <input type="hidden" id="phongid" name="phongid" class="form-control" value="{{ $phong->so_phong }}">
                         @auth
                         <input type="hidden" id="sophong" name="sophong" class="form-control" value="{{ $phong->so_phong }}">
                         <input type="hidden" id="ten" name="ten" class="form-control " value="{{auth()->user()->username}}">

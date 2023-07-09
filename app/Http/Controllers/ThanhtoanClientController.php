@@ -29,7 +29,7 @@ class ThanhtoanClientController extends Controller
         $vnp_Locale = $request->language; //Ngôn ngữ chuyển hướng thanh toán
         $vnp_BankCode = $request->bankCode; //Mã phương thức thanh toán
         $vnp_IpAddr = $request->ip(); //IP Khách hàng thanh toán
-        $vnp_Returnurl = "http://quanlykhachsan-b1910261-new.local/client/vnpay_return?"
+        $vnp_Returnurl = "http://khachsan-b1910261.local/client/vnpay_return?"
             . "ten=" . $request->ten .
             "&sdt=" . $request->sdt .
             "&email=" . $request->email .

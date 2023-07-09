@@ -14,8 +14,12 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        $url = "http://khachsan-b1910261.local";
         if (! $request->expectsJson()) {
-            return route('login.perform');
+            // return route('login.perform');
+            if(!str_contains(strval(app('url')->current()), $url))
+                return route('login.perform');
+            else return route('client.loginclient');
         }
     }
 }

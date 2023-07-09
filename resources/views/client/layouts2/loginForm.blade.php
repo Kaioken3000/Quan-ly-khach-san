@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-between">
             <label class="form-label" for="password">Password</label>
             <a href="auth-forgot-password-basic.html">
-                <small>Forgot Password?</small>
+                <small>Forgot Password?</small> 
             </a>
         </div>
         <div class="input-group input-group-merge">
@@ -38,7 +38,8 @@
     </div>
     <div class="mt-4 text-center">
         <a href="{{ url('auth/facebook') }}">
-            <img width="60%" src="https://scontent.fvca1-1.fna.fbcdn.net/v/t39.2365-6/294967112_614766366879300_4791806768823542705_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ad8a9d&_nc_ohc=lY6o8dYUVBoAX-7_cZi&_nc_ht=scontent.fvca1-1.fna&oh=00_AfAY3ICsQeIK7TuxPmXUxYEkC2m3HvMa__0daElgATQILQ&oe=64A30EA4">
+            {{-- <img width="60%" src="https://scontent.fvca1-1.fna.fbcdn.net/v/t39.2365-6/294967112_614766366879300_4791806768823542705_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ad8a9d&_nc_ohc=lY6o8dYUVBoAX-7_cZi&_nc_ht=scontent.fvca1-1.fna&oh=00_AfAY3ICsQeIK7TuxPmXUxYEkC2m3HvMa__0daElgATQILQ&oe=64A30EA4"> --}}
+            <img width="60%" src="/client/images/facebookLogin.png">
         </a>
     </div>
     <div class="mt-4 text-center">
