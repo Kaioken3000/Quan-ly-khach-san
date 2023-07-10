@@ -71,6 +71,14 @@
         <!-- Quản lý -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lý</span></li>
 
+        <!-- Ca trực -->
+        <li class="menu-item {{ Request::is('catrucs') || Request::is('catrucs*') ? 'active':'' }}">
+            <a href="{{ route('catrucs.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <div data-i18n="Analytics">Ca trực</div>
+            </a>
+        </li>
+
         <!-- Nhân viên -->
         <li class="menu-item {{ Request::is('nhanviens') || Request::is('nhanviens*') ? 'active':'' }}">
             <a href="{{ route('nhanviens.index') }}" class="menu-link">

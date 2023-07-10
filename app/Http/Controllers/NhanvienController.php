@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use App\Models\Nhanvien;
+use App\Models\Catruc;
+use App\Models\CatrucNhanvien;
 
 class NhanvienController extends Controller
 {
@@ -17,7 +19,8 @@ class NhanvienController extends Controller
     public function index()
     {
         $nhanviens = Nhanvien::orderBy('ma','asc')->paginate(5);
-        return view('nhanviens.index', compact('nhanviens'));
+        $catrucs = Catruc::get();
+        return view('nhanviens.index', compact('nhanviens', 'catrucs'));
     }
 
     /**

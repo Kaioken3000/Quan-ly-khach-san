@@ -16,6 +16,7 @@ use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\ThanhtoanController;
+use App\Http\Controllers\CatrucController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Http\Request;
 
@@ -153,6 +154,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::resource('users', UserController::class);
             Route::get('users-search', 'UserController@search');
             Route::get('users/nhanviens-search', 'UserController@search');
+
+            // Ca trực
+            Route::resource('catrucs', CatrucController::class);
+            Route::get('catrucs-search', 'CatrucController@search');
+            Route::get('catrucs/nhanviens-search', 'CatrucController@search');
+
+            // Catruc nhanvien Routes
+            Route::resource('catruc_nhanviens', CatrucNhanvienController::class);
         });
 
         //Profile
