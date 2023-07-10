@@ -19,7 +19,9 @@
             <th>sdt</th>
             <th>email</th>
             <th>Mã đặt phòng</th>
+            @hasrole('Admin')
             <th width="280px">Action</th>
+            @endhasrole
           </tr>
         </thead>
         <tbody>
@@ -30,6 +32,7 @@
             <td>{{ $khachhang->sdt }}</td>
             <td>{{ $khachhang->email }}</td>
             <td>{{ $khachhang->datphongid }}</td>
+            @hasrole('Admin')
             <td class="d-flex gap-1">
               <!-- edit -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEdit{{ $khachhang->id }}">
@@ -139,6 +142,7 @@
                 </div>
               </div>
             </td>
+            @endhasrole
           </tr>
           @endforeach
           <tr>

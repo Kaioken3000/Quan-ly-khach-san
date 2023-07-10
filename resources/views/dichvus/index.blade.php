@@ -4,9 +4,11 @@
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dịch vụ /</span> Quản lý</h4>
   <!-- Create -->
+  @hasrole('Admin')
   <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
     <i class="bx bx-plus mb-1"></i> Create Dịch vụ
   </button>
+  @endhasrole
   <!-- Modal Create -->
   <div class="modal fade" id="ModalCreate" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -65,7 +67,9 @@
             <th>ID</th>
             <th>Tên dịch vụ</th>
             <th>Giá </th>
+            @hasrole('Admin')
             <th width="280px">Action</th>
+            @endhasrole
           </tr>
         </thead>
         <tbody>
@@ -74,6 +78,7 @@
             <td>{{ $dichvu->id }}</td>
             <td>{{ $dichvu->ten }}</td>
             <td>{{ $dichvu->giatien }} {{ $dichvu->donvi }}</td>
+            @hasrole('Admin')
             <td>
               <!-- edit -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEdit{{ $dichvu->id }}">
@@ -153,6 +158,7 @@
               </div>
 
             </td>
+            @endhasrole
           </tr>
           @endforeach
           <tr>

@@ -4,9 +4,11 @@
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Phòng /</span> Quản lý</h4>
   <!-- Create -->
+  @hasrole('Admin')
   <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
     <i class="bx bx-plus mb-1"></i> Create Phòng
   </button>
+  @endhasrole
   <!-- Modal Create -->
   <div class="modal fade" id="ModalCreate" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -86,7 +88,9 @@
             <th>Số phòng</th>
             <th colspan="3">Hình</th>
             <th>Loại phòng</th>
+            @hasrole('Admin')
             <th width="280px">Action</th>
+            @endhasrole
           </tr>
         </thead>
         <tbody>
@@ -100,6 +104,7 @@
             <td><img data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                 title="{{ $phong->picture_3 }}" src="/client/images/{{ $phong->picture_3 }}" width="100%"></td>
             <td>{{ $phong->loaiphongs->ten }}</td>
+            @hasrole('Admin')
             <td>
               <!-- edit -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -201,6 +206,7 @@
                 </div>
               </div>
             </td>
+            @endhasrole
           </tr>
           @endforeach
           <tr>
