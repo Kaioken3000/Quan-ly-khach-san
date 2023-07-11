@@ -1,7 +1,9 @@
-@extends('layouts2.app')
+@extends('layouts2.appForCalendar')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
+<button onclick="myFunction()" class="btn btn-primary">Hiện nhân viên</button>
+
+<div class="container-xxl flex-grow-1 container-p-y" id="myDIV">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Nhân viên /</span> Quản lý</h4>
     <a class="btn btn-success mb-4" href="{{ route('nhanviens.create') }}"><i class="bx bx-plus mb-1"></i> Create Nhân viên</a>
     @if ($message = Session::get('success'))
@@ -37,9 +39,12 @@
                             <form action="{{ route('catruc_nhanviens.destroy',$ca->id) }}" method="Post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="badge badge-danger border-0"><i class="fa fa-times"></i></button>
+                                {{-- <button type="submit" class="badge badge-danger border-0"><i class="fa fa-times"></i></button> --}}
+                                <button type="submit" class="btn btn-link m-0" data-color="#e95959" style="color:red;">
+                                    <i class="icon-copy dw dw-delete-3"></i>
+                                </button>
                             </form>
-                            <p>{{$catruc->ten}}</p>
+                            <p class="mt-2 p-1">{{$catruc->ten}}</p>
                             @endif
                             @endforeach
                         </div>
@@ -47,12 +52,12 @@
                     </td>
                     <td>
                         @foreach($nhanvien->catrucs as $ca)
-                        <p>{{$ca->ngaybatdau}}</p>
+                        <p class="mt-2 p-1">{{$ca->ngaybatdau}}</p>
                         @endforeach
                     </td>
                     <td>
                         @foreach($nhanvien->catrucs as $ca)
-                        <p>{{$ca->ngayketthuc}}</p>
+                        <p class="mt-2 p-1">{{$ca->ngayketthuc}}</p>
                         @endforeach
                     </td>
                     <td>
@@ -62,17 +67,20 @@
                             </a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-link" data-color="#e95959">
+                            <button type="submit" class="btn btn-link" data-color="#e95959" style="color:red;">
                                 <i class="icon-copy dw dw-delete-3"></i>
                             </button>
-                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modaldichvu{{ $nhanvien->ma }}">
+                            {{-- <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modaldichvu{{ $nhanvien->ma }}">
                                 <i class="bx bx-box mb-1"></i> Thêm ca trực
-                            </button>
+                            </button> --}}
+                            <a class="btn btn-light" href="/catruc_nhanvien/themCatruc/{{$nhanvien->ma}}">
+                                Thêm ca trực
+                            </a>
                         </form>
 
                         <!-- Ca trực -->
                         <div class="my-1">
-                            
+
                         </div>
                         <!-- Modal ca trực -->
                         <div class="modal fade" id="modaldichvu{{ $nhanvien->ma }}" tabindex="-1" aria-hidden="true">
@@ -135,4 +143,20 @@
         </table>
     </div>
 </div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+</script>
+<script>
+    // myFunction()
+</script>
+@include('layouts2.calendar')
 @endsection

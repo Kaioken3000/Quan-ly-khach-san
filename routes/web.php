@@ -163,6 +163,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
             // Catruc nhanvien Routes
             Route::resource('catruc_nhanviens', CatrucNhanvienController::class);
+            Route::get('catruc_nhanvien/themCatruc/{nhanvienid}', 'CatrucNhanvienController@viewThemcatruc');
         });
 
         //Profile

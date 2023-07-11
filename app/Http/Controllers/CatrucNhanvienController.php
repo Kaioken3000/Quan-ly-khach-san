@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\CatrucNhanvien;
+use App\Models\Catruc;
 
 class CatrucNhanvienController extends Controller
 {
@@ -35,6 +36,12 @@ class CatrucNhanvienController extends Controller
         }
 
         return redirect()->route('nhanviens.index')->with('success', 'Ca truc nhan vien has been created successfully.');
+    }
+
+    public function viewThemcatruc(Request $request){
+        $nhanvienid = $request->nhanvienid;
+        $catrucs = Catruc::get();
+        return view('nhanviens.themCatruc', compact("nhanvienid", 'catrucs'));
     }
 
     /**
