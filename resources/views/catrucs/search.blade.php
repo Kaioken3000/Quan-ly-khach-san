@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Ca trực /</span> Quản lý</h4>
   <!-- Create -->
-  <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
+  <button type="button" class="btn btn-success mb-4" toggle="modal" target="#ModalCreate">
     <i class="bx bx-plus mb-1"></i> Create Ca trực
   </button>
   <!-- Modal Create -->
@@ -13,7 +13,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel1">Create Ca trực</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form action="{{ route('catrucs.store') }}" method="POST">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-outline-secondary" dismiss="modal">
             Cancel
           </button>
           <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -56,16 +56,15 @@
     <p>{{ $message }}</p>
   </div>
   @endif
-  <div class="card">
-    <h5 class="card-header">Quản lý ca trực</h5>
-    <div class="table-responsive text-nowrap">
-      <table class="table">
+  <div class="card-box  pb-10">
+        <div class="h5 pd-20 mb-0">Quản lý ca trực</div>
+        <table class="data-table table nowrap">
         <thead>
-          <tr class="thead-dark">
+          <tr >
             <th>ID</th>
             <th>Tên ca trực</th>
             <th>Giá </th>
-            <th width="280px">Action</th>
+            <th class="datatable-nosort">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +75,7 @@
             <td>{{ $catruc->giatien }} {{ $catruc->donvi }}</td>
             <td>
               <!-- edit -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEdit{{ $catruc->id }}">
+              <button type="button" class="btn btn-primary" toggle="modal" target="#ModalEdit{{ $catruc->id }}">
                 <i class="bx bx-edit mb-1"></i>
               </button>
               <!-- Modal edit -->
@@ -85,7 +84,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel1">Edit Ca trực</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <form action="{{ route('catrucs.update',$catruc->id) }}" method="POST">
@@ -114,7 +113,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                      <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                         Cancel
                       </button>
                       <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -125,20 +124,20 @@
               </div>
 
               <!-- Delete-->
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal{{ $catruc->id }}">
+              <button type="button" class="btn btn-danger" toggle="modal" target="#basicModal{{ $catruc->id }}">
                 <i class="bx bx-trash mb-1"></i>
               </button>
               <!-- Modal xoá  -->
               <div class="modal fade" id="basicModal{{ $catruc->id }}" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <div class="d-flex gap-1">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                           No
                         </button>
                         <form action="{{ route('catrucs.destroy',$catruc->id) }}" method="Post">
@@ -164,5 +163,4 @@
       </table>
     </div>
   </div>
-</div>
 @endsection

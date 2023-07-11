@@ -1,44 +1,37 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="/adminresource/assets/"
-  data-template="vertical-menu-template-free"
->
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="/adminresource/assets/" data-template="vertical-menu-template-free">
 <!-- Head -->
 @include('layouts.head')
 
-  <body>
+<body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        <!-- Menu -->
-        @include('layouts.menu')
+        <div class="layout-container">
+            <!-- Menu -->
+            @include('layouts.menu')
 
-        <!-- Layout container -->
-        <div class="layout-page">
+            <!-- Layout container -->
+            <div class="layout-page">
 
-          @include('layouts.navbar')
+                @include('layouts.navbar')
 
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
 
-            <!-- Content -->
-            @yield('content')
-            <!-- Content -->
+                    <!-- Content -->
+                    @yield('content')
+                    <!-- Content -->
 
-          </div>
-          
-          <!-- Footer -->
-          @include('layouts.footer')            
+                </div>
 
+                <!-- Footer -->
+                @include('layouts.footer')
+
+            </div>
         </div>
-      </div>
     </div>
-    
+
     <!-- Script -->
     @include('layouts.script')
-  </body>
+</body>
 </html>

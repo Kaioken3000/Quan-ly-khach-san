@@ -6,7 +6,7 @@
 
     @include('client.layouts.header') --}}
     <?php //require_once("config.php");?>
-    {{-- <div class="card m-4">
+    {{-- <div class="card-box m-4">
         <h3 class="card-header">Tạo mới đơn hàng</h3>
         <div class="table-responsive card-body">
             <form action="{{ route('client.thanhtoanvnpay') }}" id="frmCreateOrder" method="post">

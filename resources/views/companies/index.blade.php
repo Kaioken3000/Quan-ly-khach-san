@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container mt-2">
@@ -19,12 +19,12 @@
     @endif
     <table class="table table-hover">
         <thead>
-            <tr class="thead-dark">
+            <tr >
                 <th>S.No</th>
                 <th>Company Name</th>
                 <th>Company Email</th>
                 <th>Company Address</th>
-                <th width="280px">Action</th>
+                <th class="datatable-nosort">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -47,5 +47,4 @@
         </tbody>
     </table>
     {!! $companies->links("pagination::bootstrap-4") !!}
-</div>
 @endsection

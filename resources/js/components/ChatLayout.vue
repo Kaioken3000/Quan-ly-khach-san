@@ -1,5 +1,5 @@
 <template>
-    <div class="card m-4">
+    <div class="card-box m-4">
         <div class="card-header">
             Chat {{ routeparams }}
         </div>

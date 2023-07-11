@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container mt-2">
@@ -15,10 +15,10 @@
   <!-- Basic Layout -->
   <div class="row">
     <div class="col-xl">
-      <div class="card mb-4 col-xl-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="card-box">
+        <div class="card-header">
           <h5 class="mb-0">From nhập liệu</h5>
-          <small class="text-muted float-end"><i class="fa fa-star"></i></small>
+          
         </div>
         <div class="card-body">
           <form action="{{ route('users.update', $user->id) }}" method="POST">
@@ -47,5 +47,4 @@
       </div>
     </div>
   </div>
-</div>
 @endsection

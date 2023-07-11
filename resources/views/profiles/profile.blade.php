@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-    <div class="card col-4">
+    <div class="card-box col-4">
         <h3 class="card-header">Thông tin tài khoản</h3>
         <img class="w-50 rounded-circle m-auto  " src="/adminresource/assets/img/avatars/blank.jpeg" alt="">
         <div class="card-body">

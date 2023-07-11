@@ -17,6 +17,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\CatrucController;
+use App\Http\Controllers\FullCalenderController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Http\Request;
 
@@ -172,6 +173,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Báo cáo
         Route::get('/baocaos-index', 'BaocaoController@index')->name('baocaos.index'); //báo cáo index
 
+        // calendar
+        Route::get('fullcalender', [FullCalenderController::class, 'index']);
+        Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
     });
     Route::group(['middleware' => ['auth', 'role:Khachhang']], function () {
         // thanh toan vnpay

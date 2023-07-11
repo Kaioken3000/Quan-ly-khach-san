@@ -3,7 +3,7 @@
          <div class="table-responsive text-nowrap">
              <table class="table">
                  <thead>
-                     <tr class="thead-dark">
+                     <tr >
                          <th>Số phòng</th>
                          <th>Loại phòng</th>
                          <th width="280px">Hành động</th>

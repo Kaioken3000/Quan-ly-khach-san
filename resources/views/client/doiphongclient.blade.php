@@ -49,10 +49,10 @@
             <div class="table-responsive text-nowrap">
                 <table class="table" id="myTable">
                     <thead>
-                        <tr class="thead-dark">
+                        <tr >
                             <th>Số phòng</th>
                             <th>Loại phòng</th>
-                            <th width="280px">Action</th>
+                            <th class="datatable-nosort">Action</th>
                         </tr>
                     </thead>
                     <tbody>

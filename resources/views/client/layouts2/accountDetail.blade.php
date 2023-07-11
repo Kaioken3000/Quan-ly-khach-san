@@ -19,7 +19,7 @@
                     </button>
                     <!-- Modal sửa thông tin  -->
                     <div class="modal fade" id="suataikhoan" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel1"> Cập nhật thông tin</h5>
@@ -63,7 +63,7 @@
                     </div>
                     <!-- Modal xoá thông tin  -->
                     <div class="modal fade" id="xoataikhoan" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>

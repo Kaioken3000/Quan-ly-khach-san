@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card col-4">
+    <div class="card-box col-4">
         <h3 class="card-header">Lịch sử đặt phòng</h3>
         <div class="card-body">
             @foreach($danhsachdatphongs as $danhsachdatphong)

@@ -1,6 +1,6 @@
 <?php require_once("config.php");?>
 <div class="container">
-    <div class="card m-4">
+    <div class="card-box m-4">
         <h3 class="card-header">Tạo mới đơn hàng</h3>
         <div class="table-responsive card-body">
             {{-- <form action="vnpay_create_payment.php" id="frmCreateOrder" method="post"> --}}

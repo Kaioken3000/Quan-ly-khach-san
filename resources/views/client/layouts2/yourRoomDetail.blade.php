@@ -8,7 +8,7 @@
             @endif
             <table class="table">
                 <thead>
-                    <tr class="thead-dark">
+                    <tr >
                         <th>id</th>
                         <th>Ngày đặt</th>
                         <th>Ngày trả</th>
@@ -43,7 +43,7 @@
                             $thanhtoans = App\Models\Thanhtoan::where("khachhangid", $datphong->id)->get();
                             ?>
                             <!-- Button trigger modal -->
-                            <button type="button" class="badge bg-info border-info text-white" data-toggle="modal" data-target="#LichsuModal{{ $datphong->datphongid }}">
+                            <button type="button" class="badge badge-info border-info text-white" data-toggle="modal" data-target="#LichsuModal{{ $datphong->datphongid }}">
                                 Lịch sử
                             </button>
 
@@ -137,7 +137,7 @@
                                 </div>
                                 <!-- Modal xoá phòng -->
                                 <div class="modal fade" id="basicModal{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>

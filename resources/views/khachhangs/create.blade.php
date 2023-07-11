@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container mt-2">
@@ -15,10 +15,9 @@
   <!-- Basic Layout -->
   <div class="row">
     <div class="col-xl">
-      <div class="card mb-4 col-xl-7">
-        <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="card-box">
+        <div class="card-header">
           <h5 class="mb-0">From nhập liệu</h5>
-          <small class="text-muted float-end"><i class="fa fa-star"></i></small>
         </div>
         <div class="card-body">
           <form action="{{ route('khachhangs.store') }}" method="POST" class="row" id="payment-form">
@@ -110,7 +109,7 @@
                 <label class="form-label" for="tienchuyenkhoan">Nhập thông tin chuyển khoản</label>
                 <label class="form-label" for="tienchuyenkhoan">(Tiền đặt cọc bằng 50% số tiền loại phòng)</label>
                 <div class="row">
-                  <div class="card p-2">
+                  <div class="card-box p-2">
                     <script src="https://js.stripe.com/v3/"></script>
 
                     <div class="form-row" id="card_stripe">
@@ -139,7 +138,9 @@
             <input type="hidden" name="tinhtrangnhanphong" value=0>
             <input type="hidden" name="loaitien" value="datcoc">
             <input type="hidden" name="hinhthucthanhtoan" value="tructiep">
-            <button type="submit" class="btn btn-primary">Xác nhận</button>
+            <div class="d-flex align-items-center mt-3">
+              <button type="submit" class="btn btn-primary">Xác nhận</button>
+            </div>
           </form>
         </div>
       </div>

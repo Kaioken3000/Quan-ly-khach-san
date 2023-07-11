@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <!-- <style>
@@ -19,53 +19,51 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Báo cáo</h4> -->
     <!-- bao cao theo thang nam -->
-    <Section class="d-flex g-2 ">
-        <div class="card my-2 col-4">
+    <Section class="d-flex my-2">
+        <div class="card-box mr-2">
             <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-auto">
+                <div class="d-flex px-1">
+                    <div class="mx-1">
                         <label for="thang" class="col-form-label">Tháng:</label>
                     </div>
-                    <div class="col-auto">
-                        <select class="form-select" aria-labe="Bao cao thang" id="thang" name="thang">
-                            <option value="0">All</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                    </div>
+                    <select class="form-control" style="width: 70px;" aria-labe="Bao cao thang" id="thang" name="thang">
+                        <option value="0">All</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
                     <div class="col-auto">
                         <input type="submit" class="btn btn-primary" value="Báo cáo theo tháng" onclick="loctheothang()">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card my-2 col-auto">
+        <div class="card-box">
             <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-auto">
-                        <label for="nam" class="col-form-label">Năm:</label>
+                <div class="d-flex">
+                    <div class="mx-1">
+                        <label for="thang" class="col-form-label">Năm:</label>
                     </div>
-                    <div class="col-auto d-flex">
+                    <div class="d-flex">
                         <input type="text" id="nam" class="form-control mx-1" value="<?php echo date("Y"); ?>">
-                        <select class="form-select" aria-labe="Bao cao nam" id="namselect" name="namselect" onchange="thaydoitheonamselect(event)">
+                        <select class="form-control" aria-labe="Bao cao nam" id="namselect" name="namselect" onchange="thaydoitheonamselect(event)">
                             <option value="<?php echo date("Y"); ?>"><?php echo date("Y");   ?></option>
                             <option value="<?php echo date("Y") - 1; ?>"><?php echo date("Y") - 1; ?></option>
                             <option value="<?php echo date("Y") - 2; ?>"><?php echo date("Y") - 2; ?></option>
                             <option value="<?php echo date("Y") - 3; ?>"><?php echo date("Y") - 3; ?></option>
                         </select>
                     </div>
-                    <div class="col-auto">
-                        <input type="submit" class="btn btn-primary" value="Báo cáo theo năm" onclick="loctheonam()">
+                    <div>
+                        <input type="submit" class="btn btn-primary mx-1" value="Báo cáo theo năm" onclick="loctheonam()">
                         <input type="submit" class="btn btn-primary" value="Báo cáo theo tháng và năm" onclick="loctheothangvanam()">
                     </div>
                 </div>
@@ -73,12 +71,12 @@
         </div>
     </Section>
 
-    <div class="card">
-        <h5 class="card-header">Quản lý phòng</h5>
+    <div class="card-box">
+        <div class="h5 pd-20 mb-0">Quản lý phòng</div>
         <div class="table-responsive text-nowrap">
             <table class="table" id="baocaotable">
                 <thead>
-                    <tr class="thead-dark">
+                    <tr>
                         <th>id</th>
                         <th>Ngày đặt</th>
                         <th>Ngày trả</th>
@@ -106,7 +104,7 @@
                         <td>
                             <form action="{{ route('danhsachdatphongs.index') }}" method="get">
                                 <input type="hidden" name="datphongid" value="{{ $datphong->id }}">
-                                <button class="badge bg-info border-info" type="submit"> Lịch sử</button>
+                                <button class="badge badge-info border-info" type="submit"> Lịch sử</button>
                             </form>
                         </td>
                         <td>{{ $datphong->khachhangid }}</td>
@@ -179,24 +177,24 @@
                     },
 
                     xAxis: {
-                        categories: listOfYear,
-                    },
+                        categories: listOfYear
+                    , },
 
                     series: [{
-                        type: 'column',
-                        colorByPoint: true,
-                        data: listOfValue,
-                        showInLegend: false
+                        type: 'column'
+                        , colorByPoint: true
+                        , data: listOfValue
+                        , showInLegend: false
                     }]
                 });
 
                 $('#plain').click(function() {
                     chart.update({
                         chart: {
-                            inverted: false,
-                            polar: false
-                        },
-                        subtitle: {
+                            inverted: false
+                            , polar: false
+                        }
+                        , subtitle: {
                             text: 'Plain'
                         }
                     });
@@ -205,10 +203,10 @@
                 $('#inverted').click(function() {
                     chart.update({
                         chart: {
-                            inverted: true,
-                            polar: false
-                        },
-                        subtitle: {
+                            inverted: true
+                            , polar: false
+                        }
+                        , subtitle: {
                             text: 'Inverted'
                         }
                     });
@@ -217,15 +215,16 @@
                 $('#polar').click(function() {
                     chart.update({
                         chart: {
-                            inverted: false,
-                            polar: true
-                        },
-                        subtitle: {
+                            inverted: false
+                            , polar: true
+                        }
+                        , subtitle: {
                             text: 'Polar'
                         }
                     });
                 });
             });
+
         </script>
         <div id="container" data-order="{{ $thanhtoan }}" class="col-6 my-3"></div>
         <script>
@@ -234,47 +233,48 @@
                 var chartData = [];
                 productBuy.forEach(function(element) {
                     var ele = {
-                        name: element.chuathanhtoan,
-                        y: parseFloat(element.sochuathanhtoan)
+                        name: element.chuathanhtoan
+                        , y: parseFloat(element.sochuathanhtoan)
                     };
                     chartData.push(ele);
                     var ele2 = {
-                        name: element.dathanhtoan,
-                        y: parseFloat(element.sodathanhtoan)
+                        name: element.dathanhtoan
+                        , y: parseFloat(element.sodathanhtoan)
                     };
                     chartData.push(ele2);
                 });
                 console.log(chartData);
                 Highcharts.chart('container', {
                     chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
+                        plotBackgroundColor: null
+                        , plotBorderWidth: null
+                        , plotShadow: false
+                        , type: 'pie'
+                    }
+                    , title: {
                         text: 'Thanh toán'
-                    },
-                    tooltip: {
+                    }
+                    , tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
+                    }
+                    , plotOptions: {
                         pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
+                            allowPointSelect: true
+                            , cursor: 'pointer'
+                            , dataLabels: {
                                 enabled: false
-                            },
-                            showInLegend: true
+                            }
+                            , showInLegend: true
                         }
-                    },
-                    series: [{
-                        name: 'Brands',
-                        colorByPoint: true,
-                        data: chartData,
-                    }],
-                });
+                    }
+                    , series: [{
+                        name: 'Brands'
+                        , colorByPoint: true
+                        , data: chartData
+                    , }]
+                , });
             });
+
         </script>
     </div>
     <div class="row">
@@ -285,44 +285,45 @@
                 chart: {
                     type: 'spline'
                     // column
-                },
-                title: {
+                }
+                , title: {
                     text: 'Số lượng ở các phòng'
-                },
-                xAxis: {
-                    categories: <?php echo $phong ?>,
-                },
-                yAxis: {
+                }
+                , xAxis: {
+                    categories: < ? php echo $phong ? > 
+                , }
+                , yAxis: {
                     title: {
                         text: 'Số lượng đã ở'
                     }
-                },
-                tooltip: {
-                    crosshairs: true,
-                    shared: true
-                },
-                plotOptions: {
+                }
+                , tooltip: {
+                    crosshairs: true
+                    , shared: true
+                }
+                , plotOptions: {
                     spline: {
                         marker: {
-                            radius: 4,
-                            lineColor: '#666666',
-                            lineWidth: 1
+                            radius: 4
+                            , lineColor: '#666666'
+                            , lineWidth: 1
                         }
                     }
-                },
-                series: [{
-                    name: 'Số phòng',
-                    marker: {
+                }
+                , series: [{
+                    name: 'Số phòng'
+                    , marker: {
                         symbol: 'circle'
-                    },
-                    data: <?php echo $soluongphong ?>
+                    }
+                    , data: < ? php echo $soluongphong ? >
 
                 }]
             });
+
         </script>
 
         <!-- Hien tinh trang nhan phong va chua nhan phong -->
-        <div id="container3" data-order="{{ $nhanphong }}" class="col-6"></div>
+        <div id="container3" data-order="{{ $nhanphong }}" class="col-12"></div>
         <script>
             $(document).ready(function() {
                 var order = $('#container3').data('order');
@@ -346,24 +347,24 @@
                     },
 
                     xAxis: {
-                        categories: listOfYear,
-                    },
+                        categories: listOfYear
+                    , },
 
                     series: [{
-                        type: 'column',
-                        colorByPoint: true,
-                        data: listOfValue,
-                        showInLegend: false
+                        type: 'column'
+                        , colorByPoint: true
+                        , data: listOfValue
+                        , showInLegend: false
                     }]
                 });
 
                 $('#plain').click(function() {
                     chart.update({
                         chart: {
-                            inverted: false,
-                            polar: false
-                        },
-                        subtitle: {
+                            inverted: false
+                            , polar: false
+                        }
+                        , subtitle: {
                             text: 'Plain'
                         }
                     });
@@ -372,10 +373,10 @@
                 $('#inverted').click(function() {
                     chart.update({
                         chart: {
-                            inverted: true,
-                            polar: false
-                        },
-                        subtitle: {
+                            inverted: true
+                            , polar: false
+                        }
+                        , subtitle: {
                             text: 'Inverted'
                         }
                     });
@@ -384,15 +385,16 @@
                 $('#polar').click(function() {
                     chart.update({
                         chart: {
-                            inverted: false,
-                            polar: true
-                        },
-                        subtitle: {
+                            inverted: false
+                            , polar: true
+                        }
+                        , subtitle: {
                             text: 'Polar'
                         }
                     });
                 });
             });
+
         </script>
     </div>
 </div>

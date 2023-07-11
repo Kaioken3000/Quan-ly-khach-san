@@ -101,7 +101,7 @@
                         <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                             <div class="d-flex">
                                 <div class="me-2">
-                                    <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
+                                    <span class="badge badge-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
                                 </div>
                                 <div class="d-flex flex-column">
                                     <small>2022</small>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="d-flex">
                                 <div class="me-2">
-                                    <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
+                                    <span class="badge badge-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
                                 </div>
                                 <div class="d-flex flex-column">
                                     <small>2021</small>
@@ -180,7 +180,7 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                                        <span class="badge badge-label-warning rounded-pill">Year 2021</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i> 68.2%</small>
@@ -198,7 +198,7 @@
     <div class="row">
         <!-- Order Statistics -->
         <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-            <div class="card h-100">
+            <div class="card-box h-100">
                 <div class="card-header d-flex align-items-center justify-content-between pb-0">
                     <div class="card-title mb-0">
                         <h5 class="m-0 me-2">Order Statistics</h5>
@@ -288,7 +288,7 @@
 
         <!-- Expense Overview -->
         <div class="col-md-6 col-lg-4 order-1 mb-4">
-            <div class="card h-100">
+            <div class="card-box h-100">
                 <div class="card-header">
                     <ul class="nav nav-pills" role="tablist">
                         <li class="nav-item">
@@ -341,7 +341,7 @@
 
         <!-- Transactions -->
         <div class="col-md-6 col-lg-4 order-2 mb-4">
-            <div class="card h-100">
+            <div class="card-box h-100">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title m-0 me-2">Transactions</h5>
                     <div class="dropdown">

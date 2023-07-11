@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <!--Begin display -->
-<div class="card m-4">
+<div class="card-box m-4">
     <div class="card-header">
         <h3 class="text-muted">VNPAY RESPONSE</h3>
     </div>
@@ -76,5 +76,4 @@
             <?php echo date('Y')?>
         </p>
     </footer>
-</div>
 @endsection

@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="card m-4">
+    <div class="card-box m-4">
         <div class="card-header">
             <h3 class="text-muted">VNPAY RESPONSE</h3>
         </div>

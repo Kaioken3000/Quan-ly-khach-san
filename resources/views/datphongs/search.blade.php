@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -38,7 +38,7 @@
     <!-- end option1 -->
 
     <!-- Option 2 -->
-    <div class="card mx-2">
+    <div class="card-box mx-2">
       <div class="card-body">
         <label class="form-check-label">
           Nhận phòng
@@ -72,12 +72,12 @@
     <p>{{ $message }}</p>
   </div>
   @endif
-  <div class="card">
-    <h5 class="card-header">Quản lý phòng</h5>
+  <div class="card-box  pb-10">
+        <div class="h5 pd-20 mb-0">Quản lý phòng</h5>
     <div class="table-responsive text-nowrap">
       <table class="table" id="datphongtable">
         <thead>
-          <tr class="thead-dark">
+          <tr >
             <th>id</th>
             <!-- <th>Ngày đặt</th>
             <th>Ngày trả</th> -->
@@ -110,7 +110,7 @@
               $dichvudatphongs = App\Models\DichvuDatphong::where("datphongid", $datphong->datphongid)->get();
               ?>
               <!-- Button trigger modal -->
-              <button type="button" class="badge bg-info border-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->datphongid }}">
+              <button type="button" class="badge badge-info border-info" toggle="modal" target="#LichsuModal{{ $datphong->datphongid }}">
                 Lịch sử
               </button>
 
@@ -120,7 +120,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel1">Lịch sử đặt phòng</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       @foreach($danhsachdatphongs as $danhsachdatphong)
@@ -161,7 +161,7 @@
                         @hasrole('Admin')
                         <!-- xoa dich vu -->
                         <div class="col-2">
-                          <button type="button" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#dichvudatphongxoa{{ $dichvudatphong->id }}">
+                          <button type="button" class="badge badge-danger" toggle="modal" target="#dichvudatphongxoa{{ $dichvudatphong->id }}">
                             delete
                           </button>
                         </div>
@@ -179,15 +179,15 @@
                 @foreach($dichvudatphongs as $dichvudatphong)
                 <!-- Modal xoá dichvu -->
                 <div class="modal fade" id="dichvudatphongxoa{{ $dichvudatphong->id }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="d-flex gap-1">
-                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                             No
                           </button>
                           <form action="{{ route('dichvu_datphong.destroy',$dichvudatphong->id) }}" method="Post">
@@ -231,21 +231,21 @@
                 @if($datphong->tinhtrangnhanphong == 0)
                 @hasrole('Admin')
                 <div class="m-1">
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->datphongid }}">
+                  <button type="button" class="btn btn-danger" toggle="modal" target="#basicModal{{ $datphong->datphongid }}">
                     <i class="bx bx-trash mb-1"></i>
                   </button>
                 </div>
                 <!-- Modal xoá phòng -->
                 <div class="modal fade" id="basicModal{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="d-flex gap-1">
-                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                             No
                           </button>
                           <form action="{{ route('datphongs.destroy',$datphong->datphongid) }}" method="Post">
@@ -263,21 +263,21 @@
                 <!-- Huỷ đặt phòng -->
 
                 <div class="m-1">
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#huydatphong{{ $datphong->datphongid }}">
+                  <button type="button" class="btn btn-danger" toggle="modal" target="#huydatphong{{ $datphong->datphongid }}">
                     {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt phòng' : ' Hoàn tác' }}
                   </button>
                 </div>
                 <!-- Modal huỷ đặt phòng -->
                 <div class="modal fade" id="huydatphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"> Bạn có chắc chắn muốn huỷ đặt phòng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="d-flex gap-1">
-                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                             No
                           </button>
                           <form action="{{ route('huydatphongs.store',$datphong->datphongid) }}" method="Post">
@@ -296,7 +296,7 @@
               <div>
                 <!-- Dịch vụ -->
                 <div class="m-1">
-                  <button type="button" class="w-100 btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldichvu{{ $datphong->datphongid }}">
+                  <button type="button" class="w-100 btn btn-success" toggle="modal" target="#modaldichvu{{ $datphong->datphongid }}">
                     <i class="bx bx-box mb-1"></i> Dịch vụ
                   </button>
                 </div>
@@ -306,7 +306,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <form action="{{ route('dichvu_datphong.store') }}" method="POST">
@@ -331,7 +331,7 @@
                           </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                           Cancel
                         </button>
                         <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -344,21 +344,21 @@
 
                 <!-- Thanh toán -->
                 <div class="m-1">
-                  <button type="button" class="w-100 btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
+                  <button type="button" class="w-100 btn btn-warning" toggle="modal" target="#modalthanhtoan{{ $datphong->datphongid }}">
                     <i class="bx bx-coin mb-1"></i> Thanh toán
                   </button>
                 </div>
                 <!-- Modal thanh toán -->
                 <div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="d-flex gap-1">
-                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                             No
                           </button>
                           <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post">
@@ -375,7 +375,7 @@
                 <!-- Nhận phòng, sửa nhận phòng -->
                 @hasrole('Admin')
                 <div class="m-1">
-                  <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+                  <button type="button" class="w-100 btn btn-secondary" toggle="modal" target="#nhanphong{{ $datphong->datphongid }}">
                     <i class="bx bx-hotel mb-1">
                       {{ ($datphong->tinhtrangnhanphong == 0) ? ' Nhận phòng' : ' Sửa nhận phòng' }}
                     </i>
@@ -384,7 +384,7 @@
                 @else
                 @if($datphong->tinhtrangnhanphong == 0)
                 <div class="m-1">
-                  <button type="button" class="w-100 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+                  <button type="button" class="w-100 btn btn-secondary" toggle="modal" target="#nhanphong{{ $datphong->datphongid }}">
                     <i class="bx bx-hotel mb-1">
                       Nhận phòng
                     </i>
@@ -394,15 +394,15 @@
                 @endhasrole
                 <!-- Modal nhan phòng -->
                 <div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1"> Xác nhận</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="d-flex gap-1">
-                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          <button type="button" class="btn btn-outline-secondary" dismiss="modal">
                             No
                           </button>
                           <form class="m-1" action="{{ route('datphongs.nhanphong',$datphong->datphongid) }}" method="Post">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container mt-2">
@@ -50,5 +50,4 @@
             <button type="submit" class="btn btn-primary ml-3">Submit</button>
         </div>
     </form>
-</div>
 @endsection

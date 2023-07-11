@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -8,17 +8,16 @@
     <p>{{ $message }}</p>
   </div>
   @endif
-  <div class="card">
-    <h5 class="card-header">Quản lý User</h5>
-    <div class="table-responsive text-nowrap">
-      <table class="table">
+  <div class="card-box  pb-10">
+        <div class="h5 pd-20 mb-0">Quản lý User</div>
+        <table class="data-table table nowrap">
         <thead>
-          <tr class="thead-dark">
+          <tr >
             <th>Id</th>
             <th>Email</th>
             <th>Username</th>
             <th>Role</th>
-            <th width="280px">Action</th>
+            <th class="datatable-nosort">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -53,5 +52,4 @@
       </table>
     </div>
   </div>
-</div>
 @endsection

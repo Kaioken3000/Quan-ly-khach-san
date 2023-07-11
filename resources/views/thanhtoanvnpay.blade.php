@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts2.app')
 
 @section('content')
 <?php require_once("config.php");?>
-<div class="card m-4">
+<div class="card-box m-4">
     <h3 class="card-header">Tạo mới đơn hàng</h3>
     <div class="table-responsive card-body">
         {{-- <form action="vnpay_create_payment.php" id="frmCreateOrder" method="post"> --}}
@@ -54,5 +54,4 @@
     <footer class="card-footer">
         <p>&copy; VNPAY 2020</p>
     </footer>
-</div>
 @endsection
