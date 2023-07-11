@@ -20,31 +20,31 @@
                 <li>
                     <a href="{{ route('loaiphongs.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('loaiphongs') || Request::is('loaiphongs*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Loại phòng</span>
+                        <span class="micon fa fa-list"></span><span class="mtext">Loại phòng</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('phongs.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('phongs') || Request::is('phongs*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Phòng</span>
+                        <span class="micon fa fa-hotel"></span><span class="mtext">Phòng</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('dichvus.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('dichvus') || Request::is('dichvus*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Dịch vụ</span>
+                        <span class="micon fa fa-wrench"></span><span class="mtext">Dịch vụ</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('khachhangs.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('khachhangs') || Request::is('khachhangs*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Khách hàng</span>
+                        <span class="micon fa fa-users"></span><span class="mtext">Khách hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('datphongs.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Quản lý đặt phòng</span>
+                        <span class="micon fa fa-bell"></span><span class="mtext">Quản lý đặt phòng</span>
                     </a>
                 </li>
 
@@ -53,27 +53,27 @@
                     <div class="sidebar-small-cap">Admin</div>
                 </li>
                 <li>
-                    <a href="{{ route('catrucs.index') }}" 
+                    <a href="{{ route('catrucs.index') }}"
                     class="dropdown-toggle no-arrow {{ Request::is('catrucs') || Request::is('catrucs*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Ca trực</span>
+                        <span class="micon fa fa-tasks"></span><span class="mtext">Ca trực</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('nhanviens.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('nhanviens') || Request::is('nhanviens*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Nhân viên</span>
+                        <span class="micon fa fa-user"></span><span class="mtext">Nhân viên</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('users.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('users') || Request::is('users*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Account</span>
+                        <span class="micon fa fa-user-circle"></span><span class="mtext">Account</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('roles.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('roles') || Request::is('roles*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Role</span>
+                        <span class="micon fa fa-cog"></span><span class="mtext">Role</span>
                     </a>
                 </li>
                 @endhasrole
@@ -84,7 +84,7 @@
                 <li>
                     <a href="{{ route('baocaos.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('baocaos') || Request::is('baocaos*') ? 'active':'' }}">
-                        <span class="micon bi bi-diagram-3"></span><span class="mtext">Báo cáo</span>
+                        <span class="micon fa fa-file"></span><span class="mtext">Báo cáo</span>
                     </a>
                 </li>
             </ul>

@@ -152,8 +152,8 @@
     {{ Html::script('https://code.highcharts.com/highcharts.js') }}
     {{ Html::script('https://code.highcharts.com/modules/exporting.js') }}
     {{ Html::script('https://code.highcharts.com/modules/export-data.js') }}
-    <div class="row">
-        <div id="container2" data-order="{{ $thanhtoan }}" class="col-6 my-3"></div>
+    <div class="d-flex">
+        <div id="container2" data-order="{{ $thanhtoan }}" class="col-6 my-3 card-box mr-3"></div>
         <script>
             $(document).ready(function() {
                 var order = $('#container2').data('order');
@@ -226,7 +226,7 @@
             });
 
         </script>
-        <div id="container" data-order="{{ $thanhtoan }}" class="col-6 my-3"></div>
+        <div id="container" data-order="{{ $thanhtoan }}" class="col-6 my-3 card-box"></div>
         <script>
             $(document).ready(function() {
                 var productBuy = $('#container').data('order');
@@ -279,8 +279,8 @@
     </div>
     <div class="row">
         <!-- hien so luong o cua cac phong -->
-        <div id="container6" class="col-6"></div>
-        <script>
+        <div id="container6" class="col-6 card-box"></div>
+        <script type="text/x-game-map">
             Highcharts.chart('container6', {
                 chart: {
                     type: 'spline'
@@ -319,11 +319,10 @@
 
                 }]
             });
-
         </script>
 
         <!-- Hien tinh trang nhan phong va chua nhan phong -->
-        <div id="container3" data-order="{{ $nhanphong }}" class="col-12"></div>
+        <div id="container3" data-order="{{ $nhanphong }}" class="col-12 card-box m-3"></div>
         <script>
             $(document).ready(function() {
                 var order = $('#container3').data('order');

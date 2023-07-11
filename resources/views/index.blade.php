@@ -16,8 +16,8 @@
     {{ Html::script('https://code.highcharts.com/highcharts.js') }}
     {{ Html::script('https://code.highcharts.com/modules/exporting.js') }}
     {{ Html::script('https://code.highcharts.com/modules/export-data.js') }}
-    <div class="row">
-        <div id="container2" data-order="{{ $thanhtoan }}" class="col-6"></div>
+    <div class="d-flex">
+        <div id="container2" data-order="{{ $thanhtoan }}" class="col-6 card-box"></div>
         <script>
             $(document).ready(function() {
                 var order = $('#container2').data('order');
@@ -91,7 +91,7 @@
 
         </script>
 
-        <div id="container" data-order="{{ $thanhtoan }}" class="col-6"></div>
+        <div id="container" data-order="{{ $thanhtoan }}" class="col-6 card-box ml-3"></div>
         <script>
             $(document).ready(function() {
                 var productBuy = $('#container').data('order');
@@ -141,81 +141,80 @@
             });
 
         </script>
+    </div>
+    <div id="container3" data-order="{{ $nhanphong }}" class="col-12 my-3 card-box"></div>
+    <script>
+        $(document).ready(function() {
+            var order = $('#container3').data('order');
+            var listOfValue = [];
+            var listOfYear = [];
+            order.forEach(function(element) {
+                listOfYear.push(element.chuanhanphong);
+                listOfYear.push(element.danhanphong);
+                listOfValue.push(element.sochuanhanphong);
+                listOfValue.push(element.sodanhanphong);
+            });
+            console.log(listOfValue);
+            var chart = Highcharts.chart('container3', {
 
-        <div id="container3" data-order="{{ $nhanphong }}" class="col-12 mt-3"></div>
-        <script>
-            $(document).ready(function() {
-                var order = $('#container3').data('order');
-                var listOfValue = [];
-                var listOfYear = [];
-                order.forEach(function(element) {
-                    listOfYear.push(element.chuanhanphong);
-                    listOfYear.push(element.danhanphong);
-                    listOfValue.push(element.sochuanhanphong);
-                    listOfValue.push(element.sodanhanphong);
-                });
-                console.log(listOfValue);
-                var chart = Highcharts.chart('container3', {
+                title: {
+                    text: 'Nhận phòng'
+                },
 
-                    title: {
-                        text: 'Nhận phòng'
-                    },
+                subtitle: {
+                    text: 'Tình trạng nhận phòng'
+                },
 
-                    subtitle: {
-                        text: 'Tình trạng nhận phòng'
-                    },
+                xAxis: {
+                    categories: listOfYear
+                , },
 
-                    xAxis: {
-                        categories: listOfYear
-                    , },
+                series: [{
+                    type: 'column'
+                    , colorByPoint: true
+                    , data: listOfValue
+                    , showInLegend: false
+                }]
+            });
 
-                    series: [{
-                        type: 'column'
-                        , colorByPoint: true
-                        , data: listOfValue
-                        , showInLegend: false
-                    }]
-                });
-
-                $('#plain').click(function() {
-                    chart.update({
-                        chart: {
-                            inverted: false
-                            , polar: false
-                        }
-                        , subtitle: {
-                            text: 'Plain'
-                        }
-                    });
-                });
-
-                $('#inverted').click(function() {
-                    chart.update({
-                        chart: {
-                            inverted: true
-                            , polar: false
-                        }
-                        , subtitle: {
-                            text: 'Inverted'
-                        }
-                    });
-                });
-
-                $('#polar').click(function() {
-                    chart.update({
-                        chart: {
-                            inverted: false
-                            , polar: true
-                        }
-                        , subtitle: {
-                            text: 'Polar'
-                        }
-                    });
+            $('#plain').click(function() {
+                chart.update({
+                    chart: {
+                        inverted: false
+                        , polar: false
+                    }
+                    , subtitle: {
+                        text: 'Plain'
+                    }
                 });
             });
 
-        </script>
-    </div>
+            $('#inverted').click(function() {
+                chart.update({
+                    chart: {
+                        inverted: true
+                        , polar: false
+                    }
+                    , subtitle: {
+                        text: 'Inverted'
+                    }
+                });
+            });
+
+            $('#polar').click(function() {
+                chart.update({
+                    chart: {
+                        inverted: false
+                        , polar: true
+                    }
+                    , subtitle: {
+                        text: 'Polar'
+                    }
+                });
+            });
+        });
+
+    </script>
 
 </div>
 

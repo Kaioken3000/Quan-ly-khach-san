@@ -9,7 +9,7 @@
     </div>
     @endif
     <div class="card-box col-4">
-        <h3 class="card-header">Thông tin tài khoản</h3>
+        <div class="h5 pd-20 mb-0">Thông tin tài khoản</div>
         <img class="w-50 rounded-circle m-auto  " src="/adminresource/assets/img/avatars/blank.jpeg" alt="">
         <div class="card-body">
             <p>ID: {{ Auth::user()->id }}</p>
