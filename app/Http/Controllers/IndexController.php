@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Datphong;
 use App\Models\Danhsachdatphong;
 use App\Models\Dichvu;
+use App\Models\Check;
 use App\Models\DichvuDatphong;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;

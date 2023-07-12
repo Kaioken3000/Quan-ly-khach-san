@@ -177,6 +177,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // calendar
         Route::get('fullcalender', [FullCalenderController::class, 'index']);
         Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
+        
+        // check in, check out
+        Route::post('checkin', 'CheckController@checkin');
+        Route::put('checkout', 'CheckController@checkout');
     });
     Route::group(['middleware' => ['auth', 'role:Khachhang']], function () {
         // thanh toan vnpay
