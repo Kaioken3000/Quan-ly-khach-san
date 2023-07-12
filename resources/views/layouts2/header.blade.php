@@ -6,7 +6,7 @@
             @include('layouts2.search')
         </div>
     </div>
-    <div class="header-right">
+    <div class="header-right d-flex align-items-center">
         <div class="dashboard-setting user-notification">
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
