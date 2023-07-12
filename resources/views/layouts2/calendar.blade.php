@@ -87,16 +87,35 @@
                 , displayEventTime: false
                 , editable: true
                 , eventRender: function(event, element, view) {
-                    if (event.allDay === 'true') {
-                        event.allDay = true;
-                    } else {
-                        event.allDay = false;
+                        if (event.allDay === 'true') {
+                            event.allDay = true;
+                        } else {
+                            event.allDay = false;
+                        }
+                        // chuyen tu id nhanvien sang ten nhan vien
+                        @foreach($allNhanvien as $thisnhanvien)
+                            if (event.title == "{{$thisnhanvien->ma}}") {
+                                event.title = "{{$thisnhanvien->ten}}";
+                                element.find('.fc-title').text("{{$thisnhanvien->ten}}")
+                            }
+                        @endforeach
+                        //Check what is the key for description in event and use that one.
+                        if (event.catrucid) {
+                            // chuyen tu id catruc sang ten catruc
+                            @foreach($catrucs as $catruc)
+                                if (event.catrucid == "{{$catruc->id}}") {
+                                    event.catrucid = "{{$catruc->ten}}";
+                                }
+                            @endforeach
+                            element.find('.fc-title').append("-" + event.catrucid);
+                        }
                     }
-                    //Check what is the key for description in event and use that one.
-                    if (event.catrucid) {
-                        element.find('.fc-title').append("- Ca trực: " + event.catrucid);
-                    }
-                }
+                    // , eventLimit: true, // for all non-TimeGrid views
+                    // views: {
+                    //     timeGrid: {
+                    //         eventLimit: 2 // adjust to 6 only for timeGridWeek/timeGridDay
+                    //     }
+                    // }
                 , selectable: true
                 , selectHelper: true
                 , select: function(start, end, allDay) {
@@ -119,11 +138,23 @@
                                 }
                                 , type: "POST"
                                 , success: function(data) {
-                                    console.log(data)
+                                    // Get tên nhân viên
                                     displayMessage("Event Created Successfully");
+                                    // chuyen tu id nhanvien sang ten nhan vien
+                                    @foreach($allNhanvien as $thisnhanvien)
+                                        if (data.nhanvienid == "{{$thisnhanvien->ma}}") {
+                                            data.nhanvienid = "{{$thisnhanvien->ten}}";
+                                        }
+                                    @endforeach
+                                    // chuyen tu id catruc sang ten catruc
+                                    @foreach($catrucs as $catruc)
+                                        if (data.catrucid == "{{$catruc->id}}") {
+                                            data.catrucid = "{{$catruc->ten}}";
+                                        }
+                                    @endforeach
                                     calendar.fullCalendar('renderEvent', {
                                         id: data.id
-                                        , title: nhanvienid + "- Ca trực: " + data.catrucid
+                                        , title: data.nhanvienid + "-" + data.catrucid
                                         , start: start
                                         , end: end
                                         , allDay: allDay
@@ -136,6 +167,24 @@
                     }
                 }
                 , eventDrop: function(event, delta) {
+                    var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
+                    var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
+
+                    $.ajax({
+                        url: SITEURL + '/fullcalenderAjax'
+                        , data: {
+                            ngaybatdau: start
+                            , ngayketthuc: end
+                            , id: event.id
+                            , type: 'update'
+                        }
+                        , type: "POST"
+                        , success: function(response) {
+                            displayMessage("Event Updated Successfully");
+                        }
+                    });
+                }
+                , eventResize: function(event, delta) {
                     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
                     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
 
