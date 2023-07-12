@@ -71,7 +71,7 @@
                                 <i class="icon-copy dw dw-delete-3"></i>
                             </button>
                             {{-- <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modaldichvu{{ $nhanvien->ma }}">
-                                <i class="bx bx-box mb-1"></i> Thêm ca trực
+                            <i class="bx bx-box mb-1"></i> Thêm ca trực
                             </button> --}}
                             <a class="btn btn-light" href="/catruc_nhanvien/themCatruc/{{$nhanvien->ma}}">
                                 Thêm ca trực
@@ -156,7 +156,14 @@
 
 </script>
 <script>
-    // myFunction()
+    myFunction()
+
 </script>
+<style>
+    .fc-title {
+        color: white
+    }
+
+</style>
 @include('layouts2.calendar')
 @endsection

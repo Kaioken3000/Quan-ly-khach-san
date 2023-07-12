@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="index.html">
+        <a href="/">
             <img src="/bootstrap4/vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
             <img src="/bootstrap4/vendors/images/deskapp-logo-white.svg" alt="" class="light-logo" />
         </a>

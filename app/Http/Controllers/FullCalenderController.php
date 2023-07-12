@@ -34,7 +34,7 @@ class FullCalenderController extends Controller
 
             $data = CatrucNhanvien::whereDate('ngaybatdau', '>=', $request->start)
                 ->whereDate('ngayketthuc',   '<=', $request->end)
-                ->get(['id','nhanvienid as title','ngaybatdau as start', 'ngayketthuc as end']);
+                ->get(['id','nhanvienid as title','ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
             
             return response()->json($data);
         }
@@ -47,32 +47,77 @@ class FullCalenderController extends Controller
      *
      * @return response()
      */
+    // public function ajax(Request $request)
+    // {
+
+    //     switch ($request->type) {
+    //         case 'add':
+    //             $event = Event::create([
+    //                 'title' => $request->title,
+    //                 'start' => $request->start,
+    //                 'end' => $request->end,
+    //             ]);
+
+    //             return response()->json($event);
+    //             break;
+
+    //         case 'update':
+    //             $event = Event::find($request->id)->update([
+    //                 'title' => $request->title,
+    //                 'start' => $request->start,
+    //                 'end' => $request->end,
+    //             ]);
+
+    //             return response()->json($event);
+    //             break;
+
+    //         case 'delete':
+    //             $event = Event::find($request->id)->delete();
+
+    //             return response()->json($event);
+    //             break;
+
+    //         default:
+    //             # code...
+    //             break;
+    //     }
+    // }
     public function ajax(Request $request)
     {
 
         switch ($request->type) {
             case 'add':
-                $event = Event::create([
-                    'title' => $request->title,
-                    'start' => $request->start,
-                    'end' => $request->end,
+                $request->validate([
+                    'catrucid' => 'required',
+                    'nhanvienid' => 'required',
+                    'ngaybatdau' => 'required',
+                    'ngayketthuc' => 'required',
+                ]);
+                $event = CatrucNhanvien::create([
+                    'catrucid' => $request->catrucid,
+                    'nhanvienid' => $request->nhanvienid,
+                    'ngaybatdau' => $request->ngaybatdau,
+                    'ngayketthuc' => $request->ngayketthuc,
                 ]);
 
                 return response()->json($event);
                 break;
 
             case 'update':
-                $event = Event::find($request->id)->update([
-                    'title' => $request->title,
-                    'start' => $request->start,
-                    'end' => $request->end,
+                $request->validate([
+                    'ngaybatdau' => 'required',
+                    'ngayketthuc' => 'required',
+                ]);
+                $event = CatrucNhanvien::find($request->id)->update([
+                    'ngaybatdau' => $request->ngaybatdau,
+                    'ngayketthuc' => $request->ngayketthuc,
                 ]);
 
                 return response()->json($event);
                 break;
 
             case 'delete':
-                $event = Event::find($request->id)->delete();
+                $event = CatrucNhanvien::find($request->id)->delete();
 
                 return response()->json($event);
                 break;

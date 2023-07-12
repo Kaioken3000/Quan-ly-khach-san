@@ -19,8 +19,9 @@ class NhanvienController extends Controller
     public function index()
     {
         $nhanviens = Nhanvien::orderBy('ma','asc')->paginate(5);
+        $allNhanvien = Nhanvien::get();
         $catrucs = Catruc::get();
-        return view('nhanviens.index', compact('nhanviens', 'catrucs'));
+        return view('nhanviens.index', compact('nhanviens', 'catrucs', 'allNhanvien'));
     }
 
     /**
