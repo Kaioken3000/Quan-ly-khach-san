@@ -42,6 +42,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/chatify" 
+                    class="dropdown-toggle no-arrow {{ Request::is('chatify') || Request::is('chatify*') ? 'active':'' }}">
+                        <span class="micon fa fa-comments"></span><span class="mtext">Chat</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('datphongs.index') }}" 
                     class="dropdown-toggle no-arrow {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active':'' }}">
                         <span class="micon fa fa-bell"></span><span class="mtext">Quản lý đặt phòng</span>
