@@ -55,8 +55,11 @@
                 translateButton.parentElement.dispatchEvent(new Event('change', {
                     bubbles: true
                 }));
+                var body = document.getElementsByTagName("body")
+                body[0].style.top = "0px"
             }
         }, 1000);
+
     }
 
     window.onload = triggerTranslation;
