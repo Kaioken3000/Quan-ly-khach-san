@@ -70,6 +70,14 @@
             <input type="text" name="search" class="form-control search-input" placeholder="Search Here" />
         </div>
     </form>
+@elseif(Request::is('catrucs') || Request::is('catrucs*'))
+    <form action="catrucs-search" method="GET">
+        <div class="form-group mb-0">
+            <i class="dw dw-search2 search-icon"></i>
+            @csrf
+            <input type="text" name="search" class="form-control search-input" placeholder="Search Here" />
+        </div>
+    </form>
 @else
     <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
 @endif
