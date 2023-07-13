@@ -9,7 +9,7 @@
                 <p class="card-text">{{ auth()->user()->email }}</p>
 
                 <h5 class="card-title">Phone Number</h5>
-                <p class="card-text">{{ auth()->user()->sdt }}</p>
+                <p class="card-text">0{{ auth()->user()->sdt }}</p>
                 <div class="mt-3">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#suataikhoan">
                         Cập nhật thông tin

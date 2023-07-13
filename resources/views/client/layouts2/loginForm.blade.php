@@ -1,6 +1,6 @@
 <form id="formAuthentication" class="mb-3" method="post" action="{{ route('client.loginclient') }}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-    @include('layouts.messages')
+    @include('layouts2.messages')
     <div class="mb-3">
         <label for="email" class="form-label">Email or Username</label>
         <input type="text" class="form-control" id="email" name="username" value="{{ old('username') }}" placeholder="Enter your email or username" autofocus required="required" />

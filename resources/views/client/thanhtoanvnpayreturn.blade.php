@@ -95,7 +95,7 @@
 
 <body>
 
-    @include('client.layouts2.loader')
+    {{-- @include('client.layouts2.loader') --}}
 
     @include('client.layouts2.header')
 
