@@ -29,7 +29,7 @@
                     <td>
                         @if(!empty($user->getRoleNames()))
                         @foreach($user->getRoleNames() as $v)
-                        <label class="badge {{ ($v=='Admin') ? 'bg-success' : 'bg-warning' }}">{{ $v }}</label>
+                        <label class="badge {{ ($v=='Admin') ? 'badge-success' : 'badge-warning' }}">{{ $v }}</label>
                         @endforeach
                         @endif
                     </td>

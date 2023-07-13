@@ -39,6 +39,13 @@
               @enderror
             </div>
             <div class="mb-3">
+              <label class="form-label" for="sdt">Số điện thoại</label>
+              <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: Admin" value="0{{ $user->sdt }}"/>
+              @error('sdt')
+              <div class="alert alert-danger" user="alert">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
                 {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
             </div>
             <button type="submit" class="btn btn-primary">Xác nhận</button>

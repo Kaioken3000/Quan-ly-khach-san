@@ -33,10 +33,17 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
+        $request->validate([
+            'email' => 'required|unique:users',
+            'username' => 'required',
+            'sdt' => 'required|numeric|digits:10',
+            'password' => 'required',
+        ]);
+
+        $user = User::create($request->post());
 
         $role = Role::where('name','User')->first();
-
+        
         $user->assignRole($role);
 
         auth()->login($user);

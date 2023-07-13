@@ -55,6 +55,20 @@
                                 @endif
                             </div>
 
+                            {{-- SDT --}}
+                            <label for="sdt" class="form-label">Phone Number</label>
+                            <div class="mb-3 input-group custom">
+                                <input type="text" class="form-control" id="sdt" name="sdt" 
+                                value="{{ old('sdt') }}" placeholder="Enter your phone number" required="required"
+                                regex="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" />
+                                <div class="input-group-append custom">
+                                    <span class="input-group-text"><i class="icon-copy dw dw-phone"></i></span>
+                                </div>
+                                @if ($errors->has('sdt'))
+                                <div class="alert alert-danger" role="alert">{{ $errors->first('sdt') }}</div>
+                                @endif
+                            </div>
+
                             {{-- Password --}}
                             <label class="form-label" for="password">Password</label>
                             <div class="mb-3 input-group custom">
