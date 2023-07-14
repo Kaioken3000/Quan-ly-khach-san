@@ -14,6 +14,7 @@ use App\Models\Danhsachdatphong;
 use App\Models\Dichvu;
 use App\Models\Check;
 use App\Models\DichvuDatphong;
+use App\Models\Catruc;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -436,7 +437,9 @@ class IndexController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('profiles.profile', compact('user'));
+        $catrucs = Catruc::get();
+        $allNhanvien = Nhanvien::get();
+        return view('profiles.profile', compact('user', 'catrucs', 'allNhanvien'));
     }
 
     public function vieweditprofile()
