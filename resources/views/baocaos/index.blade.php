@@ -45,6 +45,21 @@
                         <input type="submit" class="btn btn-primary" value="Báo cáo theo tháng" onclick="loctheothang()">
                     </div>
                 </div>
+                <div class="d-flex px-1 my-1">
+                    <div class="mx-1">
+                        <label for="quy" class="col-form-label">Quý:</label>
+                    </div>
+                    <select class="form-control" style="width: 100px;" aria-labe="Bao cao quy" id="quy" name="quy">
+                        <option value="0">All</option>
+                        <option value="1,2,3">1 (1,2,3)</option>
+                        <option value="4,5,6">2 (4,5,6)</option>
+                        <option value="7,8,9">3 (7,8,9)</option>
+                        <option value="10,11,12">4 (10,11,12)</option>
+                    </select>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-primary" value="Báo cáo theo quy" onclick="loctheoquy()">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-box">
@@ -72,7 +87,7 @@
     </Section>
 
     <div class="card-box">
-        <div class="h5 pd-20 mb-0">Quản lý phòng</div>
+        <div class="h5 pd-20 mb-0">Bảng báo cáo</div>
         <div class="table-responsive text-nowrap">
             <table class="table" id="baocaotable">
                 <thead>
@@ -109,7 +124,7 @@
                         </td>
                         <td>{{ $datphong->khachhangid }}</td>
                         <td>
-                            <label class="badge {{ ($datphong->tinhtrangthanhtoan == 0) ? 'bg-danger' : 'bg-success' }}">
+                            <label class="badge {{ ($datphong->tinhtrangthanhtoan == 0) ? 'badge-danger' : 'badge-success' }}">
                                 {{ ($datphong->tinhtrangthanhtoan == 0) ? 'Chưa' : 'Xác nhận' }}
                             </label>
                         </td>
@@ -122,20 +137,28 @@
                         </td>
                         <td>
                             <?php
-                            $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
-                            $tonggia = 0;
-                            foreach ($danhsachdatphongs as $danhsachdatphong) {
-                                //tim phong va loai phong
-                                $phong = App\Models\Phong::find($danhsachdatphong->phongid);
-                                $loaiphong = App\Models\Loaiphong::find($phong->loaiphongid);
-
-                                //tinh gia tien
-                                $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
-                                $songay = abs(round($songay / 86400));
-                                $tonggia += $songay * $loaiphong->gia * $datphong->soluong;
-                            }
+                            $thanhtoans = App\Models\Thanhtoan::where("khachhangid", $datphong->khachhangid)->get();
                             ?>
-                            {{$tonggia}} VND
+                            <?php
+                            // $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
+                            // $tonggia = 0;
+                            // foreach ($danhsachdatphongs as $danhsachdatphong) {
+                            //     //tim phong va loai phong
+                            //     $phong = App\Models\Phong::find($danhsachdatphong->phongid);
+                            //     $loaiphong = App\Models\Loaiphong::find($phong->loaiphongid);
+
+                            //     //tinh gia tien
+                            //     $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
+                            //     $songay = abs(round($songay / 86400));
+                            //     $tonggia += $songay * $loaiphong->gia * $datphong->soluong;
+                            // }
+                            ?>
+                            {{-- {{$tonggia}} VND --}}
+                            @foreach ($thanhtoans as $thanhtoan)
+                            @if ($thanhtoan->loaitien == 'traphong')
+                            {{$thanhtoan->gia}} VND
+                            @endif
+                            @endforeach
                         </td>
                     </tr>
                     @endforeach

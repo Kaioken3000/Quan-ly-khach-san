@@ -24,19 +24,19 @@ class BaocaoController extends Controller
         // cho phan hien thi danh sach da thanh toan
         $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();
         $tonggiatatca = 0;
-        foreach ($datphongs as $datphong) {
-            $danhsachdatphongs = Danhsachdatphong::where('datphongid', $datphong->id)->get();
-            foreach ($danhsachdatphongs as $danhsachdatphong) {
-                //tim phong va loai phong
-                $phong = Phong::find($danhsachdatphong->phongid);
-                $loaiphong = Loaiphong::find($phong->loaiphongid);
+        // foreach ($datphongs as $datphong) {
+        //     $danhsachdatphongs = Danhsachdatphong::where('datphongid', $datphong->id)->get();
+        //     foreach ($danhsachdatphongs as $danhsachdatphong) {
+        //         //tim phong va loai phong
+        //         $phong = Phong::find($danhsachdatphong->phongid);
+        //         $loaiphong = Loaiphong::find($phong->loaiphongid);
 
-                //tinh gia tien
-                $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
-                $songay = abs(round($songay / 86400));
-                $tonggiatatca += $songay * $loaiphong->gia * $datphong->soluong;
-            }
-        }
+        //         //tinh gia tien
+        //         $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
+        //         $songay = abs(round($songay / 86400));
+        //         $tonggiatatca += $songay * $loaiphong->gia * $datphong->soluong;
+        //     }
+        // }
         // Log::info($datphongs);
         // Log::info($tonggiatatca);
 
