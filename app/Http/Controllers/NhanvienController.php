@@ -20,7 +20,8 @@ class NhanvienController extends Controller
     */
     public function index()
     {
-        $nhanviens = Nhanvien::orderBy('ma','asc')->paginate(5);
+        // $nhanviens = Nhanvien::orderBy('ma','asc')->paginate(5);
+        $nhanviens = Nhanvien::get();
         $allNhanvien = Nhanvien::get();
         $catrucs = Catruc::get();
         return view('nhanviens.index', compact('nhanviens', 'catrucs', 'allNhanvien'));
@@ -152,10 +153,14 @@ class NhanvienController extends Controller
     */
     public function search(Request $request)
     {
+        // $nhanviens = Nhanvien::where('ma','LIKE','%'.$request->search."%")
+        //                         ->orWhere('ten','LIKE','%'.$request->search."%")
+        //                         ->orWhere('luong','LIKE','%'.$request->search."%")
+        //                         ->orderBy('ma','asc')->paginate(5);
         $nhanviens = Nhanvien::where('ma','LIKE','%'.$request->search."%")
                                 ->orWhere('ten','LIKE','%'.$request->search."%")
                                 ->orWhere('luong','LIKE','%'.$request->search."%")
-                                ->orderBy('ma','asc')->paginate(5);
+                                ->get();
         return view('nhanviens.search', compact('nhanviens'));
     }
 }

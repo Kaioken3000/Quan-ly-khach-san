@@ -16,7 +16,8 @@ class LoaiphongController extends Controller
     */
     public function index()
     {
-        $loaiphongs = Loaiphong::orderBy('ma','desc')->paginate(5);
+        // $loaiphongs = Loaiphong::orderBy('ma','desc')->paginate(5);
+        $loaiphongs = Loaiphong::get();
         return view('loaiphongs.index', compact('loaiphongs'));
     }
 
@@ -117,12 +118,18 @@ class LoaiphongController extends Controller
     */
     public function search(Request $request)
     {
+        // $loaiphongs = Loaiphong::where('ma','LIKE','%'.$request->search."%")
+        //                         ->orWhere('ten','LIKE','%'.$request->search."%")
+        //                         ->orWhere('gia','LIKE','%'.$request->search."%")
+        //                         ->orWhere('hinh','LIKE','%'.$request->search."%")
+        //                         ->orWhere('mieuTa','LIKE','%'.$request->search."%")
+        //                         ->orderBy('ma','asc')->paginate(5);
         $loaiphongs = Loaiphong::where('ma','LIKE','%'.$request->search."%")
                                 ->orWhere('ten','LIKE','%'.$request->search."%")
                                 ->orWhere('gia','LIKE','%'.$request->search."%")
                                 ->orWhere('hinh','LIKE','%'.$request->search."%")
                                 ->orWhere('mieuTa','LIKE','%'.$request->search."%")
-                                ->orderBy('ma','asc')->paginate(5);
+                                ->get();
         return view('loaiphongs.search', compact('loaiphongs'));
     }
 }

@@ -20,7 +20,8 @@ class UserController extends Controller
     */
     public function index()
     {
-        $users = User::orderBy('id','asc')->paginate(5);
+        // $users = User::orderBy('id','asc')->paginate(5);
+        $users = User::get();
         return view('users.index', compact('users'));
     }
 
@@ -123,10 +124,14 @@ class UserController extends Controller
     */
     public function search(Request $request)
     {
+        // $users = User::where('email','LIKE','%'.$request->search."%")
+        //                         ->orWhere('username','LIKE','%'.$request->search."%")
+        //                         ->orWhere('sdt','LIKE','%'.$request->search."%")
+        //                         ->orderBy('id','asc')->paginate(5);
         $users = User::where('email','LIKE','%'.$request->search."%")
                                 ->orWhere('username','LIKE','%'.$request->search."%")
                                 ->orWhere('sdt','LIKE','%'.$request->search."%")
-                                ->orderBy('id','asc')->paginate(5);
+                                ->get();
         return view('users.search', compact('users'));
     }
 }

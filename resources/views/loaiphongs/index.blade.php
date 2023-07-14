@@ -215,11 +215,11 @@
                     @endhasrole
                 </tr>
                 @endforeach
-                <tr>
+                {{-- <tr>
                     <td>
                         {!! $loaiphongs->links("pagination::bootstrap-4") !!}
                     </td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
     </div>

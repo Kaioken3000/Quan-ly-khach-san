@@ -14,7 +14,8 @@ class DichvuController extends Controller
     */
     public function index()
     {
-        $dichvus = Dichvu::orderBy('id','asc')->paginate(5);
+        // $dichvus = Dichvu::orderBy('id','asc')->paginate(5);
+        $dichvus = Dichvu::get();
         return view('dichvus.index', compact('dichvus'));
     }
 
@@ -108,11 +109,16 @@ class DichvuController extends Controller
     */
     public function search(Request $request)
     {
+        // $dichvus = Dichvu::where('id','LIKE','%'.$request->search."%")
+        //                         ->orWhere('ten','LIKE','%'.$request->search."%")
+        //                         ->orWhere('giatien','LIKE','%'.$request->search."%")
+        //                         ->orWhere('donvi','LIKE','%'.$request->search."%")
+        //                         ->orderBy('id','asc')->paginate(5);
         $dichvus = Dichvu::where('id','LIKE','%'.$request->search."%")
                                 ->orWhere('ten','LIKE','%'.$request->search."%")
                                 ->orWhere('giatien','LIKE','%'.$request->search."%")
                                 ->orWhere('donvi','LIKE','%'.$request->search."%")
-                                ->orderBy('id','asc')->paginate(5);
+                                ->get();
         return view('dichvus.search', compact('dichvus'));
     }
 }

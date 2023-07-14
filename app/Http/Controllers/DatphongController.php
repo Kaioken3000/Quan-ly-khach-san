@@ -59,18 +59,32 @@ class DatphongController extends Controller
      */
     public function index()
     {
+        // foreach (Auth::user()->roles as $role) {
+        //     if ($role->name == 'Admin') {
+        //         $datphongs = DB::table('datphongs')
+        //             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        //             ->select('*', 'datphongs.id as datphongid')
+        //             ->orderBy('datphongs.id', 'desc')->paginate(5);
+        //     } else {
+        //         $datphongs = DB::table('datphongs')
+        //             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        //             ->where('huydatphong', 0)
+        //             ->select('*', 'datphongs.id as datphongid')
+        //             ->orderBy('datphongs.id', 'desc')->paginate(5);
+        //     }
+        // }
         foreach (Auth::user()->roles as $role) {
             if ($role->name == 'Admin') {
                 $datphongs = DB::table('datphongs')
                     ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
                     ->select('*', 'datphongs.id as datphongid')
-                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+                    ->get();
             } else {
                 $datphongs = DB::table('datphongs')
                     ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
                     ->where('huydatphong', 0)
                     ->select('*', 'datphongs.id as datphongid')
-                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+                    ->get();
             }
         }
         $dichvus = Dichvu::get();
@@ -181,11 +195,35 @@ class DatphongController extends Controller
      */
     public function search(Request $request)
     {
+        // $datphongs = Datphong::where('ngaydat', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('ngaytra', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('soluong', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('khachhangid', 'LIKE', '%' . $request->search . "%")
+        //     ->orderBy('id', 'asc')->paginate(5);
+        // foreach (Auth::user()->roles as $role) {
+        //     if ($role->name == 'Admin') {
+        //         $datphongs = DB::table('datphongs')
+        //             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        //             ->where('datphongs.id', 'LIKE', '%' . $request->search . "%")
+        //             ->orWhere('datphongs.ngaydat', 'LIKE', '%' . $request->search . "%")
+        //             ->orWhere('datphongs.ngaytra', 'LIKE', '%' . $request->search . "%")
+        //             ->orWhere('datphongs.soluong', 'LIKE', '%' . $request->search . "%")
+        //             ->orWhere('datphongs.khachhangid', 'LIKE', '%' . $request->search . "%")
+        //             ->select('*', 'datphongs.id as datphongid')
+        //             ->orderBy('datphongs.id', 'desc')->paginate(5);
+        //     } else {
+        //         $datphongs = DB::table('datphongs')
+        //             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        //             ->where('huydatphong', 0)
+        //             ->select('*', 'datphongs.id as datphongid')
+        //             ->orderBy('datphongs.id', 'desc')->paginate(5);
+        //     }
+        // }
         $datphongs = Datphong::where('ngaydat', 'LIKE', '%' . $request->search . "%")
             ->orWhere('ngaytra', 'LIKE', '%' . $request->search . "%")
             ->orWhere('soluong', 'LIKE', '%' . $request->search . "%")
             ->orWhere('khachhangid', 'LIKE', '%' . $request->search . "%")
-            ->orderBy('id', 'asc')->paginate(5);
+            ->get();
         foreach (Auth::user()->roles as $role) {
             if ($role->name == 'Admin') {
                 $datphongs = DB::table('datphongs')
@@ -196,13 +234,13 @@ class DatphongController extends Controller
                     ->orWhere('datphongs.soluong', 'LIKE', '%' . $request->search . "%")
                     ->orWhere('datphongs.khachhangid', 'LIKE', '%' . $request->search . "%")
                     ->select('*', 'datphongs.id as datphongid')
-                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+                    ->get();
             } else {
                 $datphongs = DB::table('datphongs')
                     ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
                     ->where('huydatphong', 0)
                     ->select('*', 'datphongs.id as datphongid')
-                    ->orderBy('datphongs.id', 'desc')->paginate(5);
+                    ->get();
             }
         }
         $dichvus = Dichvu::get();

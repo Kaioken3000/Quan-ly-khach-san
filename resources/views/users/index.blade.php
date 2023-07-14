@@ -47,11 +47,11 @@
                     </td> --}}
                 </tr>
                 @endforeach
-                <tr>
+                {{-- <tr>
                     <td>
                         {!! $users->links("pagination::bootstrap-4") !!}
                     </td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
     </div>

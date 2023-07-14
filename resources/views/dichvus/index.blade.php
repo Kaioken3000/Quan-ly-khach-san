@@ -166,11 +166,11 @@
                     @endhasrole
                 </tr>
                 @endforeach
-                <tr>
+                {{-- <tr>
                     <td>
                         {!! $dichvus->links("pagination::bootstrap-4") !!}
                     </td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
     </div>

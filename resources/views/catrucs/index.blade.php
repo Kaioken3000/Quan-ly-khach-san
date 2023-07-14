@@ -63,7 +63,7 @@
     <div class="card-box  pb-10">
         <div class="h5 pd-20 mb-0">Quản lý loại phòng</div>
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table class="data-table table nowrap">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -169,11 +169,11 @@
                         @endhasrole
                     </tr>
                     @endforeach
-                    <tr>
+                    {{-- <tr>
                         <td>
                             {!! $catrucs->links("pagination::bootstrap-4") !!}
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>

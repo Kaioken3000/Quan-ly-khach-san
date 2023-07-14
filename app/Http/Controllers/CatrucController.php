@@ -14,7 +14,8 @@ class CatrucController extends Controller
     */
     public function index()
     {
-        $catrucs = Catruc::orderBy('id','asc')->paginate(5);
+        // $catrucs = Catruc::orderBy('id','asc')->paginate(5);
+        $catrucs = Catruc::get();
         return view('catrucs.index', compact('catrucs'));
     }
 
@@ -108,11 +109,16 @@ class CatrucController extends Controller
     */
     public function search(Request $request)
     {
+        // $catrucs = Catruc::where('id','LIKE','%'.$request->search."%")
+        //                         ->orWhere('ten','LIKE','%'.$request->search."%")
+        //                         ->orWhere('giobatdau','LIKE','%'.$request->search."%")
+        //                         ->orWhere('gioketthuc','LIKE','%'.$request->search."%")
+        //                         ->orderBy('id','asc')->paginate(5);
         $catrucs = Catruc::where('id','LIKE','%'.$request->search."%")
                                 ->orWhere('ten','LIKE','%'.$request->search."%")
                                 ->orWhere('giobatdau','LIKE','%'.$request->search."%")
                                 ->orWhere('gioketthuc','LIKE','%'.$request->search."%")
-                                ->orderBy('id','asc')->paginate(5);
+                                ->get();
         return view('catrucs.search', compact('catrucs'));
     }
 }

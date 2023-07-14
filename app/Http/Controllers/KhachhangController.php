@@ -21,7 +21,8 @@ class KhachhangController extends Controller
     public function index()
     {
         $datphong = Datphong::get();
-        $khachhangs = Khachhang::orderBy('id', 'asc')->paginate(5);
+        // $khachhangs = Khachhang::orderBy('id', 'asc')->paginate(5);
+        $khachhangs = Khachhang::get();
         return view('khachhangs.index', compact('khachhangs', 'datphong'));
     }
 
@@ -172,13 +173,20 @@ class KhachhangController extends Controller
      */
     public function search(Request $request)
     {
+        // $khachhangs = Khachhang::where('ten', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('sdt', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('email', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('diachi', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('vanbang', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('id', 'LIKE', '%' . $request->search . "%")
+        //     ->orderBy('id', 'asc')->paginate(5);
         $khachhangs = Khachhang::where('ten', 'LIKE', '%' . $request->search . "%")
             ->orWhere('sdt', 'LIKE', '%' . $request->search . "%")
             ->orWhere('email', 'LIKE', '%' . $request->search . "%")
             ->orWhere('diachi', 'LIKE', '%' . $request->search . "%")
             ->orWhere('vanbang', 'LIKE', '%' . $request->search . "%")
             ->orWhere('id', 'LIKE', '%' . $request->search . "%")
-            ->orderBy('id', 'asc')->paginate(5);
+            ->get();
         $datphong = Datphong::get();
         return view('khachhangs.search', compact('khachhangs', 'datphong'));
     }

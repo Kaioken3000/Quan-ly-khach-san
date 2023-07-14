@@ -12,7 +12,7 @@
     </div>
     @endif
     <div class="card-box  pb-10">
-        <div class="h5 pd-20 mb-0">Quản lý loại phòng</div>
+        <div class="h5 pd-20 mb-0">Quản lý nhân viên</div>
         <table class="data-table table nowrap">
             <thead>
                 <tr>
@@ -134,11 +134,11 @@
                     </td>
                 </tr>
                 @endforeach
-                <tr>
+                {{-- <tr>
                     <td>
                         {!! $nhanviens->links("pagination::bootstrap-4") !!}
                     </td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
     </div>
