@@ -2,56 +2,74 @@
 
 @section('content')
 <div class="container mt-2">
-  <br>
-  <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('users.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
-  </div>
-  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Role/</span> Edit</h4>
-  @if(session('status'))
-  <div class="alert alert-success mb-1 mt-1">
-    {{ session('status') }}
-  </div>
-  @endif
-  <!-- Basic Layout -->
-  <div class="row">
-    <div class="col-xl">
-      <div class="card-box">
-        <div class="card-header">
-          <h5 class="mb-0">From nhập liệu</h5>
-          
-        </div>
-        <div class="card-body">
-          <form action="{{ route('users.update', $user->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-              <label class="form-label" for="email">Email</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="VD: Admin@gmail.com" value="{{ $user->email }}"/>
-              @error('email')
-              <div class="alert alert-danger" user="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="username">Username</label>
-              <input type="text" name="username" class="form-control" id="username" placeholder="VD: Admin" value="{{ $user->username }}"/>
-              @error('username')
-              <div class="alert alert-danger" user="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="sdt">Số điện thoại</label>
-              <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: Admin" value="0{{ $user->sdt }}"/>
-              @error('sdt')
-              <div class="alert alert-danger" user="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-                {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
-            </div>
-            <button type="submit" class="btn btn-primary">Xác nhận</button>
-          </form>
-        </div>
-      </div>
+    <br>
+    <div class="pull-right">
+        <a class="btn btn-primary" href="{{ route('users.index') }}"><i class="bx bx-chevron-left mb-1"></i> Back</a>
     </div>
-  </div>
-@endsection
+    <h4 class="fw-bold py-3"><span class="text-muted fw-light">Role/</span> Edit</h4>
+    @if(session('status'))
+    <div class="alert alert-success mb-1 mt-1">
+        {{ session('status') }}
+    </div>
+    @endif
+    <!-- Basic Layout -->
+    <div class="row">
+        <div class="col-xl">
+            <div class="card-box">
+                <div class="card-header">
+                    <h5 class="mb-0">From nhập liệu</h5>
+
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('users.update', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="VD: Admin@gmail.com" value="{{ $user->email }}" />
+                            @error('email')
+                            <div class="alert alert-danger" user="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="VD: Admin" value="{{ $user->username }}" />
+                            @error('username')
+                            <div class="alert alert-danger" user="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="sdt">Số điện thoại</label>
+                            <input type="text" name="sdt" class="form-control" id="sdt" placeholder="VD: Admin" value="0{{ $user->sdt }}" />
+                            @error('sdt')
+                            <div class="alert alert-danger" user="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </form>
+
+                    <form action="/updateUserid" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" value="{{$user->id}}" name="userid">
+                        <div class="my-3">
+                            <select class="form-control" id="nhanvienid" name="nhanvienid">
+                              @if($nhanviens)
+                                @foreach($nhanviens as $nhanvien)
+                                @if($nhanvien->userid == null)
+                                <option value="{{$nhanvien->ma}}">{{$nhanvien->ten}}</option>
+                                @endif
+                                @endforeach
+                              @endif
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cập nhật nhân viên</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endsection

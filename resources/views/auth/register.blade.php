@@ -62,7 +62,7 @@
                                 value="{{ old('sdt') }}" placeholder="Enter your phone number" required="required"
                                 regex="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" />
                                 <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-phone"></i></span>
+                                    <span class="input-group-text"><i class="icon-copy dw dw-phone-call"></i></span>
                                 </div>
                                 @if ($errors->has('sdt'))
                                 <div class="alert alert-danger" role="alert">{{ $errors->first('sdt') }}</div>

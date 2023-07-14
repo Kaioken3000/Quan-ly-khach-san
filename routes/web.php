@@ -149,7 +149,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             //Nhân viên
             Route::resource('nhanviens', NhanvienController::class);
             Route::get('nhanviens-search', 'NhanvienController@search');
+            Route::get('/nhanviens-taotaikhoan/{nhanvienid}', 'NhanvienController@viewtaotaikhoan');
+            Route::post('nhanviens-taotaikhoan', 'NhanvienController@taotaikhoan');
             Route::get('nhanviens/nhanviens-search', 'NhanvienController@search');
+            Route::put('updateUserid', 'NhanvienController@updateUserid');
 
             //User
             Route::resource('users', UserController::class);
@@ -176,6 +179,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // calendar
         Route::get('fullcalender', [FullCalenderController::class, 'index']);
+        Route::get('userfullcalender', [FullCalenderController::class, 'userindex']);
         Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
         
         // check in, check out

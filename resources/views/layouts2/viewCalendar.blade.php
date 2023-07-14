@@ -51,7 +51,7 @@
                 , height: 600
                 , resourceAreaWidth: 230
                 , aspectRatio: 1.5
-                , events: SITEURL + "/fullcalender"
+                , events: SITEURL + "/userfullcalender"
                 , displayEventTime: false
                 , editable: false
                 , eventRender: function(event, element, view) {

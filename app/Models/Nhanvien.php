@@ -13,7 +13,8 @@ class Nhanvien extends Model
     protected $fillable = [
         'ma',
         'ten',
-        'luong'
+        'luong',
+        'userid'
     ];
 
     protected $primaryKey = 'ma';

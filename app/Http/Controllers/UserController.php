@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Nhanvien;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -74,7 +75,8 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-        return view('users.edit',compact('user','roles','userRole'));
+        $nhanviens = Nhanvien::get();
+        return view('users.edit',compact('user','roles','userRole','nhanviens'));
     }
 
     /**

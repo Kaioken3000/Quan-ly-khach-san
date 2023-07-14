@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Http\Request;
 use App\Models\CatrucNhanvien;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class FullCalenderController extends Controller
 {
@@ -35,7 +37,24 @@ class FullCalenderController extends Controller
             $data = CatrucNhanvien::whereDate('ngaybatdau', '>=', $request->start)
                 ->whereDate('ngayketthuc',   '<=', $request->end)
                 ->get(['id','nhanvienid as title','ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
-            
+
+            return response()->json($data);
+        }
+
+        return view('fullcalender');
+    }
+    public function userindex(Request $request)
+    {
+
+        if ($request->ajax()) { 
+            $data = CatrucNhanvien::
+                join('nhanviens', 'nhanviens.ma', '=', 'catruc_nhanviens.nhanvienid')
+                ->whereDate('ngaybatdau', '>=', $request->start)
+                ->whereDate('ngayketthuc',   '<=', $request->end)
+                ->where("nhanviens.userid", Auth::user()->id) 
+                ->get(['catruc_nhanviens.id','nhanvienid as title','ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
+            Log::info($data);
+
             return response()->json($data);
         }
 

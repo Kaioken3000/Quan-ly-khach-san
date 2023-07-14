@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
-use App\Models\Nhanvien;
+use App\Models\User;
 use App\Models\Catruc;
+use App\Models\Nhanvien;
+use Illuminate\Http\Request;
 use App\Models\CatrucNhanvien;
+use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 
 class NhanvienController extends Controller
 {
@@ -48,9 +50,44 @@ class NhanvienController extends Controller
             'luong' => 'required',
         ]);
 
-        Nhanvien::create($request->post());
+        $newNhanvien = Nhanvien::create($request->post());
 
-        return redirect()->route('nhanviens.index')->with('success','Nhanvien has been created successfully.');
+        return redirect('nhanviens-taotaikhoan/'.$newNhanvien->ma);
+    }
+    public function taotaikhoan(Request $request)
+    {
+        // Tao tai khoan
+        $request->validate([
+            'email' => 'required|unique:users',
+            'username' => 'required',
+            'sdt' => 'required|numeric|digits:10',
+            'password' => 'required',
+        ]);
+
+        $user = User::create($request->post());
+
+        $role = Role::where('name','User')->first();
+        
+        $user->assignRole($role);
+
+        // cap nhat userid cho nhanvien
+        $nhanvien = Nhanvien::find($request->nhanvienid, "ma");
+        $nhanvien->userid = $user->id;
+        $nhanvien->save();
+
+        return redirect()->route('nhanviens.index')->with('success','Nhanvien Has Been created successfully');
+    }
+    public function viewtaotaikhoan(Request $request)
+    {
+        return view('nhanviens.taotaikhoan', compact('request'));
+    }
+
+    public function updateUserid(Request $request)
+    {
+        $nhanvien = Nhanvien::find($request->nhanvienid, "ma");
+        $nhanvien->userid = $request->userid;
+        $nhanvien->save();
+        return redirect()->route('nhanviens.index')->with('success','Nhanvien Has Been updated successfully');
     }
 
     /**
