@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="mb-3 form-password-toggle">
-        <label class="form-label" for="password_confirmation">Password confirm`</label>
+        <label class="form-label" for="password_confirmation">Password confirm</label>
         <div class="input-group input-group-merge">
             <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password_confirmation" required="required" />
             @if ($errors->has('password_confirmation'))

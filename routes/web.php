@@ -185,6 +185,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // check in, check out
         Route::post('checkin', 'CheckController@checkin');
         Route::put('checkout', 'CheckController@checkout');
+
     });
     Route::group(['middleware' => ['auth', 'role:Khachhang']], function () {
         // thanh toan vnpay
@@ -208,6 +209,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // Giao dien trang phong
     Route::get('client/phong', 'IndexController@hientrangphong');
+    // Search phong
+    Route::get('client/search-phong', 'IndexController@searchPhong');
     // Hien chi tiet phong
     Route::get('client/chitietphong/{phongid}', 'IndexController@hientrangchitietphong');
 
@@ -248,10 +251,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Thuc hien dang nhap o nguoi dung
     Route::get('client/login', 'LoginController@showclient')->name('client.showclient');
     Route::post('client/login', 'LoginController@loginclient')->name('client.loginclient');
-
+    
     // dich vu dat phong
     Route::post('/client/dichvu_satphong_store', 'IndexController@dichvu_satphong_store')->name('client.dichvu_satphong_store');
-
+    
     // Botman
     Route::match(['get', 'post'], '/botman', [BotManChatController::class, 'handle']);
+    
+    // Virtual tour
+    Route::get('client/virtualTour', function () {
+        return view("client.virtualTour");
+    });
+
 });

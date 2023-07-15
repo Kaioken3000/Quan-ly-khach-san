@@ -29,9 +29,32 @@ class IndexController extends Controller
     public function index()
     {
         $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(4);
-        $phongs = Phong::orderBy('so_phong', 'asc')->paginate(4);
-        return view('client.index', compact('loaiphongs','phongs'));
+        // $phongs = Phong::orderBy('so_phong', 'asc')->paginate(4);
+        $phongs = Phong::get();
+        return view('client.index', compact('loaiphongs', 'phongs'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchPhong(Request $request)
+    {
+        // $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
+        //                 ->orderBy('so_phong','asc')->paginate(5);
+        $phongs = Phong::where('phongs.so_phong', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('loaiphongs.ma', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('loaiphongs.ten', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('loaiphongs.gia', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('loaiphongs.soluong', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('loaiphongs.mieuTa', 'LIKE', '%' . $request->search . "%")
+            ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+            ->get();
+        $loaiphongs = Loaiphong::all();
+        return view('client.roomSearch', compact('phongs', 'loaiphongs'));
+    }
+
     /**
      * Hien trang phong cua client
      *
@@ -39,8 +62,9 @@ class IndexController extends Controller
      */
     public function hientrangphong()
     {
-        $phongs = Phong::orderBy('so_phong','asc')->paginate(6);
-        return view('client.phong', compact( 'phongs'));
+        // $phongs = Phong::orderBy('so_phong', 'asc')->paginate(6);
+        $phongs = Phong::get();
+        return view('client.phong', compact('phongs'));
     }
 
     /**

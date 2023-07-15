@@ -37,7 +37,7 @@
 </div>
 </section> --}}
 
-@include('client.layouts2.breadcrumb')
+@include('client.layouts2.breadcrumb', ['titlePage' => 'Bookable Rooms'])
 
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">

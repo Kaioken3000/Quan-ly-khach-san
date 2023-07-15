@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <h2>Our Rooms</h2>
+                    <h2>{{$titlePage}}</h2>
                     <div class="bt-option">
                         <a href="/client/index">Home</a>
                         <span>Rooms</span>

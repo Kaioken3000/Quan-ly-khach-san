@@ -53,6 +53,26 @@
                         <span class="micon fa fa-bell"></span><span class="mtext">Quản lý đặt phòng</span>
                     </a>
                 </li>
+                {{-- <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-dollar"></span>
+                        <span class="mtext">Thanh toán</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="index2.html">Chưa thanh toán</a></li>
+                        <li><a href="index3.html">Đã thanh toán</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-gear"></span>
+                        <span class="mtext">Xử lý</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="index2.html">Chưa xử lý</a></li>
+                        <li><a href="index3.html">Đã xử lý</a></li>
+                    </ul>
+                </li> --}}
 
                 @hasrole('Admin')
                 <li>

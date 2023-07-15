@@ -1,26 +1,30 @@
-@include('client.layouts2.breadcrumb')
+@include('client.layouts2.breadcrumb', ['titlePage' => 'All room'])
 
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
     <div class="container">
-        <div class="row">
+        <div class="row list-wrapper">
             {{-- Room list start --}}
             @foreach ($phongs as $phong)
             <?php $datphongs = App\Models\Datphong::get();
                 $check = 0;
+                $ngayvaodadat = "";
+                $ngayradadat = "";
                 foreach($datphongs as $datphong){
                     $danhsachdatphong = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->latest()->first();
                     if($danhsachdatphong->phongid == $phong->so_phong){
                         $check++;
+                        $ngayvaodadat = $danhsachdatphong->ngaybatdauo;
+                        $ngayradadat = $danhsachdatphong->ngayketthuco;
                         break;
                     }
                 }
                 ?>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 list-item">
                 <div class="room-item">
                     <img src="/client/images/{{$phong->picture_1}}" alt="">
                     <div class="ri-text">
-                        <h4>{{$phong->so_phong}}</h4>
+                        <h4>{{$phong->loaiphongs->ten}} - {{$phong->so_phong}}</h4>
                         <h3>{{$phong->loaiphongs->gia}}VND<span>/Pernight</span></h3>
                         <table>
                             <tbody>
@@ -37,7 +41,13 @@
                         @if($check==0)
                             <a href="/client/chitietphong/{{$phong->so_phong}}" class="primary-btn">More Details</a>
                         @else  
-                            <p class="mb-0">Booked</p>
+                            <div class="d-flex">
+                                <p class="mb-0"> Room is booked: &nbsp;</p>
+                                <div class="me-0">
+                                    <p class="mb-0"> since: {{$ngayvaodadat}}</p>
+                                    <p class="mb-0"> to: {{$ngayradadat}}</p>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -52,10 +62,11 @@
                 </div>
             </div> --}}
             {{-- Room list end --}}
-            <div class="col-lg-12 d-flex justify-content-center">
+            {{-- <div class="col-lg-12 d-flex justify-content-center">
                 {!! $phongs->links("pagination::bootstrap-4") !!}
-            </div>
+            </div> --}}
         </div>
     </div>
+    @include('client.layouts2.paginate', ['numberOfItem' => '6'])
 </section>
 <!-- Rooms Section End -->

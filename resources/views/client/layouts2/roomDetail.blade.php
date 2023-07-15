@@ -1,5 +1,4 @@
-@include('client.layouts2.breadcrumb')
-
+@include('client.layouts2.breadcrumb', ['titlePage' => 'Room detail'])
 <!-- Room Details Section Begin -->
 <section class="room-details-section spad">
     <div class="container">
@@ -66,7 +65,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="room-booking">
-                    <h3>Your Reservation</h3>
+                    <h3>Book now</h3>
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         <p>{{ $message }}</p>
@@ -90,7 +89,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="soluong">Số lượng</label>
+                            <label for="soluong">Number Of People In the room:</label>
                             <input type="number" name="soluong" id="soluong" class="form-control form-control-lg-border" value="1" min=1>
                             @error('soluong')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
