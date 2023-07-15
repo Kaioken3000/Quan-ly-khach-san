@@ -77,60 +77,7 @@
                                 Thêm ca trực
                             </a>
                         </form>
-
-                        <!-- Ca trực -->
-                        <div class="my-1">
-
-                        </div>
-                        <!-- Modal ca trực -->
-                        <div class="modal fade" id="modaldichvu{{ $nhanvien->ma }}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel1">Chọn ca trực</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ route('catruc_nhanviens.store') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" value="{{$nhanvien->ma}}" id="nhanvienid" name="nhanvienid">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="ngaybatdau">Ngày bắt đầu</label><br>
-                                                <input class="form-control" type="date" id="ngaybatdau" name="ngaybatdau">
-
-                                                <label class="form-label" for="ngayketthuc">Ngày kết thúc</label><br>
-                                                <input class="form-control" type="date" id="ngayketthuc" name="ngayketthuc">
-
-                                                <hr>
-                                                <label class="form-label" for="ten">Ca trực</label><br>
-                                                @foreach($catrucs as $catruc)
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="catruc{{$catruc->id}}" name="catrucid[]" value="{{$catruc->id}}">
-                                                    <label class="form-check-label" for="catruc{{$catruc->id}}">
-                                                        {{$catruc->ten}}:
-                                                    </label>
-                                                    <label class="form-check-label" for="catruc{{$catruc->id}}">
-                                                        {{$catruc->giobatdau}} - {{$catruc->gioketthuc}}
-                                                    </label>
-                                                </div>
-                                                @endforeach
-                                                @error('ten')
-                                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
-                                            Cancel
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </td>
                 </tr>
                 @endforeach
@@ -164,6 +111,6 @@
         color: white
     }
 
-</style>
-@include('layouts2.calendar')
+</style>@include('layouts2.calendar')
+
 @endsection

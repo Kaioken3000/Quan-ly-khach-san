@@ -33,6 +33,17 @@
 <!-- Datatable Setting js -->
 <script src="/bootstrap4/vendors/scripts/datatable-setting.js"></script>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
-        style="display: none; visibility: hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<script>
+    $(document).ready(function() {
+        // var table = $('#DataTables_Table_0').DataTable();
+        var table = $('.table').DataTable();
+
+        // Sort by column 1 and then re-draw
+        table
+            .order([0, 'desc'])
+            .draw();
+    });
+</script>

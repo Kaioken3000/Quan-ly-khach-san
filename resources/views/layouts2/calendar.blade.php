@@ -11,41 +11,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 <body>
-    <div class="pd-20 card-box mb-30 mt-3">
-        <div class="clearfix">
-            <div class="pull-left">
-                <h4 class="text-blue h4">Nhập thông tin</h4>
-            </div>
-        </div>
-        <form>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        <label class="weight-600">Ca trực</label>
-                        @foreach($catrucs as $catruc)
-                        <div class="form-check">
-                            <input class="" type="checkbox" id="catruc{{$catruc->id}}" name="catrucid[]" value="{{$catruc->id}}">
-                            <label>
-                                {{$catruc->ten}}: {{$catruc->giobatdau}} - {{$catruc->gioketthuc}}
-                            </label>
-                        </div>
-                        @endforeach
-                    </div>
+    <div class="d-flex">
+        <div class="pd-20 card-box mb-30 my-3 col-3">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4 class="text-blue h4">Nhập thông tin</h4>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Nhân viên</label>
-                <select class="form-control" name="nhanvienid" id="nhanvienid" class="nhanvienid">
-                    @foreach($allNhanvien as $thisNhanvien)
-                    <option value="{{$thisNhanvien->ma}}">{{$thisNhanvien->ma}} - {{$thisNhanvien->ten}}</option>
-                    @endforeach
-                </select>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-            </div>
-        </form>
+            <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="">
+                            <label class="weight-600 mx-3">Ca trực</label>
+                            @foreach($catrucs as $catruc)
+                            <div class="form-check">
+                                <input class="" type="checkbox" id="catruc{{$catruc->id}}" name="catrucid[]" value="{{$catruc->id}}">
+                                <label>
+                                    {{$catruc->ten}}: {{$catruc->giobatdau}} - {{$catruc->gioketthuc}}
+                                </label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nhân viên</label>
+                    <select class="form-control" name="nhanvienid" id="nhanvienid" class="nhanvienid">
+                        @foreach($allNhanvien as $thisNhanvien)
+                        <option value="{{$thisNhanvien->ma}}">{{$thisNhanvien->ma}} - {{$thisNhanvien->ten}}</option>
+                        @endforeach
+                    </select>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+                </div>
+            </form>
+        </div>
+        <div id='calendar' class="card-box p-3 my-3 col-9 mx-3"></div>
     </div>
-    <div id='calendar' class="card-box p-3 my-3"></div>
     <script>
         catrucid = "";
         catrucChecks = []
