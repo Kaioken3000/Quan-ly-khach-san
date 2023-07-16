@@ -54,6 +54,19 @@ class IndexController extends Controller
         $loaiphongs = Loaiphong::all();
         return view('client.roomSearch', compact('phongs', 'loaiphongs'));
     }
+    public function searchPhongWithManySearch(Request $request)
+    {
+        // $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
+        //                 ->orderBy('so_phong','asc')->paginate(5);
+        $phongs = Phong
+            ::where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
+            ->where('loaiphongs.gia', 'LIKE', '%' . $request->giaphong . "%")
+            ->where('loaiphongs.soluong', 'LIKE', $request->songuoiphong)
+            ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+            ->get();
+        $loaiphongs = Loaiphong::all();
+        return view('client.roomSearch', compact('phongs', 'loaiphongs'));
+    }
 
     /**
      * Hien trang phong cua client
@@ -64,7 +77,8 @@ class IndexController extends Controller
     {
         // $phongs = Phong::orderBy('so_phong', 'asc')->paginate(6);
         $phongs = Phong::get();
-        return view('client.phong', compact('phongs'));
+        $loaiphongs = Loaiphong::get();
+        return view('client.phong', compact('phongs', 'loaiphongs'));
     }
 
     /**

@@ -23,8 +23,8 @@
                             <span>EN <i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
-                                    <li><a href="#">Zi</a></li>
-                                    <li><a href="#">Fr</a></li>
+                                    <li><a href="#">VI</a></li>
+                                    <li><a href="#">FR</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -49,6 +49,7 @@
                             <ul>
                                 <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
                                 <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
+                                <li class="{{ Request::is('client/virtualTour') ? 'active':'' }}"><a href="/client/virtualTour">Virtual tour</a></li>
                                 {{-- <li><a href="./pages.html">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="./room-details.html">Room Details</a></li>

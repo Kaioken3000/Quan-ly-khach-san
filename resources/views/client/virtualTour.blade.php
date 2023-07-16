@@ -12,7 +12,7 @@
     @include('client.layouts2.header')
 
     {{-- content --}}
-    <style>
+    {{-- <style>
         #viewer {
             width: 100%;
             height: 100%;
@@ -70,24 +70,43 @@
             </script>
 
         </div>
-    </div>
-    {{-- <style>
+    </div> --}}
+    <style>
         body {
             margin: 0;
         }
 
         iframe {
-            height: calc(100vh - 4px);
-            width: calc(100vw - 4px);
+            /* height: calc(100vh - 4px);
+            width: calc(100vw - 4px); */
+            height: 500px;
+            width: 100%;
             box-sizing: border-box;
         }
-        .menu {
-          display: none
-        }
-    </style>
-    <iframe src="https://www.vrwix.com/vr/hotel/IND/Tamil_Nadu/Chennai/Hilton-Chennai" frameborder="0" allowfullscreen></iframe> --}}
 
-    <!-- Services Section End -->
+        .menu {
+            display: none
+        }
+
+    </style>
+    <section class="services-section spad py-5 my-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Virtual tour</span>
+                        <h2>Enjoy our virtual tour show</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        {{-- <iframe src="https://www.vrwix.com/vr/hotel/IND/Tamil_Nadu/Chennai/Hilton-Chennai" frameborder="0" allowfullscreen></iframe> --}}
+        <iframe src="https://www.vrwix.com/vr/hotel/IND/Kerala/Thiruvananthapuram/Wayanad-Silverwoods-Resorts?isAutoPlay=true&isHotelDetails=true" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Services Section End
     {{-- content --}}
 
     @include('client.layouts2.footer')

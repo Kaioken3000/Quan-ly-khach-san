@@ -211,6 +211,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('client/phong', 'IndexController@hientrangphong');
     // Search phong
     Route::get('client/search-phong', 'IndexController@searchPhong');
+    Route::post('client/search-phong-with-many', 'IndexController@searchPhongWithManySearch');
     // Hien chi tiet phong
     Route::get('client/chitietphong/{phongid}', 'IndexController@hientrangchitietphong');
 

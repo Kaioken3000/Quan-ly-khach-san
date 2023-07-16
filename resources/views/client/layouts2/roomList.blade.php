@@ -1,5 +1,5 @@
+@include('client.layouts2.searchBar')
 @include('client.layouts2.breadcrumb', ['titlePage' => 'All room'])
-
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
     <div class="container">

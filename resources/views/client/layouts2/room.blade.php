@@ -22,7 +22,7 @@
                 <div class="col-lg-3 col-md-6 list-item">
                     <div class="hp-room-item set-bg" data-setbg="/client/images/{{$phong->picture_1}}">
                         <div class="hr-text">
-                            <h3>{{ $phong->so_phong }}</h3>
+                            <h3>{{ $phong->loaiphongs->ten }} - {{ $phong->so_phong }}</h3>
                             <h2>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h2>
                             @if($check==0)
                             <a href="/client/chitietphong/{{$phong->so_phong}}" class="primary-btn">More Details</a>

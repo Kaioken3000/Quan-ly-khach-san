@@ -59,7 +59,7 @@
 
     @include('client.layouts2.header')
 
-    @include('client.layouts2.hero')
+    {{-- @include('client.layouts2.hero') --}}
     
     @include('client.layouts2.roomList')
 
