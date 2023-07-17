@@ -1,5 +1,5 @@
-<div class="my-1 col-1">
-    <button type="button" class="btn btn-link" data-color="#e95959" data-toggle="modal" data-target="#basicModal{{ $datphong->datphongid }}">
+<div class="my-1 col-4">
+    <button type="button" class="w-100 btn btn-link" data-color="#e95959" data-toggle="modal" data-target="#basicModal{{ $datphong->datphongid }}">
         <i class="icon-copy dw dw-delete-3"></i>
     </button>
 </div>

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Danhsachdatphong;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\Datphong;
+use App\Models\Xuly;
 use App\Models\Phong;
-use App\Models\Loaiphong;
-use App\Models\Khachhang;
-use App\Models\Nhanphong;
-use App\Models\Traphong;
 use App\Models\Dichvu;
+use App\Models\Datphong;
+use App\Models\Traphong;
+use App\Models\Khachhang;
+use App\Models\Loaiphong;
+use App\Models\Nhanphong;
 use App\Models\Thanhtoan;
+use Illuminate\Http\Request;
+use App\Models\Danhsachdatphong;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class DatphongController extends Controller

@@ -1,4 +1,4 @@
-<form class="my-1 mr-3 col-4" action="{{ route('datphongs.chinhthanhtoan',$datphong->datphongid) }}" method="Post">
+<form class="my-1 col-6" action="{{ route('datphongs.chinhthanhtoan',$datphong->datphongid) }}" method="Post">
     @csrf
     @method('PUT')
     <input type="hidden" name="id" value="{{ $datphong->datphongid }}">

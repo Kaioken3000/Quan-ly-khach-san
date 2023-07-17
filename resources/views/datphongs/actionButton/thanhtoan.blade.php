@@ -1,6 +1,6 @@
-<div class="my-1 col-4 mr-4">
-    <button type="button" class="btn btn-warning" style="width: 140px" data-toggle="modal" data-target="#modalthanhtoan{{ $datphong->datphongid }}">
-        <i class="fa fa-dollar mb-1"></i> Thanh toán &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+<div class="my-1 col-6">
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalthanhtoan{{ $datphong->datphongid }}">
+        <i class="fa fa-dollar mb-1"></i> Thanh toán
     </button>
 </div>
 <!-- Modal thanh toán -->

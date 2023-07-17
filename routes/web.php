@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\XulyController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PhongController;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,12 +20,12 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\KhachhangController;
-use App\Http\Controllers\LoaiphongController;
 
+use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\BotManChatController;
-use App\Http\Controllers\FullCalenderController;
 
+use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\DanhsachdatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
@@ -131,6 +132,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan'); //thanh toán
         Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
         Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong'); //nhan phong
+        Route::put('/datphongs-xuly', 'XulyController@store')->name('datphongs.xuly'); //nhan phong
 
         //Huỷ đặt phòng
         Route::delete('/huydatphongs/{datphong}', 'HuydatphongController@store')->name('huydatphongs.store'); //huỷ đặt phong
@@ -270,6 +272,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         $name = "Funny Coder";
     
         // The email sending is done using the to method on the Mail facade
-        Mail::to('namb1910261@student.ctu.edu.vn')->send(new MyTestEmail($name));
+        // Mail::to('namb1910261@student.ctu.edu.vn')->send(new MyTestEmail($name));
     });
 });

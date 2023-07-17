@@ -14,6 +14,7 @@
                         <th>Ngày trả</th>
                         <th>Số lượng</th>
                         <th colspan="2">Phòng hiện tại</th>
+                        <th>Tình trạng xử lý</th>
                         <th>Thanh toán</th>
                         <th>Nhận phòng</th>
                         <th>Action</th>
@@ -103,6 +104,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            <label class="text-white badge {{ ($datphong->tinhtrangxuly == 0) ? 'bg-danger' : 'bg-success' }}">
+                                {{ ($datphong->tinhtrangxuly == 0) ? 'Chưa' : 'Xác nhận' }}
+                            </label>
                         </td>
                         <td>
                             <label class="text-white badge {{ ($datphong->tinhtrangthanhtoan == 0) ? 'bg-danger' : 'bg-success' }}">
