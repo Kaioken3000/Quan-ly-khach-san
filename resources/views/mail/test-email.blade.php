@@ -1,0 +1,1 @@
+@include('client.layouts2.paycheckSuccess')

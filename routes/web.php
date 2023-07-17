@@ -1,31 +1,33 @@
 <?php
 
+use App\Models\User;
+use App\Mail\MyTestEmail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\LoaiphongController;
-use App\Http\Controllers\PhongController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\KhachhangController;
+use App\Http\Controllers\PhongController;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Controllers\CatrucController;
+use App\Http\Controllers\DichvuController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PDFController;
-use App\Http\Controllers\DanhsachdatphongController;
-use App\Http\Controllers\DichvuController;
-use App\Http\Controllers\DichvuDatphongController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\BotManChatController;
+use App\Http\Controllers\KhachhangController;
+use App\Http\Controllers\LoaiphongController;
+
 use App\Http\Controllers\ThanhtoanController;
-use App\Http\Controllers\CatrucController;
+use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\FullCalenderController;
+
+use App\Http\Controllers\DichvuDatphongController;
+use App\Http\Controllers\DanhsachdatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-
-use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -264,4 +266,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view("client.virtualTour");
     });
 
+    Route::get('/testroute', function() {
+        $name = "Funny Coder";
+    
+        // The email sending is done using the to method on the Mail facade
+        Mail::to('namb1910261@student.ctu.edu.vn')->send(new MyTestEmail($name));
+    });
 });

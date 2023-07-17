@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\Thanhtoan;
-use App\Models\Traphong;
 use App\Models\Datphong;
-use App\Models\Danhsachdatphong;
+use App\Models\Traphong;
+use App\Mail\MyTestEmail;
 use App\Models\Khachhang;
+use App\Models\Thanhtoan;
+use Illuminate\Http\Request;
+use App\Models\Danhsachdatphong;
 
-use App\Http\Controllers\IndexController;
+use Illuminate\Support\Facades\Log;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\IndexController;
 
 class ThanhtoanClientController extends Controller
 {
@@ -136,6 +139,9 @@ class ThanhtoanClientController extends Controller
             "khachhangid" => $khachhang->id,
             // chua co thoi gian
         ));
+
+        // Gui mail cho client
+        Mail::to(Auth::user()->email)->send(new MyTestEmail($request, $vnp_SecureHash, $secureHash));
 
         return view("client.thanhtoanvnpayreturn", compact('request', 'secureHash', 'vnp_SecureHash'));
     }
