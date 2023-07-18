@@ -58,14 +58,17 @@ class IndexController extends Controller
     {
         // $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
         //                 ->orderBy('so_phong','asc')->paginate(5);
+        if($request->songuoiphong == null || $request->songuoiphong == ""){
+            $request->songuoiphong = "1";
+        }
         $phongs = Phong
             ::where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
-            ->where('loaiphongs.gia', 'LIKE', '%' . $request->giaphong . "%")
-            ->where('loaiphongs.soluong', 'LIKE', $request->songuoiphong)
+            ->where('loaiphongs.gia', $request->tuychonggia , $request->giaphong)
+            ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
             ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
             ->get();
         $loaiphongs = Loaiphong::all();
-        return view('client.roomSearch', compact('phongs', 'loaiphongs'));
+        return view('client.roomSearch', compact('phongs', 'loaiphongs'));  
     }
 
     /**

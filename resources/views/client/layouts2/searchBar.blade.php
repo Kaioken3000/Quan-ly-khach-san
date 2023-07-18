@@ -22,9 +22,13 @@
                         </select>
                     </div>
                     <div class="m-3 d-flex">
-                        <label class="form-label mx-2 my-2">Room price:</label>
+                        <label class="form-label mx-2 my-2">Room price</label>
+                        <select class="form-select" aria-label="Default select example" name="tuychonggia">
+                            <option value=">">More than</option>
+                            <option value="=">Bằng</option>
+                            <option value="<">Smaller than</option>
+                        </select>
                         <select class="form-select" aria-label="Default select example" name="giaphong">
-                            <option value="0">All</option>
                             <option value="100000">100000 VNĐ</option>
                             <option value="200000">200000 VNĐ</option>
                             <option value="300000">300000 VNĐ</option>
