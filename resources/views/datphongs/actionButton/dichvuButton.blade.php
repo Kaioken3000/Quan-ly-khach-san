@@ -1,6 +1,6 @@
 <div class="my-1 col-4">
     <button type="button" class="w-100 btn btn-link" data-color="green" data-toggle="modal" data-target="#modaldichvu{{ $datphong->datphongid }}">
-        &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-wrench mb-1"></i> Dịch vụ &nbsp; &nbsp;&nbsp;
+        <i class="fa fa-wrench mb-1"></i> Dịch vụ
     </button>
 </div>
 <!-- Modal dịch vụ -->

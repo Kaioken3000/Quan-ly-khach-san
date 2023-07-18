@@ -1,5 +1,5 @@
 @hasrole('Admin')
-    <div class="my-1 col-6">
+    <div class="my-1 col-4">
         <button type="button" class="btn btn-secondary" data-toggle="modal"
             data-target="#nhanphong{{ $datphong->datphongid }}">
             <i class="fa fa-hotel mb-1">
@@ -9,7 +9,7 @@
     </div>
 @else
     @if ($datphong->tinhtrangnhanphong == 0)
-        <div class="my-1 col-6">
+        <div class="my-1 col-4">
             <button type="button" class="btn btn-secondary" data-toggle="modal"
                 data-target="#nhanphong{{ $datphong->datphongid }}">
                 <i class="fa fa-hotel mb-1">

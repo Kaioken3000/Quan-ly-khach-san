@@ -58,7 +58,7 @@ class DatphongController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // foreach (Auth::user()->roles as $role) {
         //     if ($role->name == 'Admin') {
@@ -90,7 +90,7 @@ class DatphongController extends Controller
         }
         $dichvus = Dichvu::get();
         $phongs = Phong::get();
-        return view('datphongs.index', compact('datphongs', 'dichvus', 'phongs'));
+        return view('datphongs.index', compact('datphongs', 'dichvus', 'phongs', 'request'));
     }
 
     /**

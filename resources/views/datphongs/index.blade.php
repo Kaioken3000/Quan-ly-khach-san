@@ -23,7 +23,7 @@
                     <tr>
                         <th class="table-plus">id</th>
                         <!-- <th>Ngày đặt</th>
-                                                                            <th>Ngày trả</th> -->
+                                                                                                        <th>Ngày trả</th> -->
                         <th>Số luọng</th>
                         <th colspan="2">Phòng hiện tại</th>
                         <th>Khách hàng</th>
@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{ $datphong->datphongid }}</td>
                             <!-- <td>{{ $datphong->ngaydat }}</td>
-                                                                            <td>{{ $datphong->ngaytra }}</td> -->
+                                                                                                        <td>{{ $datphong->ngaytra }}</td> -->
                             <td>{{ $datphong->soluong }}</td>
                             <td>
                                 <?php
@@ -75,7 +75,8 @@
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                                    <button type="submit" class="m-0 border-0 
+                                    <button type="submit"
+                                        class="m-0 border-0 
                                     badge {{ $datphong->tinhtrangxuly == 0 ? 'badge-danger' : 'badge-success' }}">
                                         {{ $datphong->tinhtrangxuly == 0 ? 'Chưa' : 'Xác nhận' }}
                                     </button>
@@ -115,61 +116,84 @@
                                             @hasrole('Admin')
                                                 @include('datphongs.actionButton.xoa')
                                             @endhasrole
-
+                                        @else
+                                            <div class="row">
+                                                <!-- Dịch vụ -->
+                                                @include('datphongs.actionButton.dichvuButton')
+                                            </div>
+                                        @endif
                                     </div>
+                                    {{-- KT co dat coc --}}
+                                    <?php $check = 0;
+                                    foreach ($thanhtoans as $thanhtoan) {
+                                        if ($thanhtoan) {
+                                            $check++;
+                                        }
+                                    }
+                                    ?>
+                                    <div class="d-flex justify-content-start">
+                                        @if ($check == 0)
+                                            {{-- Đặt cọc --}}
+                                            <div class="my-1 col-6">
+                                                <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{ $datphong->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
+                                                    class="btn btn-success">Đặt cọc online</a>
+                                            </div>
+                                        @endif
+                                        <!-- Thanh toán -->
+                                        @if ($check != 0)
+                                            @include('datphongs.actionButton.thanhtoan')
+                                        @endif
+
+                                        <!-- Nhận phòng, sửa nhận phòng -->
+                                        @if ($check != 0)
+                                            @include('datphongs.actionButton.nhanphong')
+                                        @endif
+                                    </div>
+
+                                    <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
                                 @else
-                                    <div class="row">
-                                        <!-- Dịch vụ -->
-                                        @include('datphongs.actionButton.dichvuButton')
+                                    <div class="d-flex justify-content-start">
+                                        @can('role-edit')
+                                            @include('datphongs.actionButton.suathanhtoan')
+                                        @endcan
+                                        @include('datphongs.actionButton.hoadon')
                                     </div>
                                 @endif
-                                {{-- KT co dat coc --}}
-                                <?php $check = 0;
-                                foreach ($thanhtoans as $thanhtoan) {
-                                    if ($thanhtoan) {
-                                        $check++;
-                                    }
-                                }
-                                ?>
-                                <div class="d-flex justify-content-center">
-                                    @if ($check == 0)
-                                        {{-- Đặt cọc --}}
-                                        <div class="my-1 col-6">
-                                            <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{ $datphong->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
-                                                class="btn btn-success">Đặt cọc online</a>
-                                        </div>
-                                    @endif
-                                    <!-- Thanh toán -->
-                                    @if ($check != 0)
-                                        @include('datphongs.actionButton.thanhtoan')
-                                    @endif
-
-                                    <!-- Nhận phòng, sửa nhận phòng -->
-                                    @if ($check != 0)
-                                        @include('datphongs.actionButton.nhanphong')
-                                    @endif
-                                </div>
-
-                                <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
-                            @else
-                                <div class="row">
-                                    @can('role-edit')
-                                        @include('datphongs.actionButton.suathanhtoan')
-                                    @endcan
-                                    @include('datphongs.actionButton.hoadon')
-                    @endif
-        </div>
-        </td>
-        </tr>
-        @endforeach
-        {{-- <tr>
+                            </td>
+                        </tr>
+                    @endforeach
+                    {{-- <tr>
                     <td>
                         {!! $datphongs->links("pagination::bootstrap-4") !!}
                     </td>
                 </tr> --}}
-        </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="/adminresource/js/optiondatphong.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(window).on('load', function() {
+            if ((localStorage.getItem("filter"))) {
+                var filter = localStorage.getItem("filter");
+                if (filter == "thanhtoanOnly") {
+                    setFilter('thanhtoanOnly', 'Xác nhận', 7)
+                }
+                if (filter == "chuathanhtoanOnly") {
+                    setFilter('chuathanhtoanOnly', 'Chưa', 7)
+                }
+                if (filter == "xulyOnly") {
+                    setFilter('xulyOnly', 'Xác nhận', 5)
+                }
+                if (filter == "chuaxulyOnly") {
+                    setFilter('chuaxulyOnly', 'Chưa', 5)
+                }
+            } else {
+                localStorage.setItem("filter", "");
+            }
+        });
+    </script>
 @endsection

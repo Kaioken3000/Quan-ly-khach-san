@@ -1,4 +1,4 @@
-<div class="my-1 col-6">
+<div class="my-1 col-4">
     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalthanhtoan{{ $datphong->datphongid }}">
         <i class="fa fa-dollar mb-1"></i> Thanh toán
     </button>

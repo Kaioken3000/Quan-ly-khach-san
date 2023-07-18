@@ -33,7 +33,8 @@
 <!-- Datatable Setting js -->
 <script src="/bootstrap4/vendors/scripts/datatable-setting.js"></script>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
+        style="display: none; visibility: hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <script>
@@ -46,4 +47,16 @@
             .order([0, 'desc'])
             .draw();
     });
+
+    function filterColumn(columnIndex, value) {
+        let table = $(".table").DataTable();
+        table
+            .columns([5,6])
+            .search("")
+            .draw();
+        table
+            .column(columnIndex)
+            .search(value)
+            .draw();
+    }
 </script>

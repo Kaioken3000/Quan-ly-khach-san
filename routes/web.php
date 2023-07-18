@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\XulyController;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PhongController;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,12 +20,12 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
-use App\Http\Controllers\KhachhangController;
 
+use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\ThanhtoanController;
-use App\Http\Controllers\BotManChatController;
 
+use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\DanhsachdatphongController;
@@ -185,11 +186,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('fullcalender', [FullCalenderController::class, 'index']);
         Route::get('userfullcalender', [FullCalenderController::class, 'userindex']);
         Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
-        
+
         // check in, check out
         Route::post('checkin', 'CheckController@checkin');
         Route::put('checkout', 'CheckController@checkout');
-
     });
     Route::group(['middleware' => ['auth', 'role:Khachhang']], function () {
         // thanh toan vnpay
@@ -256,21 +256,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Thuc hien dang nhap o nguoi dung
     Route::get('client/login', 'LoginController@showclient')->name('client.showclient');
     Route::post('client/login', 'LoginController@loginclient')->name('client.loginclient');
-    
+
     // dich vu dat phong
     Route::post('/client/dichvu_satphong_store', 'IndexController@dichvu_satphong_store')->name('client.dichvu_satphong_store');
-    
+
     // Botman
     Route::match(['get', 'post'], '/botman', [BotManChatController::class, 'handle']);
-    
+
     // Virtual tour
     Route::get('client/virtualTour', function () {
         return view("client.virtualTour");
     });
 
-    Route::get('/testroute', function() {
+    Route::get('/testroute', function () {
         $name = "Funny Coder";
-    
+
         // The email sending is done using the to method on the Mail facade
         // Mail::to('namb1910261@student.ctu.edu.vn')->send(new MyTestEmail($name));
     });
