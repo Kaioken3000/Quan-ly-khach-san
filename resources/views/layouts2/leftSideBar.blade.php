@@ -48,23 +48,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('datphongs.index') }}" onclick="setFilter('', '', 6); setFilter('', '', 5);"
+                    <a href="{{ route('datphongs.index') }}" onclick="setFilter('', '', 6); setFilter('', '', 5); setFilter('', '', 7);"
                         class="dropdown-toggle no-arrow {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active' : '' }}">
                         <span class="micon fa fa-bell"></span><span class="mtext">Quản lý đặt phòng</span>
                     </a>
-                </li>
-                {{-- Thanh toan --}}
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" id="thanhtoanNav" name="notLink">
-                        <span class="micon fa fa-dollar"></span>
-                        <span class="mtext">Thanh toán</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="#" onclick="setFilter('chuathanhtoanOnly', 'Chưa', 6)" id="chuathanhtoan"
-                                name="notLink">Chưa thanh toán</a></li>
-                        <li><a href="#" onclick="setFilter('thanhtoanOnly', 'Xác nhận', 6)" id="dathanhtoan"
-                                name="notLink">Đã thanh toán</a> </li>
-                    </ul>
                 </li>
                 {{-- Xu ly --}}
                 <li class="dropdown">
@@ -79,11 +66,39 @@
                                 name="notLink">Đã xử lý</a> </li>
                     </ul>
                 </li>
+                {{-- Thanh toan --}}
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle" id="thanhtoanNav" name="notLink">
+                        <span class="micon fa fa-dollar"></span>
+                        <span class="mtext">Thanh toán</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="setFilter('chuathanhtoanOnly', 'Chưa', 6)" id="chuathanhtoan"
+                                name="notLink">Chưa thanh toán</a></li>
+                        <li><a href="#" onclick="setFilter('thanhtoanOnly', 'Xác nhận', 6)" id="dathanhtoan"
+                                name="notLink">Đã thanh toán</a> </li>
+                    </ul>
+                </li>
+
+                {{-- Nhan phong --}}
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle" id="nhanphongNav" name="notLink">
+                        <span class="micon fa fa-check"></span>
+                        <span class="mtext">Nhận phòng</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="setFilter('chuanhanphongOnly', 'Chưa', 7)" id="chuanhanphong"
+                                name="notLink">Chưa nhận phòng</a></li>
+                        <li><a href="#" onclick="setFilter('nhanphongOnly', 'Xác nhận', 7)" id="danhanphong"
+                                name="notLink">Đã nhận phòng</a> </li>
+                    </ul>
+                </li>
                 <script>
                     function removeActive() {
                         var filter = localStorage.getItem("filter");
                         if (filter == 'chuathanhtoanOnly' || filter == 'thanhtoanOnly' ||
-                            filter == 'chuaxulyOnly' || filter == 'xulyOnly') {
+                            filter == 'chuaxulyOnly' || filter == 'xulyOnly' ||
+                            filter == 'chuanhanphongOnly' || filter == 'nhanphongOnly') {
                             var elements = document.getElementsByClassName(
                                 'dropdown-toggle no-arrow active'); // Select all elements with the class 'name'
                             if (elements)
@@ -106,8 +121,9 @@
                             // add active
                             var notLink = document.getElementsByName("notLink")
                             for (var i = 0; i < notLink.length; i++) {
-                                if (notLink[i].classList.contains('active'))
+                                if (notLink[i].classList.contains('active')){
                                     notLink[i].classList.remove('active')
+                                }
                             }
 
                             ////////////////
@@ -121,7 +137,7 @@
                                 var thanhtoanOnly = document.getElementById("dathanhtoan")
                                 thanhtoanOnly.classList.add("active")
                                 thanhtoanNav.classList.add('active')
-                            } 
+                            }
                             ////////////////
                             var xulyNav = document.getElementById("xulyNav")
                             if (value == 'chuaxulyOnly') {
@@ -133,7 +149,19 @@
                                 var xulyOnly = document.getElementById("daxuly")
                                 xulyOnly.classList.add("active")
                                 xulyNav.classList.add('active')
-                            } 
+                            }
+                            ////////////////
+                            var nhanphongNav = document.getElementById("nhanphongNav")
+                            if (value == 'chuanhanphongOnly') {
+                                var chuanhanphongOnly = document.getElementById("chuanhanphong")
+                                chuanhanphongOnly.classList.add("active")
+                                nhanphongNav.classList.add('active')
+                            }
+                            if (value == 'nhanphongOnly') {
+                                var nhanphongOnly = document.getElementById("danhanphong")
+                                nhanphongOnly.classList.add("active")
+                                nhanphongNav.classList.add('active')
+                            }
 
                             removeActive()
                         @else

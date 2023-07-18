@@ -180,16 +180,22 @@
             if ((localStorage.getItem("filter"))) {
                 var filter = localStorage.getItem("filter");
                 if (filter == "thanhtoanOnly") {
-                    setFilter('thanhtoanOnly', 'Xác nhận', 7)
+                    setFilter('thanhtoanOnly', 'Xác nhận', 6)
                 }
                 if (filter == "chuathanhtoanOnly") {
-                    setFilter('chuathanhtoanOnly', 'Chưa', 7)
+                    setFilter('chuathanhtoanOnly', 'Chưa', 6)
                 }
                 if (filter == "xulyOnly") {
                     setFilter('xulyOnly', 'Xác nhận', 5)
                 }
                 if (filter == "chuaxulyOnly") {
                     setFilter('chuaxulyOnly', 'Chưa', 5)
+                }
+                if (filter == "nhanphongOnly") {
+                    setFilter('nhanphongOnly', 'Xác nhận', 7)
+                }
+                if (filter == "chuanhanphongOnly") {
+                    setFilter('chuanhanphongOnly', 'Chưa', 7)
                 }
             } else {
                 localStorage.setItem("filter", "");
