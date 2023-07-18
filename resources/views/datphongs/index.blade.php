@@ -8,7 +8,7 @@
                 <a class="btn btn-success" href="{{ route('datphongs.create') }}"><i class="fa fa-plus mb-1"></i> Đặt phòng</a>
             </div>
 
-            @include('datphongs.option')
+            {{-- @include('datphongs.option') --}}
 
         </div>
         @if ($message = Session::get('success'))
@@ -22,9 +22,7 @@
                 <thead>
                     <tr>
                         <th class="table-plus">id</th>
-                        <!-- <th>Ngày đặt</th>
-                                                                                                        <th>Ngày trả</th> -->
-                        <th>Số luọng</th>
+                        <th>Số lượng</th>
                         <th colspan="2">Phòng hiện tại</th>
                         <th>Khách hàng</th>
                         <th>Xử lý</th>
@@ -37,8 +35,6 @@
                     @foreach ($datphongs as $datphong)
                         <tr>
                             <td>{{ $datphong->datphongid }}</td>
-                            <!-- <td>{{ $datphong->ngaydat }}</td>
-                                                                                                        <td>{{ $datphong->ngaytra }}</td> -->
                             <td>{{ $datphong->soluong }}</td>
                             <td>
                                 <?php
@@ -77,14 +73,10 @@
                                     <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
                                     <button type="submit"
                                         class="m-0 border-0 
-                                    badge {{ $datphong->tinhtrangxuly == 0 ? 'badge-danger' : 'badge-success' }}">
+                                        badge {{ $datphong->tinhtrangxuly == 0 ? 'badge-danger' : 'badge-success' }}">
                                         {{ $datphong->tinhtrangxuly == 0 ? 'Chưa' : 'Xác nhận' }}
                                     </button>
                                 </form>
-                                {{-- <label
-                                    class="badge {{ $datphong->tinhtrangxuly == 0 ? 'badge-danger' : 'badge-success' }}">
-                                    {{ $datphong->tinhtrangxuly == 0 ? 'Chưa' : 'Xác nhận' }}
-                                </label> --}}
                             </td>
                             <td>
                                 <label

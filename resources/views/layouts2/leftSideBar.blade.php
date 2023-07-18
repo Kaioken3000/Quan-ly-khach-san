@@ -48,7 +48,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('datphongs.index') }}" onclick="setFilter('', '', 6); setFilter('', '', 5); setFilter('', '', 7);"
+                    <a href="{{ route('datphongs.index') }}"
+                        onclick="setFilter('', '', 6); setFilter('', '', 5); setFilter('', '', 7);"
                         class="dropdown-toggle no-arrow {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active' : '' }}">
                         <span class="micon fa fa-bell"></span><span class="mtext">Quản lý đặt phòng</span>
                     </a>
@@ -93,6 +94,12 @@
                                 name="notLink">Đã nhận phòng</a> </li>
                     </ul>
                 </li>
+                {{-- Huy dat phong --}}
+                <li>
+                    <a href="/showHuydatphong" class="dropdown-toggle no-arrow {{ Request::is('showHuydatphong') || Request::is('showHuydatphong*') ? 'active' : '' }}">
+                        <span class="micon fa fa-times"></span><span class="mtext">Phòng đã hủy</span>
+                    </a>
+                </li>
                 <script>
                     function removeActive() {
                         var filter = localStorage.getItem("filter");
@@ -121,7 +128,7 @@
                             // add active
                             var notLink = document.getElementsByName("notLink")
                             for (var i = 0; i < notLink.length; i++) {
-                                if (notLink[i].classList.contains('active')){
+                                if (notLink[i].classList.contains('active')) {
                                     notLink[i].classList.remove('active')
                                 }
                             }

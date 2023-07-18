@@ -75,22 +75,36 @@ class DatphongController extends Controller
         //     }
         // }
         foreach (Auth::user()->roles as $role) {
-            if ($role->name == 'Admin') {
-                $datphongs = DB::table('datphongs')
-                    ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-                    ->select('*', 'datphongs.id as datphongid')
-                    ->get();
-            } else {
-                $datphongs = DB::table('datphongs')
-                    ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-                    ->where('huydatphong', 0)
-                    ->select('*', 'datphongs.id as datphongid')
-                    ->get();
-            }
+            // if ($role->name == 'Admin') {
+            //     $datphongs = DB::table('datphongs')
+            //         ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+            //         ->select('*', 'datphongs.id as datphongid')
+            //         ->get();
+            // } else {
+            $datphongs = DB::table('datphongs')
+                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                ->where('huydatphong', 0)
+                ->select('*', 'datphongs.id as datphongid')
+                ->get();
+            // }
         }
         $dichvus = Dichvu::get();
         $phongs = Phong::get();
         return view('datphongs.index', compact('datphongs', 'dichvus', 'phongs', 'request'));
+    }
+
+    public function showHuydatphong(Request $request)
+    {
+        foreach (Auth::user()->roles as $role) {
+            $datphongs = DB::table('datphongs')
+                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+                ->where('huydatphong', 1)
+                ->select('*', 'datphongs.id as datphongid')
+                ->get();
+        }
+        $dichvus = Dichvu::get();
+        $phongs = Phong::get();
+        return view('datphongs.showHuydatphong', compact('datphongs', 'dichvus', 'phongs', 'request'));
     }
 
     /**
@@ -366,7 +380,7 @@ class DatphongController extends Controller
                         }
                     }
                 }
-                if($request->ngaytra < $request->ngaydat){
+                if ($request->ngaytra < $request->ngaydat) {
                     $xacnhan++;
                 }
                 if ($xacnhan == 0) {
@@ -443,7 +457,7 @@ class DatphongController extends Controller
                         }
                     }
                 }
-                if($dat->ngayketthuco < $dat->ngaybatdauo){
+                if ($dat->ngayketthuco < $dat->ngaybatdauo) {
                     $xacnhan++;
                 }
                 if ($xacnhan == 0) {

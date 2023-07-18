@@ -134,6 +134,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
         Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong'); //nhan phong
         Route::put('/datphongs-xuly', 'XulyController@store')->name('datphongs.xuly'); //nhan phong
+        Route::get('/showHuydatphong', 'DatphongController@showHuydatphong')->name('datphongs.showHuydatphong'); //show huy dat phong
 
         //Huỷ đặt phòng
         Route::delete('/huydatphongs/{datphong}', 'HuydatphongController@store')->name('huydatphongs.store'); //huỷ đặt phong
