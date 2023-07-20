@@ -2,16 +2,13 @@
 <html>
 
 @hasanyrole('Admin|User')
-
-{{-- For admin --}}
-@include('Chatify::layouts.appForAdmin')
-
+    {{-- For admin --}}
+    @include('Chatify::layouts.appForAdmin')
 @endhasanyrole
 
 @hasrole('Khachhang')
-{{-- For client --}}
-@include('Chatify::layouts.appForClient')
-
+    {{-- For client --}}
+    @include('Chatify::layouts.appForClient')
 @endhasrole
 
 </html>

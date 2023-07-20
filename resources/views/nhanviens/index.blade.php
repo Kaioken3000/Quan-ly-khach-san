@@ -1,19 +1,24 @@
-@extends('layouts2.appForCalendar')
+@extends('layouts3.appForCalendar')
 
 @section('content')
 <button onclick="myFunction()" class="btn btn-primary">Hiện nhân viên</button>
 
 <div class="container-xxl flex-grow-1 container-p-y" id="myDIV">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Nhân viên /</span> Quản lý</h4>
-    <a class="btn btn-success mb-4" href="{{ route('nhanviens.create') }}"><i class="bx bx-plus mb-1"></i> Create Nhân viên</a>
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
     @endif
-    <div class="card-box  pb-10">
-        <div class="h5 pd-20 mb-0">Quản lý nhân viên</div>
-        <table class="data-table table nowrap">
+    <div class="">
+        <div class="d-flex mt-5">
+            <div class="flex-grow-1">
+                @include('layouts3.title', ['titlePage' => 'Quản lý nhân viên'])
+            </div>
+            <div>
+                <a class="btn btn-success mb-4" href="{{ route('nhanviens.create') }}"><i class="bx bx-plus mb-1"></i> Create Nhân viên</a>
+            </div>
+        </div>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Mã nhân viên</th>
@@ -63,21 +68,17 @@
                     <td>
                         <form action="{{ route('nhanviens.destroy',$nhanvien->ma) }}" method="Post">
                             <a class="btn btn-link" href="{{ route('nhanviens.edit',$nhanvien->ma) }}">
-                                <i class="icon-copy dw dw-edit2"></i>
+                                <i class="fas fa-edit"></i>
                             </a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-link" data-color="#e95959" style="color:red;">
-                                <i class="icon-copy dw dw-delete-3"></i>
+                            <button type="submit" class="btn btn-link" style="color:red">
+                                <i class="fas fa-trash"></i>
                             </button>
-                            {{-- <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modaldichvu{{ $nhanvien->ma }}">
-                            <i class="bx bx-box mb-1"></i> Thêm ca trực
-                            </button> --}}
-                            <a class="btn btn-light" href="/catruc_nhanvien/themCatruc/{{$nhanvien->ma}}">
+                            <a class="btn btn-link" href="/catruc_nhanvien/themCatruc/{{$nhanvien->ma}}">
                                 Thêm ca trực
                             </a>
                         </form>
-                        
                     </td>
                 </tr>
                 @endforeach

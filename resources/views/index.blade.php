@@ -1,4 +1,4 @@
-@extends('layouts2.app')
+@extends('layouts3.app')
 
 @section('content')
     @guest
@@ -10,33 +10,39 @@
 
     @auth
 
-        <div class="d-flex justify-content-end">
-            @include('layouts2.checkIncheckOut')
+        <div class="d-flex justify-content-end gap-1">
+            <div class="flex-grow-1">
+                @include('layouts3.title', ['titlePage' => 'Hotel Overview'])
+            </div>
+            <div class="d-flex gap-1">
+                @include('layouts2.checkIncheckOut')
+            </div>
         </div>
 
         <div>
-            @include('layouts2.title', ['titlePage' => 'Hotel Overview'])
 
-            @include('layouts2.overview')
+            @include('layouts3.overview')
 
             {{ Html::script('https://code.jquery.com/jquery-3.1.1.min.js') }}
             {{ Html::script('https://code.highcharts.com/highcharts.js') }}
             {{ Html::script('https://code.highcharts.com/modules/exporting.js') }}
             {{ Html::script('https://code.highcharts.com/modules/export-data.js') }}
-            <div class="row">
-                <div class="col-6">
-                    <div class="col-12 card-box">
-                        <div id="container2" data-order="{{ $thanhtoan }}"></div>
+            <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white pt-7 border-y border-300">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="col-12">
+                            <div id="container2" data-order="{{ $thanhtoan }}"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6">
-                    <div class="col-12 card-box">
-                        <div id="container" data-order="{{ $thanhtoan }}"></div>
+                    <div class="col-6">
+                        <div class="col-12">
+                            <div id="container" data-order="{{ $thanhtoan }}"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 my-4">
-                    <div class="col-12 card-box">
-                        <div id="container3" data-order="{{ $nhanphong }}"></div>
+                    <div class="col-12 my-4">
+                        <div class="col-12">
+                            <div id="container3" data-order="{{ $nhanphong }}"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="badge badge-info border-info" data-toggle="modal" data-target="#LichsuModal{{ $datphong->datphongid }}">
+<button type="button" class="badge bg-info" data-bs-toggle="modal" data-bs-target="#LichsuModal{{ $datphong->datphongid }}">
     Lịch sử
 </button>
 
@@ -9,8 +9,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1">Lịch sử đặt phòng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            
                 </button>
             </div>
             <div class="modal-body">
@@ -74,7 +74,7 @@
                     @hasrole('Admin')
                     <!-- xoa dich vu -->
                     <div class="col-2">
-                        <button type="button" class="badge badge-danger" data-toggle="modal" data-target="#dichvudatphongxoa{{ $dichvudatphong->id }}">
+                        <button type="button" class="badge badge-danger" data-bs-toggle="modal" data-bs-target="#dichvudatphongxoa{{ $dichvudatphong->id }}">
                             delete
                         </button>
                     </div>

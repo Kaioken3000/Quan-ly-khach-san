@@ -1,74 +1,76 @@
-@extends('layouts2.app')
+@hasrole('Admin')
+    <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
+        <i class="bx bx-plus mb-1"></i> Create Loại phòng
+    </button>
+    <!-- Modal Create -->
+    <div class="modal fade" id="ModalCreate" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Create Loại phòng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-@section('content')
-<div class="container mt-2">
-  <br>
-  <div class="pull-right">
-    <a class="btn btn-primary" href="{{ route('loaiphongs.index') }}"> <i class="bx bx-chevron-left mb-1"></i> Back</a>
-  </div>
-  <h4 class="fw-bold py-3"><span class="text-muted fw-light">Loại phòng/</span> Create</h4>
-  @if(session('status'))
-  <div class="alert alert-success mb-1 mt-1">
-    {{ session('status') }}
-  </div>
-  @endif
-  <!-- Basic Layout -->
-  <div class="row">
-    <div class="col-xl">
-      <div class="card-box">
-        <div class="card-header">
-          <h5 class="mb-0">From nhập liệu</h5>
-          
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('loaiphongs.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label" for="ma">Mã loại phòng</label>
+                            <input type="text" name="ma" class="form-control" id="ma" placeholder="VD: P1"
+                                require="require" />
+                            @error('ma')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="ten">Tên loại phòng</label>
+                            <input type="text" name="ten" class="form-control" id="ten"
+                                placeholder="VD: Phòng VIP" require="require" />
+                            @error('ten')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="gia">Giá loại phòng</label>
+                            <input type="number" name="gia" class="form-control" id="gia" min=0
+                                require="require" />
+                            @error('gia')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="hinh">Hinh loại phòng</label>
+                            <input type="file" name="hinh" class="form-control" id="hinh" require="require" />
+                            @error('hinh')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="soluong">Số lượng</label>
+                            <input type="number" name="soluong" class="form-control" id="soluong" min=1
+                                require="require" />
+                            @error('soluong')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="mieuTa">Miêu tả</label>
+                            <textarea id="mieuTa" name="mieuTa" class="form-control" placeholder="VD: Phòng đẹp, tiện nghi,.."
+                                require="require"></textarea>
+                            @error('mieuTa')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                </div>
+                </form>
+            </div>
         </div>
-        <div class="card-body">
-          <form action="{{ route('loaiphongs.store') }}" method="POST" >
-            @csrf
-            <div class="mb-3">
-              <label class="form-label" for="ma">Mã loại phòng</label>
-              <input type="text" name="ma" class="form-control" id="ma" placeholder="VD: P1" require="require"/>
-              @error('ma')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="ten">Tên loại phòng</label>
-              <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Phòng VIP" require="require"/>
-              @error('ten')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="gia">Giá loại phòng</label>
-              <input type="number" name="gia" class="form-control" id="gia" min=0 require="require"/>
-              @error('gia')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="hinh">Hinh loại phòng</label>
-              <input type="file" name="hinh" class="form-control" id="hinh" require="require"/>
-              @error('hinh')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="soluong">Số lượng</label>
-              <input type="number" name="soluong" class="form-control" id="soluong" min=1 require="require"require="require"/>
-              @error('soluong')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="mieuTa">Miêu tả</label>
-              <textarea id="mieuTa" name="mieuTa" class="form-control" placeholder="VD: Phòng đẹp, tiện nghi,.." require="require"></textarea>
-              @error('mieuTa')
-              <div class="alert alert-danger" role="alert">{{ $message }}</div>
-              @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">Xác nhận</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-@endsection
+@endhasrole

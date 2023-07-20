@@ -1,4 +1,4 @@
-@extends('layouts2.appForCalendar')
+@extends('layouts3.appForCalendar')
 
 @section('content')
 <style>
@@ -7,15 +7,15 @@
     }
 </style>
 <div class="row m-0 p-0">
-    <div class="col-3 my-3">
+    <div class="col-3 my-3" style="margin-top: 320px;">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="card-box">
-            <div class="h5 pd-20 mb-0">Thông tin tài khoản</div>
-            <div class="text-center">
+        <div class="card" style="margin-top: 60px">
+            <div class="h5 card-header">Thông tin tài khoản</div>
+            <div class="text-center mt-3">       
                 <img class="w-50 rounded-circle m-auto" src="/adminresource/assets/img/avatars/blank.jpeg" alt="">
             </div>
             <div class="card-body">

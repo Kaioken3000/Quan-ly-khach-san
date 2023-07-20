@@ -37,7 +37,8 @@
     <script src="/bootstrap4/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     <script src="/bootstrap4/vendors/scripts/dashboard3.js"></script>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
+            style="display: none; visibility: hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
 

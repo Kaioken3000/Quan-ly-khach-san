@@ -1,6 +1,6 @@
-<div class="my-1 col-4">
-    <button type="button" class="w-100 btn btn-link" data-color="green" data-toggle="modal" data-target="#modaldichvu{{ $datphong->datphongid }}">
-        <i class="fa fa-wrench mb-1"></i> Dịch vụ
+<div class="col-4">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldichvu{{ $datphong->datphongid }}">
+        <i class="fa fa-wrench"></i> Dịch vụ
     </button>
 </div>
 <!-- Modal dịch vụ -->
@@ -9,8 +9,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            
                 </button>
             </div>
             <div class="modal-body">
@@ -36,7 +36,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Cancel
                 </button>
                 <button type="submit" class="btn btn-primary">Xác nhận</button>

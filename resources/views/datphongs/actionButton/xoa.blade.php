@@ -1,6 +1,6 @@
 <div class="my-1 col-4">
-    <button type="button" class="w-100 btn btn-link" data-color="#e95959" data-toggle="modal" data-target="#basicModal{{ $datphong->datphongid }}">
-        <i class="icon-copy dw dw-delete-3"></i>
+    <button type="button" class="w-100 btn btn-link" style="color:red" data-bs-toggle="modal" data-bs-target="#basicModal{{ $datphong->datphongid }}">
+        <i class="icon-copy fas fa-trash"></i>
     </button>
 </div>
 <!-- Modal xoá phòng -->
@@ -9,13 +9,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn xoá</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            
                 </button>
             </div>
             <div class="modal-body">
                 <div class="d-flex gap-1">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         No
                     </button>
                     <form action="{{ route('datphongs.destroy',$datphong->datphongid) }}" method="Post">

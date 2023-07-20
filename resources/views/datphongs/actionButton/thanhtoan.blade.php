@@ -1,6 +1,7 @@
 <div class="my-1 col-4">
-    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalthanhtoan{{ $datphong->datphongid }}">
-        <i class="fa fa-dollar mb-1"></i> Thanh toán
+    <button type="button" class="badge bg-danger" 
+    data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
+        <i class="fa fa-dollar"></i> Thanh toán
     </button>
 </div>
 <!-- Modal thanh toán -->
@@ -9,8 +10,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            
                 </button>
             </div>
             <div class="modal-body">
@@ -173,7 +174,7 @@
                             </a>
                         </div>
                         <div class="ml-auto p-2 bd-highlight">
-                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                 Hủy
                             </button>
                         </div>

@@ -1,28 +1,28 @@
-@include('layouts2.head')
-<style>
-    #accordion-menu svg {
-        width: 20px;
-        margin-left: 10px;
-        font-weight: 10px
-    }
-
-</style>
+@include('layouts3.head')
 
 <body>
-    @include('layouts2.rightSideBar')
+    <main class="main" id="top">
+        <div class="container-fluid px-0" data-layout="container">
+            @include('layouts3.sidebarLeft')
 
-    @include('layouts2.leftSideBar')
+            @include('layouts3.header')
 
-    <div class="mobile-menu-overlay"></div>
+            <div class="content" style="padding: 65px 0px 0px 0px">
 
-    <div style="padding-left: 280px">
-        {{-- Message start --}}
+                <!-- ===============================================-->
+                <!--    Main Content-->
+                <!-- ===============================================-->
+                @include('Chatify::layouts.message')
+                <!-- ===============================================-->
+                <!--    End of Main Content-->
+                <!-- ===============================================-->
 
-        @include('Chatify::layouts.message')
+                @include('layouts3.footer')
+            </div>
+        </div>
+    </main>
 
-        {{-- Message end --}}
-    </div>
+    @include('layouts3.themeCustom')
 
-    @include('layouts2.script')
-
+    @include('layouts3.script')
 </body>

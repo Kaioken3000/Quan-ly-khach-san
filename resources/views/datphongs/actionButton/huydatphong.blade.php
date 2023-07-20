@@ -1,7 +1,7 @@
-<div class="my-1 col-4">
-    <button type="button" class="btn btn-light" data-color="#e95959"  data-toggle="modal" data-target="#huydatphong{{ $datphong->datphongid }}">
-        <i class="icon-copy fa fa-times"></i>
-        {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt phòng' : ' Hoàn tác' }}
+<div class="col-4">
+    <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#huydatphong{{ $datphong->datphongid }}">
+        <i class="fa fa-times"></i>
+        {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt' : ' Hoàn tác' }}
     </button>
 </div>
 <!-- Modal huỷ đặt phòng -->
@@ -10,13 +10,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"> Bạn có chắc chắn muốn huỷ đặt phòng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            
                 </button>
             </div>
             <div class="modal-body">
                 <div class="d-flex gap-1">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         No
                     </button>
                     <form action="{{ route('huydatphongs.store',$datphong->datphongid) }}" method="Post">
