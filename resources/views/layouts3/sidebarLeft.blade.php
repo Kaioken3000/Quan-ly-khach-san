@@ -420,43 +420,6 @@
                         </a>
                     </span>
                 </li>
-                <li class="nav-item">
-                    <!-- label-->
-                    <p class="navbar-vertical-label">Apps</p>
-                    <hr class="navbar-vertical-line">
-                    <!-- parent pages-->
-                    <span class="nav-item-wrapper">
-                        <a class="nav-link dropdown-indicator label-1"
-                            href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-management.html#project-management"
-                            role="button" data-bs-toggle="collapse" aria-expanded="false"
-                            aria-controls="project-management">
-                            <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon">
-                                    <span class="fas fa-caret-right"></span>
-                                </div>
-                                <span class="nav-link-icon">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                                <span class="nav-link-text">Project management</span>
-                            </div>
-                        </a>
-                        <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse"
-                                id="project-management">
-                                <p class="collapsed-nav-item-title d-none">Project management</p>
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="https://prium.github.io/phoenix/v1.6.0/apps/project-management/create-new.html"
-                                        data-bs-toggle="" aria-expanded="false">
-                                        <div class="d-flex align-items-center">
-                                            <span class="nav-link-text">Create new</span>
-                                        </div>
-                                    </a><!-- more inner pages-->
-                                </li>
-                            </ul>
-                        </div>
-                    </span>
-                </li>
             </ul>
         </div>
     </div>

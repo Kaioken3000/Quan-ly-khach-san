@@ -1,116 +1,199 @@
 <!DOCTYPE html>
-<html>
-@include('layouts2.head')
-<body class="login-page">
-    <div class="login-header box-shadow">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="brand-logo">
-                <a href="login.html">
-                    <img src="/bootstrap4//bootstrap4/vendors/images/deskapp-logo.svg" alt="" />
-                </a>
+<html lang="en-US" dir="ltr">
+
+@include('layouts3.head2')
+
+<body>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+        <div class="container-fluid bg-300 dark__bg-1200">
+            <div class="bg-holder bg-auth-card-overlay" style="background-image:url(/phoenix/assets/img/bg/37.png);">
             </div>
-            <div class="login-menu">
-                <ul>
-                    <li><a href="{{ route('login.perform') }}">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-7">
-                    <img src="/bootstrap4/vendors/images/login-page-img.png" alt="" />
-                </div>
-                <div class="col-md-6 col-lg-5">
-                    <div class="login-box bg-white box-shadow border-radius-10">
-                        <div class="login-title">
-                            <h2 class="text-center text-primary">Register New Account</h2>
+            <!--/.bg-holder-->
+            <div class="row flex-center position-relative min-vh-100 g-0 py-5">
+                <div class="col-11 col-sm-10 col-xl-8">
+                    <div class="card border border-200 auth-card">
+                        <div class="card-body pe-md-0">
+                            <div class="row align-items-center gx-0 gy-7">
+                                <div
+                                    class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative overflow-hidden auth-title-box">
+                                    <div class="bg-holder" style="background-image:url(/phoenix/assets/img/bg/38.png);">
+                                    </div>
+                                    <!--/.bg-holder-->
+                                    <div
+                                        class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 pb-md-7">
+                                        <h3 class="mb-3 text-black fs-1">Phoenix Authentication</h3>
+                                        <p class="text-700">Give yourself some hassle-free development process with the
+                                            uniqueness of Phoenix!</p>
+                                        <ul class="list-unstyled mb-0 w-max-content w-md-auto mx-auto">
+                                            <li class="d-flex align-items-center"><span
+                                                    class="uil uil-check-circle text-success me-2"></span><span
+                                                    class="text-700 fw-semi-bold">Fast</span></li>
+                                            <li class="d-flex align-items-center"><span
+                                                    class="uil uil-check-circle text-success me-2"></span><span
+                                                    class="text-700 fw-semi-bold">Simple</span></li>
+                                            <li class="d-flex align-items-center"><span
+                                                    class="uil uil-check-circle text-success me-2"></span><span
+                                                    class="text-700 fw-semi-bold">Responsive</span></li>
+                                        </ul>
+                                    </div>
+                                    <div
+                                        class="position-relative z-index--1 mb-6 d-none d-md-block text-center mt-md-15">
+                                        <img class="auth-title-box-img d-dark-none"
+                                            src="/phoenix/assets/img/spot-illustrations/auth.png" alt="" /><img
+                                            class="auth-title-box-img d-light-none"
+                                            src="/phoenix/assets/img/spot-illustrations/auth-dark.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col mx-auto">
+                                    <div class="auth-form-box">
+                                        <div class="text-center mb-7">
+                                            <a class="d-flex flex-center text-decoration-none mb-4"
+                                                href="/phoenix/index.html">
+                                                <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block">
+                                                    <img src="/phoenix/assets/img/icons/logo.png" alt="phoenix"
+                                                        width="58" />
+                                                </div>
+                                            </a>
+                                            <h3 class="text-1000">Sign Up</h3>
+                                            <p class="text-700">Create your account today</p>
+                                        </div><a class="btn btn-phoenix-secondary w-100 mb-3"
+                                            href="{{ route('auth.google') }}">
+                                            <span class="fab fa-google text-danger me-2 fs--1">
+                                            </span>
+                                            Sign in with google
+                                        </a>
+                                        <a class="btn btn-phoenix-secondary w-100" href="{{ url('auth/facebook') }}">
+                                            <span class="fab fa-facebook text-primary me-2 fs--1">
+                                            </span>
+                                            Sign in with facebook
+                                        </a>
+                                        <div class="position-relative">
+                                            <hr class="bg-200 mt-5 mb-4" />
+                                            <div class="divider-content-center bg-white">or use email</div>
+                                        </div>
+                                        {{-- <div class="mb-3 text-start"><label class="form-label" for="email">Email
+                                                address</label>
+                                            <div class="form-icon-container"><input
+                                                    class="form-control form-icon-input" id="email"
+                                                    type="email" placeholder="name@example.com" /><span
+                                                    class="fas fa-user text-900 fs--1 form-icon"></span></div>
+                                        </div>
+                                        <div class="mb-3 text-start"><label class="form-label"
+                                                for="password">Password</label>
+                                            <div class="form-icon-container"><input
+                                                    class="form-control form-icon-input" id="password"
+                                                    type="password" placeholder="Password" /><span
+                                                    class="fas fa-key text-900 fs--1 form-icon"></span></div>
+                                        </div>
+                                        <div class="row flex-between-center mb-7">
+                                            <div class="col-auto">
+                                                <div class="form-check mb-0"><input class="form-check-input"
+                                                        id="basic-checkbox" type="checkbox"
+                                                        checked="checked" /><label class="form-check-label mb-0"
+                                                        for="basic-checkbox">Remember me</label></div>
+                                            </div>
+                                            <div class="col-auto"><a class="fs--1 fw-semi-bold"
+                                                    href="/phoenix/pages/authentication/card/forgot-password.html">Forgot
+                                                    Password?</a></div>
+                                        </div><button class="btn btn-primary w-100 mb-3">Sign In</button> --}}
+                                        {{-- start form --}}
+                                        @include('auth.formRegister')
+                                        {{-- End form --}}
+                                        <div class="text-center">
+                                            <a class="fs--1 fw-bold" href="{{ route('login.perform') }}">
+                                                Sign in to an existing account
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <form id="formAuthentication" class="mb-3" method="post" action="{{ route('register.perform') }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-                            {{-- Username --}}
-                            <label for="username" class="form-label">Username</label>
-                            <div class="mb-3 input-group custom">
-                                <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}" placeholder="Enter your username" required="required" autofocus />
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
-                                </div>
-                                @if ($errors->has('username'))
-                                <div class="alert alert-danger" role="alert">{{ $errors->first('username') }}</div>
-                                @endif
-                            </div>
-
-                            {{-- Email --}}
-                            <label for="email" class="form-label">Email</label>
-                            <div class="mb-3 input-group custom">
-                                <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required="required" />
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-email1"></i></span>
-                                </div>
-                                @if ($errors->has('email'))
-                                <div class="alert alert-danger" role="alert">{{ $errors->first('email') }}</div>
-                                @endif
-                            </div>
-
-                            {{-- SDT --}}
-                            <label for="sdt" class="form-label">Phone Number</label>
-                            <div class="mb-3 input-group custom">
-                                <input type="text" class="form-control" id="sdt" name="sdt" 
-                                value="{{ old('sdt') }}" placeholder="Enter your phone number" required="required"
-                                regex="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" />
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-phone-call"></i></span>
-                                </div>
-                                @if ($errors->has('sdt'))
-                                <div class="alert alert-danger" role="alert">{{ $errors->first('sdt') }}</div>
-                                @endif
-                            </div>
-
-                            {{-- Password --}}
-                            <label class="form-label" for="password">Password</label>
-                            <div class="mb-3 input-group custom">
-                                <input type="password" id="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" required="required" />
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-padlock1"></i></span>
-                                </div>
-                                @if ($errors->has('password'))
-                                <div class="alert alert-danger" role="alert">{{ $errors->first('password') }}</div>
-                                @endif
-                            </div>
-
-                            {{-- Password confirm --}}
-                            <label class="form-label" for="password_confirmation">Password confirm</label>
-                            <div class="mb-3 input-group custom">
-                                <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password_confirmation" required="required" />
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-padlock1"></i></span>
-                                </div>
-                                @if ($errors->has('password_confirmation'))
-                                <div class="alert alert-danger" role="alert">{{ $errors->first('password_confirmation') }}</div>
-                                @endif
-                            </div>
-
-                            {{-- Checkbox --}}
-                            <div class="mb-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                                    <label class="custom-control-label" for="customCheck1">I agree to privacy policy & terms</label>
-                                </div>
-                            </div>
-
-                            {{-- Sign up --}}
-                            <button class="btn btn-primary d-grid w-100">Sign up</button>
-                        </form>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="support-chat-container">
+            <div class="container-fluid support-chat">
+                <div class="card bg-white">
+                    <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom">
+                        <h5 class="mb-0 d-flex align-items-center gap-2">Demo widget<span
+                                class="fa-solid fa-circle text-success fs--3"></span></h5>
+                        <div class="btn-reveal-trigger"><button
+                                class="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex"
+                                type="button" id="support-chat-dropdown" data-bs-toggle="dropdown"
+                                data-boundary="window" aria-haspopup="true" aria-expanded="false"
+                                data-bs-reference="parent"><span class="fas fa-ellipsis-h text-900"></span></button>
+                            <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown">
+                                <a class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item"
+                                    href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show
+                                    history</a><a class="dropdown-item" href="#!">Report to
+                                    Admin</a><a class="dropdown-item btn-support-chat" href="#!">Close
+                                    Support</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body chat p-0">
+                        <div class="d-flex flex-column-reverse scrollbar h-100 p-3">
+                            <div class="text-end mt-6">
+                                <a class="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                    href="#!">
+                                    <p class="mb-0 fw-semi-bold fs--1">I need help with something</p><span
+                                        class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                                </a>
+                                <a class="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                    href="#!">
+                                    <p class="mb-0 fw-semi-bold fs--1">I can’t reorder a product I previously ordered
+                                    </p><span class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                                </a>
+                                <a class="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                    href="#!">
+                                    <p class="mb-0 fw-semi-bold fs--1">How do I place an order?</p><span
+                                        class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                                </a>
+                                <a class="false d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                    href="#!">
+                                    <p class="mb-0 fw-semi-bold fs--1">My payment method not working</p><span
+                                        class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                                </a>
+                            </div>
+                            <div class="text-center mt-auto">
+                                <div class="avatar avatar-3xl status-online"><img
+                                        class="rounded-circle border border-3 border-white"
+                                        src="/phoenix/assets/img/team/30.webp" alt="" /></div>
+                                <h5 class="mt-2 mb-3">Eric</h5>
+                                <p class="text-center text-black mb-0">Ask us anything – we’ll get back to you here or
+                                    by email within 24 hours.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center gap-2 border-top ps-3 pe-4 py-3">
+                        <div class="d-flex align-items-center flex-1 gap-3 border rounded-pill px-4"><input
+                                class="form-control outline-none border-0 flex-1 fs--1 px-0" type="text"
+                                placeholder="Write message" /><label
+                                class="btn btn-link d-flex p-0 text-500 fs--1 border-0" for="supportChatPhotos"><span
+                                    class="fa-solid fa-image"></span></label><input class="d-none" type="file"
+                                accept="image/*" id="supportChatPhotos" /><label
+                                class="btn btn-link d-flex p-0 text-500 fs--1 border-0" for="supportChatAttachment">
+                                <span class="fa-solid fa-paperclip"></span></label><input class="d-none"
+                                type="file" id="supportChatAttachment" /></div><button
+                            class="btn p-0 border-0 send-btn"><span
+                                class="fa-solid fa-paper-plane fs--1"></span></button>
+                    </div>
+                </div>
+            </div><button class="btn p-0 border border-200 btn-support-chat"><span
+                    class="fs-0 btn-text text-primary text-nowrap">Chat demo</span><span
+                    class="fa-solid fa-circle text-success fs--1 ms-2"></span><span
+                    class="fa-solid fa-chevron-down text-primary fs-1"></span></button>
+        </div>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
 
-    @include('layouts2.script')
+    @include('layouts3.script')
 </body>
+
 </html>

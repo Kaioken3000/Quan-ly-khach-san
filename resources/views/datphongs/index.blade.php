@@ -22,7 +22,8 @@
                 <tr>
                     <th class="table-plus">id</th>
                     <th>Số lượng</th>
-                    <th colspan="2">Phòng hiện tại</th>
+                    <th style="width: 1px"></th>
+                    <th>Phòng hiện tại</th>
                     <th>Khách hàng</th>
                     <th>Xử lý</th>
                     <th>Thanh toán</th>

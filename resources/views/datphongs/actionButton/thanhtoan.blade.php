@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-1 payment-form" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post" id="">
+                <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post" id="">
                     @csrf
                     @method('PUT')
                     <?php
@@ -36,7 +36,7 @@
                             $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
                           }
                           echo '
-                          <p class="form-label">'
+                          <p class="">'
                             .$danhsachdatphong->phongid.
                             "-"
                             .$danhsachdatphong->phongs->loaiphongs->ten.
@@ -44,32 +44,32 @@
                             .$danhsachdatphong->phongs->loaiphongs->gia.
                             '</p>';
 
-                          echo '<p class="form-label"> Ngày bắt đầu ở: '
+                          echo '<p class=""> Ngày bắt đầu ở: '
                             .$danhsachdatphong->ngaybatdauo.
                             '</p>';
 
-                          echo '<p class="form-label"> Ngày kết thúc ở: '
+                          echo '<p class=""> Ngày kết thúc ở: '
                             .$danhsachdatphong->ngayketthuco.
                             '</p>';
 
                           if($i == count($danhsachdatphongs)-1){
-                            echo '<p class="form-label"> Ngày kết thúc ở thực tế: '
+                            echo '<p class=""> Ngày kết thúc ở thực tế: '
                               .$ngayhomnay.
                               '</p>';
                           }
 
                           if($i!=(count($danhsachdatphongs)-1) || $i==0) {
-                            echo '<p class="form-label"> Số ngày ở: '
+                            echo '<p class=""> Số ngày ở: '
                               .$songay1.
                               '</p>';
                           } else {
-                          echo '<p class="form-label"> Số ngày ở: '
+                          echo '<p class=""> Số ngày ở: '
                             .$songay2.
                             '</p>';
                           }
 
                           echo '
-                          <p type="text" class="badge badge-primary" />'.$tonggia.'</p><br>';
+                          <p class="badge bg-primary" />'.$tonggia.'</p><br>';
                           $i++;
                         }
                       } else {
@@ -79,7 +79,7 @@
                           $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
                           $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
                           echo '
-                          <p class="form-label">'
+                          <p class="">'
                             .$danhsachdatphong->phongid.
                             "-"
                             .$danhsachdatphong->phongs->loaiphongs->ten.
@@ -87,20 +87,20 @@
                             .$danhsachdatphong->phongs->loaiphongs->gia.
                             '</p>';
 
-                          echo '<p class="form-label"> Ngày bắt đầu ở: '
+                          echo '<p class=""> Ngày bắt đầu ở: '
                             .$danhsachdatphong->ngaybatdauo.
                             '</p>';
 
-                          echo '<p class="form-label"> Ngày kết thúc ở: '
+                          echo '<p class=""> Ngày kết thúc ở: '
                             .$danhsachdatphong->ngayketthuco.
                             '</p>';
 
-                          echo '<p class="form-label"> Số ngày ở: '
+                          echo '<p class=""> Số ngày ở: '
                             .$songay2.
                             '</p>';
 
                           echo '
-                          <p type="text" class="badge badge-primary" />'.$tonggia.'</p><br>';
+                          <p class="badge bg-primary" />'.$tonggia.'</p><br>';
                         }
                       }
                     ?>

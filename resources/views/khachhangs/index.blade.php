@@ -6,7 +6,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white pt-7 broder-0">
+    <div class="">
         <div class="d-flex">
             <div class="flex-grow-1">
                 @include('layouts3.title', ['titlePage'=>'Quản lý khách hàng'])
