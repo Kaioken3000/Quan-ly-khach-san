@@ -10,13 +10,16 @@
                 $check = 0;
                 $ngayvaodadat = "";
                 $ngayradadat = "";
+                $today = date("Y-m-d");
                 foreach($datphongs as $datphong){
                     $danhsachdatphong = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->latest()->first();
-                    if($danhsachdatphong->phongid == $phong->so_phong){
-                        $check++;
-                        $ngayvaodadat = $danhsachdatphong->ngaybatdauo;
-                        $ngayradadat = $danhsachdatphong->ngayketthuco;
-                        break;
+                    if($danhsachdatphong->phongid == $phong->so_phong && $datphong->huydatphong == 0){
+                        if($danhsachdatphong->ngayketthuco > $today){
+                            $check++;
+                            $ngayvaodadat = $danhsachdatphong->ngaybatdauo;
+                            $ngayradadat = $danhsachdatphong->ngayketthuco;
+                            break;
+                        }
                     }
                 }
                 ?>

@@ -128,6 +128,7 @@ class DatphongController extends Controller
     {
         $request->tinhtrangthanhtoan = 0;
         $request->tinhtrangnhanphong = 0;
+        $request->tinhtrangxuly = 0;
         $request->huydatphong = 0;
         $request->validate([
             'ngaydat' => 'required',

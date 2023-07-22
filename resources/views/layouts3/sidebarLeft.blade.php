@@ -120,7 +120,7 @@
                                 <span class="nav-link-icon">
                                     <i class="fas fa-bell"></i>
                                 </span>
-                                <span class="nav-link-text">Quản lý dịch vụ</span>
+                                <span class="nav-link-text">Quản lý đặt phòng</span>
                             </div>
                         </a>
                     </span>

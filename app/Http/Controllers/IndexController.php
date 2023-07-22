@@ -319,6 +319,7 @@ class IndexController extends Controller
 
         $request->tinhtrangthanhtoan = 0;
         $request->tinhtrangnhanphong = 0;
+        $request->tinhtrangxuly = 0;
         $request->huydatphong = 0;
         Datphong::create([
             'ngaydat' => $request->ngaydat,
@@ -326,6 +327,7 @@ class IndexController extends Controller
             'soluong' => $request->soluong,
             'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
             'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
+            'tinhtrangxuly' => $request->tinhtrangxuly,
             'huydatphong' => $request->huydatphong,
             'khachhangid' => $khachhangs,
         ]);
