@@ -69,9 +69,9 @@
                     <th>Ngày đặt</th>
                     <th>Ngày trả</th>
                     <th>Số luọng</th>
-                    <th colspan="2">Phòng hiện tại</th>
+                    <th style="width: 1px"></th>
+                    <th>Phòng hiện tại</th>
                     <th>Khách hàng</th>
-                    <th>Thanh toán</th>
                     <th>Hoá đơn</th>
                     <th>Tổng tiền</th>
                 </tr>
@@ -99,12 +99,6 @@
                         </td>
                         <td>{{ $datphong->khachhangid }}</td>
                         <td>
-                            <label
-                                class="badge {{ $datphong->tinhtrangthanhtoan == 0 ? 'badge-danger' : 'badge-success' }}">
-                                {{ $datphong->tinhtrangthanhtoan == 0 ? 'Chưa' : 'Xác nhận' }}
-                            </label>
-                        </td>
-                        <td>
                             <form action="generate-invoice-pdf" method="get">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $datphong->id }}">
@@ -114,26 +108,11 @@
                         </td>
                         <td>
                             <?php
-                            $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangid)->get();
+                            $thanhtoansss = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangid)->get();
                             ?>
-                            <?php
-                            // $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
-                            // $tonggia = 0;
-                            // foreach ($danhsachdatphongs as $danhsachdatphong) {
-                            //     //tim phong va loai phong
-                            //     $phong = App\Models\Phong::find($danhsachdatphong->phongid);
-                            //     $loaiphong = App\Models\Loaiphong::find($phong->loaiphongid);
-                            
-                            //     //tinh gia tien
-                            //     $songay = strtotime($danhsachdatphong->ngayketthuco) - strtotime($danhsachdatphong->ngaybatdauo);
-                            //     $songay = abs(round($songay / 86400));
-                            //     $tonggia += $songay * $loaiphong->gia * $datphong->soluong;
-                            // }
-                            ?>
-                            {{-- {{$tonggia}} VND --}}
-                            @foreach ($thanhtoans as $thanhtoan)
-                                @if ($thanhtoan->loaitien == 'traphong')
-                                    {{ $thanhtoan->gia }} VND
+                            @foreach ($thanhtoansss as $thanhtoanss)
+                                @if ($thanhtoanss->loaitien == 'traphong')
+                                    {{ $thanhtoanss->gia }} VND
                                 @endif
                             @endforeach
                         </td>
@@ -357,47 +336,6 @@
             });
         });
     </script>
-
-    <script type="text/x-game-map">
-            Highcharts.chart('container6', {
-                chart: {
-                    type: 'spline'
-                    // column
-                }
-                , title: {
-                    text: 'Số lượng ở các phòng'
-                }
-                , xAxis: {
-                    categories: < ? php echo $phong ? > 
-                , }
-                , yAxis: {
-                    title: {
-                        text: 'Số lượng đã ở'
-                    }
-                }
-                , tooltip: {
-                    crosshairs: true
-                    , shared: true
-                }
-                , plotOptions: {
-                    spline: {
-                        marker: {
-                            radius: 4
-                            , lineColor: '#666666'
-                            , lineWidth: 1
-                        }
-                    }
-                }
-                , series: [{
-                    name: 'Số phòng'
-                    , marker: {
-                        symbol: 'circle'
-                    }
-                    , data: < ? php echo $soluongphong ? >
-
-                }]
-            });
-        </script>
     <script src="/adminresource/js/myscript.js"></script>
 
     <style>

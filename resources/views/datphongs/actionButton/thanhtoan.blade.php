@@ -1,6 +1,6 @@
 <div class="my-1 col-4">
-    <button type="button" class="badge bg-danger" 
-    data-bs-toggle="modal" data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
+    <button type="button" class="badge bg-danger" data-bs-toggle="modal"
+        data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
         <i class="fa fa-dollar"></i> Thanh toán
     </button>
 </div>
@@ -11,154 +11,150 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            
+
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-1" action="{{ route('datphongs.thanhtoan',$datphong->datphongid) }}" method="Post" id="">
+                <form class="m-1" action="{{ route('datphongs.thanhtoan', $datphong->datphongid) }}" method="Post"
+                    id="">
                     @csrf
                     @method('PUT')
                     <?php
-                      $i=0;
-                      $tonggia = 0;
-                      $ngayhomnay = date("Y-m-d");
-                      if(count($danhsachdatphongs)!=1){
-                        foreach($danhsachdatphongs as $danhsachdatphong){
-                          $ngaybatdau = $danhsachdatphong->ngaybatdauo;
-                          $ngayketthuc = $danhsachdatphong->ngayketthuco;
-                          $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
-                          $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
-                          if($i==0){
-                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
-                          } else if($i!=(count($danhsachdatphongs)-1)) {
-                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
-                          } else {
-                            $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
-                          }
-                          echo '
-                          <p class="">'
-                            .$danhsachdatphong->phongid.
-                            "-"
-                            .$danhsachdatphong->phongs->loaiphongs->ten.
-                            "-"
-                            .$danhsachdatphong->phongs->loaiphongs->gia.
-                            '</p>';
-
-                          echo '<p class=""> Ngày bắt đầu ở: '
-                            .$danhsachdatphong->ngaybatdauo.
-                            '</p>';
-
-                          echo '<p class=""> Ngày kết thúc ở: '
-                            .$danhsachdatphong->ngayketthuco.
-                            '</p>';
-
-                          if($i == count($danhsachdatphongs)-1){
-                            echo '<p class=""> Ngày kết thúc ở thực tế: '
-                              .$ngayhomnay.
-                              '</p>';
-                          }
-
-                          if($i!=(count($danhsachdatphongs)-1) || $i==0) {
-                            echo '<p class=""> Số ngày ở: '
-                              .$songay1.
-                              '</p>';
-                          } else {
-                          echo '<p class=""> Số ngày ở: '
-                            .$songay2.
-                            '</p>';
-                          }
-
-                          echo '
-                          <p class="badge bg-primary" />'.$tonggia.'</p><br>';
-                          $i++;
+                    $i = 0;
+                    $tonggia = 0;
+                    $ngayhomnay = date('Y-m-d');
+                    if (count($danhsachdatphongs) != 1) {
+                        foreach ($danhsachdatphongs as $danhsachdatphong) {
+                            $giatientungphong = 0;
+                            $ngaybatdau = $danhsachdatphong->ngaybatdauo;
+                            $ngayketthuc = $danhsachdatphong->ngayketthuco;
+                            $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
+                            $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
+                            if ($i == 0) {
+                                $giatientungphong += $danhsachdatphong->phongs->loaiphongs->gia * $songay1;
+                            } elseif ($i != count($danhsachdatphongs) - 1) {
+                                $giatientungphong += $danhsachdatphong->phongs->loaiphongs->gia * $songay1;
+                            } else {
+                                $giatientungphong += $danhsachdatphong->phongs->loaiphongs->gia * $songay2;
+                            }
+                            echo '
+                                              <p class="">' .
+                                $danhsachdatphong->phongid .
+                                '-' .
+                                $danhsachdatphong->phongs->loaiphongs->ten .
+                                '-' .
+                                $danhsachdatphong->phongs->loaiphongs->gia .
+                                '</p>';
+                    
+                            echo '<p class=""> Ngày bắt đầu ở: ' . $danhsachdatphong->ngaybatdauo . '</p>';
+                    
+                            echo '<p class=""> Ngày kết thúc ở: ' . $danhsachdatphong->ngayketthuco . '</p>';
+                    
+                            if ($i == count($danhsachdatphongs) - 1) {
+                                echo '<p class=""> Ngày kết thúc ở thực tế: ' . $ngayhomnay . '</p>';
+                            }
+                    
+                            if ($i != count($danhsachdatphongs) - 1 || $i == 0) {
+                                echo '<p class=""> Số ngày ở: ' . $songay1 . '</p>';
+                            } else {
+                                echo '<p class=""> Số ngày ở: ' . $songay2 . '</p>';
+                            }
+                    
+                            echo ' <p class="badge bg-primary" />' .
+                                $giatientungphong .
+                                '</p><br>';
+                            $tonggia +=$giatientungphong;
+                            $i++;
                         }
-                      } else {
-                        foreach($danhsachdatphongs as $danhsachdatphong){
-                          $ngaybatdau = $danhsachdatphong->ngaybatdauo;
-                          $ngayketthuc = $danhsachdatphong->ngayketthuco;
-                          $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
-                          $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
-                          echo '
-                          <p class="">'
-                            .$danhsachdatphong->phongid.
-                            "-"
-                            .$danhsachdatphong->phongs->loaiphongs->ten.
-                            "-"
-                            .$danhsachdatphong->phongs->loaiphongs->gia.
-                            '</p>';
-
-                          echo '<p class=""> Ngày bắt đầu ở: '
-                            .$danhsachdatphong->ngaybatdauo.
-                            '</p>';
-
-                          echo '<p class=""> Ngày kết thúc ở: '
-                            .$danhsachdatphong->ngayketthuco.
-                            '</p>';
-
-                          echo '<p class=""> Số ngày ở: '
-                            .$songay2.
-                            '</p>';
-
-                          echo '
-                          <p class="badge bg-primary" />'.$tonggia.'</p><br>';
+                    } else {
+                        foreach ($danhsachdatphongs as $danhsachdatphong) {
+                            $ngaybatdau = $danhsachdatphong->ngaybatdauo;
+                            $ngayketthuc = $danhsachdatphong->ngayketthuco;
+                            $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
+                            $tonggia += $danhsachdatphong->phongs->loaiphongs->gia * $songay2;
+                            echo '
+                                              <p class="">' .
+                                $danhsachdatphong->phongid .
+                                '-' .
+                                $danhsachdatphong->phongs->loaiphongs->ten .
+                                '-' .
+                                $danhsachdatphong->phongs->loaiphongs->gia .
+                                '</p>';
+                    
+                            echo '<p class=""> Ngày bắt đầu ở: ' . $danhsachdatphong->ngaybatdauo . '</p>';
+                    
+                            echo '<p class=""> Ngày kết thúc ở: ' . $danhsachdatphong->ngayketthuco . '</p>';
+                    
+                            echo '<p class=""> Số ngày ở: ' . $songay2 . '</p>';
+                    
+                            echo '
+                                              <p class="badge bg-primary" />' .
+                                $tonggia .
+                                '</p><br>';
                         }
-                      }
+                    }
                     ?>
                     {{-- Truc tiep --}}
                     <div class="mb-3 mt-3">
-                        <?php 
-                          $tiendatcoc = App\Models\Thanhtoan::where("khachhangid", $datphong->id)
-                          ->where("loaitien", "datcoc")
-                          ->first();
-                          ?>
+                        <?php
+                        $tiendatcoc = App\Models\Thanhtoan::where('khachhangid', $datphong->id)
+                            ->where('loaitien', 'datcoc')
+                            ->first();
+                        ?>
                         <label class="form-label" for="tongsotien">Tổng số tiền</label>
-                        <input type="text" name="tongsotien" class="form-control" id="tongsotien" placeholder="VD: 300" value="{{$tonggia}}" readonly />
+                        <input type="text" name="tongsotien" class="form-control" id="tongsotien"
+                            placeholder="VD: 300" value="{{ $tonggia }}" readonly />
                         @error('tongsotien')
-                        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
 
                         {{-- tien dat coc --}}
-                        @if($tiendatcoc)
-                        <label class="form-label" for="tiendatcoc">Trừ số tiền đặt cọc</label>
-                        <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc" placeholder="VD: 300" value="{{$tiendatcoc->gia}}" readonly />
+                        @if ($tiendatcoc)
+                            <label class="form-label" for="tiendatcoc">Trừ số tiền đặt cọc</label>
+                            <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
+                                placeholder="VD: 300" value="{{ $tiendatcoc->gia }}" readonly />
                         @endif
                         <hr>
                         {{-- tien dich vu --}}
                         <label class="form-label" for="tiencacdichvu">Cộng số tiền dịch vụ</label>
                         <br>
-                        <?php $tongtiendv = 0;?>
+                        <?php $tongtiendv = 0; ?>
 
-                        @if($dichvudatphongs)
-                        @foreach($dichvudatphongs as $dichvudatphong)
-                        @if($dichvudatphong)
+                        @if ($dichvudatphongs)
+                            @foreach ($dichvudatphongs as $dichvudatphong)
+                                @if ($dichvudatphong)
+                                    <?php $tongtiendv += $dichvudatphong->dichvus->giatien; ?>
 
-                        <?php $tongtiendv += $dichvudatphong->dichvus->giatien;?>
-
-                        <label class="form-label" for="tiendichvu">{{$dichvudatphong->dichvus->ten}}</label>
-                        <input type="text" name="tiendichvu" class="form-control" id="tiendichvu" placeholder="VD: 300" value="{{$dichvudatphong->dichvus->giatien}}" readonly />
-                        @endif
-                        @endforeach
+                                    <label class="form-label"
+                                        for="tiendichvu">{{ $dichvudatphong->dichvus->ten }}</label>
+                                    <input type="text" name="tiendichvu" class="form-control" id="tiendichvu"
+                                        placeholder="VD: 300" value="{{ $dichvudatphong->dichvus->giatien }}"
+                                        readonly />
+                                @endif
+                            @endforeach
                         @endif
 
                         <label class="form-label" for="tongtiendichvu">Tổng số tiền dịch vụ</label>
-                        <input type="text" name="tongtiendichvu" class="form-control" id="tongtiendichvu" placeholder="VD: 300" value="{{$tongtiendv}}" readonly />
+                        <input type="text" name="tongtiendichvu" class="form-control" id="tongtiendichvu"
+                            placeholder="VD: 300" value="{{ $tongtiendv }}" readonly />
                         <hr>
 
                         {{-- tien tru sau dat coc --}}
-                        @if($tiendatcoc)
-                        <?php $tongtien = $tonggia - $tiendatcoc->gia + $tongtiendv ?>
+                        @if ($tiendatcoc)
+                            <?php $tongtien = $tonggia - $tiendatcoc->gia + $tongtiendv; ?>
                         @else
-                        <?php $tongtien = $tonggia + $tongtiendv ?>
+                            <?php $tongtien = $tonggia + $tongtiendv; ?>
                         @endif
                         <label class="form-label" for="sotien">Tổng giá</label>
-                        <input type="text" name="sotien" class="form-control" id="sotien" placeholder="VD: 300" value="{{$tongtien}}" readonly />
+                        <input type="text" name="sotien" class="form-control" id="sotien" placeholder="VD: 300"
+                            value="{{ $tongtien }}" readonly />
                         @error('sotien')
-                        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
 
                     </div>
                     <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                    <input type="hidden" name="khachhang_id" value="{{$datphong->id}}">
+                    <input type="hidden" name="khachhang_id" value="{{ $datphong->id }}">
                     <input type="hidden" name="loaitien" value="traphong">
                     <input type="hidden" name="hinhthucthanhtoan" value="tructiep">
 
@@ -169,8 +165,10 @@
                         </div>
                         <div class="p-2 bd-highlight">
                             {{-- Thanh toan vnpay --}}
-                            <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{$datphong->id}}/{{$tongtien}}">
-                                <img src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929" width="150px" class="shadow-sm">
+                            <a
+                                href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{ $datphong->id }}/{{ $tongtien }}">
+                                <img src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929"
+                                    width="150px" class="shadow-sm">
                             </a>
                         </div>
                         <div class="ml-auto p-2 bd-highlight">
