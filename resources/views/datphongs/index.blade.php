@@ -55,6 +55,14 @@
                             $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
                             $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->id)->get();
                             ?>
+                            {{-- KT co dat coc --}}
+                            <?php $check = 0;
+                            foreach ($thanhtoans as $thanhtoan) {
+                                if ($thanhtoan) {
+                                    $check++;
+                                }
+                            }
+                            ?>
                             {{-- Lich su dat phong --}}
                             @include('datphongs.history')
 
@@ -79,23 +87,34 @@
                             </form>
                         </td>
                         <td>
-
-                            @if ($datphong->tinhtrangthanhtoan == 0)
-                            <p style="display:none">Chưa</p>
-                                @include('datphongs.actionButton.thanhtoan')
-                            @else
-                                <p style="display:none">Xác nhận</p>
-                                @hasrole('Admin')
-                                    @include('datphongs.actionButton.suathanhtoan')
+                            @if ($check != 0)
+                                @if ($datphong->tinhtrangthanhtoan == 0)
+                                    <p style="display:none">Chưa</p>
+                                    @include('datphongs.actionButton.thanhtoan')
                                 @else
-                                    <label class="badge bg-success">
-                                        Xác nhận
-                                    </label>
-                                @endhasrole
+                                    <p style="display:none">Xác nhận</p>
+                                    @hasrole('Admin')
+                                        @include('datphongs.actionButton.suathanhtoan')
+                                    @else
+                                        <label class="badge bg-success">
+                                            Xác nhận
+                                        </label>
+                                    @endhasrole
+                                @endif
+                            @else
+                                <label class="badge bg-danger">
+                                    Chưa
+                                </label>
                             @endif
                         </td>
                         <td>
-                            @include('datphongs.actionButton.nhanphong')
+                            @if ($check != 0)
+                                @include('datphongs.actionButton.nhanphong')
+                            @else
+                                <label class="badge bg-danger">
+                                    Chưa
+                                </label>
+                            @endif
                         </td>
                         <!-- Action -->
                         <td>
@@ -120,32 +139,26 @@
                                         @include('datphongs.actionButton.dichvuButton')
                                     @endif
                                 </div>
-                                {{-- KT co dat coc --}}
-                                <?php $check = 0;
-                                foreach ($thanhtoans as $thanhtoan) {
-                                    if ($thanhtoan) {
-                                        $check++;
-                                    }
-                                }
-                                ?>
-                                {{-- <div class="d-flex justify-content-start gap-2">
-                                        @if ($check == 0)
-                                            //Đặt cọc
-                                            <div class="my-1 col-6">
+                                <div class="d-flex justify-content-start gap-2">
+                                    @if ($check == 0)
+                                        {{-- //Đặt cọc --}}
+                                        <div class="my-1 col-6">
+                                            @foreach ($danhsachdatphongs as $danhsachdatphong)
                                                 <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{ $datphong->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
                                                     class="btn btn-success">Đặt cọc online</a>
-                                            </div>
-                                        @endif
-                                            //Thanh toán
-                                        @if ($check != 0)
-                                            @include('datphongs.actionButton.thanhtoan')
-                                        @endif
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    {{-- //Thanh toán
+                                    @if ($check != 0)
+                                        @include('datphongs.actionButton.thanhtoan')
+                                    @endif
 
-                                        //Nhận phòng, sửa nhận phòng
-                                        @if ($check != 0)
-                                            @include('datphongs.actionButton.nhanphong')
-                                        @endif
-                                    </div> --}}
+                                    //Nhận phòng, sửa nhận phòng
+                                    @if ($check != 0)
+                                        @include('datphongs.actionButton.nhanphong')
+                                    @endif --}}
+                                </div>
 
                                 <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
                             @else
