@@ -137,7 +137,7 @@
                                     <span class="fas fa-caret-right"></span>
                                 </div>
                                 <span class="nav-link-icon">
-                                    <i class="fas fa-gear"></i>
+                                    <i class="fa fa-cog"></i>
                                 </span>
                                 <span class="nav-link-text">Xử lý</span>
                             </div>
@@ -175,7 +175,7 @@
                                     <span class="fas fa-caret-right"></span>
                                 </div>
                                 <span class="nav-link-icon">
-                                    <i class="fas fa-dollar"></i>
+                                    <i class="fas fa-dollar-sign"></i>
                                 </span>
                                 <span class="nav-link-text">Thanh toán</span>
                             </div>

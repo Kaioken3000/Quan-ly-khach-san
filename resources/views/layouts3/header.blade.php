@@ -55,7 +55,7 @@
                                         href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-management.html#settings-offcanvas"
                                         data-bs-toggle="offcanvas">
                                         <div class="d-flex gap-2">
-                                            <i class="fas fa-gear"></i>
+                                            <i class="fas fa-cog"></i>
                                             Setting
                                         </div>
                                     </a>

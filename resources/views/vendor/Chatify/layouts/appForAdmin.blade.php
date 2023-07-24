@@ -17,7 +17,7 @@
                 <!--    End of Main Content-->
                 <!-- ===============================================-->
 
-                @include('layouts3.footer')
+                {{-- @include('layouts3.footer') --}}
             </div>
         </div>
     </main>
