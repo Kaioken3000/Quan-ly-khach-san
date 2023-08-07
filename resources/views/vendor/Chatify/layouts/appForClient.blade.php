@@ -12,6 +12,6 @@
 
     {{-- Message end --}}
 
-    {{-- @include('client.layouts2.script') --}}
+    @include('client.layouts2.script')
 
 </body>

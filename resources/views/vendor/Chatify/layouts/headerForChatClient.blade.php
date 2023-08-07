@@ -49,6 +49,8 @@
                             <ul>
                                 <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
                                 <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
+                                <li class="{{ Request::is('client/virtualTour') ? 'active':'' }}"><a href="/client/virtualTour">Virtual tour</a></li>
+                                <li class="{{ Request::is('chatify') ? 'active':'' }}"><a href="/chatify/">Chat</a></li>
                                 {{-- <li><a href="./pages.html">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./room-details.html">Room Details</a></li>
