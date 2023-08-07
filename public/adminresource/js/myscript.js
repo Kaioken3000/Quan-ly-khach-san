@@ -14,9 +14,9 @@ function loctheothang() {
     if (filter != 0) {
         tongtien = 0;
         // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[2];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
 
             if (td) {
                 txtValue = td.textContent || td.innerText;
@@ -38,9 +38,9 @@ function loctheothang() {
 
     } else {
         tongtien = 0;
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
             if (td) {
                 tien = tiens.textContent || tiens.innerText;
                 tien = tien.trim()
@@ -70,9 +70,9 @@ function loctheonam() {
     if (filter != 0) {
         tongtien = 0;
         // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[2];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 txtValue = new Date(txtValue).getFullYear();
@@ -93,9 +93,9 @@ function loctheonam() {
 
     } else {
         tongtien = 0;
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
             if (td) {
                 tien = tiens.textContent || tiens.innerText;
                 tien = tien.trim()
@@ -128,9 +128,9 @@ function loctheothangvanam() {
     if (filterthang != 0) {
         tongtien = 0;
         // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[2];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
 
             if (td) {
                 txtValue = td.textContent || td.innerText;
@@ -169,9 +169,9 @@ function loctheoquy() {
     if (filter != 0) {
         tongtien = 0;
         // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[2];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
 
             if (td) {
                 txtValue = td.textContent || td.innerText;
@@ -192,9 +192,9 @@ function loctheoquy() {
 
     } else {
         tongtien = 0;
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];
-            tiens = tr[i].getElementsByTagName("td")[9];
+            tiens = tr[i].getElementsByTagName("td")[8];
             if (td) {
                 tien = tiens.textContent || tiens.innerText;
                 tien = tien.trim()

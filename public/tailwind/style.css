@@ -1,0 +1,247 @@
+        div.my-alert {
+            max-width: var(--tw-width-7xl);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 640px) {
+            div.my-alert {
+                padding-left: var(--tw-size-6);
+                padding-right: var(--tw-size-6);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            div.my-alert {
+                padding-left: var(--tw-size-8);
+                padding-right: var(--tw-size-8);
+            }
+        }
+
+        div.my-alert>div.my-alert__unique1 {
+            padding-top: var(--tw-size-4);
+            padding-bottom: var(--tw-size-4);
+        }
+
+        div.my-alert>div>h1 {
+            font-size: var(--tw-font-size-2xl);
+            line-height: var(--tw-line-height-8);
+        }
+
+        div.my-alert>div.my-alert__unique2 {
+            max-width: var(--tw-width-2xl);
+        }
+
+        div.my-alert>div>div {
+            display: grid;
+        }
+
+        @media (min-width: 768px) {
+            div.my-alert>div>div {
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+            }
+        }
+
+        div.my-alert>div>div {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            margin-top: var(--tw-size-4);
+        }
+
+        @media (min-width: 768px) {
+            div.my-alert>div>div>div.my-alert__unique3 {
+                grid-column: span 5 / span 5;
+            }
+        }
+
+        div.my-alert>div>div>div>form>div {
+            margin-top: var(--tw-size-1);
+            display: flex;
+            border-radius: var(--tw-border-radius-md);
+            --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+                var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        }
+
+        div.my-alert>div>div>div>form>div>div {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            flex-grow: 1;
+        }
+
+        div.my-alert>div>div>div>form>div>div:focus-within {
+            z-index: 10;
+        }
+
+        div.my-alert>div>div>div>form>div>div>div {
+            position: absolute;
+            top: var(--tw-size-0);
+            bottom: var(--tw-size-0);
+            left: var(--tw-size-0);
+            padding-left: var(--tw-size-3);
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        div.my-alert>div>div>div>form>div>div>div>svg {
+            height: var(--tw-size-5);
+            width: var(--tw-size-5);
+            --tw-text-opacity: 1;
+            color: rgb(var(--tw-color-gray-400) / var(--tw-text-opacity));
+        }
+
+        div.my-alert>div>div>div>form>div>div>input:focus {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(var(--tw-color-indigo-500) / var(--tw-ring-opacity));
+            --tw-border-opacity: 1;
+            border-color: rgb(var(--tw-color-indigo-500) / var(--tw-border-opacity));
+        }
+
+        div.my-alert>div>div>div>form>div>div>input {
+            display: block;
+            width: 100%;
+            border-radius: var(--tw-border-radius-none);
+            border-top-left-radius: var(--tw-border-radius-md);
+            border-bottom-left-radius: var(--tw-border-radius-md);
+            padding-left: var(--tw-size-10);
+        }
+
+        @media (min-width: 640px) {
+            div.my-alert>div>div>div>form>div>div>input {
+                font-size: var(--tw-font-size-sm);
+                line-height: var(--tw-line-height-5);
+            }
+        }
+
+        div.my-alert>div>div>div>form>div>div>input {
+            --tw-border-opacity: 1;
+            border-color: rgb(var(--tw-color-gray-300) / var(--tw-border-opacity));
+        }
+
+        div.my-alert>div>div>div>form>div>button {
+            margin-left: calc(var(--tw-size-px) * -1);
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        div.my-alert>div>div>div>form>div>button> :not([hidden])~ :not([hidden]) {
+            --tw-space-x-reverse: 0;
+            margin-right: calc(var(--tw-size-2) * var(--tw-space-x-reverse));
+            margin-left: calc(var(--tw-size-2) * calc(1 - var(--tw-space-x-reverse)));
+        }
+
+        div.my-alert>div>div>div>form>div>button {
+            padding-left: var(--tw-size-4);
+            padding-right: var(--tw-size-4);
+            padding-top: var(--tw-size-2);
+            padding-bottom: var(--tw-size-2);
+            border-width: 1px;
+            --tw-border-opacity: 1;
+            border-color: rgb(var(--tw-color-gray-300) / var(--tw-border-opacity));
+            font-size: var(--tw-font-size-sm);
+            line-height: var(--tw-line-height-5);
+            font-weight: var(--tw-font-weight-medium);
+            border-top-right-radius: var(--tw-border-radius-md);
+            border-bottom-right-radius: var(--tw-border-radius-md);
+            --tw-text-opacity: 1;
+            color: rgb(var(--tw-color-gray-700) / var(--tw-text-opacity));
+            --tw-bg-opacity: 1;
+            background-color: rgb(var(--tw-color-gray-50) / var(--tw-bg-opacity));
+        }
+
+        div.my-alert>div>div>div>form>div>button:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(var(--tw-color-gray-100) / var(--tw-bg-opacity));
+        }
+
+        div.my-alert>div>div>div>form>div>button:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+                var(--tw-shadow, 0 0 #0000);
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(var(--tw-color-indigo-500) / var(--tw-ring-opacity));
+            --tw-border-opacity: 1;
+            border-color: rgb(var(--tw-color-indigo-500) / var(--tw-border-opacity));
+        }
+
+        div.my-alert>div>div>div.my-alert__unique4 {
+            margin-top: var(--tw-size-2);
+            margin-bottom: var(--tw-size-2);
+        }
+
+        @media (min-width: 640px) {
+            div.my-alert>div>div>div.my-alert__unique4 {
+                margin-top: var(--tw-size-0);
+                margin-bottom: var(--tw-size-0);
+            }
+        }
+
+        div.my-alert>div>div>div.my-alert__unique4 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div.my-alert>div>div>div>span {
+            font-size: var(--tw-font-size-xs);
+            line-height: var(--tw-line-height-4);
+            text-transform: uppercase;
+            font-weight: var(--tw-font-weight-bold);
+            --tw-text-opacity: 1;
+            color: rgb(var(--tw-color-gray-400) / var(--tw-text-opacity));
+            padding-left: var(--tw-size-1);
+            padding-right: var(--tw-size-1);
+        }
+
+        @media (min-width: 768px) {
+            div.my-alert>div>div>div.my-alert__unique5 {
+                grid-column: span 2 / span 2;
+            }
+        }
+
+        div.my-alert>div>div>div>form>button {
+            margin-top: var(--tw-size-1);
+            display: inline-flex;
+            align-items: center;
+            padding-left: var(--tw-size-4);
+            padding-right: var(--tw-size-4);
+            padding-top: var(--tw-size-2);
+            padding-bottom: var(--tw-size-2);
+            border-width: 1px;
+            border-color: var(--tw-color-transparent);
+            font-size: var(--tw-font-size-sm);
+            line-height: var(--tw-line-height-5);
+            font-weight: var(--tw-font-weight-medium);
+            border-radius: var(--tw-border-radius-md);
+            --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+                var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            --tw-text-opacity: 1;
+            color: rgb(var(--tw-color-white) / var(--tw-text-opacity));
+            --tw-bg-opacity: 1;
+            background-color: rgb(var(--tw-color-indigo-600) / var(--tw-bg-opacity));
+        }
+
+        div.my-alert>div>div>div>form>button:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(var(--tw-color-indigo-700) / var(--tw-bg-opacity));
+        }
+
+        div.my-alert>div>div>div>form>button:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+                var(--tw-shadow, 0 0 #0000);
+            --tw-ring-offset-width: 2px;
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(var(--tw-color-indigo-500) / var(--tw-ring-opacity));
+        }

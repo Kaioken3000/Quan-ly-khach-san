@@ -110,6 +110,22 @@
                 </li>
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
+                        <a class="nav-link {{ Request::is('videochat') || Request::is('videochat*') ? 'active' : '' }} dropdown-indicator label-1"
+                            href="/videochat">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon">
+                                    <!-- <span class="fas fa-caret-right"></span> Font Awesome fontawesome.com -->
+                                </div>
+                                <span class="nav-link-icon">
+                                    <i class="fas fa-camera"></i>
+                                </span>
+                                <span class="nav-link-text">Video chat</span>
+                            </div>
+                        </a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('datphongs') || Request::is('datphongs*') ? 'active' : '' }} dropdown-indicator label-1"
                             href="/datphongs"
                             onclick="setFilter('', '', 6); setFilter('', '', 5); setFilter('', '', 7);">

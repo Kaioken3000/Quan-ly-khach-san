@@ -21,6 +21,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
 
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\ThanhtoanController;
@@ -191,6 +192,25 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // check in, check out
         Route::post('checkin', 'CheckController@checkin');
         Route::put('checkout', 'CheckController@checkout');
+
+        // Video chat route
+        Route::get('/videochat', function () {
+            return view('welcome');
+        });
+
+        Route::post("/createMeeting", [MeetingController::class, 'createMeeting'])->name("createMeeting");
+
+        Route::post("/validateMeeting", [MeetingController::class, 'validateMeeting'])->name("validateMeeting");
+
+        Route::get("/meeting/{meetingId}", function ($meetingId) {
+
+            $METERED_DOMAIN = env('METERED_DOMAIN');
+            return view('meeting', [
+                'METERED_DOMAIN' => $METERED_DOMAIN,
+                'MEETING_ID' => $meetingId
+            ]);
+        });
+        // video chat route end
     });
     Route::group(['middleware' => ['auth', 'role:Khachhang']], function () {
         // thanh toan vnpay
