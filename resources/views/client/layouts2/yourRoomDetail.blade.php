@@ -9,13 +9,13 @@
             <table class="table">
                 <thead>
                     <tr >
-                        <th>id</th>
-                        <th>Ngày đặt</th>
+                        <th>Mã</th>
+                        <th>Date Set</th>
                         <th>Ngày trả</th>
-                        <th>Số lượng</th>
-                        <th colspan="2">Phòng hiện tại</th>
+                        <th>Number of people</th>
+                        <th colspan="2">Phòng hiện đang ở</th>
                         <th>Tình trạng xử lý</th>
-                        <th>Thanh toán</th>
+                        <th>Thanh Toán</th>
                         <th>Nhận phòng</th>
                         <th>Action</th>
                     </tr>
@@ -45,7 +45,7 @@
                             ?>
                             <!-- Button trigger modal -->
                             <button type="button" class="badge badge-info border-info text-white" data-toggle="modal" data-target="#LichsuModal{{ $datphong->datphongid }}">
-                                Lịch sử
+                                History
                             </button>
 
                             <!-- Modal -->
@@ -130,15 +130,15 @@
                                 <!-- Đổi phòng -->
                                 <form class="m-1" action="hiendoiphongclient" method="get">
                                     <input type="hidden" name="datphongid" value="{{ $datphong->datphongid }}">
-                                    <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i> Đổi
-                                        phòng</button>
+                                    <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i> 
+                                        Change Room</button>
                                 </form>
 
                                 <!-- Xoá -->
                                 @if($datphong->tinhtrangnhanphong == 0)
                                 <div class="m-1">
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicModal{{ $datphong->datphongid }}">
-                                        Xoá
+                                        Delete
                                     </button>
                                 </div>
                                 <!-- Modal xoá phòng -->
@@ -169,7 +169,7 @@
                                 <!-- Dịch vụ -->
                                 <div class="m-1">
                                     <button type="button" class="w-100 btn btn-success" data-toggle="modal" data-target="#modaldichvu{{ $datphong->datphongid }}">
-                                        <i class="bx bx-box mb-1"></i> Dịch vụ
+                                        <i class="bx bx-box mb-1"></i> Service
                                     </button>
                                 </div>
                                 <!-- Modal dịch vụ -->

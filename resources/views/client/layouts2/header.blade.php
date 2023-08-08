@@ -49,7 +49,7 @@
                             <ul>
                                 <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
                                 <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
-                                <li class="{{ Request::is('client/virtualTour') ? 'active':'' }}"><a href="/client/virtualTour">Virtual tour</a></li>
+                                <li class="{{ Request::is('client/virtualTour') ? 'active':'' }}"><a href="/client/virtualTour">Virtual Tour</a></li>
                                 <li class="{{ Request::is('chatify') ? 'active':'' }}"><a href="/chatify/">Chat</a></li>
                                 {{-- <li><a href="./pages.html">Pages</a>
                                     <ul class="dropdown">
@@ -61,7 +61,7 @@
                                 </li> --}}
                                 @auth
                                 <li>
-                                    <form action="/client/danhsachdatphong" method="post">
+                                    {{-- <form action="/client/danhsachdatphong" method="post">
                                         @csrf
                                         <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
                                         <li>
@@ -70,7 +70,9 @@
                                                         {{ Request::is('client/danhsachdatphong') ? 'text-primary':'' }}" type="submit" value="Your Room">
                                             </a>
                                         </li>
-                                    </form>
+                                    </form> --}}
+                                    {{-- <li class="{{ Request::is('client/danhsachdatphong') ? 'active':'' }}"><a href="/client/danhsachdatphong">Danh sách đặt phòng</a></li> --}}
+                                    <li class="{{ Request::is('client/danhsachdatphong') ? 'active':'' }}"><a href="/client/danhsachdatphong">My Room List</a></li>
                                 </li>
                                 <li><a href="#">Account</a>
                                     <ul class="dropdown">

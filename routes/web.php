@@ -221,6 +221,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Nhap thong tin khách hang de dat phong
         Route::get('client/reservation', 'IndexController@reservation');
         Route::post('client/reservation', 'IndexController@reservation');
+
+        // Danh sách các phòng đã đặt
+        Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
+        Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong');
     });
 
     Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
@@ -251,9 +255,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('client/check', 'IndexController@checkroom');
 
 
-
-    // Danh sách các phòng đã đặt
-    Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
 
     // hien đổi phòng đã đặt
     Route::get('client/hiendoiphongclient', 'IndexController@hiendoiphongclient');

@@ -166,10 +166,11 @@ class IndexController extends Controller
     // Hien thi danh sach datphong cua client
     public function danhsachdatphong(Request $request)
     {
+        $userid = Auth::user()->id;
         $datphongs = DB::table('datphongs')
             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
             ->select('*', 'datphongs.id as datphongid')
-            ->where('khachhangs.userid', $request->clientid)
+            ->where('khachhangs.userid', $userid)
             ->where('huydatphong', 0)
             ->orderBy('datphongs.id', 'desc')->paginate(5);
         $dichvus = Dichvu::get();
