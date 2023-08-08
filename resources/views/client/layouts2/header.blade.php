@@ -1,7 +1,7 @@
 <!-- Header Section Begin -->
 <header class="header-section">
     <div class="top-nav">
-        <div class="container">
+        <div class="container-xxl mx-5">
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="tn-left">
@@ -19,7 +19,7 @@
                         </div>
                         <a href="#" class="bk-btn">Booking Now</a>
                         <div class="language-option">
-                            <img src="/client2/img/flag.jpg" alt="">
+                            <img src="/client2/img/vnflag.png" alt="">
                             <span>EN <i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="menu-item">
-        <div class="container">
+        <div class="container-xxl mx-5">
             <div class="row">
                 <div class="col-lg-2">
                     <div class="logo">
@@ -90,7 +90,7 @@
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
-                            <i class="icon_search"></i>
+                            @include("client.layouts2.searchMenu")
                         </div>
                     </div>
                 </div>

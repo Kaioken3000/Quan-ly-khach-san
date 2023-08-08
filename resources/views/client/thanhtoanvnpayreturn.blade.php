@@ -105,7 +105,7 @@
 
     @include('client.layouts2.footer')
 
-    @include('client.layouts2.search')
+    {{-- @include('client.layouts2.search') --}}
 
     @include('client.layouts2.script')
 

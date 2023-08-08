@@ -42,7 +42,7 @@
     @include('client.layouts2.header')
 
     @include('client.layouts2.hero')
-
+    
     @include('client.layouts2.about')
 
     @include('client.layouts2.service')
@@ -55,7 +55,7 @@
 
     @include('client.layouts2.footer')
 
-    @include('client.layouts2.search')
+    {{-- @include('client.layouts2.search') --}}
 
     @include('client.layouts2.script')
 
