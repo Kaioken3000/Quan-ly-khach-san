@@ -11,8 +11,8 @@
         </div>
     @endif
     <!-- Basic Layout -->
-    <h5 class="mb-0">From nhập liệu</h5>
-    <form action="/datphongs-kiemtra" method="GET">
+    {{-- <h5 class="mb-0">From nhập liệu</h5> --}}
+    <form action="/datphongs-kiemtra" method="GET" class="w-25">
         <div class="mb-3">
             <label class="form-label" for="ngaydat">Ngày vào</label>
             <input type="date" name="ngaydat" class="form-control" id="ngaydat" />
@@ -29,7 +29,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="soluong">Số lượng</label>
-            <input type="number" name="soluong" class="form-control" id="soluong" />
+            <input type="number" name="soluong" class="form-control" id="soluong" value="1"/>
             @error('soluong')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror

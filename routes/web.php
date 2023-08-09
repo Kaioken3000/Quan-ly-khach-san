@@ -116,6 +116,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('phongs', PhongController::class);
         Route::get('phongs-search', 'phongController@search');
         Route::get('phongs/phongs-search', 'phongController@search');
+        Route::get('phongs/roomDetail/{phongid}', 'phongController@roomDetail')->name("phong.roomDetail");
 
         // Dichvu Routes
         Route::resource('dichvus', DichvuController::class);

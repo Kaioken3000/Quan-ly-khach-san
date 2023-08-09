@@ -131,4 +131,10 @@ class PhongController extends Controller
         $loaiphongs = Loaiphong::all();
         return view('phongs.search', compact('phongs','loaiphongs'));
     }
+
+    public function roomDetail(Request $request)
+    {
+        $phong = Phong::where("so_phong", $request->phongid)->first();
+        return view('phongs.roomDetail', compact('phong'));
+    }
 }

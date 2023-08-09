@@ -35,7 +35,7 @@
                                 // Declare variables
                                 var input, filter, table, tr, td, i, txtValue;
                                 filter = input.value.toUpperCase();
-                                table = document.getElementById("myTable");
+                                table = document.getElementById("DataTables_Table_0");
                                 tr = table.getElementsByTagName("tr");
 
                                 // Loop through all table rows, and hide those who don't match the search query
@@ -78,7 +78,7 @@
                                 <td>{{ $loaiphong->ten }}</td>
                             @endif
                         @endforeach
-                        <td>
+                        <td class="d-flex gap-3">
                             <form action="{{ route('khachhangs.create') }}" method="get">
                                 <input type="hidden" name="ngaydat" id="ngaydat" value="{{ $request->ngaydat }}" />
                                 <input type="hidden" name="ngaytra" id="ngaytra" value="{{ $request->ngaytra }}" />
@@ -89,6 +89,8 @@
                                 <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đặt
                                     phòng</button>
                             </form>
+                            <a href="{{ route('phong.roomDetail', ['phongid'=>$phong->so_phong]) }}"
+                                 class="btn btn-primary" target="_blank">Xem chi tiết</a>
                         </td>
                     </tr>
                 @endforeach

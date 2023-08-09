@@ -1,4 +1,4 @@
-@include('client.layouts2.breadcrumb', ['titlePage' => 'Room detail'])
+@include('client.layouts2.breadcrumb', ['titlePage' => 'Chi Tiết Phòng'])
 <!-- Room Details Section Begin -->
 <section class="room-details-section spad">
     <div class="container">
@@ -54,8 +54,8 @@
                                     <td>{{$phong->ten}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="r-o">Capacity:</td>
-                                    <td>{{$phong->soluong}}</td>
+                                    <td class="r-o">Quantity:</td>
+                                    <td>{{$phong->soluong}} people</td>
                                 </tr>
                             </tbody>
                         </table>

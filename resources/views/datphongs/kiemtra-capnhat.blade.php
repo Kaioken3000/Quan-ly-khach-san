@@ -33,7 +33,7 @@
                         // Declare variables
                         var input, filter, table, tr, td, i, txtValue;
                         filter = input.value.toUpperCase();
-                        table = document.getElementById("myTable");
+                        table = document.getElementById("DataTables_Table_0");
                         tr = table.getElementsByTagName("tr");
 
                         // Loop through all table rows, and hide those who don't match the search query
@@ -82,8 +82,10 @@
                             @csrf
                             <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->datphongid }}" />
                             <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
-                            <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi
-                                phòng</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bx bx-plus mb-1"></i> 
+                                Đổi phòng
+                            </button>
                         </form>
                     </td>
                 </tr>
