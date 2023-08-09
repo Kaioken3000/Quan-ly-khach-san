@@ -11,6 +11,8 @@ use App\Models\Khachhang;
 use App\Models\Loaiphong;
 use App\Models\Nhanphong;
 use App\Models\Thanhtoan;
+use App\Models\Huydatphong;
+use App\Models\DichvuDatphong;
 use Illuminate\Http\Request;
 use App\Models\Danhsachdatphong;
 use Illuminate\Support\Facades\DB;
@@ -91,6 +93,18 @@ class DatphongController extends Controller
         $dichvus = Dichvu::get();
         $phongs = Phong::get();
         return view('datphongs.index', compact('datphongs', 'dichvus', 'phongs', 'request'));
+    }
+
+    public function showHistoryPage(Request $request)
+    {
+        $danhsachdatphongs = Danhsachdatphong::where('datphongid', $request->datphongid)->get();
+        $nhanphongs = Nhanphong::where('datphongid', $request->datphongid)->get();
+        $traphongs = Traphong::where('datphongid', $request->datphongid)->get();
+        $huydatphongs = Huydatphong::where('datphongid', $request->datphongid)->get();
+        $dichvudatphongs = DichvuDatphong::where('datphongid', $request->datphongid)->get();
+        $thanhtoans = Thanhtoan::where('khachhangid', $request->khachhangid)->get();
+
+        return view('datphongs.historyPage', compact('danhsachdatphongs', 'nhanphongs', 'traphongs', 'huydatphongs', 'dichvudatphongs', 'thanhtoans'));
     }
 
     public function showHuydatphong(Request $request)

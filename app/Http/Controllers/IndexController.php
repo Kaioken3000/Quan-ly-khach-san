@@ -172,7 +172,7 @@ class IndexController extends Controller
             ->select('*', 'datphongs.id as datphongid')
             ->where('khachhangs.userid', $userid)
             ->where('huydatphong', 0)
-            ->orderBy('datphongs.id', 'desc')->paginate(5);
+            ->orderBy('datphongs.id', 'desc')->get();
         $dichvus = Dichvu::get();
         return view('client.danhsachdatphong', compact('datphongs', 'dichvus'));
     }

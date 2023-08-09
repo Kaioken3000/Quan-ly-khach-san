@@ -64,7 +64,11 @@
                             }
                             ?>
                             {{-- Lich su dat phong --}}
-                            @include('datphongs.history')
+                            {{-- @include('datphongs.history') --}}
+                            <a href="{{route('datphongs.showHistoryPage', ['datphongid'=> $datphong->datphongid, 'khachhangid'=>$datphong->id])}}"
+                                target="_blank" class="badge bg-primary">
+                            Chi tiết
+                            </a>
 
                             {{-- Hien va xoa dich vu --}}
                             @hasrole('Admin')
