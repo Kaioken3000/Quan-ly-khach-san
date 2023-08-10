@@ -52,7 +52,7 @@
                             $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->datphongid)->get();
                             $traphongs = App\Models\Traphong::where('datphongid', $datphong->datphongid)->get();
                             $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->datphongid)->get();
-                            $anuongdatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
+                            $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->datphongid)->get();
                             $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
                             $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->id)->get();
                             ?>
