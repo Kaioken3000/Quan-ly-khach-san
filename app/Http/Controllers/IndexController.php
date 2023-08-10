@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\Loaiphong;
-use App\Models\Phong;
-use App\Models\Khachhang;
-use App\Models\Nhanvien;
 use App\Models\User;
-use App\Models\Datphong;
-use App\Models\Danhsachdatphong;
-use App\Models\Dichvu;
 use App\Models\Check;
-use App\Models\DichvuDatphong;
+use App\Models\Phong;
+use App\Models\Anuong;
 use App\Models\Catruc;
+use App\Models\Dichvu;
+use App\Models\Datphong;
+use App\Models\Nhanvien;
+use App\Models\Khachhang;
+use App\Models\Loaiphong;
+use Illuminate\Http\Request;
+use App\Models\DichvuDatphong;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Danhsachdatphong;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -174,7 +175,8 @@ class IndexController extends Controller
             ->where('huydatphong', 0)
             ->orderBy('datphongs.id', 'desc')->get();
         $dichvus = Dichvu::get();
-        return view('client.danhsachdatphong', compact('datphongs', 'dichvus'));
+        $anuongs = Anuong::get();
+        return view('client.danhsachdatphong', compact('datphongs', 'dichvus', 'anuongs'));
     }
 
     // kiem tra phong trong cua client

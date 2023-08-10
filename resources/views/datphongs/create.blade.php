@@ -29,7 +29,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="soluong">Số lượng</label>
-            <input type="number" name="soluong" class="form-control" id="soluong" value="1"/>
+            <input type="number" name="soluong" class="form-control" id="soluong"/>
             @error('soluong')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror

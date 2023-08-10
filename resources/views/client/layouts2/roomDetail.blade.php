@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group">
                             <label for="soluong">Number Of People In the room:</label>
-                            <input type="number" name="soluong" id="soluong" class="form-control form-control-lg-border" value="1" min=1>
+                            <input type="number" name="soluong" id="soluong" class="form-control form-control-lg-border" min=1>
                             @error('soluong')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror

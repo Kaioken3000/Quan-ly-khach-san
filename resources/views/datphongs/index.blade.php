@@ -52,6 +52,7 @@
                             $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->datphongid)->get();
                             $traphongs = App\Models\Traphong::where('datphongid', $datphong->datphongid)->get();
                             $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->datphongid)->get();
+                            $anuongdatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
                             $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
                             $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->id)->get();
                             ?>
@@ -65,14 +66,14 @@
                             ?>
                             {{-- Lich su dat phong --}}
                             {{-- @include('datphongs.history') --}}
-                            <a href="{{route('datphongs.showHistoryPage', ['datphongid'=> $datphong->datphongid, 'khachhangid'=>$datphong->id])}}"
+                            <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->datphongid, 'khachhangid' => $datphong->id]) }}"
                                 target="_blank" class="badge bg-primary">
-                            Chi tiết
+                                Chi tiết
                             </a>
 
                             {{-- Hien va xoa dich vu --}}
                             @hasrole('Admin')
-                                @include('datphongs.dichvu')
+                                {{-- @include('datphongs.dichvu') --}}
                             @endhasrole
 
                         </td>
@@ -140,7 +141,10 @@
                                         @endhasrole
                                     @else
                                         <!-- Dịch vụ -->
-                                        @include('datphongs.actionButton.dichvuButton')
+                                        <div class="d-flex flex-column col-4">
+                                            @include('datphongs.actionButton.dichvuButton')
+                                            @include('datphongs.actionButton.anUongButton')
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="d-flex justify-content-start gap-2">

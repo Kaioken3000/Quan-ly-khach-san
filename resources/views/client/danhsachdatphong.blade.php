@@ -33,7 +33,7 @@
 
     @include('client.layouts2.header')
 
-    @include('client.layouts2.yourRoomDetail')
+    @include('client.yourRoom.yourRoomDetail')
 
     @include('client.layouts2.footer')
 

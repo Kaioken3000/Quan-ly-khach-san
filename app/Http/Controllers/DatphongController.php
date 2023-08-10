@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Xuly;
 use App\Models\Phong;
+use App\Models\Anuong;
 use App\Models\Dichvu;
 use App\Models\Datphong;
 use App\Models\Traphong;
@@ -12,8 +13,9 @@ use App\Models\Loaiphong;
 use App\Models\Nhanphong;
 use App\Models\Thanhtoan;
 use App\Models\Huydatphong;
-use App\Models\DichvuDatphong;
 use Illuminate\Http\Request;
+use App\Models\AnuongDatphong;
+use App\Models\DichvuDatphong;
 use App\Models\Danhsachdatphong;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -91,8 +93,9 @@ class DatphongController extends Controller
             // }
         }
         $dichvus = Dichvu::get();
+        $anuongs = Anuong::get();
         $phongs = Phong::get();
-        return view('datphongs.index', compact('datphongs', 'dichvus', 'phongs', 'request'));
+        return view('datphongs.index', compact('datphongs', 'dichvus', 'anuongs', 'phongs', 'request'));
     }
 
     public function showHistoryPage(Request $request)
@@ -102,9 +105,11 @@ class DatphongController extends Controller
         $traphongs = Traphong::where('datphongid', $request->datphongid)->get();
         $huydatphongs = Huydatphong::where('datphongid', $request->datphongid)->get();
         $dichvudatphongs = DichvuDatphong::where('datphongid', $request->datphongid)->get();
+        $anuongdatphongs = AnuongDatphong::where('datphongid', $request->datphongid)->get();
         $thanhtoans = Thanhtoan::where('khachhangid', $request->khachhangid)->get();
 
-        return view('datphongs.historyPage', compact('danhsachdatphongs', 'nhanphongs', 'traphongs', 'huydatphongs', 'dichvudatphongs', 'thanhtoans'));
+        return view('datphongs.historyPage', compact('danhsachdatphongs', 'nhanphongs', 'traphongs', 
+        'huydatphongs', 'dichvudatphongs','anuongdatphongs', 'thanhtoans'));
     }
 
     public function showHuydatphong(Request $request)

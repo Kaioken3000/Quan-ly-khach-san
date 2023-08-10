@@ -78,6 +78,23 @@
                                         </p>
                                     @endforeach
                                 @endif
+                                @if (count($anuongdatphongs) > 0)
+                                    <b class="font-weight-bold">Used Food service</b>
+                                    @foreach ($anuongdatphongs as $anuongdatphong)
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <p>{{ $anuongdatphong->anuongs->ten }}:
+                                                    <b>{{ $anuongdatphong->anuongs->gia }} VND</b>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>Số lượng:
+                                                    <b>{{ $anuongdatphong->soluong }}</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
 
@@ -87,8 +104,3 @@
         </div>
     </div>
 </div>
-<style>
-    .modal-lg {
-        max-width: 80%;
-    }
-</style>

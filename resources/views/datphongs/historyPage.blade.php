@@ -94,13 +94,96 @@
                                 @hasrole('Admin')
                                     <!-- xoa dich vu -->
                                     <div class="col-2">
+                                        <!-- Button trigger modal -->
                                         <button type="button" class="badge bg-danger" data-bs-toggle="modal"
                                             data-bs-target="#dichvudatphongxoa{{ $dichvudatphong->id }}">
-                                            delete
+                                            <i class="fas fa-trash"></i>
                                         </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="dichvudatphongxoa{{ $dichvudatphong->id }}" tabindex="-1"
+                                            aria-labelledby="dichvudatphongxoa{{ $dichvudatphong->id }}Label"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="dichvudatphongxoa{{ $dichvudatphong->id }}Label"> Bạn có chắc
+                                                            chắn muốn xoá</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">No</button>
+                                                        <form
+                                                            action="{{ route('dichvu_datphong.destroy', $dichvudatphong->id) }}"
+                                                            method="Post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger"> Yes</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endhasrole
                             </div>
+                        @endforeach
+                    @endif
+                    <hr>
+                    @if (count($anuongdatphongs) > 0)
+                        <b>Dịch vụ ăn uống</b>
+                        @foreach ($anuongdatphongs as $anuongdatphong)
+                            <div class="d-flex justify-content-between">
+                                <div class="col-10">
+                                    {{ $anuongdatphong->anuongs->ten }}:
+                                    <b>{{ $anuongdatphong->anuongs->gia }} VND</b>
+                                    <br>
+                                    Số lượng:
+                                    <b>{{ $anuongdatphong->soluong }}</b>
+                                </div>
+                                @hasrole('Admin')
+                                    <!-- xoa dich vu an uong -->
+                                    <div class="col-2">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="badge bg-danger" data-bs-toggle="modal"
+                                            data-bs-target="#anuongdatphongxoa{{ $anuongdatphong->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="anuongdatphongxoa{{ $anuongdatphong->id }}" tabindex="-1"
+                                            aria-labelledby="anuongdatphongxoa{{ $anuongdatphong->id }}Label"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="anuongdatphongxoa{{ $anuongdatphong->id }}Label"> Bạn có chắc
+                                                            chắn muốn xoá</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">No</button>
+                                                        <form
+                                                            action="{{ route('anuong_datphong.destroy', $anuongdatphong->id) }}"
+                                                            method="Post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger"> Yes</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endhasrole
+                            </div>
+                            <br>
                         @endforeach
                     @endif
                 </div>
@@ -114,4 +197,3 @@
         }
     </style>
 @endsection
-

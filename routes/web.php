@@ -20,6 +20,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
+use App\Http\Controllers\AnuongController;
 
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\KhachhangController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\DichvuDatphongController;
+use App\Http\Controllers\AnuongDatphongController;
 use App\Http\Controllers\DanhsachdatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 /*
@@ -120,11 +122,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // Dichvu Routes
         Route::resource('dichvus', DichvuController::class);
-        Route::get('dichvus-search', 'dichvuController@search');
-        Route::get('dichvus/dichvus-search', 'dichvuController@search');
-
+        Route::get('dichvus-search', 'DichvuController@search');
+        Route::get('dichvus/dichvus-search', 'DichvuController@search');
         // Dichvu Routes
         Route::resource('dichvu_datphong', DichvuDatphongController::class);
+
+        // Anuong Routes
+        Route::resource('anuongs', AnuongController::class);
+        Route::get('anuongs-search', 'AnuongController@search');
+        Route::get('anuongs/anuongs-search', 'AnuongController@search');
 
         // Datphong Routess
         Route::resource('datphongs', DatphongController::class);
@@ -226,9 +232,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // Danh sách các phòng đã đặt
         Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
-        Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong');
-    });
+        Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong')->name("client.danhsachdatphong");
 
+    });
+    // AnuongDatphong
+    Route::resource('anuong_datphong', AnuongDatphongController::class);
+    
+    // Hoadon
     Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 
     /**

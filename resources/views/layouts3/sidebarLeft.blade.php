@@ -78,6 +78,22 @@
                 </li>
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
+                        <a class="nav-link {{ Request::is('anuongs') || Request::is('anuongs*') ? 'active' : '' }} dropdown-indicator label-1"
+                            href="/anuongs">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon">
+                                    <!-- <span class="fas fa-caret-right"></span> Font Awesome fontawesome.com -->
+                                </div>
+                                <span class="nav-link-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </span>
+                                <span class="nav-link-text">Dịch vụ ăn uống</span>
+                            </div>
+                        </a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('khachhangs') || Request::is('khachhangs*') ? 'active' : '' }} dropdown-indicator label-1"
                             href="/khachhangs">
                             <div class="d-flex align-items-center">

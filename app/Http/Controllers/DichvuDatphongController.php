@@ -41,6 +41,6 @@ class DichvuDatphongController extends Controller
     public function destroy(DichvuDatphong $dichvu_datphong)
     {
         $dichvu_datphong->delete();
-        return redirect()->route('datphongs.index')->with('success','Dich vu dat phong has been deleted successfully');
+        return redirect()->back()->withMessage('success','Dich vu dat phong has been deleted successfully');
     }
 }
