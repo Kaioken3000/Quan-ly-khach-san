@@ -39,16 +39,8 @@
                                         } else {
                                             $giatientungphong += $danhsachdatphong->phongs->loaiphongs->gia * $songay2;
                                         }
-                                        echo '
-                                        <h5 class="mb-3">' .
-                                            "Phòng: ".$danhsachdatphong->phongid .
-                                        '</h5>';
-                                        echo '
-                                        <h5 class="mb-3">' .
-                                            $danhsachdatphong->phongs->loaiphongs->ten .
-                                            '-' .
-                                            $danhsachdatphong->phongs->loaiphongs->gia . ' VND' .
-                                        '</h5>';
+                                        echo ' <h5 class="mb-3">' . 'Phòng: ' . $danhsachdatphong->phongid . '</h5>';
+                                        echo ' <h5 class="mb-3">' . $danhsachdatphong->phongs->loaiphongs->ten . '-' . $danhsachdatphong->phongs->loaiphongs->gia . ' VND' . '</h5>';
                                 
                                         echo '<p class=""> Ngày bắt đầu ở: ' . $danhsachdatphong->ngaybatdauo . '</p>';
                                 
@@ -74,14 +66,7 @@
                                         $ngayketthuc = $danhsachdatphong->ngayketthuco;
                                         $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
                                         $tonggia += $danhsachdatphong->phongs->loaiphongs->gia * $songay2;
-                                        echo '
-                                                                                                                                                                                                                                                                              <p class="">' .
-                                            $danhsachdatphong->phongid .
-                                            '-' .
-                                            $danhsachdatphong->phongs->loaiphongs->ten .
-                                            '-' .
-                                            $danhsachdatphong->phongs->loaiphongs->gia .
-                                            '</p>';
+                                        echo '<p class="">' . $danhsachdatphong->phongid . '-' . $danhsachdatphong->phongs->loaiphongs->ten . '-' . $danhsachdatphong->phongs->loaiphongs->gia . '</p>';
                                 
                                         echo '<p class=""> Ngày bắt đầu ở: ' . $danhsachdatphong->ngaybatdauo . '</p>';
                                 
@@ -89,10 +74,7 @@
                                 
                                         echo '<p class=""> Số ngày ở: ' . $songay2 . '</p>';
                                 
-                                        echo '
-                                                                                                                                                                                                                                                                              <p class="badge bg-primary" />' .
-                                            $tonggia .
-                                            '</p><br>';
+                                        echo ' <p class="badge bg-primary" />' . $tonggia . '</p><br>';
                                     }
                                 }
                                 ?>
