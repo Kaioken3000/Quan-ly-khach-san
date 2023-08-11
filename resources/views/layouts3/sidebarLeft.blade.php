@@ -60,6 +60,65 @@
                         </a>
                     </span>
                 </li>
+                {{-- Chi tiết phòng --}}
+                <li class="nav-item">
+                    <!-- parent pages-->
+                    <span class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" id="xulyNav"
+                            href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-management1.html#project-management1"
+                            role="button" data-bs-toggle="collapse" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon">
+                                    <span class="fas fa-caret-right"></span>
+                                </div>
+                                <span class="nav-link-icon">
+                                    <i class="fa fa-cog"></i>
+                                </span>
+                                <span class="nav-link-text">Chi tiết phòng</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent" data-bs-parent="#xulyNav" id="project-management1">
+                                <li class="nav-item">
+                                    <a href="/thietbis" class="nav-link">
+                                        <span class="micon fa fa-tv"></span>
+                                        <span class="mtext">Thiết bị</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link">
+                                        <span class="micon fa fa-bed"></span>
+                                        <span class="mtext">Giường</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link">
+                                        <span class="micon fa fa-image"></span>
+                                        <span class="mtext">Hình</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link">
+                                        <span class="micon fa fa-video"></span>
+                                        <span class="mtext">Video</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link">
+                                        <span class="micon fa fa-landmark"></span>
+                                        <span class="mtext">Virtual Tour</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link">
+                                        <span class="micon fa fa-circle-info"></span>
+                                        <span class="mtext">Miêu Tả</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </li>
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('dichvus') || Request::is('dichvus*') ? 'active' : '' }} dropdown-indicator label-1"
@@ -175,18 +234,17 @@
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#xulyNav"
-                                id="project-management1">
+                            <ul class="nav collapse parent" data-bs-parent="#xulyNav" id="project-management1">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuaxuly" name="notLink"
-                                    onclick="setFilter('chuaxulyOnly', 'Chưa', 5)">
+                                        onclick="setFilter('chuaxulyOnly', 'Chưa', 5)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa xử lý</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="daxuly" name="notLink"
-                                    onclick="setFilter('xulyOnly', 'Xác nhận', 5)">
+                                        onclick="setFilter('xulyOnly', 'Xác nhận', 5)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã xử lý</span>
                                     </a>
@@ -213,18 +271,17 @@
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#thanhtoanNav"
-                                id="project-management2">
+                            <ul class="nav collapse parent" data-bs-parent="#thanhtoanNav" id="project-management2">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuathanhtoan" name="notLink"
-                                    onclick="setFilter('chuathanhtoanOnly', 'Chưa', 6)">
+                                        onclick="setFilter('chuathanhtoanOnly', 'Chưa', 6)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa thanh toán</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="dathanhtoan" name="notLink"
-                                    onclick="setFilter('thanhtoanOnly', 'Xác nhận', 6)">
+                                        onclick="setFilter('thanhtoanOnly', 'Xác nhận', 6)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã thanh toán</span>
                                     </a>
@@ -232,7 +289,7 @@
                             </ul>
                         </div>
                     </span>
-                {{-- Nhận phòng --}}
+                    {{-- Nhận phòng --}}
                 <li class="nav-item">
                     <!-- parent pages-->
                     <span class="nav-item-wrapper">
@@ -250,18 +307,17 @@
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#nhanphongNav"
-                                id="project-management3">
+                            <ul class="nav collapse parent" data-bs-parent="#nhanphongNav" id="project-management3">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuanhanphong" name="notLink"
-                                    onclick="setFilter('chuanhanphongOnly', 'Chưa', 7)">
+                                        onclick="setFilter('chuanhanphongOnly', 'Chưa', 7)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa nhận phòng</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="danhanphong" name="notLink"
-                                    onclick="setFilter('nhanphongOnly', 'check', 7)">
+                                        onclick="setFilter('nhanphongOnly', 'check', 7)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã nhận phòng</span>
                                     </a>

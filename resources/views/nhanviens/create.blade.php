@@ -17,7 +17,7 @@
         <div class="mb-3">
             <label class="form-label" for="ma">Mã nhân viên</label>
             <input type="text" name="ma" class="form-control" id="ma" placeholder="VD: NV1"
-                require="require" />
+                required />
             @error('ma')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
@@ -25,14 +25,14 @@
         <div class="mb-3">
             <label class="form-label" for="ten">Tên nhân viên</label>
             <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Phòng VIP"
-                require="require" />
+                required />
             @error('ten')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
             <label class="form-label" for="luong">Lương nhân viên</label>
-            <input type="number" name="luong" class="form-control" id="luong" min=0 require="require" />
+            <input type="number" name="luong" class="form-control" id="luong" min=0 required />
             @error('luong')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror

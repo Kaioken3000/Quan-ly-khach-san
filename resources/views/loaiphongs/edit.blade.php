@@ -24,7 +24,7 @@ aria-hidden="true">
                     <label class="form-label" for="ma">Mã loại phòng</label>
                     <input type="text" name="ma" class="form-control"
                         value="{{ $loaiphong->ma }}" id="ma"
-                        placeholder="VD: P1" require="require" />
+                        placeholder="VD: P1" required />
                     @error('ma')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>
@@ -34,7 +34,7 @@ aria-hidden="true">
                     <label class="form-label" for="ten">Tên loại phòng</label>
                     <input type="text" name="ten" class="form-control"
                         id="ten" value="{{ $loaiphong->ten }}"
-                        placeholder="VD: Phòng VIP" require="require" />
+                        placeholder="VD: Phòng VIP" required />
                     @error('ten')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>
@@ -44,7 +44,7 @@ aria-hidden="true">
                     <label class="form-label" for="gia">Giá loại phòng</label>
                     <input type="number" name="gia" class="form-control"
                         value="{{ $loaiphong->gia }}" id="gia" min=0
-                        require="require" />
+                        required />
                     @error('gia')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>
@@ -53,7 +53,7 @@ aria-hidden="true">
                 <div class="mb-3">
                     <label class="form-label" for="hinh">Hinh loại phòng</label>
                     <input type="file" name="hinh" class="form-control"
-                        id="hinh" require="require" />
+                        id="hinh" required />
                     @error('hinh')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>
@@ -63,7 +63,7 @@ aria-hidden="true">
                     <label class="form-label" for="soluong">Số lượng</label>
                     <input type="number" name="soluong" class="form-control"
                         id="soluong" min=1 value="{{ $loaiphong->soluong }}"
-                        require="require" />
+                        required />
                     @error('soluong')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>
@@ -72,7 +72,7 @@ aria-hidden="true">
                 <div class="mb-3">
                     <label class="form-label" for="mieuTa">Miêu tả</label>
                     <textarea id="mieuTa" name="mieuTa" class="form-control" placeholder="VD: Phòng đẹp, tiện nghi,.."
-                        require="require">{{ $loaiphong->mieuTa }}</textarea>
+                        required>{{ $loaiphong->mieuTa }}</textarea>
                     @error('mieuTa')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>

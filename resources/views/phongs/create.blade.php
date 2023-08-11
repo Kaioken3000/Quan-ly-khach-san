@@ -26,21 +26,21 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="picture_1">Hinh phòng 1</label>
-                            <input type="file" name="picture_1" class="form-control" id="picture_1" require="require" />
+                            <input type="file" name="picture_1" class="form-control" id="picture_1" required />
                             @error('picture_1')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="picture_2">Hinh phòng 2</label>
-                            <input type="file" name="picture_2" class="form-control" id="picture_2" require="require" />
+                            <input type="file" name="picture_2" class="form-control" id="picture_2" required />
                             @error('picture_2')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="picture_3">Hinh phòng 3</label>
-                            <input type="file" name="picture_3" class="form-control" id="picture_3" require="require" />
+                            <input type="file" name="picture_3" class="form-control" id="picture_3" required />
                             @error('picture_3')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror

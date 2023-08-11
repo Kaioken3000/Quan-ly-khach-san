@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="ten">Tên ca trực</label>
                         <input type="text" name="ten" class="form-control" id="ten"
-                            value="{{ $catruc->ten }}" placeholder="VD: ăn uống" require="require" />
+                            value="{{ $catruc->ten }}" placeholder="VD: ăn uống" required />
                         @error('ten')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
@@ -27,7 +27,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="giobatdau">Giờ bắt đầu</label>
                         <input type="time" name="giobatdau" class="form-control" value="{{ $catruc->giobatdau }}"
-                            id="giobatdau" min=0 require="require" />
+                            id="giobatdau" min=0 required />
                         @error('giobatdau')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
@@ -35,7 +35,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="gioketthuc">Giờ kết thúc</label>
                         <input type="time" name="gioketthuc" class="form-control" id="gioketthuc"
-                            value="{{ $catruc->gioketthuc }}" placeholder="VD: VND" require="require" />
+                            value="{{ $catruc->gioketthuc }}" placeholder="VD: VND" required />
                         @error('gioketthuc')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Thietbi;
 use App\Mail\MyTestEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -14,23 +15,24 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PhongController;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Controllers\AnuongController;
 use App\Http\Controllers\CatrucController;
 use App\Http\Controllers\DichvuController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MessageController;
+
+use App\Http\Controllers\ThietbiController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
-use App\Http\Controllers\AnuongController;
-
-use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\KhachhangController;
+
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\ThanhtoanController;
-
 use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\FullCalenderController;
-use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\AnuongDatphongController;
+use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\DanhsachdatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 /*
@@ -131,6 +133,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('anuongs', AnuongController::class);
         Route::get('anuongs-search', 'AnuongController@search');
         Route::get('anuongs/anuongs-search', 'AnuongController@search');
+
+        // Thiet bi Routes
+        Route::resource('thietbis', ThietbiController::class);
+        Route::get('thietbis-search', 'ThietbiController@search');
+        Route::get('thietbis/thietbis-search', 'ThietbiController@search');
 
         // Datphong Routess
         Route::resource('datphongs', DatphongController::class);
@@ -233,11 +240,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Danh sách các phòng đã đặt
         Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
         Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong')->name("client.danhsachdatphong");
-
     });
     // AnuongDatphong
     Route::resource('anuong_datphong', AnuongDatphongController::class);
-    
+
     // Hoadon
     Route::get('generate-invoice-pdf', 'PDFController@generateInvoicePDF');
 

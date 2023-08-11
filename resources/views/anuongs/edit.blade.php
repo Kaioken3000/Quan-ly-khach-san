@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="ten">Tên</label>
                         <input type="text" name="ten" class="form-control" id="ten"
-                            value="{{ $anuong->ten }}" placeholder="VD: ăn uống" require="require" />
+                            value="{{ $anuong->ten }}" placeholder="VD: ăn uống" required />
                         @error('ten')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="hinh">Hinh</label>
-                        <input type="file" name="hinh" class="form-control" id="hinh" require="require" />
+                        <input type="file" name="hinh" class="form-control" id="hinh" required />
                         @error('hinh')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -36,7 +36,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="soluong">Số lượng</label>
                         <input type="number" name="soluong" class="form-control" id="soluong" min=1
-                            value="{{ $anuong->soluong }}" require="require" />
+                            value="{{ $anuong->soluong }}" required />
                         @error('soluong')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -45,7 +45,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="gia">Giá</label>
                         <input type="number" name="gia" class="form-control" value="{{ $anuong->gia }}"
-                            id="gia" min=0 require="require" />
+                            id="gia" min=0 required />
                         @error('gia')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="mieuTa">Miêu tả</label>
-                        <textarea id="mieuTa" name="mieuTa" class="form-control" require="require">{{ $anuong->mieuTa }}</textarea>
+                        <textarea id="mieuTa" name="mieuTa" class="form-control" required>{{ $anuong->mieuTa }}</textarea>
                         @error('mieuTa')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>

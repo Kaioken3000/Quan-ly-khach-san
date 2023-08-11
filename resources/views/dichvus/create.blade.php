@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="ten">Tên dịch vụ</label>
                         <input type="text" name="ten" class="form-control" id="ten"
-                            placeholder="VD: ăn uống" require="require" />
+                            placeholder="VD: ăn uống" required />
                         @error('ten')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
@@ -27,7 +27,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="giatien">Giá dịch vụ</label>
                         <input type="number" name="giatien" class="form-control" id="giatien" min=0
-                            require="require" />
+                            required />
                         @error('giatien')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
@@ -35,7 +35,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="donvi">Đơn vị</label>
                         <input type="text" name="donvi" class="form-control" id="donvi" placeholder="VD: VNĐ"
-                            require="require" value="VND" />
+                            required value="VND" />
                         @error('donvi')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror

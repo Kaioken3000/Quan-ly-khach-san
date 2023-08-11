@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="ten">Tên dịch vụ</label>
                         <input type="text" name="ten" class="form-control" id="ten"
-                            value="{{ $dichvu->ten }}" placeholder="VD: ăn uống" require="require" />
+                            value="{{ $dichvu->ten }}" placeholder="VD: ăn uống" required />
                         @error('ten')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -28,7 +28,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="giatien">Giá dịch vụ</label>
                         <input type="number" name="giatien" class="form-control" value="{{ $dichvu->giatien }}"
-                            id="giatien" min=0 require="require" />
+                            id="giatien" min=0 required />
                         @error('giatien')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -37,7 +37,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="donvi">Đơn vị</label>
                         <input type="text" name="donvi" class="form-control" id="donvi"
-                            value="{{ $dichvu->donvi }}" placeholder="VD: VND" require="require" />
+                            value="{{ $dichvu->donvi }}" placeholder="VD: VND" required />
                         @error('donvi')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>

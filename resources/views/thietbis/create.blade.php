@@ -1,7 +1,6 @@
-<!-- Create -->
 @hasrole('Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
-        <i class="bx bx-plus mb-1"></i> Create Ca trực
+        <i class="bx bx-plus mb-1"></i> Create Thiết bị
     </button>
 @endhasrole
 <!-- Modal Create -->
@@ -9,15 +8,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Create Ca trực</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Create Thiết bị</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('catrucs.store') }}" method="POST">
+                <form action="{{ route('thietbis.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="ten">Tên ca trực</label>
+                        <label class="form-label" for="ten">Tên thiết bị</label>
                         <input type="text" name="ten" class="form-control" id="ten"
                             placeholder="VD: ăn uống" required />
                         @error('ten')
@@ -25,18 +25,25 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="giobatdau">Giờ bắt đầu</label>
-                        <input type="time" name="giobatdau" class="form-control" id="giobatdau" min=0
-                            required />
-                        @error('giobatdau')
+                        <label class="form-label" for="hinh">Hình thiết bị</label>
+                        <input type="file" name="hinh" class="form-control" id="hinh"
+                            placeholder="VD: ăn uống" required />
+                        @error('hinh')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="gioketthuc">Giờ kết thúc</label>
-                        <input type="time" name="gioketthuc" class="form-control" id="gioketthuc"
-                            placeholder="VD: VNĐ" required value="VND" />
-                        @error('gioketthuc')
+                        <label class="form-label" for="gia">Giá thiết bị</label>
+                        <input type="number" name="gia" class="form-control" id="gia" min=0
+                            required />
+                        @error('gia')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mieuTa">Miêu tả</label>
+                        <textarea id="mieuTa" name="mieuTa" class="form-control" required></textarea>
+                        @error('mieuTa')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
