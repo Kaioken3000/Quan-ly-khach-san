@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Loaiphong;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
+use App\Models\Hinh;
 use App\Models\Phong;
+use App\Models\Giuong;
+use App\Models\Mieuta;
+use App\Models\Thietbi;
+use App\Models\HinhPhong;
+use App\Models\Loaiphong;
+use App\Models\GiuongPhong;
+use App\Models\MieutaPhong;
+use App\Models\ThietbiPhong;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PhongController extends Controller
 {
@@ -24,7 +32,7 @@ class PhongController extends Controller
         // $phongs = Phong::orderBy('so_phong','desc')->paginate(5);
         $phongs = Phong::get();
         $loaiphongs = Loaiphong::all();
-        return view('phongs.index', compact('phongs','loaiphongs'));
+        return view('phongs.index', compact('phongs', 'loaiphongs'));
     }
 
     /**
@@ -35,7 +43,11 @@ class PhongController extends Controller
     public function create()
     {
         $loaiphongs = Loaiphong::all();
-        return view('phongs.create', compact('loaiphongs'));
+        $thietbis = Thietbi::all();
+        $giuongs = Giuong::all();
+        $mieutas = Mieuta::all();
+        $hinhs = Hinh::all();
+        return view('phongs.create', compact('loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs'));
     }
 
     /**
@@ -48,13 +60,54 @@ class PhongController extends Controller
     {
         $request->validate([
             'so_phong' => 'required|unique:phongs',
-            'picture_1' => 'required',
-            'picture_2' => 'required',
-            'picture_3' => 'required',
-            'loaiphongid' => 'required'
+            'loaiphongid' => 'required',
+
+            'thietbiid' => 'required',
+            'giuongid' => 'required',
+            'mieutaid' => 'required',
+            'hinhid' => 'required',
         ]);
 
-        Phong::create($request->post());
+        $phong = Phong::create($request->post());
+
+        foreach ($request->thietbiid as $thietbi) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['thietbiid'] = $thietbi;
+
+            ThietbiPhong::create($dich);
+        }
+
+        foreach ($request->giuongid as $giuong) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['giuongid'] = $giuong;
+
+            GiuongPhong::create($dich);
+        }
+
+        foreach ($request->mieutaid as $mieuta) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['mieutaid'] = $mieuta;
+
+            MieutaPhong::create($dich);
+        }
+        foreach ($request->mieutaid as $mieuta) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['mieutaid'] = $mieuta;
+
+            MieutaPhong::create($dich);
+        }
+
+        foreach ($request->hinhid as $hinh) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['hinhid'] = $hinh;
+
+            HinhPhong::create($dich);
+        }
 
         return redirect()->route('phongs.index')->with('success', 'Phong has been created successfully.');
     }
@@ -92,8 +145,10 @@ class PhongController extends Controller
     public function update(Request $request, Phong $phong)
     {
         $request->validate([
-            'so_phong' => ['required',
-                            Rule::unique('phongs')->ignore($phong->so_phong, 'so_phong')],
+            'so_phong' => [
+                'required',
+                Rule::unique('phongs')->ignore($phong->so_phong, 'so_phong')
+            ],
             'picture_1' => 'required',
             'picture_2' => 'required',
             'picture_3' => 'required',
@@ -127,9 +182,9 @@ class PhongController extends Controller
         // $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
         //                 ->orderBy('so_phong','asc')->paginate(5);
         $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
-                        ->get();
+            ->get();
         $loaiphongs = Loaiphong::all();
-        return view('phongs.search', compact('phongs','loaiphongs'));
+        return view('phongs.search', compact('phongs', 'loaiphongs'));
     }
 
     public function roomDetail(Request $request)

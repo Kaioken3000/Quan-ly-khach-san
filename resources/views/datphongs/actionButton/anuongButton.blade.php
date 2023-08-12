@@ -47,13 +47,13 @@
                                     </div>
                                 </label>
                             </div>
-                            @error('anuongid[]')
+                            @error('anuongid')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror
                             @error('datphongid')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror
-                            @error('soluong[]')
+                            @error('soluong')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror
                         @endforeach

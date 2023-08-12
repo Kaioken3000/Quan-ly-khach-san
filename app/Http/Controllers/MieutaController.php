@@ -43,7 +43,7 @@ class MieutaController extends Controller
 
         Mieuta::create($request->post());
 
-        return redirect()->route('mieutas.index')->with('success', 'Mieuta has been created successfully.');
+        return redirect()->back()->withMessage('success', 'Mieuta has been created successfully.');
     }
 
     /**
@@ -83,7 +83,7 @@ class MieutaController extends Controller
 
         $mieuta->fill($request->post())->save();
 
-        return redirect()->route('mieutas.index')->with('success', 'Mieuta Has Been updated successfully');
+        return redirect()->back()->withMessage('success', 'Mieuta Has Been updated successfully');
     }
 
     /**
@@ -95,7 +95,7 @@ class MieutaController extends Controller
     public function destroy(Mieuta $mieuta)
     {
         $mieuta->delete();
-        return redirect()->route('mieutas.index')->with('success', 'Mieuta has been deleted successfully');
+        return redirect()->back()->withMessage('success', 'Mieuta has been deleted successfully');
     }
 
     /**

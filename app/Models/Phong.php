@@ -27,4 +27,21 @@ class Phong extends Model
     {
         return $this->belongsTo(Loaiphong::class, 'loaiphongid','ma');
     }
+
+    public function thietbiphongs()
+    {
+        return $this->hasMany(ThietbiPhong::class, 'phongid');
+    }
+    public function giuongphongs()
+    {
+        return $this->hasMany(GiuongPhong::class, 'phongid');
+    }
+    public function mieutaphongs()
+    {
+        return $this->hasMany(MieutaPhong::class, 'phongid');
+    }
+    public function hinhphongs()
+    {
+        return $this->hasMany(HinhPhong::class, 'phongid');
+    }
 }

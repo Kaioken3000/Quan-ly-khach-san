@@ -19,6 +19,10 @@ class Thietbi extends Model
 
     public function phongs()
     {
-        return $this->belongsTo(Loaiphong::class, 'phongid','id');
+        return $this->belongsTo(Loaiphong::class, 'phongid', 'id');
+    }
+    public function thietbiphongs()
+    {
+        return $this->hasMany(ThietbiPhong::class, 'thietbi_phongs');
     }
 }

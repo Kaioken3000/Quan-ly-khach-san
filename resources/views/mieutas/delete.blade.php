@@ -1,14 +1,14 @@
 <!-- Delete-->
 <button type="button" class="btn btn-link" style="color:red" data-bs-toggle="modal"
-    data-bs-target="#ModalXoaPhong{{ $phong->so_phong }}">
+    data-bs-target="#ModalDeleteMieuta{{ $mieuta->id }}">
     <i class="icon-copy fas fa-trash"></i>
 </button>
 <!-- Modal xoá  -->
-<div class="modal fade" id="ModalXoaPhong{{ $phong->so_phong }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ModalDeleteMieuta{{ $mieuta->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalXoaPhong"> Bạn có chắc chắn muốn xoá
+                <h5 class="modal-title" id="modalDeleteMieuta"> Bạn có chắc chắn muốn xoá
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
@@ -19,7 +19,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         No
                     </button>
-                    <form action="{{ route('phongs.destroy', $phong->so_phong) }}" method="Post">
+                    <form action="{{ route('mieutas.destroy', $mieuta->id) }}" method="Post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"> Yes</button>

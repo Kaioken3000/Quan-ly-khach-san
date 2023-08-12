@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('giuongs', function (Blueprint $table) {
+        Schema::create('hinh_phongs', function (Blueprint $table) {
             $table->id();
-            $table->string("ten");
-            $table->string("kichthuoc");
-            $table->string("donvi");
-            $table->string("hinh");
-            $table->string("gia");
-            $table->string("mieuTa");
             $table->integer('phongid')->nullable();
-            $table->foreign('phongid')->references('so_phong')->on('phongs')->constrained()->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('phongid')->references('so_phong')->on('phongs')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('hinhid')->nullable()->constrained('hinhs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('giuongs');
+        Schema::dropIfExists('hinh_phongs');
     }
 };

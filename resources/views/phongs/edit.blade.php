@@ -1,13 +1,13 @@
 <!-- edit -->
-<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#ModalEdit{{ $phong->so_phong }}">
+<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#ModalEditPhong{{ $phong->so_phong }}">
     <i class="icon-copy fas fa-edit"></i>
 </button>
 <!-- Modal edit -->
-<div class="modal fade" id="ModalEdit{{ $phong->so_phong }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ModalEditPhong{{ $phong->so_phong }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Edit Phòng</h5>
+                <h5 class="modal-title" id="modalEditPhong">Edit Phòng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>

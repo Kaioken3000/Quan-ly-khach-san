@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Giuong extends Model
+class GiuongPhong extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'ten',
-        'kichthuoc',
-        'donvi',
-        'hinh',
-        'gia',
-        'mieuTa',
         'phongid',
+        'giuongid',
     ];
 
     public function phongs()
     {
-        return $this->belongsTo(Loaiphong::class, 'phongid', 'id');
+        return $this->belongsTo(Phong::class, 'phongid', 'so_phong');
+    }
+
+    public function giuongs()
+    {
+        return $this->belongsTo(Giuong::class, 'giuongid', 'id');
     }
 }

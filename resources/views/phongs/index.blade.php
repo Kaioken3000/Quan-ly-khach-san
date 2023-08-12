@@ -12,7 +12,8 @@
                 @include('layouts3.title', ['titlePage' => 'Quản lý phòng'])
             </div>
             <div>
-                @include('phongs.create')
+                {{-- @include('phongs.create') --}}
+                <a href="{{ route('phongs.create') }}" class="btn btn-success">Create Phòng</a>
             </div>
         </div>
         <table class="table">
@@ -20,9 +21,10 @@
                 <tr>
                     <th class="table-plus">Số phòng</th>
                     <th>Hình</th>
-                    <th></th>
-                    <th></th>
                     <th>Loại phòng</th>
+                    <th>Thiết bị</th>
+                    <th>Giừơng</th>
+                    <th>Miêu tả</th>
                     @hasrole('Admin')
                         <th class="datatable-nosort">Action</th>
                     @endhasrole
@@ -32,27 +34,36 @@
                 @foreach ($phongs as $phong)
                     <tr>
                         <td>{{ $phong->so_phong }}</td>
-                        <td style="width: 10%">
-                            <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $phong->picture_1 }}" src="/client/images/{{ $phong->picture_1 }}"
-                                class="img-fluid">
-                        </td>
-                        <td style="width: 10%">
-                            <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $phong->picture_2 }}" src="/client/images/{{ $phong->picture_2 }}"
-                                class="img-fluid">
-
-                        </td>
-                        <td style="width: 10%">
-                            <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $phong->picture_3 }}" src="/client/images/{{ $phong->picture_3 }}"
-                                class="img-fluid">
-
+                        <td>
+                            @include('phongs.modalChiTietHinh')
                         </td>
                         <td>{{ $phong->loaiphongs->ten }}</td>
+                        <td>
+                            @foreach ($phong->thietbiphongs as $thietbiphong)
+                                <?php $thietbi = App\Models\Thietbi::where('id', $thietbiphong->thietbiid)->first();
+                                ?>
+                                <p>{{ $thietbi->ten }}</p>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($phong->giuongphongs as $giuongphong)
+                                <?php $giuong = App\Models\Giuong::where('id', $giuongphong->giuongid)->first();
+                                ?>
+                                <p>{{ $giuong->ten }}</p>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($phong->mieutaphongs as $mieutaphong)
+                                <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
+                                ?>
+                                <p>{{ $mieuta->noidung }}</p>
+                            @endforeach
+                        </td>
                         @hasrole('Admin')
                             <td>
-                                @include('phongs.edit')
+                                {{-- @include('phongs.edit') --}}
+                                <a href="{{ route('phongs.edit', $phong->so_phong) }}" class="btn btn-link"><i
+                                        class="icon-copy fas fa-edit"></i></a>
                                 @include('phongs.delete')
                             </td>
                         @endhasrole

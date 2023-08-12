@@ -39,12 +39,11 @@ class HinhController extends Controller
     {
         $request->validate([
             'vitri' => 'required',
-            'phongid' => 'required',
         ]);
 
         Hinh::create($request->post());
 
-        return redirect()->route('hinhs.index')->with('success', 'Hinh has been created successfully.');
+        return redirect()->back()->withMessage('success', 'Hinh has been created successfully.');
     }
 
     /**
@@ -80,12 +79,11 @@ class HinhController extends Controller
     {
         $request->validate([
             'vitri' => 'required',
-            'phongid' => 'required',
         ]);
 
         $hinh->fill($request->post())->save();
 
-        return redirect()->route('hinhs.index')->with('success', 'Hinh Has Been updated successfully');
+        return redirect()->back()->withMessage('success', 'Hinh Has Been updated successfully');
     }
 
     /**
@@ -97,7 +95,7 @@ class HinhController extends Controller
     public function destroy(Hinh $hinh)
     {
         $hinh->delete();
-        return redirect()->route('hinhs.index')->with('success', 'Hinh has been deleted successfully');
+        return redirect()->back()->withMessage('success', 'Hinh has been deleted successfully');
     }
 
     /**

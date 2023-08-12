@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('mieutas', function (Blueprint $table) {
             $table->id();
-            $table->string("noidung");
+            $table->longText("noidung");
             $table->string("hinh")->nullable();
             $table->integer('phongid')->nullable();
             $table->foreign('phongid')->references('so_phong')->on('phongs')->constrained()->onDelete('set null')->onUpdate('cascade');

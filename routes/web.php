@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\HinhController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\XulyController;
 use Illuminate\Support\Facades\Redirect;
@@ -18,15 +19,17 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\AnuongController;
 use App\Http\Controllers\CatrucController;
 use App\Http\Controllers\DichvuController;
+use App\Http\Controllers\GiuongController;
+use App\Http\Controllers\MieutaController;
+
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MessageController;
-
 use App\Http\Controllers\ThietbiController;
+
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\KhachhangController;
-
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\BotManChatController;
@@ -138,6 +141,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('thietbis', ThietbiController::class);
         Route::get('thietbis-search', 'ThietbiController@search');
         Route::get('thietbis/thietbis-search', 'ThietbiController@search');
+
+        // Mieu ta Routes
+        Route::resource('mieutas', MieutaController::class);
+        Route::get('mieutas-search', 'MieutaController@search');
+        Route::get('mieutas/mieutas-search', 'MieutaController@search');
+        
+        // Giuong Routes
+        Route::resource('hinhs', HinhController::class);
+        Route::get('hinhs-search', 'HinhController@search');
+        Route::get('hinhs/hinhs-search', 'HinhController@search');
+
+        // Giuong Routes
+        Route::resource('giuongs', GiuongController::class);
+        Route::get('giuongs-search', 'GiuongController@search');
+        Route::get('giuongs/giuongs-search', 'GiuongController@search');
 
         // Datphong Routess
         Route::resource('datphongs', DatphongController::class);

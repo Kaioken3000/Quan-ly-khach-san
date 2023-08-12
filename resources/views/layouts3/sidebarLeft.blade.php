@@ -64,9 +64,9 @@
                 <li class="nav-item">
                     <!-- parent pages-->
                     <span class="nav-item-wrapper">
-                        <a class="nav-link dropdown-indicator label-1" id="xulyNav"
-                            href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-management1.html#project-management1"
-                            role="button" data-bs-toggle="collapse" aria-expanded="false">
+                        <a class="nav-link dropdown-indicator label-1" id="chiTietPhong"
+                            href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-managementChiTietPhong.html#project-managementChiTietPhong"
+                            role="button" data-bs-toggle="collapse">
                             <div class="d-flex align-items-center">
                                 <div class="dropdown-indicator-icon">
                                     <span class="fas fa-caret-right"></span>
@@ -74,25 +74,33 @@
                                 <span class="nav-link-icon">
                                     <i class="fa fa-cog"></i>
                                 </span>
-                                <span class="nav-link-text">Chi tiết phòng</span>
+                                <span class="nav-link-text">Thông tin phòng</span>
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#xulyNav" id="project-management1">
+                            <ul class="nav collapse parent 
+                            {{ Request::is('thietbis') || Request::is('thietbis*') ? 'show' : '' }}
+                            {{ Request::is('giuongs') || Request::is('giuongs*') ? 'show' : '' }}
+                            {{ Request::is('mieutas') || Request::is('mieutas*') ? 'show' : '' }}
+                            {{ Request::is('hinhs') || Request::is('hinhs*') ? 'show' : '' }}"
+                                data-bs-parent="#chiTietPhong" id="project-managementChiTietPhong">
                                 <li class="nav-item">
-                                    <a href="/thietbis" class="nav-link">
+                                    <a href="/thietbis"
+                                        class="nav-link {{ Request::is('thietbis') || Request::is('thietbis*') ? 'active' : '' }}">
                                         <span class="micon fa fa-tv"></span>
                                         <span class="mtext">Thiết bị</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link">
+                                    <a href="/giuongs"
+                                        class="nav-link {{ Request::is('giuongs') || Request::is('giuongs*') ? 'active' : '' }}">
                                         <span class="micon fa fa-bed"></span>
                                         <span class="mtext">Giường</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link">
+                                    <a href="/hinhs"
+                                        class="nav-link {{ Request::is('hinhs') || Request::is('hinhs*') ? 'active' : '' }}">
                                         <span class="micon fa fa-image"></span>
                                         <span class="mtext">Hình</span>
                                     </a>
@@ -110,7 +118,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link">
+                                    <a href="/mieutas"
+                                        class="nav-link {{ Request::is('mieutas') || Request::is('mieutas*') ? 'active' : '' }}">
                                         <span class="micon fa fa-circle-info"></span>
                                         <span class="mtext">Miêu Tả</span>
                                     </a>

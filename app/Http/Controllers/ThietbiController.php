@@ -46,7 +46,7 @@ class ThietbiController extends Controller
 
         Thietbi::create($request->post());
 
-        return redirect()->route('thietbis.index')->with('success', 'Thietbi has been created successfully.');
+        return redirect()->back()->withMessage('success', 'Thietbi has been created successfully.');
     }
 
     /**
@@ -82,14 +82,21 @@ class ThietbiController extends Controller
     {
         $request->validate([
             'ten' => 'required',
-            'hinh' => 'required',
             'gia' => 'required',
             'mieuTa' => 'required',
         ]);
 
-        $thietbi->fill($request->post())->save();
+        if ($request->hinh) {
+            $thietbi->fill($request->post())->save();
+        } else {
+            $thietbi->fill([
+                'ten' => $request->ten,
+                'gia' => $request->gia,
+                'mieuTa' => $request->mieuTa,
+            ])->save();
+        }
 
-        return redirect()->route('thietbis.index')->with('success', 'Thietbi Has Been updated successfully');
+        return redirect()->back()->withMessage('success', 'Thietbi Has Been updated successfully');
     }
 
     /**
@@ -101,7 +108,7 @@ class ThietbiController extends Controller
     public function destroy(Thietbi $thietbi)
     {
         $thietbi->delete();
-        return redirect()->route('thietbis.index')->with('success', 'Thietbi has been deleted successfully');
+        return redirect()->back()->withMessage('success', 'Thietbi has been deleted successfully');
     }
 
     /**

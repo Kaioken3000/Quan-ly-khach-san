@@ -1,70 +1,87 @@
-<!-- Create -->
-@hasrole('Admin')
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCreate">
-        <i class="bx bx-plus mb-1"></i> Create Phòng
-    </button>
-    <!-- Modal Create -->
-    <div class="modal fade" id="ModalCreate" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel1">Create phòng</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+@extends('layouts3.app')
 
-                    </button>
+@section('content')
+    <!-- Create -->
+    @hasrole('Admin')
+        @error('thietbiid')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+        @enderror
+        @error('giuongid')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+        @enderror
+        @error('mieutaid')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+        @enderror
+        <ul class="nav nav-underline" id="myTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab" href="#tab-thongtin"
+                    role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin chung</a></li>
+            <li class="nav-item"><a class="nav-link" id="thietbi-tab" data-bs-toggle="tab" href="#tab-thietbi" role="tab"
+                    aria-controls="tab-thietbi" aria-selected="false">Thiết bị</a></li>
+            <li class="nav-item"><a class="nav-link" id="giuong-tab" data-bs-toggle="tab" href="#tab-giuong" role="tab"
+                    aria-controls="tab-giuong" aria-selected="false">Giường</a></li>
+            <li class="nav-item"><a class="nav-link" id="mieuta-tab" data-bs-toggle="tab" href="#tab-mieuta" role="tab"
+                    aria-controls="tab-mieuta" aria-selected="false">Miêu tả</a></li>
+            <li class="nav-item"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab" href="#tab-hinh" role="tab"
+                    aria-controls="tab-hinh" aria-selected="false">Hình</a></li>
+        </ul>
+        <div class="tab-content clearfix">
+            <!-- Modal Create -->
+            <div class="tab-content clearfix">
+                <div class="tab-content mt-3" id="myTabContent">
+                    <div class="overflow-auto tab-pane fade show active" id="tab-thongtin" role="tabpanel"
+                        aria-labelledby="thongtin-tab">
+                        <form action="{{ route('phongs.store') }}" method="POST">
+                            @csrf
+                            @foreach ($thietbis as $thietbi)
+                                <input class="form-check-input" type="checkbox" id="thietbi{{ $thietbi->id }}"
+                                    name="thietbiid[]" value="{{ $thietbi->id }}" hidden>
+                            @endforeach
+                            @foreach ($giuongs as $giuong)
+                                <input class="form-check-input" type="checkbox" id="giuong{{ $giuong->id }}" name="giuongid[]"
+                                    value="{{ $giuong->id }}" hidden>
+                            @endforeach
+                            @foreach ($mieutas as $mieuta)
+                                <input class="form-check-input" type="checkbox" id="mieuta{{ $mieuta->id }}" name="mieutaid[]"
+                                    value="{{ $mieuta->id }}" hidden>
+                            @endforeach
+                            @foreach ($hinhs as $hinh)
+                                <input class="form-check-input" type="checkbox" id="hinh{{ $hinh->id }}" name="hinhid[]"
+                                    value="{{ $hinh->id }}" hidden>
+                            @endforeach
+                            @include('phongs.tab.tabThongTinChung')
+                            <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>
+                        </form>
+                    </div>
+                    <div class="overflow-auto tab-pane fade" id="tab-thietbi" role="tabpanel"
+                        aria-labelledby="thietbi-tab">
+                        @include('phongs.tab.tabThietBi')
+                    </div>
+                    <div class="overflow-auto tab-pane fade" id="tab-giuong" role="tabpanel"
+                        aria-labelledby="giuong-tab">
+                        @include('phongs.tab.tabGiuong')
+                    </div>
+                    <div class="overflow-auto tab-pane fade" id="tab-hinh" role="tabpanel"
+                        aria-labelledby="hinh-tab">
+                        @include('phongs.tab.tabHinh')
+                    </div>
+                    <div class="overflow-auto tab-pane fade" id="tab-mieuta" role="tabpanel"
+                        aria-labelledby="mieuta-tab">
+                        @include('phongs.tab.tabMieuTa')
+                    </div>
+
+                    <script>
+                        function changeBoder(ele, element) {
+                            var elementBtn = document.getElementById(element);
+                            if (elementBtn.checked == true) {
+                                ele.style.border = 'none';
+                            } else {
+                                ele.style.border = '3px black solid';
+                            }
+                        }
+                    </script>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('phongs.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="form-label" for="so_phong">Sô phòng</label>
-                            <input type="number" name="so_phong" class="form-control" id="so_phong"
-                                placeholder="VD: 001" />
-                            @error('so_phong')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="picture_1">Hinh phòng 1</label>
-                            <input type="file" name="picture_1" class="form-control" id="picture_1" required />
-                            @error('picture_1')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="picture_2">Hinh phòng 2</label>
-                            <input type="file" name="picture_2" class="form-control" id="picture_2" required />
-                            @error('picture_2')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="picture_3">Hinh phòng 3</label>
-                            <input type="file" name="picture_3" class="form-control" id="picture_3" required />
-                            @error('picture_3')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="loaiphongid">Loại phòng</label>
-                            <select class="form-control" id="loaiphongid" name="loaiphongid">
-                                @foreach ($loaiphongs as $loaiphong)
-                                    <option value="{{ $loaiphong->ma }}">{{ $loaiphong->ten }}</option>
-                                @endforeach
-                            </select>
-                            @error('loaiphongid')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">Xác nhận</button>
-                </div>
-                </form>
             </div>
+
         </div>
-    </div>
-@endhasrole
+    @endhasrole
+@endsection
