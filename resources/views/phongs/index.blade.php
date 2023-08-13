@@ -16,60 +16,44 @@
                 <a href="{{ route('phongs.create') }}" class="btn btn-success">Create Phòng</a>
             </div>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="table-plus">Số phòng</th>
-                    <th>Hình</th>
-                    <th>Loại phòng</th>
-                    <th>Thiết bị</th>
-                    <th>Giừơng</th>
-                    <th>Miêu tả</th>
-                    @hasrole('Admin')
-                        <th class="datatable-nosort">Action</th>
-                    @endhasrole
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($phongs as $phong)
-                    <tr>
-                        <td>{{ $phong->so_phong }}</td>
-                        <td>
-                            @include('phongs.modalChiTietHinh')
-                        </td>
-                        <td>{{ $phong->loaiphongs->ten }}</td>
-                        <td>
-                            @foreach ($phong->thietbiphongs as $thietbiphong)
-                                <?php $thietbi = App\Models\Thietbi::where('id', $thietbiphong->thietbiid)->first();
-                                ?>
-                                <p>{{ $thietbi->ten }}</p>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($phong->giuongphongs as $giuongphong)
-                                <?php $giuong = App\Models\Giuong::where('id', $giuongphong->giuongid)->first();
-                                ?>
-                                <p>{{ $giuong->ten }}</p>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($phong->mieutaphongs as $mieutaphong)
-                                <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
-                                ?>
-                                <p>{{ $mieuta->noidung }}</p>
-                            @endforeach
-                        </td>
-                        @hasrole('Admin')
-                            <td>
-                                {{-- @include('phongs.edit') --}}
-                                <a href="{{ route('phongs.edit', $phong->so_phong) }}" class="btn btn-link"><i
-                                        class="icon-copy fas fa-edit"></i></a>
-                                @include('phongs.delete')
-                            </td>
-                        @endhasrole
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+        <ul class="nav nav-underline" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
+                    href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin</a></li>
+
+            <li class="nav-item" role="presentation"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab"
+                    href="#tab-hinh" role="tab" aria-controls="tab-hinh" aria-selected="false" tabindex="-1">Hình</a>
+            </li>
+
+            <li class="nav-item" role="presentation"><a class="nav-link" id="thietbi-tab" data-bs-toggle="tab"
+                    href="#tab-thietbi" role="tab" aria-controls="tab-thietbi" aria-selected="false"
+                    tabindex="-1">Thiết
+                    bị</a></li>
+
+            <li class="nav-item" role="presentation"><a class="nav-link" id="giuong-tab" data-bs-toggle="tab"
+                    href="#tab-giuong" role="tab" aria-controls="tab-giuong" aria-selected="false"
+                    tabindex="-1">Giường</a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" id="mieuta-tab" data-bs-toggle="tab"
+                    href="#tab-mieuta" role="tab" aria-controls="tab-mieuta" aria-selected="false" tabindex="-1">Miêu
+                    tả</a></li>
+        </ul>
+        <div class="tab-content mt-3" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
+                @include('phongs.mainTab.tabThongtin')
+            </div>
+            <div class="tab-pane fade" id="tab-hinh" role="tabpanel" aria-labelledby="hinh-tab">
+                @include('phongs.mainTab.tabHinh')
+            </div>
+            <div class="tab-pane fade" id="tab-thietbi" role="tabpanel" aria-labelledby="thietbi-tab">
+                @include('phongs.mainTab.tabThietbi')
+            </div>
+            <div class="tab-pane fade" id="tab-giuong" role="tabpanel" aria-labelledby="giuong-tab">
+                @include('phongs.mainTab.tabGiuong')
+            </div>
+            <div class="tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
+                @include('phongs.mainTab.tabMieuta')
+            </div>
+        </div>
+
     </div>
 @endsection

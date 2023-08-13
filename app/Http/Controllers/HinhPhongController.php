@@ -28,7 +28,7 @@ class HinhPhongController extends Controller
             HinhPhong::create($dich);
         }
 
-        return redirect()->route('phongs.index')->with('success', 'Thiet bi phong has been created successfully.');
+        return redirect()->back()->withMessage('success', 'Hinh phong has been created successfully.');
     }
 
     /**
@@ -40,6 +40,6 @@ class HinhPhongController extends Controller
     public function destroy(HinhPhong $hinh_phong)
     {
         $hinh_phong->delete();
-        return redirect()->back()->withMessage('success', 'Thiet bi phong has been deleted successfully');
+        return redirect()->back()->withMessage('success', 'Hinh phong has been deleted successfully');
     }
 }

@@ -10,10 +10,10 @@
     <div class="modal-dialog modal-lg" style="max-width: 90%">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title" id="modalChiTietHinh">Modal title</h1>
+                <h1 class="modal-title" id="modalChiTietHinh">Chi tiết hình</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body row">
                 @foreach ($phong->hinhphongs as $hinhphong)
                     <?php $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first(); ?>
                     <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"

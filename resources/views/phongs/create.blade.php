@@ -12,6 +12,9 @@
         @error('mieutaid')
             <div class="alert alert-danger" role="alert">{{ $message }}</div>
         @enderror
+        @error('hinhid')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+        @enderror
         <ul class="nav nav-underline" id="myTab" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab" href="#tab-thongtin"
                     role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin chung</a></li>
@@ -52,30 +55,27 @@
                             <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>
                         </form>
                     </div>
-                    <div class="overflow-auto tab-pane fade" id="tab-thietbi" role="tabpanel"
-                        aria-labelledby="thietbi-tab">
+                    <div class="overflow-auto tab-pane fade" id="tab-thietbi" role="tabpanel" aria-labelledby="thietbi-tab">
                         @include('phongs.tab.tabThietBi')
                     </div>
-                    <div class="overflow-auto tab-pane fade" id="tab-giuong" role="tabpanel"
-                        aria-labelledby="giuong-tab">
+                    <div class="overflow-auto tab-pane fade" id="tab-giuong" role="tabpanel" aria-labelledby="giuong-tab">
                         @include('phongs.tab.tabGiuong')
                     </div>
-                    <div class="overflow-auto tab-pane fade" id="tab-hinh" role="tabpanel"
-                        aria-labelledby="hinh-tab">
+                    <div class="overflow-auto tab-pane fade" id="tab-hinh" role="tabpanel" aria-labelledby="hinh-tab">
                         @include('phongs.tab.tabHinh')
                     </div>
-                    <div class="overflow-auto tab-pane fade" id="tab-mieuta" role="tabpanel"
-                        aria-labelledby="mieuta-tab">
+                    <div class="overflow-auto tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
                         @include('phongs.tab.tabMieuTa')
                     </div>
 
                     <script>
                         function changeBoder(ele, element) {
                             var elementBtn = document.getElementById(element);
+                            var eleBtn = document.getElementById(ele);
                             if (elementBtn.checked == true) {
-                                ele.style.border = 'none';
+                                eleBtn.style.border = 'none';
                             } else {
-                                ele.style.border = '3px black solid';
+                                eleBtn.style.border = '3px black solid';
                             }
                         }
                     </script>

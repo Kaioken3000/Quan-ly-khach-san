@@ -4,9 +4,19 @@
     </div>
     @foreach ($thietbis as $thietbi)
         <div class="form-check col-4">
+
             <label class="form-check-label" for="thietbi{{ $thietbi->id }}">
-                <div class="card form-check-label" style="max-width:32rem;"
-                    onclick="changeBoder(this,'thietbi{{ $thietbi->id }}')">
+                <div class="card form-check-label" <?php
+                if (isset($phong)) {
+                    foreach ($phong->thietbiphongs as $thietbiphong) {
+                        if ($thietbi->id === $thietbiphong->thietbiid) {
+                            echo 'style="border: 3px black solid"';
+                        }
+                    }
+                }
+                ?> id="thietbiDetail{{ $thietbi->id }}"
+                    onclick="changeBoder('thietbiDetail{{ $thietbi->id }}','thietbi{{ $thietbi->id }}');">
+
                     <div class="row g-0">
                         <div class="col-md-4 d-flex">
                             <img class="img-fluid" style="object-fit: cover;" src="/client/images/{{ $thietbi->hinh }}">

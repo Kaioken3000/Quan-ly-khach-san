@@ -28,7 +28,7 @@ class ThietbiPhongController extends Controller
             ThietbiPhong::create($dich);
         }
 
-        return redirect()->route('phongs.index')->with('success', 'Thiet bi phong has been created successfully.');
+        return redirect()->back()->withMessage('success', 'Thiet bi phong has been created successfully.');
     }
 
     /**

@@ -29,11 +29,15 @@ use App\Http\Controllers\ThietbiController;
 
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
+use App\Http\Controllers\HinhPhongController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\LoaiphongController;
 use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\BotManChatController;
+use App\Http\Controllers\GiuongPhongController;
+use App\Http\Controllers\MieutaPhongController;
 use App\Http\Controllers\FullCalenderController;
+use App\Http\Controllers\ThietbiPhongController;
 use App\Http\Controllers\AnuongDatphongController;
 use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\DanhsachdatphongController;
@@ -141,21 +145,29 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('thietbis', ThietbiController::class);
         Route::get('thietbis-search', 'ThietbiController@search');
         Route::get('thietbis/thietbis-search', 'ThietbiController@search');
+        // ThietbiPhong Route
+        Route::resource('thietbi_phong', ThietbiPhongController::class);
 
         // Mieu ta Routes
         Route::resource('mieutas', MieutaController::class);
         Route::get('mieutas-search', 'MieutaController@search');
         Route::get('mieutas/mieutas-search', 'MieutaController@search');
-        
-        // Giuong Routes
+        // MieutaPhong Route
+        Route::resource('mieuta_phong', MieutaPhongController::class);
+
+        // Hinh Routes
         Route::resource('hinhs', HinhController::class);
         Route::get('hinhs-search', 'HinhController@search');
         Route::get('hinhs/hinhs-search', 'HinhController@search');
+        // HinhPhong Route
+        Route::resource('hinh_phong', HinhPhongController::class);
 
         // Giuong Routes
         Route::resource('giuongs', GiuongController::class);
         Route::get('giuongs-search', 'GiuongController@search');
         Route::get('giuongs/giuongs-search', 'GiuongController@search');
+        // GiuongPhong Route
+        Route::resource('giuong_phong', GiuongPhongController::class);
 
         // Datphong Routess
         Route::resource('datphongs', DatphongController::class);

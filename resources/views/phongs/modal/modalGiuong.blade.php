@@ -1,46 +1,41 @@
 <div class="">
     <button type="button" class="btn btn-success" data-bs-toggle="modal"
-        data-bs-target="#modalanuong{{ $datphong->datphongid }}">
-        <i class="fa fa-utensils"></i> ăn uống
+        data-bs-target="#ModalThemGiuong{{ $phong->so_phong }}">
+        <i class="fa fa-plus"></i> Thêm giường
     </button>
 </div>
 <!-- Modal dịch vụ -->
-<div class="modal fade" id="modalanuong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ModalThemGiuong{{ $phong->so_phong }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
+                <h5 class="modal-title" id="modalThemGiuong">Chọn giường</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>
             </div>
-            <form action="{{ route('anuong_datphong.store') }}" method="POST">
+            <form action="{{ route('giuong_phong.store') }}" method="POST">
                 <div class="modal-body">
                     @csrf
-                    <input hidden type="text" value="{{ $datphong->datphongid }}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{ $phong->so_phong }}" id="phongid" name="phongid">
                     <div class="row m-2">
-                        @foreach ($anuongs as $anuong)
+                        @foreach ($giuongs as $giuong)
                             <div class="form-check col-4">
-                                <input class="form-check-input" type="checkbox" id="anuong{{ $anuong->id }}"
-                                    name="anuongid[]" value="{{ $anuong->id }}">
-                                <label class="form-check-label" for="anuong{{ $anuong->id }}">
+                                <input class="form-check-input" type="checkbox" id="giuong{{ $giuong->id }}{{$phong->so_phong}}"
+                                    name="giuongid[]" value="{{ $giuong->id }}">
+                                <label class="form-check-label" for="giuong{{ $giuong->id }}{{$phong->so_phong}}">
                                     <div class="card form-check-label" style="max-width:32rem;">
                                         <div class="row g-0">
                                             <div class="col-md-4 d-flex">
                                                 <img class="img-fluid" style="object-fit: cover;"
-                                                    src="/client/images/{{ $anuong->hinh }}">
+                                                    src="/client/images/{{ $giuong->hinh }}">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">{{ $anuong->ten }}</h4>
-                                                    <p class="card-text">{{ $anuong->gia }} VND</p>
+                                                    <h4 class="card-title">{{ $giuong->ten }}</h4>
+                                                    <p class="card-text">{{ $giuong->gia }} VND</p>
                                                     <p class="card-text"> <small
-                                                            class="text-muted">{{ $anuong->mieuTa }}</small></p>
-                                                    <div class="w-50">
-                                                        <input class="form-control" type="number"
-                                                            id="soluong{{ $anuong->id }}" name="soluong[]"
-                                                            min="1" max="100">
-                                                    </div>
+                                                            class="text-muted">{{ $giuong->mieuTa }}</small></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -48,13 +43,10 @@
                                 </label>
                             </div>
                         @endforeach
-                        @error('anuongid')
+                        @error('giuongid')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
-                        @error('datphongid')
-                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                        @enderror
-                        @error('soluong')
+                        @error('phongid')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>

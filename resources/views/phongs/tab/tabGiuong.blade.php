@@ -5,8 +5,16 @@
     @foreach ($giuongs as $giuong)
         <div class="form-check col-4">
             <label class="form-check-label" for="giuong{{ $giuong->id }}">
-                <div class="card form-check-label" style="max-width:32rem;"
-                    onclick="changeBoder(this,'giuong{{ $giuong->id }}')">
+                <div class="card form-check-label" <?php
+                if (isset($phong)) {
+                    foreach ($phong->giuongphongs as $giuongphong) {
+                        if ($giuong->id === $giuongphong->giuongid) {
+                            echo 'style="border: 3px black solid"';
+                        }
+                    }
+                }
+                ?> id="giuongDetail{{ $giuong->id }}"
+                    onclick="changeBoder('giuongDetail{{ $giuong->id }}','giuong{{ $giuong->id }}')">
                     <div class="row g-0">
                         <div class="col-md-4 d-flex">
                             <img class="img-fluid" style="object-fit: cover;" src="/client/images/{{ $giuong->hinh }}">
@@ -27,8 +35,8 @@
                 </div>
             </label>
         </div>
-        @endforeach
-        @error('giuongid')
-            <div class="alert alert-danger" role="alert">{{ $message }}</div>
-        @enderror
+    @endforeach
+    @error('giuongid')
+        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+    @enderror
 </div>

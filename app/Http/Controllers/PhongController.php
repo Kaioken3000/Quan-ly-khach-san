@@ -32,7 +32,11 @@ class PhongController extends Controller
         // $phongs = Phong::orderBy('so_phong','desc')->paginate(5);
         $phongs = Phong::get();
         $loaiphongs = Loaiphong::all();
-        return view('phongs.index', compact('phongs', 'loaiphongs'));
+        $hinhs = Hinh::all();
+        $thietbis = Thietbi::all();
+        $giuongs = Giuong::all();
+        $mieutas = Mieuta::all();
+        return view('phongs.index', compact('phongs', 'loaiphongs', 'hinhs', 'thietbis', 'giuongs', 'mieutas'));
     }
 
     /**
@@ -93,13 +97,6 @@ class PhongController extends Controller
 
             MieutaPhong::create($dich);
         }
-        foreach ($request->mieutaid as $mieuta) {
-            $dich = array();
-            $dich['phongid'] = $phong->so_phong;
-            $dich['mieutaid'] = $mieuta;
-
-            MieutaPhong::create($dich);
-        }
 
         foreach ($request->hinhid as $hinh) {
             $dich = array();
@@ -132,7 +129,11 @@ class PhongController extends Controller
     public function edit(Phong $phong)
     {
         $loaiphongs = Loaiphong::all();
-        return view('phongs.edit', compact('phong'), compact('loaiphongs'));
+        $thietbis = Thietbi::all();
+        $giuongs = Giuong::all();
+        $mieutas = Mieuta::all();
+        $hinhs = Hinh::all();
+        return view('phongs.edit', compact('phong', 'loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs'));
     }
 
     /**
@@ -149,13 +150,63 @@ class PhongController extends Controller
                 'required',
                 Rule::unique('phongs')->ignore($phong->so_phong, 'so_phong')
             ],
-            'picture_1' => 'required',
-            'picture_2' => 'required',
-            'picture_3' => 'required',
-            'loaiphongid' => 'required'
+            'loaiphongid' => 'required',
+
+            'thietbiid' => 'required',
+            'giuongid' => 'required',
+            'mieutaid' => 'required',
+            'hinhid' => 'required',
         ]);
 
         $phong->fill($request->post())->save();
+
+        // updatde thiet bi phong
+        $thietbiDel = ThietbiPhong::where('phongid', $phong->so_phong);
+        $thietbiDel->delete();
+
+        foreach ($request->thietbiid as $thietbi) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['thietbiid'] = $thietbi;
+
+            ThietbiPhong::create($dich);
+        }
+        
+        // updatde giuong phong
+        $giuongDel = GiuongPhong::where('phongid', $phong->so_phong);
+        $giuongDel->delete();
+
+        foreach ($request->giuongid as $giuong) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['giuongid'] = $giuong;
+
+            GiuongPhong::create($dich);
+        }
+
+        // updatde mieu ta phong
+        $mieutaDel = MieutaPhong::where('phongid', $phong->so_phong);
+        $mieutaDel->delete();
+
+        foreach ($request->mieutaid as $mieuta) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['mieutaid'] = $mieuta;
+
+            MieutaPhong::create($dich);
+        }
+
+        // updatde hinh phong
+        $hinhDel = HinhPhong::where('phongid', $phong->so_phong);
+        $hinhDel->delete();
+
+        foreach ($request->hinhid as $hinh) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['hinhid'] = $hinh;
+
+            HinhPhong::create($dich);
+        }
 
         return redirect()->route('phongs.index')->with('success', 'Phong Has Been updated successfully');
     }
