@@ -8,7 +8,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
+                <h5 class="modal-title" id="ModalDichvu">Chọn dịch vụ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                             
                 </button>
@@ -21,11 +21,11 @@
                         <label class="form-label" for="ten">Dịch vụ</label><br>
                         @foreach($dichvus as $dichvu)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}" name="dichvuid[]" value="{{$dichvu->id}}">
-                            <label class="form-check-label" for="dichvu{{$dichvu->id}}">
+                            <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}{{$datphong->datphongid}}" name="dichvuid[]" value="{{$dichvu->id}}">
+                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->datphongid}}">
                                 {{$dichvu->ten}}:
                             </label>
-                            <label class="form-check-label" for="dichvu{{$dichvu->id}}">
+                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->datphongid}}">
                                 {{$dichvu->giatien}} {{$dichvu->donvi}}
                             </label>
                         </div>

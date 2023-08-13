@@ -39,18 +39,22 @@
         </ul>
         <div class="tab-content mt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
-                @include('phongs.mainTab.tabThongtin')
+                @include('phongs.mainTab.tabThongtin')  
             </div>
             <div class="tab-pane fade" id="tab-hinh" role="tabpanel" aria-labelledby="hinh-tab">
+                @include('hinhs.create')
                 @include('phongs.mainTab.tabHinh')
             </div>
             <div class="tab-pane fade" id="tab-thietbi" role="tabpanel" aria-labelledby="thietbi-tab">
+                @include('thietbis.create')
                 @include('phongs.mainTab.tabThietbi')
             </div>
             <div class="tab-pane fade" id="tab-giuong" role="tabpanel" aria-labelledby="giuong-tab">
+                @include('giuongs.create')
                 @include('phongs.mainTab.tabGiuong')
             </div>
             <div class="tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
+                @include('mieutas.create')
                 @include('phongs.mainTab.tabMieuta')
             </div>
         </div>

@@ -1,5 +1,5 @@
 <div class="">
-    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
         data-bs-target="#modalanuong{{ $datphong->datphongid }}">
         <i class="fa fa-utensils"></i> ăn uống
     </button>
@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Chọn dịch vụ</h5>
+                <h5 class="modal-title" id="ModalAnuong">Chọn dịch vụ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>
@@ -21,9 +21,9 @@
                     <div class="row m-2">
                         @foreach ($anuongs as $anuong)
                             <div class="form-check col-4">
-                                <input class="form-check-input" type="checkbox" id="anuong{{ $anuong->id }}"
+                                <input class="form-check-input" type="checkbox" id="anuong{{ $anuong->id }}{{$datphong->datphongid}}"
                                     name="anuongid[]" value="{{ $anuong->id }}">
-                                <label class="form-check-label" for="anuong{{ $anuong->id }}">
+                                <label class="form-check-label" for="anuong{{ $anuong->id }}{{$datphong->datphongid}}">
                                     <div class="card form-check-label" style="max-width:32rem;">
                                         <div class="row g-0">
                                             <div class="col-md-4 d-flex">

@@ -5,6 +5,7 @@
     </button>
 </div>
 <!-- Modal huỷ đặt phòng -->
+@hasrole("Admin")
 <div class="modal fade" id="huydatphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -29,3 +30,4 @@
         </div>
     </div>
 </div>
+@endhasrole

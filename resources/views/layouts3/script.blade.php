@@ -52,15 +52,15 @@
 </script>
 
 <style>
-    #DataTables_Table_0_length label,
-    #DataTables_Table_0_filter label {
+    .dataTables_length label,
+    .dataTables_filter label {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 10px;
     }
 
-    #DataTables_Table_0_length label {
+    .dataTables_length label {
         width: 180px;
     }
 </style>
