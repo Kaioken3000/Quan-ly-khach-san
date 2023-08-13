@@ -25,7 +25,14 @@
                     }
                     ?>
                     <div class="col-lg-3 col-md-6 list-item">
-                        <div class="hp-room-item set-bg" data-setbg="/client/images/{{ $phong->picture_1 }}">
+                        <div class="hp-room-item set-bg"
+                            data-setbg="/client/images/<?php 
+                                foreach ($phong->hinhphongs as $hinhphong){
+                                    $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first();
+                                        echo $hinh->vitri ;
+                                    break;
+                                }
+                            ?>">
                             <div class="hr-text">
                                 <h3>{{ $phong->loaiphongs->ten }} - {{ $phong->so_phong }}</h3>
                                 <h2>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h2>

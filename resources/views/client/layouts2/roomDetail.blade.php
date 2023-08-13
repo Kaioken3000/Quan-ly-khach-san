@@ -74,11 +74,11 @@
                             </tbody>
                         </table>
                         <h5 class="my-3">Miêu tả:</h5>
-                        <p class="f-para"><i class="fa fa-check text-warning"></i> {{ $phong->loaiphongs->mieuTa }}</p>
+                        {{-- <p class="f-para"><i class="fa fa-check text-warning"></i> {{ $phong->loaiphongs->mieuTa }}</p> --}}
                         @foreach ($phong->mieutaphongs as $mieutaphong)
                             <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
                             ?>
-                            <p class="f-para"><i class="fa fa-check text-warning"></i>{{ $mieuta->noidung }}</p>
+                            {!! $mieuta->noidung !!}
                             @if (isset($mieuta->hinh))
                                 <img src="/client/images/{{ $mieuta->hinh }}">
                             @endif

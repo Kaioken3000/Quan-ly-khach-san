@@ -1,4 +1,3 @@
-
 <!-- ===============================================-->
 <!--    JavaScripts-->
 <!-- ===============================================-->
@@ -26,6 +25,15 @@
 
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+{{-- for edit text --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js"
+    integrity="sha512-lLE5tUMZXmDmyGWI5KDlFemVusXiALcU1lPibL4xkPbPvuOXfXcdoeU3KBDxWp18/KOzrfKkgsscN1t9740ciA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{{-- flatpickr --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
     $(document).ready(function() {

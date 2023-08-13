@@ -34,7 +34,7 @@
                     @foreach ($phong->mieutaphongs as $mieutaphong)
                         <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
                         ?>
-                        <p>{{ $mieuta->noidung }}</p>
+                        {!! $mieuta->noidung !!}
                     @endforeach
                 </td>
                 @hasrole('Admin')

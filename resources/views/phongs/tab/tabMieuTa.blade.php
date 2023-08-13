@@ -16,7 +16,7 @@
                 onclick="changeBoder('mieutaDetail{{ $mieuta->id }}','mieuta{{ $mieuta->id }}')">
                 <div class="card-body">
                     {{-- <textarea cols="150" rows="10">{{ $mieuta->noidung }}</textarea> --}}
-                    <p>{{ $mieuta->noidung }}</p>
+                    {!! $mieuta->noidung !!}
                     @include('mieutas.edit')
                     @include('mieutas.delete')
                 </div>

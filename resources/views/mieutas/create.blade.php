@@ -18,14 +18,15 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="noidung">Nội dung</label>
-                        <textarea id="noidung" name="noidung" class="form-control" required cols="90" rows="20"></textarea>
+                        {{-- <textarea id="noidung" name="noidung" class="form-control" required cols="90" rows="20"></textarea> --}}
+                        <textarea class="tinymce" name="noidung" id="noidung" data-tinymce="{}"></textarea>
                         @error('noidung')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="hinh">Hình</label>
-                        <input type="file" name="hinh" class="form-control" id="hinh"/>
+                        <input type="file" name="hinh" class="form-control" id="hinh" />
                         @error('hinh')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror

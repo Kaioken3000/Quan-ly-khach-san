@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Phòng</th>
-            <th>Hình</th>
+            <th>Nội dung</th>
             @hasrole('Admin')
                 <th>Action</th>
             @endhasrole
@@ -16,7 +16,7 @@
                     @foreach ($phong->mieutaphongs as $mieutaphong)
                         <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first(); ?>
                         <div class="d-flex justify-content-between gap-1">
-                            <p>{{ $mieuta->noidung }}</p>
+                            {!! $mieuta->noidung !!}
                             <div>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="badge bg-danger" data-bs-toggle="modal"

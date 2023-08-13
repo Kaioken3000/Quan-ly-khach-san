@@ -25,7 +25,7 @@
                                     id="mieuta{{ $mieuta->id }}{{ $phong->so_phong }}" name="mieutaid[]"
                                     value="{{ $mieuta->id }}">
                                 <label class="form-check-label" for="mieuta{{ $mieuta->id }}{{ $phong->so_phong }}">
-                                    <p>{{ $mieuta->noidung }}</p>
+                                    {!!$mieuta->noidung !!}
                                 </label>
                             </div>
                         @endforeach

@@ -30,8 +30,9 @@
                 @foreach ($mieutas as $mieuta)
                     <tr>
                         <td>{{ $mieuta->id }}</td>
-                        <td >
-                            <textarea cols="80" rows="10">{{ $mieuta->noidung }}</textarea>
+                        <td>
+                            {{-- <textarea cols="80" rows="10">{{ $mieuta->noidung }}</textarea> --}}
+                            {!! $mieuta->noidung !!}
                         <td style="width: 10%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                 title="{{ $mieuta->hinh }}" src="/client/images/{{ $mieuta->hinh }}" class="img-fluid">
