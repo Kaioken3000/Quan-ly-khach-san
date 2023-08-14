@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\Danhsachdatphong;
-use App\Models\Thanhtoan;
-use App\Models\Traphong;
 use App\Models\Datphong;
+use App\Models\Traphong;
+use App\Models\Thanhtoan;
+use Illuminate\Http\Request;
+use App\Models\Danhsachdatphong;
+use Illuminate\Support\Facades\Log;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class ThanhtoanController extends Controller
@@ -105,7 +106,8 @@ class ThanhtoanController extends Controller
             $datphong->tinhtrangnhanphong = 1;
 
             $traphongs = array();
-            $traphongs['ten'] = $datphong->khachhangs->ten;
+            $traphongs['ten'] = Auth::user()->username;
+            $traphongs['userid'] = Auth::user()->id;
             $traphongs['datphongid'] = $datphong->id;
 
             Traphong::create($traphongs);

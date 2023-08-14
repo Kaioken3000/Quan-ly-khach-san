@@ -32,6 +32,7 @@ use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\HinhPhongController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\LoaiphongController;
+use App\Http\Controllers\NhanphongController;
 use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\GiuongPhongController;
@@ -177,10 +178,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('datphongs/datphongs-search', 'DatphongController@search'); //tim kiem
         Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan'); //thanh toán
         Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
-        Route::put('/datphongs-nhanphong', 'DatphongController@nhanphong')->name('datphongs.nhanphong'); //nhan phong
-        Route::put('/datphongs-xuly', 'XulyController@store')->name('datphongs.xuly'); //nhan phong
+        
+        Route::put('/datphongs-nhanphong', 'NhanphongController@store')->name('datphongs.nhanphong'); //nhan phong
+        Route::put('/datphongs-xuly', 'XulyController@store')->name('datphongs.xuly'); //xu ly
+        
         Route::get('/showHuydatphong', 'DatphongController@showHuydatphong')->name('datphongs.showHuydatphong'); //show huy dat phong
-        Route::get('/showHistoryPage', 'DatphongController@showHistoryPage')->name('datphongs.showHistoryPage'); //show huy dat phong
+        Route::get('/showHistoryPage', 'DatphongController@showHistoryPage')->name('datphongs.showHistoryPage'); //show historry page
 
         //Huỷ đặt phòng
         Route::delete('/huydatphongs/{datphong}', 'HuydatphongController@store')->name('huydatphongs.store'); //huỷ đặt phong

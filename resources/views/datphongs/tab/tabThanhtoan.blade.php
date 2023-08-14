@@ -46,7 +46,11 @@
                     <ul class="list-group">
                         @if (count($xulys) > 0)
                             @foreach ($xulys as $xuly)
-                                <li class="list-group-item">Họ tên người xử lý: <b>{{ $xuly->ten }}</b>
+                                <li class="list-group-item">Họ tên người xử lý: <b>
+                                        @isset($xuly->users)
+                                            {{ $xuly->users->username }}
+                                        @endisset
+                                    </b>
                                 </li>
                                 <li class="list-group-item">Thời gian xử lý: <b>{{ $xuly->created_at }}</b>
                                 </li>
@@ -73,7 +77,11 @@
                     <ul class="list-group">
                         @if (count($nhanphongs) > 0)
                             @foreach ($nhanphongs as $nhanphong)
-                                <li class="list-group-item">Họ tên người nhận: <b>{{ $nhanphong->ten }}</b></li>
+                                <li class="list-group-item">Họ tên người nhận: <b>
+                                        @isset($nhanphong->users)
+                                            {{ $nhanphong->users->username }}
+                                        @endisset
+                                    </b></li>
                                 <li class="list-group-item">Thời gian nhận: <b>{{ $nhanphong->created_at }}</b></li>
                             @endforeach
                         @endif
@@ -93,7 +101,12 @@
                     <ul class="list-group">
                         @if (count($traphongs) > 0)
                             @foreach ($traphongs as $traphong)
-                                <li class="list-group-item">Họ tên người trả phòng: <b>{{ $traphong->ten }}</b>
+                                <li class="list-group-item">Họ tên người trả phòng:
+                                    <b>
+                                        @isset($traphong->users->username)
+                                            {{ $traphong->users->username }}
+                                        @endisset
+                                    </b>
                                 </li>
                                 <li class="list-group-item">Thời gian trả phòng:
                                     <b>{{ $traphong->created_at }}</b>
@@ -129,7 +142,11 @@
                     <ul class="list-group">
                         @if (count($huydatphongs) > 0)
                             @foreach ($huydatphongs as $huydatphong)
-                                <li class="list-group-item">Số trả phòng: <b>{{ $huydatphong->so }}</b></li>
+                                <li class="list-group-item">Số trả phòng: <b>
+                                    @isset ($huydatphong->users)
+                                    {{ $huydatphong->users->username }}
+                                    @endisset    
+                                </b></li>
                                 <li class="list-group-item">Họ tên người huỷ đặt phòng: <b>{{ $huydatphong->ten }}</b>
                                 </li>
                                 <li class="list-group-item">Thời gian huỷ đặt phòng:

@@ -294,7 +294,8 @@ class DatphongController extends Controller
         $datphong->tinhtrangnhanphong = 1;
 
         $traphongs = array();
-        $traphongs['ten'] = $datphong->khachhangs->ten;
+        $traphongs['ten'] = Auth::user()->username;
+        $traphongs['userid'] = Auth::user()->id;
         $traphongs['datphongid'] = $datphong->id;
 
         Traphong::create($traphongs);
@@ -345,7 +346,7 @@ class DatphongController extends Controller
         $datphong = Datphong::find($request->id);
 
         $nhanphongs = array();
-        $nhanphongs['ten'] = $datphong->khachhangs->ten;
+        $nhanphongs['userid'] = Auth::user()->id;
         $nhanphongs['datphongid'] = $datphong->id;
 
         if ($datphong->tinhtrangnhanphong == 1) {

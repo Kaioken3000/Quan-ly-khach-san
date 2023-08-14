@@ -13,6 +13,7 @@ class Traphong extends Model
         'so',
         'ten',
         'datphongid',
+        'userid'
     ];
 
     protected $primaryKey = 'so';
@@ -21,5 +22,9 @@ class Traphong extends Model
 
     public function datphongs(){
         return $this->hasOne(Datphong::class, 'datphongid', 'id');
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class, 'userid', 'id');
     }
 }

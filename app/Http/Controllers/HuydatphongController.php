@@ -6,6 +6,7 @@ use App\Models\Datphong;
 use App\Models\Huydatphong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class HuydatphongController extends Controller
 {
@@ -20,7 +21,8 @@ class HuydatphongController extends Controller
         $datphong = Datphong::find($datphong->id);
 
         $huydatphongs = array();
-        $huydatphongs['ten'] = $datphong->khachhangs->ten;
+        $huydatphongs['ten'] = Auth::user()->username;
+        $huydatphongs['userid'] = Auth::user()->id;
         $huydatphongs['datphongid'] = $datphong->id;
         
         if($datphong->huydatphong == 0){

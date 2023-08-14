@@ -113,7 +113,7 @@
                             @include('datphongs.actionButton.doiphong')
 
                             <!-- Huỷ đặt phòng -->
-                            @include('datphongs.actionButton.huydatphong')
+                            {{-- @include('datphongs.actionButton.huydatphong') --}}
 
                             <!-- Xoá -->
                             @if ($datphong->tinhtrangnhanphong == 0)

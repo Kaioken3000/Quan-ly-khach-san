@@ -11,10 +11,17 @@ class Nhanphong extends Model
 
     protected $fillable = [
         'ten',
-        'datphongid'
+        'datphongid',
+        'userid'
     ];
 
-    public function datphongs(){
+    public function datphongs()
+    {
         return $this->hasOne(Datphong::class, 'datphongid', 'id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'userid', 'id');
     }
 }

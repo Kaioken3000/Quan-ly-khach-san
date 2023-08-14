@@ -1,239 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Hoá đơn khách sạn</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./dompdf/style.css">
 </head>
-<style type="text/css">
-    body {
-        font-family: DejaVu Sans, sans-serif;
-    }
-
-    .m-0 {
-        margin: 0px;
-    }
-
-    .p-0 {
-        padding: 0px;
-    }
-
-    .pt-5 {
-        padding-top: 5px;
-    }
-
-    .mt-10 {
-        margin-top: 10px;
-    }
-
-    .text-center {
-        text-align: center !important;
-    }
-
-    .w-100 {
-        width: 100%;
-    }
-
-    .w-50 {
-        width: 50%;
-    }
-
-    .w-85 {
-        width: 85%;
-    }
-
-    .w-15 {
-        width: 15%;
-    }
-
-    .logo img {
-        width: 45px;
-        height: 45px;
-        padding-top: 30px;
-    }
-
-    .logo span {
-        margin-left: 8px;
-        top: 19px;
-        position: absolute;
-        font-weight: bold;
-        font-size: 25px;
-    }
-
-    .gray-color {
-        color: #5D5D5D;
-    }
-
-    .text-bold {
-        font-weight: bold;
-    }
-
-    .border {
-        border: 1px solid black;
-    }
-
-    table tr,
-    th,
-    td {
-        border: 1px solid #d2d2d2;
-        border-collapse: collapse;
-        padding: 7px 8px;
-    }
-
-    table tr th {
-        background: #F4F4F4;
-        font-size: 15px;
-    }
-
-    table tr td {
-        font-size: 13px;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    .box-text p {
-        line-height: 10px;
-    }
-
-    .float-left {
-        float: left;
-    }
-
-    .total-part {
-        font-size: 16px;
-        line-height: 12px;
-    }
-
-    .total-right p {
-        padding-right: 20px;
-    }
-</style>
 
 <body>
-    <div class="head-title">
-        <h1 class="text-center m-0 p-0">QL khách san</h1>
-    </div>
-    <div class="add-detail mt-10">
-        <div class="w-50 float-left mt-10">
-            <h3>Thông tin khách hang:</h3>
-            <p class="m-0 pt-5 text-bold w-100">Khách hàng Id - <span class="gray-color">{{ $khachhang->id }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Tên khách hàng- <span class="gray-color">{{ $khachhang->ten }}</span>
-            </p>
-            <p class="m-0 pt-5 text-bold w-100">Số điện thoại - <span class="gray-color">{{ $khachhang->sdt }}</span>
-            </p>
-            <p class="m-0 pt-5 text-bold w-100">Email - <span class="gray-color">{{ $khachhang->email }}</span></p>
+    <div class="container">
+
+        <table width="100%">
+            <tr>
+                <td width="75px">
+                    <div class="logotype" style="line-height: 60px;">
+                        Copmany</div>
+                    {{-- <img src="./Phoenix_files/logo.png" alt=""> --}}
+                </td>
+                <td width="400px">
+                    <div
+                        style="background: #ffd9e8;border-left: 15px solid #fff;padding-left: 30px;font-size: 26px;font-weight: bold;letter-spacing: -1px;height: 73px;line-height: 60px;">
+                        Hóa đơn đặt phòng</div>
+                </td>
+                <td>
+                    <ul>
+                        <li>Mẫu số:06AAFCD6498P1ZT</li>
+                        <li>Ký hiệu:NP1SP</li>
+                        <br>
+                        <li>Số:{{ $datphong->id }}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <ul style="padding: 0px; margin: 0px; list-style-type: none;">
+            <li>Đơn vị: Công ty TNHH Khách sạn sogo</li>
+            <li>Số điện thoại: (12) 345 67890</li>
+            <li>Email: info.colorlib@gmail.com</li>
+            <li>Địa chỉ: 856 Cordia Extension Apt. 356, Lake, United State</li>
+        </ul>
+        <br>
+        {{-- Thông tin khách hàng --}}
+        <h3>Thông tin khách hàng</h3>
+        <table width="100%" style="border-collapse: collapse;">
+            <tr>
+                <td widdth="50%" style="background:#eee;padding:20px;">
+                    <strong>Khách hàng Id:</strong> {{ $khachhang->id }}<br>
+                    <strong>Tên khách hàng:</strong>{{ $khachhang->ten }}<br>
+                </td>
+                <td style="background:#eee;padding:20px;">
+                    <strong>Số điện thoại:</strong> {{ $khachhang->sdt }}<br>
+                    <strong>E-mail:</strong>{{ $khachhang->email }}<br>
+                </td>
+            </tr>
+        </table><br>
+        {{-- Kết thúc thông tin khách hàng --}}
+        {{-- Thông tin đặt phòng --}}
+        <h3>Thông tin đặt phòng</h3>
+        <table width="100%">
+            <tr>
+                <td widdth="50%">
+                    <strong>Mã đặt phòng:</strong> {{ $datphong->id }}<br>
+                    <strong>Ngày đặt:</strong>{{ $datphong->ngaydat }}<br>
+                    <strong>Ngày trả:</strong>{{ $datphong->ngaytra }}<br>
+                </td>
+                <td>
+                    <strong>Số lượng người ở:</strong> {{ $datphong->soluong }}<br>
+                    <strong>Khách hàng:</strong>{{ $datphong->khachhangid }}<br>
+                    @if ($tiendatcoc)
+                        <strong>Tiền đặt cọc:</strong>
+                        {{ $tiendatcoc->gia }}
+                    @endif
+                    <br>
+                </td>
+            </tr>
+        </table><br>
+        {{-- Kết thúc thông tin đặt phòng --}}
+        <div class="add-detail mt-10">
+            <div class="w-50 float-left mt-10">
+                <h3>Dịch vụ sử dụng:</h3>
+                <?php $tongtiendv = 0; ?>
+                @foreach ($dichvudatphongs as $dichvudatphong)
+                    <?php $tongtiendv += $dichvudatphong->dichvus->giatien; ?>
+                    <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}:
+                            {{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
+                @endforeach
+            </div>
         </div>
-        <div class="w-50 float-left logo mt-10">
-        </div>
-        <div style="clear: both;"></div>
-    </div>
-    <div class="add-detail mt-10">
-        <div class="w-50 float-left mt-10">
-            <h3>Thông tin đặt phòng:</h3>
-            <p class="m-0 pt-5 text-bold w-100">Id - <span class="gray-color">{{ $datphong->id }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Ngày đặt- <span class="gray-color">{{ $datphong->ngaydat }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Ngày trả- <span class="gray-color">{{ $datphong->ngaytra }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Số lượng - <span class="gray-color">{{ $datphong->soluong }}</span></p>
-            <p class="m-0 pt-5 text-bold w-100">Khách hàng - <span class="gray-color">{{ $datphong->khachhangid}}</span></p>
-            @if($tiendatcoc)
-            <p class="m-0 pt-5 text-bold w-100">Tiền đặt cọc - <span class="gray-color">{{ $tiendatcoc->gia}}</span></p>
-            @endif
-        </div>
-        <div class="w-50 float-left logo mt-10">
-        </div>
-        <div style="clear: both;"></div>
-    </div>
-    <div class="add-detail mt-10">
-        <div class="w-50 float-left mt-10">
-            <h3>Dịch vụ sử dụng:</h3>
-            <?php $tongtiendv = 0;?>
-            @foreach($dichvudatphongs as $dichvudatphong)
-            <?php $tongtiendv += $dichvudatphong->dichvus->giatien;?>
-            <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}: {{
-                    $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
+        <br>
+
+        <h3>Các phòng đã ở</h3>
+        <table width="100%" style="border-collapse: collapse;border-bottom:1px solid #eee;">
+            <tr>
+                <td class="column-header">Phòng</td>
+                <td style="width: 100px" class="column-header">Giá phòng</td>
+                <td class="column-header">Loại phòng</td>
+                <td class="column-header">Số lượng người ở</td>
+                <td class="column-header">Ngày bắt đầu ở</td>
+                <td class="column-header">Ngày kết thúc ở</td>
+                <td class="column-header">Số ngày ở</td>
+            </tr>
+
+            <?php $i = 0;
+            $tonggia = 0; ?>
+            @foreach ($danhsachdatphongs as $danhsachdatphong)
+                <tr>
+                    <?php $phong = App\Models\Phong::find($danhsachdatphong->phongid);
+                    $ngayhomnay = date('Y/m/d');
+                    
+                    $ngaybatdau = $danhsachdatphong->ngaybatdauo;
+                    $ngayketthuc = $danhsachdatphong->ngayketthuco;
+                    $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
+                    $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
+                    if ($i == 0) {
+                        $tonggia += $danhsachdatphong->phongs->loaiphongs->gia * $songay1;
+                    } elseif ($i != count($danhsachdatphongs) - 1) {
+                        $tonggia += $danhsachdatphong->phongs->loaiphongs->gia * $songay1;
+                    } else {
+                        $tonggia += $danhsachdatphong->phongs->loaiphongs->gia * $songay2;
+                    }
+                    ?>
+                    <td class="row">{{ $phong->so_phong }}</td>
+                    <td class="row">{{ $phong->loaiphongs->gia }} VND</td>
+                    <td class="row">{{ $phong->loaiphongid }}</td>
+                    <td class="row">
+                        <?php $soluongnguoio = App\Models\Datphong::where('khachhangid', $khachhang->id)->first(); ?>
+                        {{ $soluongnguoio->soluong }} người
+                    </td>
+                    <td class="row">{{ $danhsachdatphong->ngaybatdauo }}</td>
+                    <td class="row">{{ $danhsachdatphong->ngayketthuco }}</td>
+                    @if ($i != count($danhsachdatphongs) - 1 || $i == 0)
+                        <td class="row">{{ $songay1 }} ngày</td>
+                    @else
+                        <td class="row">{{ $songay2 }} ngày</td>
+                    @endif
+                    <?php $i++; ?>
+                </tr>
             @endforeach
-        </div>
-        <div class="w-50 float-left logo mt-10">
-        </div>
-        <div style="clear: both;"></div>
-    </div>
-    <div class="table-section bill-tbl w-100 mt-10">
-        <table class="table w-100 mt-10">
-            <tr>
-                <th class="w-50">Phòng</th>
-                <th class="w-50">Loại phòng</th>
-            </tr>
+        </table>
+        <br>
+
+        <table width="100%" style="background:#eee;padding:20px; height: 20px">
             <tr>
                 <td>
-                    <div class="box-text">
-                        <?php $i=0; $tonggia = 0;?>
-                        @foreach($danhsachdatphongs as $danhsachdatphong)
-                        <?php $phong = App\Models\Phong::find($danhsachdatphong->phongid); 
-                            $ngayhomnay = date("Y/m/d");
-
-                            $ngaybatdau = $danhsachdatphong->ngaybatdauo;
-                            $ngayketthuc = $danhsachdatphong->ngayketthuco;
-                            $songay1 = abs(round((strtotime($ngayketthuc) - strtotime($ngaybatdau)) / 86400));
-                            $songay2 = abs(round((strtotime($ngayhomnay) - strtotime($ngaybatdau)) / 86400));
-                            if($i==0){
-                                $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
-                            } else if($i!=(count($danhsachdatphongs)-1)) {
-                                $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay1);
-                            } else {
-                                $tonggia+=($danhsachdatphong->phongs->loaiphongs->gia)*($songay2);
-                            }
-                        ?>
-                        <p>Sô phòng: {{ $phong->so_phong }}</p>
-                        <p>Loại phòng: {{ $phong->loaiphongid }}</p>
-                        <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
-                        <p>Ngày kết thúc ỏ: {{ $danhsachdatphong->ngayketthuco }}</p>
-                        @if($i!=(count($danhsachdatphongs)-1) || $i==0)
-                            <p>So ngay o: {{ $songay1 }}</p>
-                        @else
-                            <p>So ngay o: {{ $songay2 }}</p>
-                        @endif
-                        <hr>
-                        <?php $i++;?>
-                        @endforeach
-
-                    </div>
-                </td>
-                <td>
-                    <div class="box-text">
-                        @foreach($danhsachdatphongs as $danhsachdatphong)
-                        <?php $p = App\Models\Phong::find($danhsachdatphong->phongid);
-                        $loaiphong = App\Models\LoaiPhong::find($p->loaiphongid); ?>
-                        <p>Mã: {{ $loaiphong->ma }}</p>
-                        <p>Tên: {{ $loaiphong->ten }}</p>
-                        <p>Giá: {{ $loaiphong->gia }}VND</p>
-                        <p>Sô lượng: {{ $loaiphong->soluong }}</p>
-                        <p>Miêu tả: {{ $loaiphong->mieuta }}</p>
-                        <hr>
-                        @endforeach
-                    </div>
+                    <table width="180px" style="float:right">
+                        <tr>
+                            <td><strong>Tổng cộng:</strong></td>
+                            <td style="text-align:right">
+                                @if ($tiendatcoc)
+                                    {{ $tonggia + $tongtiendv - $tiendatcoc->gia }}VND
+                                @else
+                                    {{ $tonggia + $tongtiendv }}VND
+                                @endif
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
-    </div>
-    <div class="table-section bill-tbl w-100 mt-10">
-        <table class="table w-100 mt-10">
-            <tr>
-                <td colspan="7">
-                    <div class="total-part">
-                        <div class="total-left w-85 float-left" align="right">
-                            @if($tiendatcoc)
-                            <p>Tổng cộng: {{ $tonggia + $tongtiendv - $tiendatcoc->gia}}VND</p>
-                            @else
-                            <p>Tổng cộng: {{ $tonggia + $tongtiendv}}VND</p>
-                            @endif
-                        </div>
-                        <div style="clear: both;"></div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+        <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>
+                document.write(new Date().getFullYear());
+            </script> All rights reserved | This template is made with <i class="fa fa-heart"
+                aria-hidden="true"></i> by <a href="#" target="_blank">nam</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+    </div><!-- container -->
+</body>
 
 </html>

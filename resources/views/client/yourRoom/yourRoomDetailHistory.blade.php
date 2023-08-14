@@ -52,7 +52,11 @@
                                     @if (count($nhanphongs) > 0)
                                         <b class="font-weight-bold">Nhận phòng</b>
                                         @foreach ($nhanphongs as $nhanphong)
-                                            <p>Họ tên người nhận: <b>{{ $nhanphong->ten }}</b></p>
+                                            <p>Họ tên người nhận: <b>
+                                                    @isset($nhanphong->users)
+                                                        {{ $nhanphong->users->username }}
+                                                    @endisset
+                                                </b></p>
                                             <p>Thời gian nhận: <b>{{ $nhanphong->created_at }}</b>
                                             </p>
                                         @endforeach
@@ -63,7 +67,11 @@
                                         <b class="font-weight-bold">Trả phòng</b>
                                         @foreach ($traphongs as $traphong)
                                             <p>Số trả phòng: {{ $traphong->so }}</p>
-                                            <p>Họ tên người trả phòng: {{ $traphong->ten }}</p>
+                                            <p>Họ tên người trả phòng:
+                                                @isset($traphong->users)
+                                                    {{ $traphong->users->username }}
+                                                @endisset
+                                            </p>
                                             <p>Thời gian trả phòng: {{ $traphong->created_at }}</p>
                                         @endforeach
                                     @endif

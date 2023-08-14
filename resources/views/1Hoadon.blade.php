@@ -113,7 +113,7 @@
 
 <body>
     <div class="head-title">
-        <h1 class="text-center m-0 p-0">QL khách san</h1>
+        <h1 class="text-center m-0 p-0">Hóa đơn khách sạn</h1>
     </div>
     <div class="add-detail mt-10">
         <div class="w-50 float-left mt-10">

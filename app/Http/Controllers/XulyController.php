@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Xuly;
 use App\Models\Datphong;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class XulyController extends Controller
 {
@@ -19,7 +20,8 @@ class XulyController extends Controller
         $datphong = Datphong::find($request->id);
 
         $xulys = array();
-        $xulys['ten'] = $datphong->khachhangs->ten;
+        $xulys['ten'] = Auth::user()->username;
+        $xulys['userid'] = Auth::user()->id;
         $xulys['datphongid'] = $datphong->id;
 
         if ($datphong->tinhtrangxuly == 1) {

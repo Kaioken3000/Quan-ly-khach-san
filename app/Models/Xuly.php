@@ -11,12 +11,17 @@ class Xuly extends Model
 
     protected $fillable = [
         'ten',
-        'datphongid'
+        'datphongid',
+        'userid'
     ];
 
     protected $table = 'xulys';
 
     public function datphongs(){
         return $this->hasOne(Datphong::class, 'datphongid', 'id');
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class, 'userid', 'id');
     }
 }
