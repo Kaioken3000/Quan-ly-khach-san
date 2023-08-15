@@ -92,10 +92,10 @@
                             {{ $phongmax->phongid }}
                         </td>
                         <td>
-                            <form action="{{ route('danhsachdatphongs.index') }}" method="get">
-                                <input type="hidden" name="datphongid" value="{{ $datphong->id }}">
-                                <button class="badge bg-info" type="submit"> Lịch sử</button>
-                            </form>
+                            <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->datphongid, 'khachhangid' => $datphong->khachhangid]) }}"
+                                target="_blank" class="badge bg-primary">
+                                Chi tiết
+                            </a>
                         </td>
                         <td>{{ $datphong->khachhangid }}</td>
                         <td>
