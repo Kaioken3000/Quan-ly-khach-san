@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Thietbi;
+use App\Models\Chinhanh;
 use App\Mail\MyTestEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -20,13 +21,14 @@ use App\Http\Controllers\AnuongController;
 use App\Http\Controllers\CatrucController;
 use App\Http\Controllers\DichvuController;
 use App\Http\Controllers\GiuongController;
-use App\Http\Controllers\MieutaController;
 
+use App\Http\Controllers\MieutaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\ThietbiController;
 
+use App\Http\Controllers\ThietbiController;
+use App\Http\Controllers\ChinhanhController;
 use App\Http\Controllers\DatphongController;
 use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\HinhPhongController;
@@ -38,9 +40,11 @@ use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\GiuongPhongController;
 use App\Http\Controllers\MieutaPhongController;
 use App\Http\Controllers\FullCalenderController;
+use App\Http\Controllers\HinhChinhanhController;
 use App\Http\Controllers\ThietbiPhongController;
 use App\Http\Controllers\AnuongDatphongController;
 use App\Http\Controllers\DichvuDatphongController;
+use App\Http\Controllers\MieutaChinhanhController;
 use App\Http\Controllers\DanhsachdatphongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 /*
@@ -119,6 +123,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/messages', 'MessageController@index');
         Route::post('/messages', 'MessageController@store');
 
+        // Chi nhanh Routes
+        Route::resource('chinhanhs', ChinhanhController::class);
+        Route::get('chinhanhs-search', 'ChinhanhController@search');
+        Route::get('chinhanhs/chinhanhs-search', 'ChinhanhController@search');
+
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
         Route::get('loaiphongs-search', 'LoaiphongController@search');
@@ -155,6 +164,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('mieutas/mieutas-search', 'MieutaController@search');
         // MieutaPhong Route
         Route::resource('mieuta_phong', MieutaPhongController::class);
+        // MieutaChinhanh Route
+        Route::resource('mieuta_chinhanh', MieutaChinhanhController::class);
 
         // Hinh Routes
         Route::resource('hinhs', HinhController::class);
@@ -162,6 +173,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('hinhs/hinhs-search', 'HinhController@search');
         // HinhPhong Route
         Route::resource('hinh_phong', HinhPhongController::class);
+        // HinhChinhanh Route
+        Route::resource('hinh_chinhanh', HinhChinhanhController::class);
 
         // Giuong Routes
         Route::resource('giuongs', GiuongController::class);

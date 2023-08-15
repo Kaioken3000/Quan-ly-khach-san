@@ -30,6 +30,22 @@
                 <hr class="navbar-vertical-line">
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
+                        <a class="nav-link {{ Request::is('chinhanhs') || Request::is('chinhanhs*') ? 'active' : '' }} dropdown-indicator label-1"
+                            href="/chinhanhs">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon">
+                                    <!-- <span class="fas fa-caret-right"></span> Font Awesome fontawesome.com -->
+                                </div>
+                                <span class="nav-link-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </span>
+                                <span class="nav-link-text">Chi nhánh</span>
+                            </div>
+                        </a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('loaiphongs') || Request::is('loaiphongs*') ? 'active' : '' }} dropdown-indicator label-1"
                             href="/loaiphongs">
                             <div class="d-flex align-items-center">
