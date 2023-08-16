@@ -14,7 +14,8 @@ class Nhanvien extends Model
         'ma',
         'ten',
         'luong',
-        'userid'
+        'userid',
+        'chinhanhid',
     ];
 
     protected $primaryKey = 'ma';
@@ -35,5 +36,9 @@ class Nhanvien extends Model
     {
         // return $this->belongsToMany(Catruc::class, 'catruc_nhanvies' ,'nhanvienid', 'catrucid' );
         return $this->hasMany(CatrucNhanvien::class, 'nhanvienid', 'ma');
+    }
+    public function chinhanhs()
+    {
+        return $this->belongsTo(Chinhanh::class, 'chinhanhid', 'id');
     }
 }

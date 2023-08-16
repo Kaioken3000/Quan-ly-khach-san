@@ -12,7 +12,7 @@
     @endif
     <!-- Basic Layout -->
     <h5 class="mb-0">From nhập liệu</h5>
-    <form action="{{ route('nhanviens.store') }}" method="POST">
+    <form action="{{ route('nhanviens.store') }}" method="POST" class="w-25">
         @csrf
         <div class="mb-3">
             <label class="form-label" for="ma">Mã nhân viên</label>
@@ -34,6 +34,22 @@
             <label class="form-label" for="luong">Lương nhân viên</label>
             <input type="number" name="luong" class="form-control" id="luong" min=0 required />
             @error('luong')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="chinhanh">Chi nhánh</label>
+            <select class="form-control" id="chinhanhid" name="chinhanhid">
+                @foreach ($chinhanhs as $chinhanh)
+                    <option value="{{ $chinhanh->id }}"
+                        @if (isset($nhanvien)) @if ($chinhanh->id === $nhanvien->chinhanhid)
+                                selected @endif
+                        @endif
+                        >{{ $chinhanh->ten }}
+                    </option>
+                @endforeach
+            </select>
+            @error('chinhanh')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
         </div>

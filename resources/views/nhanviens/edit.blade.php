@@ -25,8 +25,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="ten">Tên nhân viên</label>
-            <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Phòng VIP"
-                required value="{{ $nhanvien->ten }}" />
+            <input type="text" name="ten" class="form-control" id="ten" placeholder="VD: Phòng VIP" required
+                value="{{ $nhanvien->ten }}" />
             @error('ten')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
@@ -36,6 +36,22 @@
             <input type="number" name="luong" class="form-control" id="luong" min=0 required
                 value="{{ $nhanvien->luong }}" />
             @error('luong')
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="chinhanh">Chi nhánh</label>
+            <select class="form-control" id="chinhanhid" name="chinhanhid">
+                @foreach ($chinhanhs as $chinhanh)
+                    <option value="{{ $chinhanh->id }}"
+                        @if (isset($nhanvien)) @if ($chinhanh->id === $nhanvien->chinhanhid)
+                                selected @endif
+                        @endif
+                        >{{ $chinhanh->ten }}
+                    </option>
+                @endforeach
+            </select>
+            @error('chinhanh')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
         </div>

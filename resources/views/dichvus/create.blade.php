@@ -1,6 +1,6 @@
 @hasrole('Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
-        <i class="bx bx-plus mb-1"></i> Create Dịch vụ
+        <i class="fas fa-plus"></i> Create Dịch vụ
     </button>
 @endhasrole
 <!-- Modal Create -->

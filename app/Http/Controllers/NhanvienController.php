@@ -7,6 +7,7 @@ use App\Models\Catruc;
 use App\Models\Nhanvien;
 use Illuminate\Http\Request;
 use App\Models\CatrucNhanvien;
+use App\Models\Chinhanh;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
@@ -34,7 +35,8 @@ class NhanvienController extends Controller
     */
     public function create()
     {
-        return view('nhanviens.create');
+        $chinhanhs = Chinhanh::get();
+        return view('nhanviens.create', compact('chinhanhs'));
     }
 
     /**
@@ -110,7 +112,8 @@ class NhanvienController extends Controller
     */
     public function edit(Nhanvien $nhanvien)
     {
-        return view('nhanviens.edit',compact('nhanvien'));
+        $chinhanhs = Chinhanh::get();
+        return view('nhanviens.edit',compact('nhanvien', 'chinhanhs'));
     }
 
     /**

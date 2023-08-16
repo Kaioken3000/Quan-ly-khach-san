@@ -13,7 +13,7 @@
             </div>
             <div>
                 {{-- @include('phongs.create') --}}
-                <a href="{{ route('phongs.create') }}" class="btn btn-success">Create Phòng</a>
+                <a href="{{ route('phongs.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create Phòng</a>
             </div>
         </div>
 

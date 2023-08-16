@@ -22,7 +22,7 @@
         @method('POST')
         <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
         <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
-        <button type="submit" class="btn btn-success"><i class="bx bx-plus mb-1"></i> Đổi
+        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Đổi
             phòng</button>
     </form>
 </td>
@@ -89,7 +89,7 @@
                             <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
                             <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
                             <button type="submit" class="primary-btn border-0 bg-white text-dark">
-                                <i class="bx bx-plus mb-1"></i> 
+                                <i class="fas fa-plus"></i> 
                                 Change Room
                             </button>
                         </form>

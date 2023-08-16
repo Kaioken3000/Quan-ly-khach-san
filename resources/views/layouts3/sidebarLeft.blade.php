@@ -476,7 +476,7 @@
                                     <span class="nav-link-icon">
                                         <i class="fas fa-user"></i>
                                     </span>
-                                    <span class="nav-link-text">Nhân viên</span>
+                                    <span class="nav-link-text">Nhân viên và ca trực</span>
                                 </div>
                             </a>
                         </span>

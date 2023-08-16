@@ -101,7 +101,6 @@
     <script src="/Phoenix_files/dhtmlxgantt.js.download"></script>
     <script src="/Phoenix_files/phoenix.js.download"></script>
     <script src="/Phoenix_files/projectmanagement-dashboard.js.download"></script>
-    
 </body>
 
 </html>

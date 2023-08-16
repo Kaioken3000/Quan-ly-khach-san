@@ -1,117 +1,78 @@
 @extends('layouts3.appForCalendar')
 
 @section('content')
-<button onclick="myFunction()" class="btn btn-primary">Hiện nhân viên</button>
+    {{-- datatable --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<div class="container-xxl flex-grow-1 container-p-y" id="myDIV">
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+
     @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-    @endif
-    <div class="">
-        <div class="d-flex mt-5">
-            <div class="flex-grow-1">
-                @include('layouts3.title', ['titlePage' => 'Quản lý nhân viên'])
-            </div>
-            <div>
-                <a class="btn btn-success mb-4" href="{{ route('nhanviens.create') }}"><i class="bx bx-plus mb-1"></i> Create Nhân viên</a>
-            </div>
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Mã nhân viên</th>
-                    <th>Tên nhân viên</th>
-                    <th>Lương </th>
-                    <th>Ca trực </th>
-                    <th>Ngày bắt đầu</th>
-                    <th>Ngày kết thúc</th>
-                    <th class="datatable-nosort">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($nhanviens as $nhanvien)
-                <tr>
-                    <td>{{ $nhanvien->ma }}</td>
-                    <td>{{ $nhanvien->ten }}</td>
-                    <td>{{ $nhanvien->luong }} VND</td>
-                    <td>
-                        @foreach($nhanvien->catrucs as $ca)
-                        <div class="d-flex gap-1">
-                            @foreach($catrucs as $catruc)
-                            @if($catruc->id == $ca->catrucid)
-                            <form action="{{ route('catruc_nhanviens.destroy',$ca->id) }}" method="Post">
-                                @csrf
-                                @method('DELETE')
-                                {{-- <button type="submit" class="badge badge-danger border-0"><i class="fa fa-times"></i></button> --}}
-                                <button type="submit" class="btn btn-link m-0" data-color="#e95959" style="color:red;">
-                                    <i class="icon-copy dw dw-delete-3"></i>
-                                </button>
-                            </form>
-                            <p class="mt-2 p-1">{{$catruc->ten}}</p>
-                            @endif
-                            @endforeach
-                        </div>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach($nhanvien->catrucs as $ca)
-                        <p class="mt-2 p-1">{{$ca->ngaybatdau}}</p>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach($nhanvien->catrucs as $ca)
-                        <p class="mt-2 p-1">{{$ca->ngayketthuc}}</p>
-                        @endforeach
-                    </td>
-                    <td>
-                        <form action="{{ route('nhanviens.destroy',$nhanvien->ma) }}" method="Post">
-                            <a class="btn btn-link" href="{{ route('nhanviens.edit',$nhanvien->ma) }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-link" style="color:red">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <a class="btn btn-link" href="/catruc_nhanvien/themCatruc/{{$nhanvien->ma}}">
-                                Thêm ca trực
-                            </a>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                {{-- <tr>
-                    <td>
-                        {!! $nhanviens->links("pagination::bootstrap-4") !!}
-                    </td>
-                </tr> --}}
-            </tbody>
-        </table>
+    @endif
+    <div class="d-flex mt-5">
+        <div class="flex-grow-1">
+            @include('layouts3.title', ['titlePage' => 'Quản lý nhân viên và ca trực'])
+        </div>
+        <div>
+            <a class="btn btn-success mb-4" href="{{ route('nhanviens.create') }}"><i class="fas fa-plus"></i>
+                Create Nhân viên</a>
+        </div>
     </div>
-</div>
+    <ul class="nav nav-underline" id="myTab" role="tablist">
+        <li class="nav-item"><a class="nav-link active" id="nhanvien-tab" data-bs-toggle="tab" href="#tab-nhanvien"
+                role="tab" aria-controls="tab-home" aria-selected="true">Nhân viên</a></li>
+        <li class="nav-item"><a class="nav-link" id="catruc-tab" data-bs-toggle="tab" href="#tab-catruc" role="tab"
+                aria-controls="tab-profile" aria-selected="false">Ca trực</a></li>
+        <li class="nav-item"><a class="nav-link" id="lichtruc-tab" data-bs-toggle="tab" href="#tab-lichtruc" role="tab"
+                aria-controls="tab-lichtruc" aria-selected="false">Lịch trực</a></li>
+    </ul>
+    <div class="tab-content mt-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="tab-nhanvien" role="tabpanel" aria-labelledby="nhanvien-tab">
+            @include('nhanviens.mainTab.tabNhanvien')
+        </div>
+        <div class="tab-pane fade" id="tab-catruc" role="tabpanel" aria-labelledby="catruc-tab">
+            @include('nhanviens.mainTab.tabCatruc')
+        </div>
+        <script>
+            $(document).ready(function() {
+                // var table = $('#DataTables_Table_0').DataTable();
+                let table = new DataTable('.table');
 
-<script>
-    function myFunction() {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
+                // Sort by column 1 and then re-draw
+                table
+                    .order([0, 'desc'])
+                    .draw();
+            });
+        </script>
+
+
+        <div class="tab-pane fade" id="tab-lichtruc" role="tabpanel" aria-labelledby="lichtruc-tab">
+            @include('layouts2.calendar')
+        </div>
+    </div>
+    <style>
+        .selectize-control {
+            border: none;
+            padding: 0;
         }
-    }
 
-</script>
-<script>
-    myFunction()
+        .dataTables_length label,
+        .dataTables_filter label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
 
-</script>
-<style>
-    .fc-title {
-        color: white
-    }
-
-</style>@include('layouts2.calendar')
-
+        .dataTables_length label {
+            width: 180px;
+        }
+    </style>
 @endsection

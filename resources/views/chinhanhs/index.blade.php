@@ -12,7 +12,7 @@
         </div>
         <div>
             {{-- @include('chinhanhs.create') --}}
-            <a href="{{ route('chinhanhs.create') }}" class="btn btn-success">Create Chi nhánh</a>
+            <a href="{{ route('chinhanhs.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create Chi nhánh</a>
         </div>
     </div>
     <ul class="nav nav-underline" id="myTab" role="tablist">
