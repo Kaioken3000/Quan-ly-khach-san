@@ -85,6 +85,10 @@
                                 Xác nhận
                             </label>
                         @endif
+                    @else
+                        <label class="badge bg-danger">
+                            Chưa
+                        </label>
                     @endif
                 </td>
                 <td>

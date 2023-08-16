@@ -28,23 +28,23 @@
                 <!-- label-->
                 <p class="navbar-vertical-label">Apps</p>
                 <hr class="navbar-vertical-line">
-                @hasrole("MainAdmin")
-                <li class="nav-item">
-                    <!-- parent pages--><span class="nav-item-wrapper">
-                        <a class="nav-link {{ Request::is('chinhanhs') || Request::is('chinhanhs*') ? 'active' : '' }} dropdown-indicator label-1"
-                            href="/chinhanhs">
-                            <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon">
-                                    <!-- <span class="fas fa-caret-right"></span> Font Awesome fontawesome.com -->
+                @hasrole('MainAdmin')
+                    <li class="nav-item">
+                        <!-- parent pages--><span class="nav-item-wrapper">
+                            <a class="nav-link {{ Request::is('chinhanhs') || Request::is('chinhanhs*') ? 'active' : '' }} dropdown-indicator label-1"
+                                href="/chinhanhs">
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown-indicator-icon">
+                                        <!-- <span class="fas fa-caret-right"></span> Font Awesome fontawesome.com -->
+                                    </div>
+                                    <span class="nav-link-icon">
+                                        <i class="fas fa-code-branch"></i>
+                                    </span>
+                                    <span class="nav-link-text">Chi nhánh</span>
                                 </div>
-                                <span class="nav-link-icon">
-                                    <i class="fas fa-code-branch"></i>
-                                </span>
-                                <span class="nav-link-text">Chi nhánh</span>
-                            </div>
-                        </a>
-                    </span>
-                </li>
+                            </a>
+                        </span>
+                    </li>
                 @endhasrole
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
@@ -280,6 +280,45 @@
                         </div>
                     </span>
                 </li>
+
+                {{-- Nhận phòng --}}
+                <li class="nav-item">
+                    <!-- parent pages-->
+                    <span class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" id="nhanphongNav"
+                            href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-management3.html#project-management3"
+                            role="button" data-bs-toggle="collapse" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon">
+                                    <span class="fas fa-caret-right"></span>
+                                </div>
+                                <span class="nav-link-icon">
+                                    <i class="fas fa-door-open"></i>
+                                </span>
+                                <span class="nav-link-text">Nhận phòng</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent" data-bs-parent="#nhanphongNav" id="project-management3">
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link" id="chuanhanphong" name="notLink"
+                                        onclick="setFilter('chuanhanphongOnly', 'Chưa', 6)">
+                                        <span class="micon fa fa-times"></span>
+                                        <span class="mtext">Chưa nhận phòng</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link" id="danhanphong" name="notLink"
+                                        onclick="setFilter('nhanphongOnly', 'Xác nhận', 6)">
+                                        <span class="micon fa fa-check"></span>
+                                        <span class="mtext">Đã nhận phòng</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </li>
+
                 {{-- Thanh toán --}}
                 <li class="nav-item">
                     <!-- parent pages-->
@@ -301,14 +340,14 @@
                             <ul class="nav collapse parent" data-bs-parent="#thanhtoanNav" id="project-management2">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuathanhtoan" name="notLink"
-                                        onclick="setFilter('chuathanhtoanOnly', 'Chưa', 6)">
+                                        onclick="setFilter('chuathanhtoanOnly', 'Chưa', 7)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa thanh toán</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="dathanhtoan" name="notLink"
-                                        onclick="setFilter('thanhtoanOnly', 'Xác nhận', 6)">
+                                        onclick="setFilter('thanhtoanOnly', 'Xác nhận', 7)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã thanh toán</span>
                                     </a>
@@ -316,43 +355,8 @@
                             </ul>
                         </div>
                     </span>
-                    {{-- Nhận phòng --}}
-                <li class="nav-item">
-                    <!-- parent pages-->
-                    <span class="nav-item-wrapper">
-                        <a class="nav-link dropdown-indicator label-1" id="nhanphongNav"
-                            href="https://prium.github.io/phoenix/v1.6.0/dashboard/project-management3.html#project-management3"
-                            role="button" data-bs-toggle="collapse" aria-expanded="false">
-                            <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon">
-                                    <span class="fas fa-caret-right"></span>
-                                </div>
-                                <span class="nav-link-icon">
-                                    <i class="fas fa-door-open"></i>
-                                </span>
-                                <span class="nav-link-text">Nhận phòng</span>
-                            </div>
-                        </a>
-                        <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#nhanphongNav" id="project-management3">
-                                <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link" id="chuanhanphong" name="notLink"
-                                        onclick="setFilter('chuanhanphongOnly', 'Chưa', 7)">
-                                        <span class="micon fa fa-times"></span>
-                                        <span class="mtext">Chưa nhận phòng</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link" id="danhanphong" name="notLink"
-                                        onclick="setFilter('nhanphongOnly', 'check', 7)">
-                                        <span class="micon fa fa-check"></span>
-                                        <span class="mtext">Đã nhận phòng</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </span>
                 </li>
+
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('showHuydatphong') || Request::is('showHuydatphong*') ? 'active' : '' }} dropdown-indicator label-1"

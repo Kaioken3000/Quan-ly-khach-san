@@ -36,9 +36,8 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
+    let table = new DataTable('.table');
     $(document).ready(function() {
-        // var table = $('#DataTables_Table_0').DataTable();
-        let table = new DataTable('.table');
 
         // Sort by column 1 and then re-draw
         table
@@ -49,12 +48,24 @@
     function filterColumn(columnIndex, value) {
         let table = $(".table").DataTable();
         table
-            .columns([5, 6])
+            .columns([5, 6, 7])
             .search("")
             .draw();
         table
             .column(columnIndex)
             .search(value)
+            .draw();
+    }
+
+    function locChinhanh(chinhanhid) {
+        // let table = new DataTable('.table');
+        table
+            .columns(2)
+            .search("")
+            .draw();
+        table
+            .columns(2)
+            .search(chinhanhid)
             .draw();
     }
 </script>

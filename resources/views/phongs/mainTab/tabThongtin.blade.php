@@ -3,6 +3,7 @@
         <tr>
             <th class="table-plus">Số phòng</th>
             <th>Loại phòng</th>
+            <th>Chi nhánh</th>
             <th>Thiết bị</th>
             <th>Giừơng</th>
             <th>Miêu tả</th>
@@ -14,37 +15,43 @@
     <tbody>
         @foreach ($phongs as $phong)
             <tr>
-                <td>{{ $phong->so_phong }}</td>
+                <td>{{ $phong->so_phong }} </td>
                 <td>{{ $phong->loaiphongs->ten }}</td>
+                <td>{{ $phong->chinhanhs->ten ?? '' }}</td>
                 <td>
-                    @foreach ($phong->thietbiphongs as $thietbiphong)
-                        <?php $thietbi = App\Models\Thietbi::where('id', $thietbiphong->thietbiid)->first();
-                        ?>
-                        <p>{{ $thietbi->ten }}</p>
+                    @foreach ($phong->thietbis as $thietbi)
+                        <p>{{ $thietbi->ten ?? '' }}</p>
                     @endforeach
                 </td>
                 <td>
-                    @foreach ($phong->giuongphongs as $giuongphong)
-                        <?php $giuong = App\Models\Giuong::where('id', $giuongphong->giuongid)->first();
-                        ?>
-                        <p>{{ $giuong->ten }}</p>
+                    @foreach ($phong->giuongs as $giuong)
+                        <p>{{ $giuong->ten ?? '' }}</p>
                     @endforeach
                 </td>
                 <td>
-                    @foreach ($phong->mieutaphongs as $mieutaphong)
-                        <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
-                        ?>
-                        {!! $mieuta->noidung !!}
+                    @foreach ($phong->mieutas as $mieuta)
+                        <p>{!! $mieuta->noidung ?? '' !!}</p>
                     @endforeach
                 </td>
-                @hasanyrole('MainAdmin|Admin')
-                    <td>
+                <td>
+                    @hasrole('Admin')
+                        @isset(Auth::user()->nhanviens)
+                            @foreach (Auth::user()->nhanviens as $nhanvien)
+                                @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
+                                    <a href="{{ route('phongs.edit', $phong->so_phong) }}" class="btn btn-link"><i
+                                            class="icon-copy fas fa-edit"></i></a>
+                                    @include('phongs.delete')
+                                @endif
+                            @endforeach
+                        @endisset
+                    @endhasrole
+                    @hasrole('MainAdmin')
                         {{-- @include('phongs.edit') --}}
                         <a href="{{ route('phongs.edit', $phong->so_phong) }}" class="btn btn-link"><i
                                 class="icon-copy fas fa-edit"></i></a>
                         @include('phongs.delete')
-                    </td>
-                @endhasanyrole
+                    @endhasrole
+                </td>
             </tr>
         @endforeach
     </tbody>

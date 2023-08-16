@@ -25,6 +25,20 @@
                 Create Nhân viên</a>
         </div>
     </div>
+
+    @hasrole('MainAdmin')
+        <div class="d-flex gap-1 mb-3">
+            <div>
+                <button class="btn btn-primary" id="chinhanhBtn" onclick="locChinhanh('')">Tất cả</button>
+            </div>
+            @foreach ($chinhanhs as $chinhanh)
+                <div>
+                    <button class="btn btn-primary" id="chinhanhBtn{{ $chinhanh->id }}"
+                        onclick="locChinhanh('{{ $chinhanh->ten }}')">{{ $chinhanh->ten }}</button>
+                </div>
+            @endforeach
+        </div>
+    @endhasrole
     <ul class="nav nav-underline" id="myTab" role="tablist">
         <li class="nav-item"><a class="nav-link active" id="nhanvien-tab" data-bs-toggle="tab" href="#tab-nhanvien"
                 role="tab" aria-controls="tab-home" aria-selected="true">Nhân viên</a></li>
@@ -41,15 +55,27 @@
             @include('nhanviens.mainTab.tabCatruc')
         </div>
         <script>
+            let table = new DataTable('.table');
             $(document).ready(function() {
                 // var table = $('#DataTables_Table_0').DataTable();
-                let table = new DataTable('.table');
 
                 // Sort by column 1 and then re-draw
                 table
                     .order([0, 'desc'])
                     .draw();
             });
+
+            function locChinhanh(chinhanhid) {
+                // let table = new DataTable('.table');
+                table
+                    .columns(2)
+                    .search("")
+                    .draw();
+                table
+                    .columns(2)
+                    .search(chinhanhid)
+                    .draw();
+            }
         </script>
 
 

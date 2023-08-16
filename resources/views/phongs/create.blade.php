@@ -33,27 +33,29 @@
                 <div class="tab-content mt-3" id="myTabContent">
                     <div class="overflow-auto tab-pane fade show active" id="tab-thongtin" role="tabpanel"
                         aria-labelledby="thongtin-tab">
-                        <form action="{{ route('phongs.store') }}" method="POST" class="w-25">
-                            @csrf
-                            @foreach ($thietbis as $thietbi)
-                                <input class="form-check-input" type="checkbox" id="thietbi{{ $thietbi->id }}"
-                                    name="thietbiid[]" value="{{ $thietbi->id }}" hidden>
-                            @endforeach
-                            @foreach ($giuongs as $giuong)
-                                <input class="form-check-input" type="checkbox" id="giuong{{ $giuong->id }}" name="giuongid[]"
-                                    value="{{ $giuong->id }}" hidden>
-                            @endforeach
-                            @foreach ($mieutas as $mieuta)
-                                <input class="form-check-input" type="checkbox" id="mieuta{{ $mieuta->id }}" name="mieutaid[]"
-                                    value="{{ $mieuta->id }}" hidden>
-                            @endforeach
-                            @foreach ($hinhs as $hinh)
-                                <input class="form-check-input" type="checkbox" id="hinh{{ $hinh->id }}" name="hinhid[]"
-                                    value="{{ $hinh->id }}" hidden>
-                            @endforeach
-                            @include('phongs.tab.tabThongTinChung')
-                            <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>
-                        </form>
+                        <div  class="w-25">
+                            <form action="{{ route('phongs.store') }}" method="POST">
+                                @csrf
+                                @foreach ($thietbis as $thietbi)
+                                    <input class="form-check-input" type="checkbox" id="thietbi{{ $thietbi->id }}"
+                                        name="thietbiid[]" value="{{ $thietbi->id }}" hidden>
+                                @endforeach
+                                @foreach ($giuongs as $giuong)
+                                    <input class="form-check-input" type="checkbox" id="giuong{{ $giuong->id }}" name="giuongid[]"
+                                        value="{{ $giuong->id }}" hidden>
+                                @endforeach
+                                @foreach ($mieutas as $mieuta)
+                                    <input class="form-check-input" type="checkbox" id="mieuta{{ $mieuta->id }}" name="mieutaid[]"
+                                        value="{{ $mieuta->id }}" hidden>
+                                @endforeach
+                                @foreach ($hinhs as $hinh)
+                                    <input class="form-check-input" type="checkbox" id="hinh{{ $hinh->id }}" name="hinhid[]"
+                                        value="{{ $hinh->id }}" hidden>
+                                @endforeach
+                                @include('phongs.tab.tabThongTinChung')
+                                <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="overflow-auto tab-pane fade" id="tab-thietbi" role="tabpanel" aria-labelledby="thietbi-tab">
                         @include('phongs.tab.tabThietBi')

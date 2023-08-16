@@ -3,6 +3,7 @@
         <tr>
             <th>Phòng</th>
             <th>Nội dung</th>
+            <th></th>
             @hasanyrole('MainAdmin|Admin')
                 <th>Action</th>
             @endhasanyrole
@@ -14,47 +15,45 @@
                 <td>{{ $phong->so_phong }}</td>
                 <td>
                     @foreach ($phong->mieutaphongs as $mieutaphong)
-                        <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first(); ?>
                         <div class="d-flex justify-content-between gap-1">
-                            {!! $mieuta->noidung !!}
+                            {!! $mieutaphong->mieutas->noidung !!}
                             <div>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-                                    data-bs-target="#mieutaphongxoa{{ $mieutaphong->id }}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="mieutaphongxoa{{ $mieutaphong->id }}" tabindex="-1"
-                            aria-labelledby="mieutaphongxoa{{ $mieutaphong->id }}Label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="Mieutaphongxoa{{ $mieutaphong->id }}Label">
-                                            Bạn có chắc
-                                            chắn muốn xoá</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">No</button>
-                                        <form action="{{ route('mieuta_phong.destroy', $mieutaphong->id) }}"
-                                            method="Post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"> Yes</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                @hasrole('Admin')
+                                    @isset(Auth::user()->nhanviens)
+                                        @foreach (Auth::user()->nhanviens as $nhanvien)
+                                            @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
+                                                <span>
+                                                    @include('phongs.modal.modalMieutaPhong')
+                                                </span>
+                                            @endif
+                                        @endforeach
+                                    @endisset
+                                @endhasrole
+                                @hasrole('MainAdmin')
+                                    <span>
+                                        @include('phongs.modal.modalMieutaPhong')
+                                    </span>
+                                @endhasrole
                     @endforeach
                 </td>
+                <td>{{ $phong->chinhanhs->ten }}</td>
                 <td>
-                    @include('phongs.modal.modalMieuta')
+                    @hasrole('Admin')
+                        @isset(Auth::user()->nhanviens)
+                            @foreach (Auth::user()->nhanviens as $nhanvien)
+                                @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
+                                    <span>
+                                        @include('phongs.modal.modalMieuta')
+                                    </span>
+                                @endif
+                            @endforeach
+                        @endisset
+                    @endhasrole
+                    @hasrole('MainAdmin')
+                        <span>
+                            @include('phongs.modal.modalMieuta')
+                        </span>
+                    @endhasrole
                 </td>
             </tr>
         @endforeach

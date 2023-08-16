@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chinhanh;
 use App\Models\Hinh;
 use App\Models\Phong;
 use App\Models\Giuong;
@@ -36,7 +37,8 @@ class PhongController extends Controller
         $thietbis = Thietbi::all();
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
-        return view('phongs.index', compact('phongs', 'loaiphongs', 'hinhs', 'thietbis', 'giuongs', 'mieutas'));
+        $chinhanhs = Chinhanh::all();
+        return view('phongs.index', compact('phongs', 'loaiphongs', 'hinhs', 'thietbis', 'giuongs', 'mieutas', 'chinhanhs'));
     }
 
     /**
@@ -51,7 +53,8 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
-        return view('phongs.create', compact('loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs'));
+        $chinhanhs = Chinhanh::all();
+        return view('phongs.create', compact('loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs'));
     }
 
     /**
@@ -65,6 +68,7 @@ class PhongController extends Controller
         $request->validate([
             'so_phong' => 'required|unique:phongs',
             'loaiphongid' => 'required',
+            'chinhanhid' => 'required',
 
             'thietbiid' => 'required',
             'giuongid' => 'required',
@@ -133,7 +137,8 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
-        return view('phongs.edit', compact('phong', 'loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs'));
+        $chinhanhs = Chinhanh::all();
+        return view('phongs.edit', compact('phong', 'loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs'));
     }
 
     /**
@@ -151,6 +156,7 @@ class PhongController extends Controller
                 Rule::unique('phongs')->ignore($phong->so_phong, 'so_phong')
             ],
             'loaiphongid' => 'required',
+            'chinhanhid' => 'required',
 
             'thietbiid' => 'required',
             'giuongid' => 'required',

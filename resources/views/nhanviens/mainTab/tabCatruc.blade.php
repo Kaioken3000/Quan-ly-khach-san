@@ -3,6 +3,7 @@
         <tr>
             <th>Tên nhân viên</th>
             <th>Ca trực </th>
+            <th></th>
             <th>
                 <div class="d-flex justify-content-between">
                     <p>Ngày bắt đầu</p>
@@ -40,6 +41,7 @@
                         @endforeach
                     </ul>
                 </td>
+                <td>{{ $nhanvien->chinhanhs->ten ?? '' }}</td>
                 <td>
                     <ul class="list-group">
                         @foreach ($nhanvien->catrucs as $ca)

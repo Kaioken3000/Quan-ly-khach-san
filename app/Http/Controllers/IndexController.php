@@ -480,7 +480,17 @@ class IndexController extends Controller
     {
         $user = Auth::user();
         $catrucs = Catruc::get();
-        $allNhanvien = Nhanvien::get();
+
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)){
+                $allNhanvien = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            }
+            else $nhanvien = [];
+        if ($roleName == "MainAdmin"){
+            $allNhanvien = Nhanvien::get();
+        }
         return view('profiles.profile', compact('user', 'catrucs', 'allNhanvien'));
     }
 

@@ -32,11 +32,23 @@ class FullCalenderController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->ajax()) { 
+        if ($request->ajax()) {
 
-            $data = CatrucNhanvien::whereDate('ngaybatdau', '>=', $request->start)
-                ->whereDate('ngayketthuc',   '<=', $request->end)
-                ->get(['id','nhanvienid as title','ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
+            $roleName = Auth::user()->roles[0]->name;
+            if ($roleName == "Admin")
+                if (isset(Auth::user()->nhanviens)) {
+                    $data = CatrucNhanvien::whereDate('ngaybatdau', '>=', $request->start)
+                        ->join('nhanviens', 'catruc_nhanviens.nhanvienid', '=', 'nhanviens.ma')
+                        ->where('nhanviens.chinhanhid', Auth::user()->nhanviens[0]->chinhanhs->id)
+                        ->whereDate('ngayketthuc',   '<=', $request->end)
+                        ->get(['id', 'nhanvienid as title', 'ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
+                }
+            if ($roleName == "MainAdmin") {
+                $data = CatrucNhanvien::whereDate('ngaybatdau', '>=', $request->start)
+                    ->whereDate('ngayketthuc',   '<=', $request->end)
+                    ->get(['id', 'nhanvienid as title', 'ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
+            }
+
 
             return response()->json($data);
         }
@@ -46,13 +58,12 @@ class FullCalenderController extends Controller
     public function userindex(Request $request)
     {
 
-        if ($request->ajax()) { 
-            $data = CatrucNhanvien::
-                join('nhanviens', 'nhanviens.ma', '=', 'catruc_nhanviens.nhanvienid')
+        if ($request->ajax()) {
+            $data = CatrucNhanvien::join('nhanviens', 'nhanviens.ma', '=', 'catruc_nhanviens.nhanvienid')
                 ->whereDate('ngaybatdau', '>=', $request->start)
                 ->whereDate('ngayketthuc',   '<=', $request->end)
-                ->where("nhanviens.userid", Auth::user()->id) 
-                ->get(['catruc_nhanviens.id','nhanvienid as title','ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
+                ->where("nhanviens.userid", Auth::user()->id)
+                ->get(['catruc_nhanviens.id', 'nhanvienid as title', 'ngaybatdau as start', 'ngayketthuc as end', 'catrucid']);
             Log::info($data);
 
             return response()->json($data);

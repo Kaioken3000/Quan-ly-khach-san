@@ -60,6 +60,10 @@ class User extends Authenticatable
 
     public function khachhangs()
     {
-        return $this->hasMany(Khachhang::class);
+        return $this->hasMany(Khachhang::class, 'userid', 'id');
+    }
+    public function nhanviens()
+    {
+        return $this->hasMany(Nhanvien::class, 'userid', 'id');
     }
 }

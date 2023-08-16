@@ -4,35 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Catruc;
+use App\Models\Chinhanh;
 use App\Models\Nhanvien;
 use Illuminate\Http\Request;
 use App\Models\CatrucNhanvien;
-use App\Models\Chinhanh;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class NhanvienController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        // $nhanviens = Nhanvien::orderBy('ma','asc')->paginate(5);
-        $nhanviens = Nhanvien::get();
-        $allNhanvien = Nhanvien::get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)){
+                $nhanviens = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+                $allNhanvien = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            }
+            else $nhanvien = [];
+        if ($roleName == "MainAdmin"){
+            $nhanviens = Nhanvien::get();
+            $allNhanvien = Nhanvien::get();
+        }
+
         $catrucs = Catruc::get();
-        return view('nhanviens.index', compact('nhanviens', 'catrucs', 'allNhanvien'));
+        $chinhanhs = Chinhanh::get();
+        return view('nhanviens.index', compact('nhanviens', 'catrucs', 'allNhanvien', 'chinhanhs'));
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $chinhanhs = Chinhanh::get();
@@ -40,11 +52,11 @@ class NhanvienController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -55,7 +67,7 @@ class NhanvienController extends Controller
 
         $newNhanvien = Nhanvien::create($request->post());
 
-        return redirect('nhanviens-taotaikhoan/'.$newNhanvien->ma);
+        return redirect('nhanviens-taotaikhoan/' . $newNhanvien->ma);
     }
     public function taotaikhoan(Request $request)
     {
@@ -69,8 +81,8 @@ class NhanvienController extends Controller
 
         $user = User::create($request->post());
 
-        $role = Role::where('name','User')->first();
-        
+        $role = Role::where('name', 'User')->first();
+
         $user->assignRole($role);
 
         // cap nhat userid cho nhanvien
@@ -78,7 +90,7 @@ class NhanvienController extends Controller
         $nhanvien->userid = $user->id;
         $nhanvien->save();
 
-        return redirect()->route('nhanviens.index')->with('success','Nhanvien Has Been created successfully');
+        return redirect()->route('nhanviens.index')->with('success', 'Nhanvien Has Been created successfully');
     }
     public function viewtaotaikhoan(Request $request)
     {
@@ -90,80 +102,82 @@ class NhanvienController extends Controller
         $nhanvien = Nhanvien::find($request->nhanvienid, "ma");
         $nhanvien->userid = $request->userid;
         $nhanvien->save();
-        return redirect()->route('nhanviens.index')->with('success','Nhanvien Has Been updated successfully');
+        return redirect()->route('nhanviens.index')->with('success', 'Nhanvien Has Been updated successfully');
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\nhanvien  $nhanvien
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\nhanvien  $nhanvien
+     * @return \Illuminate\Http\Response
+     */
     public function show(Nhanvien $nhanvien)
     {
-        return view('nhanviens.show',compact('nhanvien'));
+        return view('nhanviens.show', compact('nhanvien'));
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Nhanvien  $nhanvien
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Nhanvien  $nhanvien
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Nhanvien $nhanvien)
     {
         $chinhanhs = Chinhanh::get();
-        return view('nhanviens.edit',compact('nhanvien', 'chinhanhs'));
+        return view('nhanviens.edit', compact('nhanvien', 'chinhanhs'));
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\nhanvien  $nhanvien
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\nhanvien  $nhanvien
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Nhanvien $nhanvien)
     {
         $request->validate([
-            'ma' => ['required',
-                    Rule::unique('nhanviens')->ignore($nhanvien->ma, 'ma')],
+            'ma' => [
+                'required',
+                Rule::unique('nhanviens')->ignore($nhanvien->ma, 'ma')
+            ],
             'ten' => 'required',
             'luong' => 'required',
         ]);
-        
+
         $nhanvien->fill($request->post())->save();
 
-        return redirect()->route('nhanviens.index')->with('success','Nhanvien Has Been updated successfully');
+        return redirect()->route('nhanviens.index')->with('success', 'Nhanvien Has Been updated successfully');
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Nhanvien  $nhanvien
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Nhanvien  $nhanvien
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Nhanvien $nhanvien)
     {
         $nhanvien->delete();
-        return redirect()->route('nhanviens.index')->with('success','Nhanvien has been deleted successfully');
+        return redirect()->route('nhanviens.index')->with('success', 'Nhanvien has been deleted successfully');
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function search(Request $request)
     {
         // $nhanviens = Nhanvien::where('ma','LIKE','%'.$request->search."%")
         //                         ->orWhere('ten','LIKE','%'.$request->search."%")
         //                         ->orWhere('luong','LIKE','%'.$request->search."%")
         //                         ->orderBy('ma','asc')->paginate(5);
-        $nhanviens = Nhanvien::where('ma','LIKE','%'.$request->search."%")
-                                ->orWhere('ten','LIKE','%'.$request->search."%")
-                                ->orWhere('luong','LIKE','%'.$request->search."%")
-                                ->get();
+        $nhanviens = Nhanvien::where('ma', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('luong', 'LIKE', '%' . $request->search . "%")
+            ->get();
         return view('nhanviens.search', compact('nhanviens'));
     }
 }

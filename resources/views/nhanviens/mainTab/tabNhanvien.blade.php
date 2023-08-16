@@ -14,9 +14,7 @@
                 <td>{{ $nhanvien->ma }}</td>
                 <td>{{ $nhanvien->ten }}</td>
                 <td>
-                    @isset($nhanvien->chinhanhs)
-                        {{ $nhanvien->chinhanhs->ten }}
-                    @endisset
+                    {{ $nhanvien->chinhanhs->ten ?? '' }}
                 </td>
                 <td>{{ $nhanvien->luong }} VND</td>
                 <td>

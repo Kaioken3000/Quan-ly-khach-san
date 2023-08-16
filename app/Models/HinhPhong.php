@@ -19,7 +19,7 @@ class HinhPhong extends Model
         return $this->belongsTo(Datphong::class, 'phongid', 'so_phong');
     }
 
-    public function Hinhs()
+    public function hinhs()
     {
         return $this->belongsTo(Hinh::class, 'hinhid', 'id');
     }

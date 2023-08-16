@@ -3,6 +3,7 @@
         <tr>
             <th>Phòng</th>
             <th>Hình</th>
+            <th></th>
             @hasanyrole('MainAdmin|Admin')
                 <th>Action</th>
             @endhasanyrole
@@ -14,44 +15,45 @@
                 <td>{{ $phong->so_phong }}</td>
                 <td>
                     @foreach ($phong->hinhphongs as $hinhphong)
-                        <?php $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first(); ?>
                         <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                            title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid"
-                            style="max-width: 200px">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-                            data-bs-target="#hinhphongxoa{{ $hinhphong->id }}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="hinhphongxoa{{ $hinhphong->id }}" tabindex="-1"
-                            aria-labelledby="hinhphongxoa{{ $hinhphong->id }}Label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="Hinhphongxoa{{ $hinhphong->id }}Label">
-                                            Bạn có chắc
-                                            chắn muốn xoá</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">No</button>
-                                        <form action="{{ route('hinh_phong.destroy', $hinhphong->id) }}" method="Post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"> Yes</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            title="{{ $hinhphong->hinhs->vitri }}" src="/client/images/{{ $hinhphong->hinhs->vitri }}"
+                            class="img-fluid" style="max-width: 200px">
+                        @hasrole('Admin')
+                            @isset(Auth::user()->nhanviens)
+                                @foreach (Auth::user()->nhanviens as $nhanvien)
+                                    @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
+                                        <span>
+                                            @include('phongs.modal.modalHinhPhong')
+                                        </span>
+                                    @endif
+                                @endforeach
+                            @endisset
+                        @endhasrole
+                        @hasrole('MainAdmin')
+                            <span>
+                                @include('phongs.modal.modalHinhPhong')
+                            </span>
+                        @endhasrole
                     @endforeach
                 </td>
+                <td>{{ $phong->chinhanhs->ten }}</td>
                 <td>
-                    @include('phongs.modal.modalHinh')
+                    @hasrole('Admin')
+                        @isset(Auth::user()->nhanviens)
+                            @foreach (Auth::user()->nhanviens as $nhanvien)
+                                @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
+                                    <span>
+                                        @include('phongs.modal.modalHinh')
+                                    </span>
+                                @endif
+                            @endforeach
+                        @endisset
+                    @endhasrole
+                    @hasrole('MainAdmin')
+                        <span>
+                            @include('phongs.modal.modalHinh')
+                        </span>
+                    @endhasrole
                 </td>
             </tr>
         @endforeach
