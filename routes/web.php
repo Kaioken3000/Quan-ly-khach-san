@@ -107,6 +107,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 
+    Route::group(['middleware' => ['auth', 'role:MainAdmin']], function () {
+        // Chi nhanh Routes
+        Route::resource('chinhanhs', ChinhanhController::class);
+        Route::get('chinhanhs-search', 'ChinhanhController@search');
+        Route::get('chinhanhs/chinhanhs-search', 'ChinhanhController@search');
+    });
+
     Route::group(['middleware' => ['auth', 'role:MainAdmin|Admin|User']], function () {
         // thanh toan vnpay
         Route::get("/thanhtoanvnpayview/{datphongid}/{loaitien}/{khachhangid}/{sotien}", "ThanhtoanController@index");
@@ -122,11 +129,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
         Route::get('/messages', 'MessageController@index');
         Route::post('/messages', 'MessageController@store');
-
-        // Chi nhanh Routes
-        Route::resource('chinhanhs', ChinhanhController::class);
-        Route::get('chinhanhs-search', 'ChinhanhController@search');
-        Route::get('chinhanhs/chinhanhs-search', 'ChinhanhController@search');
 
         // Loai phong Routes
         Route::resource('loaiphongs', LoaiphongController::class);
@@ -191,10 +193,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('datphongs/datphongs-search', 'DatphongController@search'); //tim kiem
         Route::put('/datphongs-thanhtoan', 'DatphongController@thanhtoan')->name('datphongs.thanhtoan'); //thanh toán
         Route::put('/datphongs-chinhthanhtoan', 'DatphongController@chinhthanhtoan')->name('datphongs.chinhthanhtoan'); //thanh toán khi thay doi
-        
+
         Route::put('/datphongs-nhanphong', 'NhanphongController@store')->name('datphongs.nhanphong'); //nhan phong
         Route::put('/datphongs-xuly', 'XulyController@store')->name('datphongs.xuly'); //xu ly
-        
+
         Route::get('/showHuydatphong', 'DatphongController@showHuydatphong')->name('datphongs.showHuydatphong'); //show huy dat phong
         Route::get('/showHistoryPage', 'DatphongController@showHistoryPage')->name('datphongs.showHistoryPage'); //show historry page
 

@@ -117,7 +117,7 @@
 
                             <!-- Xoá -->
                             @if ($datphong->tinhtrangnhanphong == 0)
-                                @hasanyrole('MainAdmin|Admin')
+                                @hasanyrole('MainAdmin')
                                     @include('datphongs.actionButton.xoa')
                                 @endhasanyrole
                             @else

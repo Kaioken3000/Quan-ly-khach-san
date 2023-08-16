@@ -143,10 +143,10 @@
                         @if (count($huydatphongs) > 0)
                             @foreach ($huydatphongs as $huydatphong)
                                 <li class="list-group-item">Số trả phòng: <b>
-                                    @isset ($huydatphong->users)
-                                    {{ $huydatphong->users->username }}
-                                    @endisset    
-                                </b></li>
+                                        @isset($huydatphong->users)
+                                            {{ $huydatphong->users->username }}
+                                        @endisset
+                                    </b></li>
                                 <li class="list-group-item">Họ tên người huỷ đặt phòng: <b>{{ $huydatphong->ten }}</b>
                                 </li>
                                 <li class="list-group-item">Thời gian huỷ đặt phòng:
@@ -155,7 +155,9 @@
                             @endforeach
                         @endif
                         <li class="list-group-item">
-                            @include('datphongs.actionButton.huydatphong')
+                            @hasrole('MainAdmin')
+                                @include('datphongs.actionButton.huydatphong')
+                            @endhasrole
                         </li>
                     </ul>
                 </td>

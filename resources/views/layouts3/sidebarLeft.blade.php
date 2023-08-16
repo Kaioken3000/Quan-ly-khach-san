@@ -28,6 +28,7 @@
                 <!-- label-->
                 <p class="navbar-vertical-label">Apps</p>
                 <hr class="navbar-vertical-line">
+                @hasrole("MainAdmin")
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('chinhanhs') || Request::is('chinhanhs*') ? 'active' : '' }} dropdown-indicator label-1"
@@ -44,6 +45,7 @@
                         </a>
                     </span>
                 </li>
+                @endhasrole
                 <li class="nav-item">
                     <!-- parent pages--><span class="nav-item-wrapper">
                         <a class="nav-link {{ Request::is('loaiphongs') || Request::is('loaiphongs*') ? 'active' : '' }} dropdown-indicator label-1"
