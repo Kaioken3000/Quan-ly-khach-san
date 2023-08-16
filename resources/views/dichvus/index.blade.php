@@ -21,9 +21,9 @@
                         <th class="table-plus">ID</th>
                         <th>Tên dịch vụ</th>
                         <th>Giá </th>
-                        @hasrole('Admin')
+                        @hasanyrole('MainAdmin|Admin')
                             <th class="datatable-nosort">Action</th>
-                        @endhasrole
+                        @endhasanyrole
                     </tr>
                 </thead>
                 <tbody>
@@ -32,12 +32,12 @@
                             <td>{{ $dichvu->id }}</td>
                             <td>{{ $dichvu->ten }}</td>
                             <td>{{ $dichvu->giatien }} {{ $dichvu->donvi }}</td>
-                            @hasrole('Admin')
+                            @hasanyrole('MainAdmin|Admin')
                                 <td>
                                     @include('dichvus.edit')
                                     @include('dichvus.delete')
                                 </td>
-                            @endhasrole
+                            @endhasanyrole
                         </tr>
                     @endforeach
                 </tbody>

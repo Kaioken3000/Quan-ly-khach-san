@@ -122,13 +122,13 @@
                                     @include('datphongs.actionButton.thanhtoan')
                                 @else
                                     <p style="display:none">Xác nhận</p>
-                                    @hasrole('Admin')
+                                    @hasanyrole('MainAdmin|Admin')
                                         @include('datphongs.actionButton.suathanhtoan')
                                     @else
                                         <label class="badge bg-success">
                                             Xác nhận
                                         </label>
-                                    @endhasrole
+                                    @endhasanyrole
                                 @endif
                             @else
                                 <label class="badge bg-danger">

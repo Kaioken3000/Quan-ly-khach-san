@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Create -->
-    @hasrole('Admin')
+    @hasanyrole('MainAdmin|Admin')
         @error('thietbiid')
             <div class="alert alert-danger" role="alert">{{ $message }}</div>
         @enderror
@@ -33,7 +33,7 @@
                 <div class="tab-content mt-3" id="myTabContent">
                     <div class="overflow-auto tab-pane fade show active" id="tab-thongtin" role="tabpanel"
                         aria-labelledby="thongtin-tab">
-                        <form action="{{ route('phongs.store') }}" method="POST">
+                        <form action="{{ route('phongs.store') }}" method="POST" class="w-25">
                             @csrf
                             @foreach ($thietbis as $thietbi)
                                 <input class="form-check-input" type="checkbox" id="thietbi{{ $thietbi->id }}"
@@ -83,5 +83,5 @@
             </div>
 
         </div>
-    @endhasrole
+    @endhasanyrole
 @endsection

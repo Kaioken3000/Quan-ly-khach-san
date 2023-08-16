@@ -40,45 +40,74 @@
                 <div class="listOfContacts1" style="width: 100%;">
                     <div class="listOfContacts1" style="width: 100%;">
                         <?php $userAdmins = App\Models\User::role('Admin')->first(); ?>
-                        @if($userAdmins->id != Auth::user()->id)
-                        <table class="messenger-list-item" data-contact="{{$userAdmins->id}}">
-                            <tbody>
-                                <tr data-action="0">
-                                    <td>
-                                        <div class="saved-messages avatar av-m">
-                                            <div class="avatar av-m" style="background-image: url('{{ Chatify::getUserWithAvatar($userAdmins)->avatar }}');">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p data-id="{{$userAdmins->id}}" data-type="user">
-                                            {{$userAdmins->username}}
-                                        </p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @endif
-                        @foreach($userNhanviens as $userNhanvien)
-                        @if($userNhanvien->id != Auth::user()->id)
-                        <table class="messenger-list-item" data-contact="{{$userNhanvien->id}}">
-                            <tbody>
-                                <tr data-action="0">
-                                    <td>
-                                        <div class="saved-messages avatar av-m">
-                                            <div class="avatar av-m" style="background-image: url('{{ Chatify::getUserWithAvatar($userNhanvien)->avatar }}');">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p data-id="{{$userNhanvien->id}}" data-type="user">
-                                            {{$userNhanvien->username}}
-                                        </p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @endif
+                        @isset($userAdmins)
+                            @if ($userAdmins->id != Auth::user()->id)
+                                <table class="messenger-list-item" data-contact="{{ $userAdmins->id }}">
+                                    <tbody>
+                                        <tr data-action="0">
+                                            <td>
+                                                <div class="saved-messages avatar av-m">
+                                                    <div class="avatar av-m"
+                                                        style="background-image: url('{{ Chatify::getUserWithAvatar($userAdmins)->avatar }}');">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p data-id="{{ $userAdmins->id }}" data-type="user">
+                                                    {{ $userAdmins->username }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @endif
+                        @endisset
+
+                        <?php $userMainAdmins = App\Models\User::role('MainAdmin')->first(); ?>
+                        @isset($userMainAdmins)
+                            @if ($userMainAdmins->id != Auth::user()->id)
+                                <table class="messenger-list-item" data-contact="{{ $userMainAdmins->id }}">
+                                    <tbody>
+                                        <tr data-action="0">
+                                            <td>
+                                                <div class="saved-messages avatar av-m">
+                                                    <div class="avatar av-m"
+                                                        style="background-image: url('{{ Chatify::getUserWithAvatar($userMainAdmins)->avatar }}');">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p data-id="{{ $userMainAdmins->id }}" data-type="user">
+                                                    {{ $userMainAdmins->username }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @endif
+                        @endisset
+
+                        @foreach ($userNhanviens as $userNhanvien)
+                            @if ($userNhanvien->id != Auth::user()->id)
+                                <table class="messenger-list-item" data-contact="{{ $userNhanvien->id }}">
+                                    <tbody>
+                                        <tr data-action="0">
+                                            <td>
+                                                <div class="saved-messages avatar av-m">
+                                                    <div class="avatar av-m"
+                                                        style="background-image: url('{{ Chatify::getUserWithAvatar($userNhanvien)->avatar }}');">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p data-id="{{ $userNhanvien->id }}" data-type="user">
+                                                    {{ $userNhanvien->username }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -109,7 +138,8 @@
                 {{-- header back button, avatar and user name --}}
                 <div class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
                     <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
-                    <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
+                    <div class="avatar av-s header-avatar"
+                        style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
                     <a href="#" class="user-name">{{ config('chatify.name') }}</a>
                 </div>

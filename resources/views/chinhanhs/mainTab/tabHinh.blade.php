@@ -3,9 +3,9 @@
         <tr>
             <th>Chi nhánh</th>
             <th>Hình</th>
-            @hasrole('Admin')
+            @hasanyrole('MainAdmin|Admin')
                 <th>Action</th>
-            @endhasrole
+            @endhasanyrole
         </tr>
     </thead>
     <tbody>

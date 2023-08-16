@@ -6,9 +6,9 @@
             <th>Thiết bị</th>
             <th>Giừơng</th>
             <th>Miêu tả</th>
-            @hasrole('Admin')
+            @hasanyrole('MainAdmin|Admin')
                 <th class="datatable-nosort">Action</th>
-            @endhasrole
+            @endhasanyrole
         </tr>
     </thead>
     <tbody>
@@ -37,14 +37,14 @@
                         {!! $mieuta->noidung !!}
                     @endforeach
                 </td>
-                @hasrole('Admin')
+                @hasanyrole('MainAdmin|Admin')
                     <td>
                         {{-- @include('phongs.edit') --}}
                         <a href="{{ route('phongs.edit', $phong->so_phong) }}" class="btn btn-link"><i
                                 class="icon-copy fas fa-edit"></i></a>
                         @include('phongs.delete')
                     </td>
-                @endhasrole
+                @endhasanyrole
             </tr>
         @endforeach
     </tbody>

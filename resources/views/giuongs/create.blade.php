@@ -1,8 +1,8 @@
-@hasrole('Admin')
+@hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreateGiuong">
         <i class="fas fa-plus"></i> Create Giường
     </button>
-@endhasrole
+@endhasanyrole
 <!-- Modal Create -->
 <div class="modal fade" id="ModalCreateGiuong" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">

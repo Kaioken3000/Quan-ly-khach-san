@@ -1,7 +1,7 @@
 @extends('layouts3.app')
 
 @section('content')
-    @hasrole('Admin')
+    @hasanyrole('MainAdmin|Admin')
         <ul class="nav nav-underline" id="myTab" role="tablist">
             <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
                     href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin</a></li>
@@ -153,5 +153,5 @@
             });
             $("[data-child]").eq(0).trigger("change");
         </script>
-    @endhasrole
+    @endhasanyrole
 @endsection

@@ -23,9 +23,9 @@
                     <th>Hình</th>
                     <th>Giá </th>
                     <th>Miêu tả </th>
-                    @hasrole('Admin')
+                    @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
-                    @endhasrole
+                    @endhasanyrole
                 </tr>
             </thead>
             <tbody>
@@ -39,12 +39,12 @@
                         </td>
                         <td>{{ $thietbi->gia }}</td>
                         <td>{{ $thietbi->mieuTa }}</td>
-                        @hasrole('Admin')
+                        @hasanyrole('MainAdmin|Admin')
                             <td>
                                 @include('thietbis.edit')
                                 @include('thietbis.delete')
                             </td>
-                        @endhasrole
+                        @endhasanyrole
                     </tr>
                 @endforeach
             </tbody>

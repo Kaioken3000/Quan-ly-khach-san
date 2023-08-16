@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Create -->
-    @hasrole('Admin')
+    @hasanyrole('MainAdmin|Admin')
         @error('thietbiid')
             <div class="alert alert-danger" role="alert">{{ $message }}</div>
         @enderror
@@ -114,5 +114,5 @@
                 }
             }
         </script>
-    @endhasrole
+    @endhasanyrole
 @endsection

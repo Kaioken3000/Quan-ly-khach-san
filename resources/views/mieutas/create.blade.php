@@ -1,8 +1,8 @@
-@hasrole('Admin')
+@hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreateMieuta">
         <i class="fas fa-plus"></i> Create Miêu tả
     </button>
-@endhasrole
+@endhasanyrole
 <!-- Modal Create -->
 <div class="modal fade" id="ModalCreateMieuta" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

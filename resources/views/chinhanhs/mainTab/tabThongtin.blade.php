@@ -7,9 +7,9 @@
             <th>Thành phố</th>
             <th>Quận</th>
             <th>Số điện thoại</th>
-            @hasrole('Admin')
+            @hasanyrole('MainAdmin|Admin')
                 <th class="datatable-nosort">Action</th>
-            @endhasrole
+            @endhasanyrole
         </tr>
     </thead>
     <tbody>
@@ -21,14 +21,14 @@
                 <td>{{ $chinhanh->thanhpho }}</td>
                 <td>{{ $chinhanh->quan }}</td>
                 <td>{{ $chinhanh->sdt }}</td>
-                @hasrole('Admin')
+                @hasanyrole('MainAdmin|Admin')
                     <td>
                         {{-- @include('chinhanhs.edit') --}}
                         <a href="{{ route('chinhanhs.edit', $chinhanh->id) }}" class="btn btn-link"><i
                                 class="fas fa-edit"></i></a>
                         @include('chinhanhs.delete')
                     </td>
-                @endhasrole
+                @endhasanyrole
             </tr>
         @endforeach
     </tbody>

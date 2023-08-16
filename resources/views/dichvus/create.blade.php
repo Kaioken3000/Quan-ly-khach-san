@@ -1,8 +1,8 @@
-@hasrole('Admin')
+@hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
         <i class="fas fa-plus"></i> Create Dịch vụ
     </button>
-@endhasrole
+@endhasanyrole
 <!-- Modal Create -->
 <div class="modal fade" id="ModalCreate" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">

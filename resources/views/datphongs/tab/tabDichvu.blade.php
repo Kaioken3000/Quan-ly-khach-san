@@ -32,12 +32,12 @@
                                     <p>
                                         <b>{{ $dichvudatphong->created_at }} </b>
                                     </p>
-                                    @hasrole('Admin')
+                                    @hasanyrole('MainAdmin|Admin')
                                         <!-- xoa dich vu -->
                                         <span>
                                             @include('datphongs.tab.modal.modalThemDichvu')
                                         </span>
-                                    @endhasrole
+                                    @endhasanyrole
                                 </li>
                             @endforeach
                         </ul>
@@ -58,12 +58,12 @@
                                     <p>
                                         <b>{{ $anuongdatphong->created_at }} </b>
                                     </p>
-                                    @hasrole('Admin')
+                                    @hasanyrole('MainAdmin|Admin')
                                         <!-- xoa dich vu an uong -->
                                         <span>
                                             @include('datphongs.tab.modal.modalThemAnuong')
                                         </span>
-                                    @endhasrole
+                                    @endhasanyrole
                                 </li>
                             @endforeach
                         </ul>

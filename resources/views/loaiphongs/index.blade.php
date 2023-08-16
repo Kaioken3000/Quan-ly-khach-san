@@ -24,9 +24,9 @@
                     <th>Hinh</th>
                     <th>Số lượng</th>
                     <th>Miêu tả loại phòng</th>
-                    @hasrole('Admin')
+                    @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
-                    @endhasrole
+                    @endhasanyrole
                 </tr>
             </thead>
             <tbody>
@@ -40,12 +40,12 @@
                                 src="/client/images/{{ $loaiphong->hinh }}" class="img-fluid"></td>
                         <td>{{ $loaiphong->soluong }}</td>
                         <td>{{ $loaiphong->mieuTa }}</td>
-                        @hasrole('Admin')
+                        @hasanyrole('MainAdmin|Admin')
                             <td>
                                 @include('loaiphongs.edit')
                                 @include('loaiphongs.delete')
                             </td>
-                        @endhasrole
+                        @endhasanyrole
                     </tr>
                 @endforeach
             </tbody>

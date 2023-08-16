@@ -20,9 +20,9 @@
                     <th>sdt</th>
                     <th>email</th>
                     <th>Mã đặt phòng</th>
-                    @hasrole('Admin')
+                    @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
-                    @endhasrole
+                    @endhasanyrole
                 </tr>
             </thead>
             <tbody>
@@ -33,12 +33,12 @@
                         <td>{{ $khachhang->sdt }}</td>
                         <td>{{ $khachhang->email }}</td>
                         <td>{{ $khachhang->datphongid }}</td>
-                        @hasrole('Admin')
+                        @hasanyrole('MainAdmin|Admin')
                             <td class="d-flex gap-1">
                                 @include('khachhangs.edit')
                                 @include('khachhangs.delete')
                             </td>
-                        @endhasrole
+                        @endhasanyrole
                     </tr>
                 @endforeach
             </tbody>

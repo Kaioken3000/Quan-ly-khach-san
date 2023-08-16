@@ -176,7 +176,7 @@
                         @endif
                     }
                 </script>
-                @hasrole('Admin')
+                @hasanyrole('MainAdmin|Admin')
                     <li>
                         <div class="sidebar-small-cap">Admin</div>
                     </li>
@@ -204,7 +204,7 @@
                             <span class="micon fa fa-cog"></span><span class="mtext">Role</span>
                         </a>
                     </li>
-                @endhasrole
+                @endhasanyrole
 
                 <li>
                     <div class="sidebar-small-cap">Tác vụ</div>

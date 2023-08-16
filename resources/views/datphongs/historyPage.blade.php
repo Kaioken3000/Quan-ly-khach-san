@@ -91,7 +91,7 @@
                                     <b>{{ $dichvudatphong->dichvus->giatien }}
                                         {{ $dichvudatphong->dichvus->donvi }}</b>
                                 </div>
-                                @hasrole('Admin')
+                                @hasanyrole('MainAdmin|Admin')
                                     <!-- xoa dich vu -->
                                     <div class="col-2">
                                         <!-- Button trigger modal -->
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endhasrole
+                                @endhasanyrole
                             </div>
                         @endforeach
                     @endif
@@ -144,7 +144,7 @@
                                     Số lượng:
                                     <b>{{ $anuongdatphong->soluong }}</b>
                                 </div>
-                                @hasrole('Admin')
+                                @hasanyrole('MainAdmin|Admin')
                                     <!-- xoa dich vu an uong -->
                                     <div class="col-2">
                                         <!-- Button trigger modal -->
@@ -181,7 +181,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endhasrole
+                                @endhasanyrole
                             </div>
                             <br>
                         @endforeach

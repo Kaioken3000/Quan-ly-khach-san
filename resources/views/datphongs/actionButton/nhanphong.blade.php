@@ -1,4 +1,4 @@
-@hasrole('Admin')
+@hasanyrole('MainAdmin|Admin')
     <p style="display:none">{{ $datphong->tinhtrangnhanphong == 0 ? 'Chưa' : 'check' }}</p>
     <div class="my-1 col-4">
         <button type="button"
@@ -27,7 +27,7 @@
             Xác nhận
         </label>
     @endif
-@endhasrole
+@endhasanyrole
 <!-- Modal nhan phòng -->
 <div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered" role="document">

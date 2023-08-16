@@ -22,9 +22,9 @@
                     <th>Tên ca trực</th>
                     <th>Giờ bắt đầu </th>
                     <th>Giờ kết thúc </th>
-                    @hasrole('Admin')
+                    @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
-                    @endhasrole
+                    @endhasanyrole
                 </tr>
             </thead>
             <tbody>
@@ -34,12 +34,12 @@
                         <td>{{ $catruc->ten }}</td>
                         <td>{{ $catruc->giobatdau }}</td>
                         <td>{{ $catruc->gioketthuc }}</td>
-                        @hasrole('Admin')
+                        @hasanyrole('MainAdmin|Admin')
                             <td>
                                 @include('catrucs.edit')
                                 @include('catrucs.delete')
                             </td>
-                        @endhasrole
+                        @endhasanyrole
                     </tr>
                 @endforeach
                 {{-- <tr>

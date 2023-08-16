@@ -107,7 +107,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 
-    Route::group(['middleware' => ['auth', 'role:Admin|User']], function () {
+    Route::group(['middleware' => ['auth', 'role:MainAdmin|Admin|User']], function () {
         // thanh toan vnpay
         Route::get("/thanhtoanvnpayview/{datphongid}/{loaitien}/{khachhangid}/{sotien}", "ThanhtoanController@index");
         Route::post("/thanhtoanvnpay", "ThanhtoanController@create")->name("thanhtoanvnpay");
@@ -210,7 +210,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('khachhangs-search', 'KhachhangController@search');
         Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
 
-        Route::group(['middleware' => ['role:Admin']], function () {
+        Route::group(['middleware' => ['role:MainAdmin|Admin']], function () {
             //Role
             Route::resource('roles', RoleController::class);
 

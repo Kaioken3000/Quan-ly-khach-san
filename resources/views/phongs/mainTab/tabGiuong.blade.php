@@ -6,9 +6,9 @@
             <th>Giá giường</th>
             <th>Kích thước</th>
             <th>Ghi chú</th>
-            @hasrole('Admin')
+            @hasanyrole('MainAdmin|Admin')
                 <th class="datatable-nosort">Action</th>
-            @endhasrole
+            @endhasanyrole
         </tr>
     </thead>
     <tbody>
@@ -96,11 +96,11 @@
                         @endforeach
                     </ul>
                 </td>
-                @hasrole('Admin')
+                @hasanyrole('MainAdmin|Admin')
                     <td>
                         @include('phongs.modal.modalGiuong')
                     </td>
-                @endhasrole
+                @endhasanyrole
             </tr>
         @endforeach
     </tbody>

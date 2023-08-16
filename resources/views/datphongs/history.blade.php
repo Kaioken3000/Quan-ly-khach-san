@@ -103,7 +103,7 @@
                                             <b>{{ $dichvudatphong->dichvus->giatien }}
                                                 {{ $dichvudatphong->dichvus->donvi }}</b>
                                         </div>
-                                        @hasrole('Admin')
+                                        @hasanyrole('MainAdmin|Admin')
                                             <!-- xoa dich vu -->
                                             <div class="col-2">
                                                 <button type="button" class="badge bg-danger" data-bs-toggle="modal"
@@ -111,7 +111,7 @@
                                                     delete
                                                 </button>
                                             </div>
-                                        @endhasrole
+                                        @endhasanyrole
                                     </div>
                                 @endforeach
                             @endif

@@ -445,7 +445,7 @@
                     }
                 </script>
 
-                @hasrole('Admin')
+                @hasanyrole('MainAdmin|Admin')
                     <!-- label-->
                     <p class="navbar-vertical-label">Admin</p>
                     <hr class="navbar-vertical-line">
@@ -513,7 +513,7 @@
                             </a>
                         </span>
                     </li>
-                @endhasrole
+                @endhasanyrole
                 <!-- label-->
                 <p class="navbar-vertical-label">Tác vụ</p>
                 <hr class="navbar-vertical-line">

@@ -1,7 +1,7 @@
 @extends('layouts3.app')
 
 @section('content')
-    @hasrole('Admin')
+    @hasanyrole('MainAdmin|Admin')
         @error('mieutaid')
             <div class="alert alert-danger" role="alert">{{ $message }}</div>
         @enderror
@@ -38,5 +38,5 @@
                 }
             }
         </script>
-    @endhasrole
+    @endhasanyrole
 @endsection

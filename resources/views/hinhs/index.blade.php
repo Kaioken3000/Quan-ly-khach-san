@@ -21,9 +21,9 @@
                     <th class="table-plus">ID</th>
                     <th>Hình</th>
                     <th>Vị trí</th>
-                    @hasrole('Admin')
+                    @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
-                    @endhasrole
+                    @endhasanyrole
                 </tr>
             </thead>
             <tbody>
@@ -35,12 +35,12 @@
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                 title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid">
                         </td>
-                        @hasrole('Admin')
+                        @hasanyrole('MainAdmin|Admin')
                             <td>
                                 @include('hinhs.edit')
                                 @include('hinhs.delete')
                             </td>
-                        @endhasrole
+                        @endhasanyrole
                     </tr>
                 @endforeach
             </tbody>

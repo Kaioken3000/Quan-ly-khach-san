@@ -53,9 +53,9 @@
                     </a>
 
                     {{-- Hien va xoa dich vu --}}
-                    @hasrole('Admin')
+                    @hasanyrole('MainAdmin|Admin')
                         {{-- @include('datphongs.dichvu') --}}
-                    @endhasrole
+                    @endhasanyrole
 
                 </td>
                 <td>{{ $datphong->ten }}</td>
@@ -117,9 +117,9 @@
 
                             <!-- Xoá -->
                             @if ($datphong->tinhtrangnhanphong == 0)
-                                @hasrole('Admin')
+                                @hasanyrole('MainAdmin|Admin')
                                     @include('datphongs.actionButton.xoa')
-                                @endhasrole
+                                @endhasanyrole
                             @else
                                 <!-- Dịch vụ -->
                                 <div class="d-flex flex-column col-4">

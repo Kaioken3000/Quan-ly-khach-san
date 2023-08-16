@@ -1,4 +1,4 @@
-@hasrole('Admin')
+@hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreate">
         <i class="fas fa-plus"></i> Create Loại phòng
     </button>
@@ -73,4 +73,4 @@
             </div>
         </div>
     </div>
-@endhasrole
+@endhasanyrole
