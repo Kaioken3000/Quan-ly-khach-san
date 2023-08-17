@@ -6,15 +6,17 @@
         <div class="row list-wrapper">
             {{-- Room list start --}}
             @foreach ($phongs as $phong)
-            <?php $datphongs = App\Models\Datphong::get();
+                <?php $datphongs = App\Models\Datphong::get();
                 $check = 0;
-                $ngayvaodadat = "";
-                $ngayradadat = "";
-                $today = date("Y-m-d");
-                foreach($datphongs as $datphong){
-                    $danhsachdatphong = App\Models\Danhsachdatphong::where("datphongid", $datphong->id)->latest()->first();
-                    if($danhsachdatphong->phongid == $phong->so_phong && $datphong->huydatphong == 0){
-                        if($danhsachdatphong->ngayketthuco > $today){
+                $ngayvaodadat = '';
+                $ngayradadat = '';
+                $today = date('Y-m-d');
+                foreach ($datphongs as $datphong) {
+                    $danhsachdatphong = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)
+                        ->latest()
+                        ->first();
+                    if ($danhsachdatphong->phongid == $phong->so_phong && $datphong->huydatphong == 0) {
+                        if ($danhsachdatphong->ngayketthuco > $today) {
                             $check++;
                             $ngayvaodadat = $danhsachdatphong->ngaybatdauo;
                             $ngayradadat = $danhsachdatphong->ngayketthuco;
@@ -23,38 +25,39 @@
                     }
                 }
                 ?>
-            <div class="col-lg-4 col-md-6 list-item">
-                <div class="room-item">
-                    <img src="/client/images/{{$phong->picture_1}}" alt="">
-                    <div class="ri-text">
-                        <h4>{{$phong->loaiphongs->ten}} - {{$phong->so_phong}}</h4>
-                        <h3>{{$phong->loaiphongs->gia}}VND<span>/Pernight</span></h3>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="r-o">Category:</td>
-                                    <td>{{$phong->loaiphongs->ten}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="r-o">Capacity:</td>
-                                    <td>{{$phong->loaiphongs->soluong}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @if($check==0)
-                            <a href="/client/chitietphong/{{$phong->so_phong}}" class="primary-btn">More Details</a>
-                        @else  
-                            <div class="d-flex">
-                                <p class="mb-0"> Room is booked: &nbsp;</p>
-                                <div class="me-0">
-                                    <p class="mb-0"> since: {{$ngayvaodadat}}</p>
-                                    <p class="mb-0"> to: {{$ngayradadat}}</p>
+                <div class="col-lg-4 col-md-6 list-item">
+                    <div class="room-item">
+                        <img src="/client/images/{{ $phong->hinhs[0]->vitri }}" alt="">
+                        <div class="ri-text">
+                            <h4>{{ $phong->loaiphongs->ten }} - {{ $phong->so_phong }}</h4>
+                            <h3>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Category:</td>
+                                        <td>{{ $phong->loaiphongs->ten }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td>{{ $phong->loaiphongs->soluong }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @if ($check == 0)
+                                <a href="/client/chitietphong/{{ $phong->so_phong }}" class="primary-btn">More
+                                    Details</a>
+                            @else
+                                <div class="d-flex">
+                                    <p class="mb-0"> Room is booked: &nbsp;</p>
+                                    <div class="me-0">
+                                        <p class="mb-0"> since: {{ $ngayvaodadat }}</p>
+                                        <p class="mb-0"> to: {{ $ngayradadat }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
             {{-- Room list end --}}
             {{-- <div class="col-lg-12">

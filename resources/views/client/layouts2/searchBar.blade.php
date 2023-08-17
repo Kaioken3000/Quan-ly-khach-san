@@ -9,15 +9,24 @@
             </div>
         </div>
         <div class="row text-center">
-            <form class="col-12" method="post" action="/client/search-phong-with-many">
+            <form method="post" action="/client/search-phong-with-many">
                 <div class="row">
                     @csrf
+                    <div class="m-3 d-flex">
+                        <label class="form-label mx-2 my-2">Chi nhánh: </label>
+                        <select class="form-select" aria-label="Default select example" name="chinhanhid">
+                            <option value=" ">All</option>
+                            @foreach ($chinhanhs as $chinhanh)
+                                <option value="{{ $chinhanh->id }}">{{ $chinhanh->ten }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="m-3 d-flex">
                         <label class="form-label mx-2 my-2">Room category: </label>
                         <select class="form-select" aria-label="Default select example" name="tenphong">
                             <option value=" ">All</option>
-                            @foreach($loaiphongs as $loaiphong)
-                            <option value="{{$loaiphong->ma}}">{{$loaiphong->ten}}</option>
+                            @foreach ($loaiphongs as $loaiphong)
+                                <option value="{{ $loaiphong->ma }}">{{ $loaiphong->ten }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -304,6 +304,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // Giao dien trang phong
     Route::get('client/phong', 'IndexController@hientrangphong');
+    // Chi nhánh
+    Route::get('client/chinhanh', 'IndexController@showChinhanhs');
+    Route::get('client/chinhanhChitiet/{chinhanhid}', 'IndexController@showChinhanhChitiet');
+    
     // Search phong
     Route::get('client/search-phong', 'IndexController@searchPhong');
     Route::post('client/search-phong-with-many', 'IndexController@searchPhongWithManySearch');

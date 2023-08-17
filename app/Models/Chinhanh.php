@@ -17,6 +17,19 @@ class Chinhanh extends Model
         'sdt',
     ];
 
+    public function hinhs()
+    {
+        return $this->belongsToMany(Hinh::class, 'hinh_chinhanhs', 'chinhanhid', 'hinhid');
+    }
+    public function mieutas()
+    {
+        return $this->belongsToMany(Mieuta::class, 'mieuta_chinhanhs', 'chinhanhid', 'mieutaid');
+    }
+    public function phongs()
+    {
+        return $this->hasMany(Phong::class, 'chinhanhid', 'id');
+    }
+
     public function mieutachinhanhs()
     {
         return $this->hasMany(MieutaChinhanh::class, 'chinhanhid');

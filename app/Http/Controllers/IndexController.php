@@ -7,6 +7,7 @@ use App\Models\Check;
 use App\Models\Phong;
 use App\Models\Anuong;
 use App\Models\Catruc;
+use App\Models\Chinhanh;
 use App\Models\Dichvu;
 use App\Models\Datphong;
 use App\Models\Nhanvien;
@@ -29,10 +30,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $loaiphongs = Loaiphong::orderBy('ma', 'asc')->paginate(4);
-        // $phongs = Phong::orderBy('so_phong', 'asc')->paginate(4);
         $phongs = Phong::get();
-        return view('client.index', compact('loaiphongs', 'phongs'));
+        $chinhanhs = Chinhanh::get();
+        return view('client.index', compact('phongs', 'chinhanhs'));
     }
 
     /**
@@ -66,10 +66,12 @@ class IndexController extends Controller
             ::where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
             ->where('loaiphongs.gia', $request->tuychonggia, $request->giaphong)
             ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
+            ->where('phongs.chinhanhid', '=', $request->chinhanhid)
             ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
             ->get();
         $loaiphongs = Loaiphong::all();
-        return view('client.roomSearch', compact('phongs', 'loaiphongs'));
+        $chinhanhs = Chinhanh::get();
+        return view('client.roomSearch', compact('phongs', 'loaiphongs', 'chinhanhs'));
     }
 
     /**
@@ -82,7 +84,23 @@ class IndexController extends Controller
         // $phongs = Phong::orderBy('so_phong', 'asc')->paginate(6);
         $phongs = Phong::get();
         $loaiphongs = Loaiphong::get();
-        return view('client.phong', compact('phongs', 'loaiphongs'));
+        $chinhanhs = Chinhanh::get();
+        return view('client.phong', compact('phongs', 'loaiphongs', 'chinhanhs'));
+    }
+
+    // Hien cac chi nhánh
+    public function showChinhanhs()
+    {
+        $chinhanhs = Chinhanh::get();
+        return view('client.chinhanhs.chinhanhList', compact('chinhanhs'));
+    }
+    // Hien chi tiet chi nhánh
+    public function showChinhanhChitiet(Request $request)
+    {
+        $chinhanh = Chinhanh::where("id", $request->chinhanhid)->first();
+        $chinhanhs = Chinhanh::get();
+        $loaiphongs = Loaiphong::get();
+        return view('client.chinhanhs.chinhanhChitiet', compact('chinhanh', 'chinhanhs', 'loaiphongs'));
     }
 
     /**
@@ -92,7 +110,7 @@ class IndexController extends Controller
      */
     public function hientrangchitietphong(Request $request)
     {
-        $phong = Phong::where('so_phong', $request->phongid) ->first();
+        $phong = Phong::where('so_phong', $request->phongid)->first();
         return view('client.roomdetail', compact('request', 'phong'));
     }
 
@@ -484,11 +502,10 @@ class IndexController extends Controller
         $roleName = Auth::user()->roles[0]->name;
 
         if ($roleName == "Admin")
-            if (isset(Auth::user()->nhanviens)){
+            if (isset(Auth::user()->nhanviens)) {
                 $allNhanvien = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
-            }
-            else $nhanvien = [];
-        if ($roleName == "MainAdmin"){
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
             $allNhanvien = Nhanvien::get();
         }
         return view('profiles.profile', compact('user', 'catrucs', 'allNhanvien'));

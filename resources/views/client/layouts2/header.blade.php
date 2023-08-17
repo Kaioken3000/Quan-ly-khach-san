@@ -35,43 +35,25 @@
     </div>
     <div class="menu-item">
         <div class="container-xxl mx-5">
-            <div class="row">
-                <div class="col-lg-2">
+            <div class="row align-items-center">
+                <div class="col-lg-1">
                     <div class="logo">
                         <a href="/client/index">
                             <img src="/client2/img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-11">
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
                                 <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
+                                <li class="{{ Request::is('client/chinhanh*') ? 'active':'' }}"><a href="/client/chinhanh">Branch</a></li>
                                 <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
                                 <li class="{{ Request::is('client/virtualTour') ? 'active':'' }}"><a href="/client/virtualTour">Virtual Tour</a></li>
                                 <li class="{{ Request::is('chatify') ? 'active':'' }}"><a href="/chatify/">Chat</a></li>
-                                {{-- <li><a href="./pages.html">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./room-details.html">Room Details</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="#">Family Room</a></li>
-                                        <li><a href="#">Premium Room</a></li>
-                                    </ul>
-                                </li> --}}
                                 @auth
                                 <li>
-                                    {{-- <form action="/client/danhsachdatphong" method="post">
-                                        @csrf
-                                        <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
-                                        <li>
-                                            <a href="#" class="btn btn-link">
-                                                <input class="border-0 bg-white pe-auto m-0 p-0 
-                                                        {{ Request::is('client/danhsachdatphong') ? 'text-primary':'' }}" type="submit" value="Your Room">
-                                            </a>
-                                        </li>
-                                    </form> --}}
-                                    {{-- <li class="{{ Request::is('client/danhsachdatphong') ? 'active':'' }}"><a href="/client/danhsachdatphong">Danh sách đặt phòng</a></li> --}}
                                     <li class="{{ Request::is('client/danhsachdatphong') ? 'active':'' }}"><a href="/client/danhsachdatphong">My Room List</a></li>
                                 </li>
                                 <li><a href="#">Account</a>
