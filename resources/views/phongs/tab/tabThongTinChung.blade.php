@@ -23,7 +23,7 @@
     @enderror
 </div>
 <div class="mb-3">
-    <label class="form-label" for="chinhanhid">Loại phòng</label>
+    <label class="form-label" for="chinhanhid">Chi nhánh</label>
     <select class="form-control" id="chinhanhid" name="chinhanhid">
         @foreach ($chinhanhs as $chinhanh)
             <option value="{{ $chinhanh->id }}"

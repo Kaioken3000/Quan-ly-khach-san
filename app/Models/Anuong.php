@@ -15,7 +15,13 @@ class Anuong extends Model
         'gia',
         'soluong',
         'mieuTa',
+        'chinhanhid',
     ];
+
+    public function chinhanhs()
+    {
+        return $this->belongsTo(Chinhanh::class, 'chinhanhid', 'id');
+    }
 
     public function datphongs()
     {

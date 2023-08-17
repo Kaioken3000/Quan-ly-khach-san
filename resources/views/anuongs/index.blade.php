@@ -20,10 +20,11 @@
                 <tr>
                     <th class="table-plus">ID</th>
                     <th>Tên</th>
+                    <th>Chi nhánh</th>
                     <th>Hinh</th>
                     <th>Giá </th>
                     <th>Số lượng</th>
-                    <th>Miêuu tả </th>
+                    <th>Miêu tả </th>
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
                     @endhasanyrole
@@ -34,6 +35,7 @@
                     <tr>
                         <td>{{ $anuong->id }}</td>
                         <td>{{ $anuong->ten }}</td>
+                        <td>{{ $anuong->chinhanhs->ten ?? ''}}</td>
                         <td style="width: 10%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                 title="{{ $anuong->hinh }}" src="/client/images/{{ $anuong->hinh }}"

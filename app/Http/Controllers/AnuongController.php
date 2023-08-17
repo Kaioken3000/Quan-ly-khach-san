@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuong;
+use App\Models\Chinhanh;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnuongController extends Controller
 {
     public function index()
     {
         // $anuongs = Anuong::orderBy('id','asc')->paginate(5);
-        $anuongs = Anuong::get();
-        return view('anuongs.index', compact('anuongs'));
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $anuongs = Anuong::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $anuongs = Anuong::get();
+            $chinhanhs = Chinhanh::get();
+        }
+        return view('anuongs.index', compact('anuongs', 'chinhanhs'));
     }
 
     /**
@@ -38,6 +50,7 @@ class AnuongController extends Controller
             'gia' => 'required',
             'soluong' => 'required',
             'mieuTa' => 'required',
+            'chinhanhid' => 'required',
         ]);
 
         Anuong::create($request->post());
@@ -78,13 +91,23 @@ class AnuongController extends Controller
     {
         $request->validate([
             'ten' => 'required',
-            'hinh' => 'required',
             'gia' => 'required',
             'soluong' => 'required',
             'mieuTa' => 'required',
+            'chinhanhid' => 'required',
         ]);
 
-        $anuong->fill($request->post())->save();
+        if ($request->hinh) {
+            $anuong->fill($request->post())->save();
+        } else {
+            $anuong->fill([
+                'ten' => $request->ten,
+                'gia' => $request->gia,
+                'soluong' => $request->soluong,
+                'mieuTa' => $request->mieuTa,
+                'chinhanhid' => $request->chinhanhid,
+            ])->save();
+        }
 
         return redirect()->route('anuongs.index')->with('success', 'Anuong Has Been updated successfully');
     }

@@ -33,24 +33,37 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="soluong">Số lượng</label>
-                        <input type="number" name="soluong" class="form-control" id="soluong" min=1
-                            required />
+                        <input type="number" name="soluong" class="form-control" id="soluong" min=1 required />
                         @error('soluong')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="gia">Giá</label>
-                        <input type="number" name="gia" class="form-control" id="gia" min=0
-                            required />
+                        <input type="number" name="gia" class="form-control" id="gia" min=0 required />
                         @error('gia')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="chinhanhid">Chi nhánh</label>
+                        <select class="form-control" id="chinhanhid" name="chinhanhid">
+                            @foreach ($chinhanhs as $chinhanh)
+                                <option value="{{ $chinhanh->id }}"
+                                    @if (isset($phong)) @if ($chinhanh->id === $phong->chinhanhid)
+                                            selected @endif
+                                    @endif
+                                    >{{ $chinhanh->ten }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('chinhanhid')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="mieuTa">Miêu tả</label>
-                        <textarea id="mieuTa" name="mieuTa" class="form-control" placeholder="VD: Phòng đẹp, tiện nghi,.."
-                            required></textarea>
+                        <textarea id="mieuTa" name="mieuTa" class="form-control" placeholder="VD: Phòng đẹp, tiện nghi,.." required></textarea>
                         @error('mieuTa')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror

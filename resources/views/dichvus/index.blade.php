@@ -20,6 +20,7 @@
                     <tr>
                         <th class="table-plus">ID</th>
                         <th>Tên dịch vụ</th>
+                        <th>Chi nhánh</th>
                         <th>Giá </th>
                         @hasanyrole('MainAdmin|Admin')
                             <th class="datatable-nosort">Action</th>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $dichvu->id }}</td>
                             <td>{{ $dichvu->ten }}</td>
+                            <td>{{ $dichvu->chinhanhs->ten ?? '' }}</td>
                             <td>{{ $dichvu->giatien }} {{ $dichvu->donvi }}</td>
                             @hasanyrole('MainAdmin|Admin')
                                 <td>

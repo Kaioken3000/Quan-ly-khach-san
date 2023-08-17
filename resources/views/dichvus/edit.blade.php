@@ -34,6 +34,7 @@
                                 {{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label" for="donvi">Đơn vị</label>
                         <input type="text" name="donvi" class="form-control" id="donvi"
@@ -41,6 +42,23 @@
                         @error('donvi')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="chinhanhid">Chi nhánh</label>
+                        <select class="form-control" id="chinhanhid" name="chinhanhid">
+                            @foreach ($chinhanhs as $chinhanh)
+                                <option value="{{ $chinhanh->id }}"
+                                    @if (isset($phong)) @if ($chinhanh->id === $phong->chinhanhid)
+                                            selected @endif
+                                    @endif
+                                    >{{ $chinhanh->ten }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('chinhanhid')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
             </div>

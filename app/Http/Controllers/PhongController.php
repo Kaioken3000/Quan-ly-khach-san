@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chinhanh;
 use App\Models\Hinh;
 use App\Models\Phong;
 use App\Models\Giuong;
 use App\Models\Mieuta;
 use App\Models\Thietbi;
+use App\Models\Chinhanh;
 use App\Models\HinhPhong;
 use App\Models\Loaiphong;
 use App\Models\GiuongPhong;
@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class PhongController extends Controller
 {
@@ -53,7 +54,16 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
-        $chinhanhs = Chinhanh::all();
+
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
         return view('phongs.create', compact('loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs'));
     }
 
@@ -137,7 +147,16 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
-        $chinhanhs = Chinhanh::all();
+        
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
         return view('phongs.edit', compact('phong', 'loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs'));
     }
 
@@ -177,7 +196,7 @@ class PhongController extends Controller
 
             ThietbiPhong::create($dich);
         }
-        
+
         // updatde giuong phong
         $giuongDel = GiuongPhong::where('phongid', $phong->so_phong);
         $giuongDel->delete();

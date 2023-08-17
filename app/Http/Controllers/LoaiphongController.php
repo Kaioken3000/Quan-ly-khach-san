@@ -10,10 +10,10 @@ use App\Models\Loaiphong;
 class LoaiphongController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         // $loaiphongs = Loaiphong::orderBy('ma','desc')->paginate(5);
@@ -22,21 +22,21 @@ class LoaiphongController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('loaiphongs.create');
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -50,72 +50,83 @@ class LoaiphongController extends Controller
 
         Loaiphong::create($request->post());
 
-        return redirect()->route('loaiphongs.index')->with('success','Loaiphong has been created successfully.');
+        return redirect()->route('loaiphongs.index')->with('success', 'Loaiphong has been created successfully.');
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\loaiphong  $loaiphong
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\loaiphong  $loaiphong
+     * @return \Illuminate\Http\Response
+     */
     public function show(Loaiphong $loaiphong)
     {
-        return view('loaiphongs.show',compact('loaiphong'));
+        return view('loaiphongs.show', compact('loaiphong'));
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Loaiphong  $loaiphong
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Loaiphong  $loaiphong
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Loaiphong $loaiphong)
     {
-        return view('loaiphongs.edit',compact('loaiphong'));
+        return view('loaiphongs.edit', compact('loaiphong'));
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\loaiphong  $loaiphong
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\loaiphong  $loaiphong
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Loaiphong $loaiphong)
     {
         $request->validate([
-            'ma' => ['required',
-                    Rule::unique('loaiphongs')->ignore($loaiphong->ma, 'ma')],
+            'ma' => [
+                'required',
+                Rule::unique('loaiphongs')->ignore($loaiphong->ma, 'ma')
+            ],
             'ten' => 'required',
             'gia' => 'required',
-            'hinh' => 'required',
             'soluong' => 'required',
             'mieuTa' => 'required',
         ]);
-        
-        $loaiphong->fill($request->post())->save();
 
-        return redirect()->route('loaiphongs.index')->with('success','Loaiphong Has Been updated successfully');
+        if ($request->hinh) {
+            $loaiphong->fill($request->post())->save();
+        } else {
+            $loaiphong->fill([
+                'ma' => $request->ma,
+                'ten' => $request->ten,
+                'gia' => $request->gia,
+                'soluong' => $request->soluong,
+                'mieuTa' => $request->mieuTa,
+            ])->save();
+        }
+
+        return redirect()->route('loaiphongs.index')->with('success', 'Loaiphong Has Been updated successfully');
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Loaiphong  $loaiphong
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Loaiphong  $loaiphong
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Loaiphong $loaiphong)
     {
         $loaiphong->delete();
-        return redirect()->route('loaiphongs.index')->with('success','Loaiphong has been deleted successfully');
+        return redirect()->route('loaiphongs.index')->with('success', 'Loaiphong has been deleted successfully');
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function search(Request $request)
     {
         // $loaiphongs = Loaiphong::where('ma','LIKE','%'.$request->search."%")
@@ -124,12 +135,12 @@ class LoaiphongController extends Controller
         //                         ->orWhere('hinh','LIKE','%'.$request->search."%")
         //                         ->orWhere('mieuTa','LIKE','%'.$request->search."%")
         //                         ->orderBy('ma','asc')->paginate(5);
-        $loaiphongs = Loaiphong::where('ma','LIKE','%'.$request->search."%")
-                                ->orWhere('ten','LIKE','%'.$request->search."%")
-                                ->orWhere('gia','LIKE','%'.$request->search."%")
-                                ->orWhere('hinh','LIKE','%'.$request->search."%")
-                                ->orWhere('mieuTa','LIKE','%'.$request->search."%")
-                                ->get();
+        $loaiphongs = Loaiphong::where('ma', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('gia', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('hinh', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('mieuTa', 'LIKE', '%' . $request->search . "%")
+            ->get();
         return view('loaiphongs.search', compact('loaiphongs'));
     }
 }

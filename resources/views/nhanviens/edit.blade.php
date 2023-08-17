@@ -12,7 +12,7 @@
     @endif
     <!-- Basic Layout -->
     <h5 class="mb-0">From nhập liệu</h5>
-    <form action="{{ route('nhanviens.update', $nhanvien->ma) }}" method="POST">
+    <form action="{{ route('nhanviens.update', $nhanvien->ma) }}" method="POST" class="w-25">
         @csrf
         @method('PUT')
         <div class="mb-3">

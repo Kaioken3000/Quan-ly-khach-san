@@ -25,18 +25,18 @@ class NhanvienController extends Controller
         $roleName = Auth::user()->roles[0]->name;
 
         if ($roleName == "Admin")
-            if (isset(Auth::user()->nhanviens)){
+            if (isset(Auth::user()->nhanviens)) {
                 $nhanviens = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
                 $allNhanvien = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
-            }
-            else $nhanvien = [];
-        if ($roleName == "MainAdmin"){
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
             $nhanviens = Nhanvien::get();
             $allNhanvien = Nhanvien::get();
+            $chinhanhs = Chinhanh::get();
         }
 
         $catrucs = Catruc::get();
-        $chinhanhs = Chinhanh::get();
         return view('nhanviens.index', compact('nhanviens', 'catrucs', 'allNhanvien', 'chinhanhs'));
     }
 
@@ -47,7 +47,16 @@ class NhanvienController extends Controller
      */
     public function create()
     {
-        $chinhanhs = Chinhanh::get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
+
         return view('nhanviens.create', compact('chinhanhs'));
     }
 
@@ -124,7 +133,15 @@ class NhanvienController extends Controller
      */
     public function edit(Nhanvien $nhanvien)
     {
-        $chinhanhs = Chinhanh::get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
         return view('nhanviens.edit', compact('nhanvien', 'chinhanhs'));
     }
 

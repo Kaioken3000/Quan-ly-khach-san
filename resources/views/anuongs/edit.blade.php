@@ -27,7 +27,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="hinh">Hinh</label>
-                        <input type="file" name="hinh" class="form-control" id="hinh" required />
+                        <input type="file" name="hinh" class="form-control" id="hinh" />
                         @error('hinh')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
@@ -49,6 +49,22 @@
                         @error('gia')
                             <div class="alert alert-danger" role="alert">
                                 {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="chinhanhid">Chi nhánh</label>
+                        <select class="form-control" id="chinhanhid" name="chinhanhid">
+                            @foreach ($chinhanhs as $chinhanh)
+                                <option value="{{ $chinhanh->id }}"
+                                    @if (isset($phong)) @if ($chinhanh->id === $phong->chinhanhid)
+                                            selected @endif
+                                    @endif
+                                    >{{ $chinhanh->ten }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('chinhanhid')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">

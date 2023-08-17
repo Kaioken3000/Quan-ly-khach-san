@@ -53,7 +53,7 @@ aria-hidden="true">
                 <div class="mb-3">
                     <label class="form-label" for="hinh">Hinh loại phòng</label>
                     <input type="file" name="hinh" class="form-control"
-                        id="hinh" required />
+                        id="hinh" />
                     @error('hinh')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}</div>
