@@ -413,9 +413,20 @@ class DatphongController extends Controller
             'soluong' => 'required'
         ]);
 
-        $phongslist = Phong::get();
         $phongs = array();
         $datphongs = Datphong::get();
+
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin") {
+            $temp = collect([]);
+            if (isset(Auth::user()->nhanviens)) {
+                $phongslist = Phong::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            }
+        }
+        if ($roleName == "MainAdmin") {
+            $phongslist = Phong::get();
+        }
 
         if ($datphongs->count() > 0) {
             foreach ($phongslist as $phong) {
@@ -425,7 +436,7 @@ class DatphongController extends Controller
                 } else {
                     foreach ($datphongs as $datphong) {
                         $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->latest()->first();
-                        if ($danhsachdatphong->phongid == $phong->so_phong) {
+                        if ($danhsachdatphong->phongid == $phong->so_phong && $datphong->huydatphong == 0) {
                             // if ($request->ngaydat >= $danhsachdatphong->ngaybatdauo && $request->ngaydat <= $danhsachdatphong->ngayketthuco) {
                             //     $xacnhan++;
                             // } else if ($request->ngaytra >= $danhsachdatphong->ngaybatdauo && $request->ngaytra <= $danhsachdatphong->ngayketthuco) {
@@ -492,7 +503,18 @@ class DatphongController extends Controller
     // }
     public function kiemtra_capnhat(Request $request)
     {
-        $phongslist = Phong::get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin") {
+            $temp = collect([]);
+            if (isset(Auth::user()->nhanviens)) {
+                $phongslist = Phong::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            }
+        }
+        if ($roleName == "MainAdmin") {
+            $phongslist = Phong::get();
+        }
+        
         $phongs = array();
         $datphongs = Datphong::get();
 
@@ -507,7 +529,7 @@ class DatphongController extends Controller
                 } else {
                     foreach ($datphongs as $datphong) {
                         $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->latest()->first();
-                        if ($danhsachdatphong->phongid == $phong->so_phong) {
+                        if ($danhsachdatphong->phongid == $phong->so_phong && $datphong->huydatphong == 0) {
                             if ($dat->ngaybatdauo < $danhsachdatphong->ngaybatdauo && $dat->ngayketthuco < $danhsachdatphong->ngaybatdauo) {
                                 // $xacnhan++;
                             } else if ($dat->ngaybatdauo > $danhsachdatphong->ngayketthuco && $dat->ngayketthuco > $danhsachdatphong->ngayketthuco) {

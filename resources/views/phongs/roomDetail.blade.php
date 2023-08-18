@@ -42,15 +42,17 @@
                         {{-- content --}}
                         <div id="carouselExample" class="carousel slide">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="/client/images/{{ $phong->picture_1 }}" class="d-block w-100">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="/client/images/{{ $phong->picture_2 }}" class="d-block w-100">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="/client/images/{{ $phong->picture_3 }}" class="d-block w-100">
-                                </div>
+                                <?php $i = 0; ?>
+                                @foreach ($phong->hinhs as $hinh)
+                                    <div
+                                        class="carousel-item
+                                    <?php if ($i == 0) {
+                                        echo 'active';
+                                    } ?>
+                                    ">
+                                        <img src="/client/images/{{ $hinh->vitri }}" class="d-block w-100">
+                                    </div>
+                                @endforeach
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                                 data-bs-slide="prev">

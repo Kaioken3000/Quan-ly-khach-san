@@ -20,36 +20,16 @@
             </div>
             <input disabled type="hidden" name="khachhangid" value="{{ $phongdat->khachhangid }}">
             <div class="d-flex justify-content-between my-3">
+                <button type="button" value="" class="btn btn-primary" id="myInput0"
+                    onclick="locPhongTheoLoaiphong( '', 1 )">
+                    Tất cả
+                </button>
                 @foreach ($loaiphongs as $loaiphong)
                     <button type="button" value="{{ $loaiphong->ten }}" class="btn btn-primary"
-                        id="myInput{{ $loaiphong->ma }}" onclick="myFunction( '{{ $loaiphong->ma }}' )">
+                        id="myInput{{ $loaiphong->ma }}" onclick="locPhongTheoLoaiphong( '{{ $loaiphong->ten }}', 1 )">
                         {{ $loaiphong->ten }}
                     </button>
                 @endforeach
-                <script>
-                    function myFunction(ma) {
-                        input = document.getElementById("myInput" + ma);
-
-                        // Declare variables
-                        var input, filter, table, tr, td, i, txtValue;
-                        filter = input.value.toUpperCase();
-                        table = document.getElementById("DataTables_Table_0");
-                        tr = table.getElementsByTagName("tr");
-
-                        // Loop through all table rows, and hide those who don't match the search query
-                        for (i = 0; i < tr.length; i++) {
-                            td = tr[i].getElementsByTagName("td")[1];
-                            if (td) {
-                                txtValue = td.textContent || td.innerText;
-                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                    tr[i].style.display = "";
-                                } else {
-                                    tr[i].style.display = "none";
-                                }
-                            }
-                        }
-                    }
-                </script>
             </div>
         </div>
     </div>
@@ -83,7 +63,7 @@
                             <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->datphongid }}" />
                             <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
                             <button type="submit" class="btn btn-success">
-                                <i class="fas fa-plus"></i> 
+                                <i class="fas fa-plus"></i>
                                 Đổi phòng
                             </button>
                         </form>

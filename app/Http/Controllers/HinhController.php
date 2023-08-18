@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hinh;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HinhController extends Controller
 {
@@ -41,7 +42,9 @@ class HinhController extends Controller
             'vitri' => 'required',
         ]);
 
-        Hinh::create($request->post());
+        foreach ($request->vitri as $vitri) { 
+            Hinh::create(['vitri' => $vitri]);
+        }
 
         return redirect()->back()->withMessage('success', 'Hinh has been created successfully.');
     }

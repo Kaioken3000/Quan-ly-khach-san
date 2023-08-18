@@ -18,7 +18,7 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="vitri">Hình</label>
-                        <input type="file" name="vitri" class="form-control" id="vitri"/>
+                        <input type="file" name="vitri[]" class="form-control" id="vitri" multiple/>
                         @error('vitri')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror

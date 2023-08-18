@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Danhsachdatphong;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\Datphong;
-use App\Models\Phong;
-use App\Models\Loaiphong;
-use App\Models\Khachhang;
-use App\Models\Nhanvien;
 use App\Models\User;
+use App\Models\Phong;
+use App\Models\Datphong;
+use App\Models\Nhanvien;
+use App\Models\Khachhang;
+use App\Models\Loaiphong;
+use Illuminate\Http\Request;
+use App\Models\Danhsachdatphong;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class BaocaoController extends Controller
 {
@@ -22,7 +23,28 @@ class BaocaoController extends Controller
     public function index()
     {
         // cho phan hien thi danh sach da thanh toan
-        $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();
+        // $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin") {
+            $temp = [];
+            if (isset(Auth::user()->nhanviens)) {
+                $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();
+                foreach ($datphongs as $datphong) {
+                    foreach ($datphong->phongs as $phong) {
+                        if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
+                            $temp[] = $datphong;
+                        }
+                    }
+                }
+            }
+            $datphongs = $temp;
+        }
+        if ($roleName == "MainAdmin") {
+            $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();
+        }
+
+
         $tonggiatatca = 0;
         // foreach ($datphongs as $datphong) {
         //     $danhsachdatphongs = Danhsachdatphong::where('datphongid', $datphong->id)->get();
@@ -122,6 +144,6 @@ class BaocaoController extends Controller
         //     }
         // }
 
-        return view('baocaos.index', compact('datphongs', 'tonggiatatca', 'sophong', 'sokhachhang', 'sonhanvien', 'souser', 'thanhtoan', 'nhanphong', 'soluongphong','phong'));
+        return view('baocaos.index', compact('datphongs', 'tonggiatatca', 'sophong', 'sokhachhang', 'sonhanvien', 'souser', 'thanhtoan', 'nhanphong', 'soluongphong', 'phong'));
     }
 }

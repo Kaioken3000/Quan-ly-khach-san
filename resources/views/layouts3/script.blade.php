@@ -68,6 +68,17 @@
             .search(chinhanhid)
             .draw();
     }
+    function locPhongTheoLoaiphong(loaiphongten, index) {
+        // let table = new DataTable('.table');
+        table
+            .columns(index)
+            .search("")
+            .draw();
+        table
+            .columns(index)
+            .search(loaiphongten)
+            .draw();
+    }
 </script>
 
 <style>
