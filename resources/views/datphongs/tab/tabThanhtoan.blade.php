@@ -12,14 +12,14 @@
     <tbody>
         @foreach ($datphongs as $datphong)
             <?php
-            $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->get();
-            $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->datphongid)->get();
-            $xulys = App\Models\Xuly::where('datphongid', $datphong->datphongid)->get();
-            $traphongs = App\Models\Traphong::where('datphongid', $datphong->datphongid)->get();
-            $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->datphongid)->get();
-            $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->datphongid)->get();
-            $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
-            $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->id)->get();
+            $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
+            $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->id)->get();
+            $xulys = App\Models\Xuly::where('datphongid', $datphong->id)->get();
+            $traphongs = App\Models\Traphong::where('datphongid', $datphong->id)->get();
+            $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->id)->get();
+            $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->id)->get();
+            $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->id)->get();
+            $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
             ?>
             {{-- KT co dat coc --}}
             <?php $check = 0;
@@ -30,7 +30,7 @@
             }
             ?>
             <tr>
-                <td>{{ $datphong->datphongid }}</td>
+                <td>{{ $datphong->id }}</td>
                 <td>
                     <ul class="list-group">
                         @foreach ($thanhtoans as $thanhtoan)
@@ -59,11 +59,11 @@
 
                         {{-- Nut xu ly --}}
                         <li class="list-group-item">
-                            <form class="mt-1" action="{{ route('datphongs.xuly', $datphong->datphongid) }}"
+                            <form class="mt-1" action="{{ route('datphongs.xuly', $datphong->id) }}"
                                 method="Post">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                                <input type="hidden" name="id" value="{{ $datphong->id }}">
                                 <button type="submit"
                                     class="
                                         badge {{ $datphong->tinhtrangxuly == 0 ? 'bg-danger' : 'bg-success' }}">

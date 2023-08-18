@@ -6,6 +6,7 @@ use App\Models\Xuly;
 use App\Models\Phong;
 use App\Models\Anuong;
 use App\Models\Dichvu;
+use App\Models\Chinhanh;
 use App\Models\Datphong;
 use App\Models\Traphong;
 use App\Models\Khachhang;
@@ -65,37 +66,45 @@ class DatphongController extends Controller
     public function index(Request $request)
     {
         // foreach (Auth::user()->roles as $role) {
-        //     if ($role->name == 'Admin') {
-        //         $datphongs = DB::table('datphongs')
-        //             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-        //             ->select('*', 'datphongs.id as datphongid')
-        //             ->orderBy('datphongs.id', 'desc')->paginate(5);
-        //     } else {
-        //         $datphongs = DB::table('datphongs')
-        //             ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-        //             ->where('huydatphong', 0)
-        //             ->select('*', 'datphongs.id as datphongid')
-        //             ->orderBy('datphongs.id', 'desc')->paginate(5);
-        //     }
+        //     $datphongs = Datphong::join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        //     ->where('huydatphong', 0)
+        //     ->select('*', 'datphongs.id as datphongid')
+        //     ->get();
         // }
-        foreach (Auth::user()->roles as $role) {
-            // if ($role->name == 'Admin') {
-            //     $datphongs = DB::table('datphongs')
-            //         ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-            //         ->select('*', 'datphongs.id as datphongid')
-            //         ->get();
-            // } else {
-            $datphongs = DB::table('datphongs')
-                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-                ->where('huydatphong', 0)
-                ->select('*', 'datphongs.id as datphongid')
-                ->get();
-            // }
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin") {
+            $temp = [];
+            if (isset(Auth::user()->nhanviens)) {
+                $datphongs = Datphong::where('huydatphong', 0)->get();
+                foreach ($datphongs as $datphong) {
+                    foreach ($datphong->phongs as $phong) {
+                        if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
+                            $temp[] = $datphong;
+                        }
+                    }
+                }
+            }
+            $datphongs = $temp;
         }
+        if ($roleName == "MainAdmin") {
+            $datphongs = Datphong::where('huydatphong', 0)->get();
+        }
+
         $dichvus = Dichvu::get();
         $anuongs = Anuong::get();
         $phongs = Phong::get();
-        return view('datphongs.index', compact('datphongs', 'dichvus', 'anuongs', 'phongs', 'request'));
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
+
+        return view('datphongs.index', compact('datphongs', 'dichvus', 'anuongs', 'phongs', 'request', 'chinhanhs'));
     }
 
     public function showHistoryPage(Request $request)
@@ -108,22 +117,51 @@ class DatphongController extends Controller
         $anuongdatphongs = AnuongDatphong::where('datphongid', $request->datphongid)->get();
         $thanhtoans = Thanhtoan::where('khachhangid', $request->khachhangid)->get();
 
-        return view('datphongs.historyPage', compact('danhsachdatphongs', 'nhanphongs', 'traphongs', 
-        'huydatphongs', 'dichvudatphongs','anuongdatphongs', 'thanhtoans'));
+        return view('datphongs.historyPage', compact(
+            'danhsachdatphongs',
+            'nhanphongs',
+            'traphongs',
+            'huydatphongs',
+            'dichvudatphongs',
+            'anuongdatphongs',
+            'thanhtoans'
+        ));
     }
 
     public function showHuydatphong(Request $request)
     {
-        foreach (Auth::user()->roles as $role) {
-            $datphongs = DB::table('datphongs')
-                ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-                ->where('huydatphong', 1)
-                ->select('*', 'datphongs.id as datphongid')
-                ->get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin") {
+            $temp = [];
+            if (isset(Auth::user()->nhanviens)) {
+                $datphongs = Datphong::where('huydatphong', 0)->get();
+                foreach ($datphongs as $datphong) {
+                    foreach ($datphong->phongs as $phong) {
+                        if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
+                            $temp[] = $datphong;
+                        }
+                    }
+                }
+            }
+            $datphongs = $temp;
+        }
+        if ($roleName == "MainAdmin") {
+            $datphongs = Datphong::where('huydatphong', 0)->get();
         }
         $dichvus = Dichvu::get();
+        $anuongs = Anuong::get();
         $phongs = Phong::get();
-        return view('datphongs.showHuydatphong', compact('datphongs', 'dichvus', 'phongs', 'request'));
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
+        return view('datphongs.showHuydatphong', compact('datphongs', 'dichvus', 'anuongs', 'phongs', 'request', 'chinhanhs'));
     }
 
     /**

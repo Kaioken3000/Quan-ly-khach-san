@@ -1,12 +1,12 @@
 <div class="col-4">
-    <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#huydatphong{{ $datphong->datphongid }}">
+    <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#huydatphong{{ $datphong->id }}">
         <i class="fa fa-times"></i>
         {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt' : ' Hoàn tác' }}
     </button>
 </div>
 <!-- Modal huỷ đặt phòng -->
-@hasrole("Admin")
-<div class="modal fade" id="huydatphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+@hasrole("MainAdmin")
+<div class="modal fade" id="huydatphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,7 +20,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         No
                     </button>
-                    <form action="{{ route('huydatphongs.store',$datphong->datphongid) }}" method="Post">
+                    <form action="{{ route('huydatphongs.store',$datphong->id) }}" method="Post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"> Yes</button>
@@ -30,4 +30,4 @@
         </div>
     </div>
 </div>
-@endhasanyrole
+@endhasrole

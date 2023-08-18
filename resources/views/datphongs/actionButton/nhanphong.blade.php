@@ -5,7 +5,7 @@
             class=" badge
         {{ $datphong->tinhtrangnhanphong == 0 ? 'bg-danger' : ' bg-success' }}
         "
-            data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+            data-bs-toggle="modal" data-bs-target="#nhanphong{{ $datphong->id }}">
             <i class="fa fa-hotel"> </i>
             {{ $datphong->tinhtrangnhanphong == 0 ? ' Nhận phòng' : ' Sửa nhận phòng' }}
         </button>
@@ -15,7 +15,7 @@
         <p style="display:none">Chưa</p>
         <div class="my-1 col-4">
             <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-                data-bs-target="#nhanphong{{ $datphong->datphongid }}">
+                data-bs-target="#nhanphong{{ $datphong->id }}">
                 <i class="fa fa-hotel">
                 </i>
                 Nhận phòng
@@ -29,7 +29,7 @@
     @endif
 @endhasanyrole
 <!-- Modal nhan phòng -->
-<div class="modal fade" id="nhanphong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="nhanphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -43,11 +43,11 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         No
                     </button>
-                    <form class="m-1" action="{{ route('datphongs.nhanphong', $datphong->datphongid) }}"
+                    <form class="m-1" action="{{ route('datphongs.nhanphong', $datphong->id) }}"
                         method="Post">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                        <input type="hidden" name="id" value="{{ $datphong->id }}">
                         <button type="submit" class="w-100 btn btn-secondary">Yes</button>
                     </form>
                 </div>

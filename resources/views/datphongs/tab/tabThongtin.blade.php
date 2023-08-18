@@ -2,10 +2,11 @@
     <thead>
         <tr>
             <th class="table-plus">id</th>
-            <th>Số lượng</th>
-            <th style="width: 1px"></th>
             <th>Phòng hiện tại</th>
-            <th>Khách hàng</th>
+            <th>Chi nhánh</th>
+            <th>Chi tiết phòng</th>
+            <th style="width: 1px">Số lượng</th>
+            <th>Khách hàng(ID)</th>
             <th>Xử lý</th>
             <th>Nhận phòng</th>
             <th>Thanh toán</th>
@@ -13,13 +14,13 @@
         </tr>
     </thead>
     <tbody>
+        <?php $i = 0; ?>
         @foreach ($datphongs as $datphong)
             <tr>
-                <td>{{ $datphong->datphongid }}</td>
-                <td>{{ $datphong->soluong }}</td>
+                <td>{{ $datphong->id }}</td>
                 <td>
                     <?php
-                    $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)
+                    $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)
                         ->orderBy('id', 'desc')
                         ->first();
                     ?>
@@ -28,14 +29,18 @@
                     @endif
                 </td>
                 <td>
+                    <p>{{ $datphong->phongs[count($datphong->phongs) - 1]->chinhanhs->ten }}</p>
+                    <?php $i++; ?>
+                </td>
+                <td>
                     <?php
-                    $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->get();
-                    $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->datphongid)->get();
-                    $traphongs = App\Models\Traphong::where('datphongid', $datphong->datphongid)->get();
-                    $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->datphongid)->get();
-                    $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->datphongid)->get();
-                    $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
-                    $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->id)->get();
+                    $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
+                    $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->id)->get();
+                    $traphongs = App\Models\Traphong::where('datphongid', $datphong->id)->get();
+                    $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->id)->get();
+                    $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->id)->get();
+                    $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->id)->get();
+                    $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
                     ?>
                     {{-- KT co dat coc --}}
                     <?php $check = 0;
@@ -47,7 +52,7 @@
                     ?>
                     {{-- Lich su dat phong --}}
                     {{-- @include('datphongs.history') --}}
-                    <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->datphongid, 'khachhangid' => $datphong->id]) }}"
+                    <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->id, 'khachhangid' => $datphong->khachhangs->id]) }}"
                         target="_blank" class="badge bg-primary">
                         Chi tiết
                     </a>
@@ -58,14 +63,15 @@
                     @endhasanyrole
 
                 </td>
-                <td>{{ $datphong->ten }}</td>
+                <td>{{ $datphong->soluong }}</td>
+                <td>{{ $datphong->khachhangs->ten }}({{ $datphong->khachhangs->id }})</td>
 
                 {{-- 3 tinh trang --}}
                 <td>
-                    <form class="mt-1" action="{{ route('datphongs.xuly', $datphong->datphongid) }}" method="Post">
+                    <form class="mt-1" action="{{ route('datphongs.xuly', $datphong->id) }}" method="Post">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
+                        <input type="hidden" name="id" value="{{ $datphong->id }}">
                         <button type="submit"
                             class="
                                 badge {{ $datphong->tinhtrangxuly == 0 ? 'bg-danger' : 'bg-success' }}">
@@ -137,7 +143,7 @@
                                 {{-- //Đặt cọc --}}
                                 <div class="my-1 col-6">
                                     @foreach ($danhsachdatphongs as $danhsachdatphong)
-                                        <a href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{ $datphong->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
+                                        <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
                                             class="btn btn-success">Đặt cọc online</a>
                                     @endforeach
                                 </div>

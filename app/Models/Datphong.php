@@ -21,6 +21,11 @@ class Datphong extends Model
         'huydatphong',
     ];
 
+    public function phongs()
+    {
+        return $this->belongsToMany(Phong::class, 'danhsachdatphongs', 'datphongid','phongid');
+    }
+
     public function khachhangs()
     {
         return $this->belongsTo(Khachhang::class, 'khachhangid', 'id');

@@ -16,20 +16,34 @@
         {{-- @include('datphongs.option') --}}
     </div>
 
+    @hasrole('MainAdmin')
+        <div class="d-flex gap-1 mb-3">
+            <div>
+                <button class="btn btn-primary" id="chinhanhBtn" onclick="locChinhanh('')">Tất cả</button>
+            </div>
+            @foreach ($chinhanhs as $chinhanh)
+                <div>
+                    <button class="btn btn-primary" id="chinhanhBtn{{ $chinhanh->id }}"
+                        onclick="locChinhanh('{{ $chinhanh->ten }}')">{{ $chinhanh->ten }}</button>
+                </div>
+            @endforeach
+        </div>
+    @endhasrole
+
     <ul class="nav nav-underline" id="myTab" role="tablist">
         <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
                 href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" id="phong-tab" data-bs-toggle="tab"
-                href="#tab-phong" role="tab" aria-controls="tab-phong" aria-selected="false" tabindex="-1">Phòng</a>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="phong-tab" data-bs-toggle="tab" href="#tab-phong"
+                role="tab" aria-controls="tab-phong" aria-selected="false" tabindex="-1">Phòng</a>
         </li>
-        <li class="nav-item" role="presentation"><a class="nav-link" id="phong2-tab" data-bs-toggle="tab"
-                href="#tab-phong2" role="tab" aria-controls="tab-phong2" aria-selected="false" tabindex="-1">Phòng chi tiết</a>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="phong2-tab" data-bs-toggle="tab" href="#tab-phong2"
+                role="tab" aria-controls="tab-phong2" aria-selected="false" tabindex="-1">Phòng chi tiết</a>
         </li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="dichvu-tab" data-bs-toggle="tab" href="#tab-dichvu"
                 role="tab" aria-controls="tab-dichvu" aria-selected="false" tabindex="-1">Dịch vụ</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="thanhtoan-tab" data-bs-toggle="tab"
-                href="#tab-thanhtoan" role="tab" aria-controls="tab-thanhtoan" aria-selected="false"
-                tabindex="-1">Chi tiết đặt phòng</a></li>
+                href="#tab-thanhtoan" role="tab" aria-controls="tab-thanhtoan" aria-selected="false" tabindex="-1">Chi
+                tiết đặt phòng</a></li>
     </ul>
     <div class="tab-content mt-3" id="myTabContent">
         <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">

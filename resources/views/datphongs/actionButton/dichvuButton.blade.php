@@ -1,10 +1,10 @@
 <div class="mb-3">
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldichvu{{ $datphong->datphongid }}">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldichvu{{ $datphong->id }}">
         <i class="fa fa-wrench"></i> Dịch vụ
     </button>
 </div>
 <!-- Modal dịch vụ -->
-<div class="modal fade" id="modaldichvu{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modaldichvu{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,16 +16,16 @@
             <div class="modal-body">
                 <form action="{{ route('dichvu_datphong.store') }}" method="POST">
                     @csrf
-                    <input hidden type="text" value="{{$datphong->datphongid}}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{$datphong->id}}" id="datphongid" name="datphongid">
                     <div class="mb-3">
                         <label class="form-label" for="ten">Dịch vụ</label><br>
                         @foreach($dichvus as $dichvu)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}{{$datphong->datphongid}}" name="dichvuid[]" value="{{$dichvu->id}}">
-                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->datphongid}}">
+                            <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}{{$datphong->id}}" name="dichvuid[]" value="{{$dichvu->id}}">
+                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->id}}">
                                 {{$dichvu->ten}}:
                             </label>
-                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->datphongid}}">
+                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->id}}">
                                 {{$dichvu->giatien}} {{$dichvu->donvi}}
                             </label>
                         </div>

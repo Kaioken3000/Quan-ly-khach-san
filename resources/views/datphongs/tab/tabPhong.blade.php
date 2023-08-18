@@ -8,18 +8,18 @@
     <tbody>
         @foreach ($datphongs as $datphong)
             <?php
-            $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->datphongid)->get();
-            $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->datphongid)->get();
-            $traphongs = App\Models\Traphong::where('datphongid', $datphong->datphongid)->get();
-            $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->datphongid)->get();
-            $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->datphongid)->get();
-            $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->datphongid)->get();
-            $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->id)->get();
+            $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
+            $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->id)->get();
+            $traphongs = App\Models\Traphong::where('datphongid', $datphong->id)->get();
+            $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->id)->get();
+            $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->id)->get();
+            $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->id)->get();
+            $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
             ?>
             <tr>
                 <td>
                     <div style="width: 10px">
-                        {{ $datphong->datphongid }}
+                        {{ $datphong->id }}
                     </div>
                 </td>
                 <td class="row">
@@ -115,21 +115,21 @@
                                                 <div class="col-2">
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->datphongid }}">
+                                                        data-bs-target="#dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->id }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade"
-                                                        id="dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->datphongid }}"
+                                                        id="dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->id }}"
                                                         tabindex="-1"
-                                                        aria-labelledby="dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->datphongid }}Label"
+                                                        aria-labelledby="dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->id }}Label"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="Dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->datphongid }}Label">
+                                                                        id="Dichvudatphongdelete{{ $dichvudatphong->id }}{{ $datphong->id }}Label">
                                                                         Bạn có
                                                                         chắc
                                                                         chắn muốn xoá</h5>
@@ -173,21 +173,21 @@
                                                 <div class="col-2">
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->datphongid }}">
+                                                        data-bs-target="#anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->id }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade"
-                                                        id="anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->datphongid }}"
+                                                        id="anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->id }}"
                                                         tabindex="-1"
-                                                        aria-labelledby="Anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->datphongid }}Label"
+                                                        aria-labelledby="Anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->id }}Label"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->datphongid }}Label">
+                                                                        id="anuongdatphongdelete{{ $anuongdatphong->id }}{{ $datphong->id }}Label">
                                                                         Bạn có
                                                                         chắc
                                                                         chắn muốn xoá</h5>

@@ -1,11 +1,11 @@
 <div class="my-1 col-4">
     <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-        data-bs-target="#modalthanhtoan{{ $datphong->datphongid }}">
+        data-bs-target="#modalthanhtoan{{ $datphong->id }}">
         <i class="fa fa-dollar"></i> Thanh toán
     </button>
 </div>
 <!-- Modal thanh toán -->
-<div class="modal fade" id="modalthanhtoan{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalthanhtoan{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-1" action="{{ route('datphongs.thanhtoan', $datphong->datphongid) }}" method="Post">
+                <form class="m-1" action="{{ route('datphongs.thanhtoan', $datphong->id) }}" method="Post">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -83,7 +83,7 @@
                         </div>
                         <div class="mb-3 col">
                             <?php
-                            $tiendatcoc = App\Models\Thanhtoan::where('khachhangid', $datphong->id)
+                            $tiendatcoc = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)
                                 ->where('loaitien', 'datcoc')
                                 ->first();
                             ?>
@@ -157,8 +157,8 @@
                         <div class="alert alert-danger" role="alert">{{ $message }}</div>
                     @enderror
 
-                    <input type="hidden" name="id" value="{{ $datphong->datphongid }}">
-                    <input type="hidden" name="khachhang_id" value="{{ $datphong->id }}">
+                    <input type="hidden" name="id" value="{{ $datphong->id }}">
+                    <input type="hidden" name="khachhang_id" value="{{ $datphong->khachhangs->id }}">
                     <input type="hidden" name="loaitien" value="traphong">
                     <input type="hidden" name="hinhthucthanhtoan" value="tructiep">
 
@@ -170,7 +170,7 @@
                         <div class="bd-highlight mx-3">
                             {{-- Thanh toan vnpay --}}
                             <a
-                                href="/thanhtoanvnpayview/{{ $datphong->datphongid }}/traphong/{{ $datphong->id }}/{{ $tongtien }}">
+                                href="/thanhtoanvnpayview/{{ $datphong->id }}/traphong/{{ $datphong->khachhangs->id }}/{{ $tongtien }}">
                                 <img src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929"
                                     width="150px" class="shadow-sm">
                             </a>
