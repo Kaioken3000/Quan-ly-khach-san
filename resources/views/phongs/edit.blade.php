@@ -26,6 +26,8 @@
                     aria-controls="tab-mieuta" aria-selected="false">Miêu tả</a></li>
             <li class="nav-item"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab" href="#tab-hinh" role="tab"
                     aria-controls="tab-hinh" aria-selected="false">Hình</a></li>
+            <li class="nav-item"><a class="nav-link" id="virtualtour-tab" data-bs-toggle="tab" href="#tab-virtualtour"
+                    role="tab" aria-controls="tab-virtualtour" aria-selected="false">Virtual Tour</a></li>
         </ul>
         <div class="tab-content clearfix">
             <!-- Modal Create -->
@@ -84,6 +86,18 @@
                                     }
                                     ?> name="hinhid[]" value="{{ $hinh->id }}" hidden>
                             @endforeach
+                            @foreach ($virtualtours as $virtualtour)
+                                <input class="form-check-input" type="checkbox" id="virtualtour{{ $virtualtour->id }}"
+                                    <?php
+                                    if (isset($phong)) {
+                                        foreach ($phong->virtualtourphongs as $virtualtourphong) {
+                                            if ($virtualtour->id === $virtualtourphong->virtualtourid) {
+                                                echo 'checked';
+                                            }
+                                        }
+                                    }
+                                    ?> name="virtualtourid[]" value="{{ $virtualtour->id }}" hidden>
+                            @endforeach
                             @include('phongs.tab.tabThongTinChung')
                             <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>
                         </form>
@@ -99,6 +113,9 @@
                     </div>
                     <div class="overflow-auto tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
                         @include('phongs.tab.tabMieuTa')
+                    </div>
+                    <div class="overflow-auto tab-pane fade" id="tab-virtualtour" role="tabpanel" aria-labelledby="virtualtour-tab">
+                        @include('phongs.tab.tabVirtualtour')
                     </div>
                 </div>
             </div>

@@ -30,7 +30,7 @@
         </div>
     @endhasrole
 
-    <ul class="nav nav-underline" id="myTab" role="tablist">
+    <ul class="nav nav-underline" id="myTab" role="tablist" id="myTab">
         <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
                 href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="phong-tab" data-bs-toggle="tab" href="#tab-phong"

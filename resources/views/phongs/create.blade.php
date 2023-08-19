@@ -15,6 +15,9 @@
         @error('hinhid')
             <div class="alert alert-danger" role="alert">{{ $message }}</div>
         @enderror
+        @error('virtualtourid')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+        @enderror
         <ul class="nav nav-underline" id="myTab" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab" href="#tab-thongtin"
                     role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin chung</a></li>
@@ -26,6 +29,8 @@
                     aria-controls="tab-mieuta" aria-selected="false">Miêu tả</a></li>
             <li class="nav-item"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab" href="#tab-hinh" role="tab"
                     aria-controls="tab-hinh" aria-selected="false">Hình</a></li>
+            <li class="nav-item"><a class="nav-link" id="virtualtour-tab" data-bs-toggle="tab" href="#tab-virtualtour"
+                    role="tab" aria-controls="tab-virtualtour" aria-selected="false">Virtual Tour</a></li>
         </ul>
         <div class="tab-content clearfix">
             <!-- Modal Create -->
@@ -33,7 +38,7 @@
                 <div class="tab-content mt-3" id="myTabContent">
                     <div class="overflow-auto tab-pane fade show active" id="tab-thongtin" role="tabpanel"
                         aria-labelledby="thongtin-tab">
-                        <div  class="w-25">
+                        <div class="w-25">
                             <form action="{{ route('phongs.store') }}" method="POST">
                                 @csrf
                                 @foreach ($thietbis as $thietbi)
@@ -41,16 +46,20 @@
                                         name="thietbiid[]" value="{{ $thietbi->id }}" hidden>
                                 @endforeach
                                 @foreach ($giuongs as $giuong)
-                                    <input class="form-check-input" type="checkbox" id="giuong{{ $giuong->id }}" name="giuongid[]"
-                                        value="{{ $giuong->id }}" hidden>
+                                    <input class="form-check-input" type="checkbox" id="giuong{{ $giuong->id }}"
+                                        name="giuongid[]" value="{{ $giuong->id }}" hidden>
                                 @endforeach
                                 @foreach ($mieutas as $mieuta)
-                                    <input class="form-check-input" type="checkbox" id="mieuta{{ $mieuta->id }}" name="mieutaid[]"
-                                        value="{{ $mieuta->id }}" hidden>
+                                    <input class="form-check-input" type="checkbox" id="mieuta{{ $mieuta->id }}"
+                                        name="mieutaid[]" value="{{ $mieuta->id }}" hidden>
                                 @endforeach
                                 @foreach ($hinhs as $hinh)
-                                    <input class="form-check-input" type="checkbox" id="hinh{{ $hinh->id }}" name="hinhid[]"
-                                        value="{{ $hinh->id }}" hidden>
+                                    <input class="form-check-input" type="checkbox" id="hinh{{ $hinh->id }}"
+                                        name="hinhid[]" value="{{ $hinh->id }}" hidden>
+                                @endforeach
+                                @foreach ($virtualtours as $virtualtour)
+                                    <input class="form-check-input" type="checkbox" id="virtualtour{{ $virtualtour->id }}"
+                                        name="virtualtourid[]" value="{{ $virtualtour->id }}">
                                 @endforeach
                                 @include('phongs.tab.tabThongTinChung')
                                 <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>
@@ -68,6 +77,10 @@
                     </div>
                     <div class="overflow-auto tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
                         @include('phongs.tab.tabMieuTa')
+                    </div>
+                    <div class="overflow-auto tab-pane fade" id="tab-virtualtour" role="tabpanel"
+                        aria-labelledby="virtualtour-tab">
+                        @include('phongs.tab.tabVirtualtour')
                     </div>
 
                     <script>

@@ -61,6 +61,15 @@ class Phong extends Model
         return $this->belongsToMany(Hinh::class, 'hinh_phongs', 'phongid', 'hinhid');
     }
     /**
+     * The hinhs that belong to the Phong
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function virtualtours()
+    {
+        return $this->belongsToMany(Virtualtour::class, 'virtualtour_phongs', 'phongid', 'virtualtourid');
+    }
+    /**
      * The mieutas that belong to the Phong
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -85,5 +94,9 @@ class Phong extends Model
     public function hinhphongs()
     {
         return $this->hasMany(HinhPhong::class, 'phongid');
+    }
+    public function virtualtourphongs()
+    {
+        return $this->hasMany(VirtualtourPhong::class, 'phongid');
     }
 }

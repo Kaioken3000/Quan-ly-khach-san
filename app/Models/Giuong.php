@@ -21,6 +21,6 @@ class Giuong extends Model
 
     public function phongs()
     {
-        return $this->belongsTo(Loaiphong::class, 'phongid', 'id');
+        return $this->belongsTo(Phong::class, 'phongid', 'id');
     }
 }

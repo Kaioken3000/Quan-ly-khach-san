@@ -130,7 +130,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link">
+                                    <a href="/virtualtours"
+                                        class="nav-link {{ Request::is('virtualtours') || Request::is('virtualtours*') ? 'active' : '' }}">
                                         <span class="micon fa fa-landmark"></span>
                                         <span class="mtext">Virtual Tour</span>
                                     </a>

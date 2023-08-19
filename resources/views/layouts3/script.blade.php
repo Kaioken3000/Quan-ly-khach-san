@@ -39,6 +39,14 @@
     let table = new DataTable('.table');
     $(document).ready(function() {
 
+        $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('#myTab a[href="' + activeTab + '"]').tab('show');
+        }
+
         // Sort by column 1 and then re-draw
         table
             .order([0, 'desc'])
@@ -68,6 +76,7 @@
             .search(chinhanhid)
             .draw();
     }
+
     function locPhongTheoLoaiphong(loaiphongten, index) {
         // let table = new DataTable('.table');
         table

@@ -12,9 +12,11 @@ use App\Models\HinhPhong;
 use App\Models\Loaiphong;
 use App\Models\GiuongPhong;
 use App\Models\MieutaPhong;
+use App\Models\Virtualtour;
 use App\Models\ThietbiPhong;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\VirtualtourPhong;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +41,8 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $chinhanhs = Chinhanh::all();
-        return view('phongs.index', compact('phongs', 'loaiphongs', 'hinhs', 'thietbis', 'giuongs', 'mieutas', 'chinhanhs'));
+        $virtualtours = Virtualtour::all();
+        return view('phongs.index', compact('phongs', 'loaiphongs', 'hinhs', 'thietbis', 'giuongs', 'mieutas', 'chinhanhs', 'virtualtours'));
     }
 
     /**
@@ -54,6 +57,7 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
+        $virtualtours = Virtualtour::all();
 
         $roleName = Auth::user()->roles[0]->name;
 
@@ -64,7 +68,7 @@ class PhongController extends Controller
         if ($roleName == "MainAdmin") {
             $chinhanhs = Chinhanh::get();
         }
-        return view('phongs.create', compact('loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs'));
+        return view('phongs.create', compact('loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs', 'virtualtours'));
     }
 
     /**
@@ -84,6 +88,7 @@ class PhongController extends Controller
             'giuongid' => 'required',
             'mieutaid' => 'required',
             'hinhid' => 'required',
+            'virtualtourid' => 'required',
         ]);
 
         $phong = Phong::create($request->post());
@@ -119,6 +124,13 @@ class PhongController extends Controller
 
             HinhPhong::create($dich);
         }
+        foreach ($request->virtualtourid as $virtualtour) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['virtualtourid'] = $virtualtour;
+
+            VirtualtourPhong::create($dich);
+        }
 
         return redirect()->route('phongs.index')->with('success', 'Phong has been created successfully.');
     }
@@ -147,6 +159,7 @@ class PhongController extends Controller
         $giuongs = Giuong::all();
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
+        $virtualtours = Virtualtour::all();
         
         $roleName = Auth::user()->roles[0]->name;
 
@@ -157,7 +170,7 @@ class PhongController extends Controller
         if ($roleName == "MainAdmin") {
             $chinhanhs = Chinhanh::get();
         }
-        return view('phongs.edit', compact('phong', 'loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs'));
+        return view('phongs.edit', compact('phong', 'loaiphongs', 'thietbis', 'giuongs', 'mieutas', 'hinhs', 'chinhanhs', 'virtualtours'));
     }
 
     /**
@@ -181,6 +194,7 @@ class PhongController extends Controller
             'giuongid' => 'required',
             'mieutaid' => 'required',
             'hinhid' => 'required',
+            'virtualtourid' => 'required',
         ]);
 
         $phong->fill($request->post())->save();
@@ -231,6 +245,18 @@ class PhongController extends Controller
             $dich['hinhid'] = $hinh;
 
             HinhPhong::create($dich);
+        }
+        
+        // updatde virtualtour phong
+        $virtualtourDel = VirtualtourPhong::where('phongid', $phong->so_phong);
+        $virtualtourDel->delete();
+
+        foreach ($request->virtualtourid as $virtualtour) {
+            $dich = array();
+            $dich['phongid'] = $phong->so_phong;
+            $dich['virtualtourid'] = $virtualtour;
+
+            VirtualtourPhong::create($dich);
         }
 
         return redirect()->route('phongs.index')->with('success', 'Phong Has Been updated successfully');

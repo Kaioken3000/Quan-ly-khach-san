@@ -17,8 +17,7 @@
     </div>
     <div class="d-flex gap-1 mb-3">
         <div>
-            <button class="btn btn-primary" id="chinhanhBtn"
-                onclick="locChinhanh('')">Tất cả</button>
+            <button class="btn btn-primary" id="chinhanhBtn" onclick="locChinhanh('')">Tất cả</button>
         </div>
         @foreach ($chinhanhs as $chinhanh)
             <div>
@@ -28,7 +27,7 @@
         @endforeach
     </div>
 
-    <ul class="nav nav-underline" id="myTab" role="tablist">
+    <ul class="nav nav-underline" id="myTab" role="tablist" id="myTab">
         <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
                 href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin</a></li>
 
@@ -45,6 +44,8 @@
         <li class="nav-item" role="presentation"><a class="nav-link" id="mieuta-tab" data-bs-toggle="tab" href="#tab-mieuta"
                 role="tab" aria-controls="tab-mieuta" aria-selected="false" tabindex="-1">Miêu
                 tả</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="virtualTour-tab" data-bs-toggle="tab" href="#tab-virtualTour"
+                role="tab" aria-controls="tab-virtualTour" aria-selected="false" tabindex="-1">Virtual Tour</a></li>
     </ul>
     <div class="tab-content mt-3" id="myTabContent">
         <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
@@ -65,6 +66,10 @@
         <div class="tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
             @include('mieutas.create')
             @include('phongs.mainTab.tabMieuta')
+        </div>
+        <div class="tab-pane fade" id="tab-virtualTour" role="tabpanel" aria-labelledby="virtualTour-tab">
+            @include('virtualTours.create')
+            @include('phongs.mainTab.tabVirtualTour')
         </div>
     </div>
 @endsection

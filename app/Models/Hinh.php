@@ -16,6 +16,6 @@ class Hinh extends Model
 
     public function phongs()
     {
-        return $this->belongsTo(Loaiphong::class, 'phongid','id');
+        return $this->belongsTo(Hinh::class, 'phongid', 'id');
     }
 }

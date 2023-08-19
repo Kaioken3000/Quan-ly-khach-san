@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Models\Thietbi;
 use App\Models\Chinhanh;
 use App\Mail\MyTestEmail;
+use App\Models\Virtualtour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -20,13 +21,13 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\AnuongController;
 use App\Http\Controllers\CatrucController;
 use App\Http\Controllers\DichvuController;
-use App\Http\Controllers\GiuongController;
 
+use App\Http\Controllers\GiuongController;
 use App\Http\Controllers\MieutaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MeetingController;
-use App\Http\Controllers\MessageController;
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ThietbiController;
 use App\Http\Controllers\ChinhanhController;
 use App\Http\Controllers\DatphongController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\BotManChatController;
 use App\Http\Controllers\GiuongPhongController;
 use App\Http\Controllers\MieutaPhongController;
+use App\Http\Controllers\VirtualtourController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\HinhChinhanhController;
 use App\Http\Controllers\ThietbiPhongController;
@@ -46,6 +48,7 @@ use App\Http\Controllers\AnuongDatphongController;
 use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\MieutaChinhanhController;
 use App\Http\Controllers\DanhsachdatphongController;
+use App\Http\Controllers\VirtualtourPhongController;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 /*
 |--------------------------------------------------------------------------
@@ -177,6 +180,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('hinh_phong', HinhPhongController::class);
         // HinhChinhanh Route
         Route::resource('hinh_chinhanh', HinhChinhanhController::class);
+
+        // Virtualtour Routes
+        Route::resource('virtualtours', VirtualtourController::class);
+        Route::get('virtualtours-search', 'VirtualtourController@search');
+        Route::get('virtualtours/virtualtours-search', 'VirtualtourController@search');
+        Route::get('virtualtours-showpreview/{virtualtourid}', 'VirtualtourController@showPreview');
+        // HinhPhong Route
+        Route::resource('virtualtour_phong', VirtualtourPhongController::class);
 
         // Giuong Routes
         Route::resource('giuongs', GiuongController::class);
