@@ -30,7 +30,7 @@
                 }));
                 var body = document.getElementsByTagName("body")
                 body[0].style.top = "0px"
-                body[0].style.width = "98%"
+                // body[0].style.width = "98%"
             }
         }, 1000);
 

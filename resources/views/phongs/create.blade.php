@@ -59,7 +59,7 @@
                                 @endforeach
                                 @foreach ($virtualtours as $virtualtour)
                                     <input class="form-check-input" type="checkbox" id="virtualtour{{ $virtualtour->id }}"
-                                        name="virtualtourid[]" value="{{ $virtualtour->id }}">
+                                        name="virtualtourid[]" value="{{ $virtualtour->id }}" hidden>
                                 @endforeach
                                 @include('phongs.tab.tabThongTinChung')
                                 <button type="submit" class="btn btn-primary mt-3"> Xác nhận</button>

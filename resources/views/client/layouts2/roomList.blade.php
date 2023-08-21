@@ -44,7 +44,7 @@
                                 </tbody>
                             </table>
                             @if ($check == 0)
-                                <a href="/client/chitietphong/{{ $phong->so_phong }}" class="primary-btn">More
+                                <a href="/client/chitietphong/{{ $phong->so_phong }}" target="_blank" class="primary-btn">More
                                     Details</a>
                             @else
                                 <div class="d-flex">

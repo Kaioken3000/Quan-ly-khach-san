@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Models\DichvuDatphong;
 use Illuminate\Validation\Rule;
 use App\Models\Danhsachdatphong;
+use App\Models\Virtualtour;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,17 @@ class IndexController extends Controller
         $phongs = Phong::get();
         $chinhanhs = Chinhanh::get();
         return view('client.index', compact('phongs', 'chinhanhs'));
+    }
+
+     /**
+     * Hien trang index cua client
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function previewVirtualTour(Request $request)
+    {
+        $virtualtour = Virtualtour::where("id", $request->virtualtourid)->first();
+        return view('client.previewVirtualTour', compact('virtualtour'));
     }
 
     /**

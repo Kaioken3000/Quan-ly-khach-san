@@ -13,11 +13,14 @@
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
-                            <?php $i=0?>
+                            <?php $i = 0; ?>
                             @foreach ($phong->hinhphongs as $hinhphong)
                                 <?php $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first();
                                 ?>
-                                <div class="carousel-item <?php if($i==0) echo 'active'; $i++;?>">
+                                <div class="carousel-item <?php if ($i == 0) {
+                                    echo 'active';
+                                }
+                                $i++; ?>">
                                     <img class="d-block w-100" src="/client/images/{{ $hinh->vitri }}">
                                 </div>
                             @endforeach
@@ -34,55 +37,65 @@
                         </a>
                     </div>
                     {{-- end content --}}
-                    <div class="rd-text">
-                        <h2>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h2>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="r-o">Category:</td>
-                                    <td>{{ $phong->loaiphongs->ten }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="r-o">Quantity:</td>
-                                    <td>{{ $phong->loaiphongs->soluong }} people</td>
-                                </tr>
-                                <tr>
-                                    <td class="r-0" style="width: 300px">Device in room:</td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            @foreach ($phong->thietbiphongs as $thietbiphong)
-                                                <?php $thietbi = App\Models\Thietbi::where('id', $thietbiphong->thietbiid)->first();
+                    <div class="room-details-item">
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3>{{ $phong->loaiphongs->ten }}-{{ $phong->so_phong }}</h3>
+                                <div class="rdt-right">
+                                    <a href="/client/previewVirtualTour/{{ $phong->virtualtours[0]->id }}"
+                                        target="_blank">Xem Virtual
+                                        Tour
+                                        <i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <h2>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h2>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Category:</td>
+                                        <td>{{ $phong->loaiphongs->ten }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Quantity:</td>
+                                        <td>{{ $phong->loaiphongs->soluong }} people</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-0" style="width: 500px">Device in room:</td>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                @foreach ($phong->thietbiphongs as $thietbiphong)
+                                                    <?php $thietbi = App\Models\Thietbi::where('id', $thietbiphong->thietbiid)->first();
+                                                    ?>
+                                                    {{ $thietbi->ten }},
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-0 d-flex justify-content-start align-items-start">Bed:</td>
+                                        <td>
+                                            @foreach ($phong->giuongphongs as $giuongphong)
+                                                <?php $giuong = App\Models\Giuong::where('id', $giuongphong->giuongid)->first();
                                                 ?>
-                                                {{ $thietbi->ten }},
+                                                {{ $giuong->ten }}
+                                                <br>
+                                                <img src="/client/images/{{ $giuong->hinh }}" class="img-fluid"
+                                                    style="max-width: 300px">
                                             @endforeach
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="r-0 d-flex justify-content-start align-items-start">Bed:</td>
-                                    <td>
-                                        @foreach ($phong->giuongphongs as $giuongphong)
-                                            <?php $giuong = App\Models\Giuong::where('id', $giuongphong->giuongid)->first();
-                                            ?>
-                                            {{ $giuong->ten }}
-                                            <br>
-                                            <img src="/client/images/{{ $giuong->hinh }}" class="img-fluid"
-                                                style="max-width: 300px">
-                                        @endforeach
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h5 class="my-3">Miêu tả:</h5>
-                        {{-- <p class="f-para"><i class="fa fa-check text-warning"></i> {{ $phong->loaiphongs->mieuTa }}</p> --}}
-                        @foreach ($phong->mieutaphongs as $mieutaphong)
-                            <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
-                            ?>
-                            {!! $mieuta->noidung !!}
-                            @if (isset($mieuta->hinh))
-                                <img src="/client/images/{{ $mieuta->hinh }}">
-                            @endif
-                        @endforeach
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {{-- <p class="f-para"><i class="fa fa-check text-warning"></i> {{ $phong->loaiphongs->mieuTa }}</p> --}}
+                            @foreach ($phong->mieutaphongs as $mieutaphong)
+                                <?php $mieuta = App\Models\Mieuta::where('id', $mieutaphong->mieutaid)->first();
+                                ?>
+                                {!! $mieuta->noidung !!}
+                                @if (isset($mieuta->hinh))
+                                    <img src="/client/images/{{ $mieuta->hinh }}">
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,12 +151,13 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div id="fb-root"></div>
                 <script async defer crossorigin="anonymous"
                     src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=658955415606544&autoLogAppEvents=1"
                     nonce="sFzhTDa5"></script>
-                <div class="fb-comments" data-href="{{ Request::url() }}" data-width="" data-numposts="5"></div>
+                <div class="fb-comments" data-href="{{ Request::url() }}" data-width="100%" data-numposts="5">
+                </div>
             </div>
         </div>
     </div>

@@ -28,10 +28,12 @@
                         <p>{{ $giuong->ten ?? '' }}</p>
                     @endforeach
                 </td>
-                <td>
-                    @foreach ($phong->mieutas as $mieuta)
-                        <p>{!! $mieuta->noidung ?? '' !!}</p>
-                    @endforeach
+                <td style="width: 400px">
+                    <div class="overflow-auto" style="height: 200px">
+                        @foreach ($phong->mieutas as $mieuta)
+                            <p>{!! $mieuta->noidung ?? '' !!}</p>
+                        @endforeach
+                    </div>
                 </td>
                 <td>
                     @hasrole('Admin')

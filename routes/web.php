@@ -370,6 +370,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('client/virtualTour', function () {
         return view("client.virtualTour");
     });
+    // Virtual tour
+    Route::get('client/previewVirtualTour/{virtualtourid}', 'IndexController@previewVirtualTour');
 
     Route::get('/testroute', function () {
         $name = "Funny Coder";

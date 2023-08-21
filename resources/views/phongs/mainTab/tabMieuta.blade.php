@@ -16,25 +16,28 @@
                 <td>
                     @foreach ($phong->mieutaphongs as $mieutaphong)
                         <div class="d-flex justify-content-between gap-1">
-                            {!! $mieutaphong->mieutas->noidung !!}
-                            <div>
-                                @hasrole('Admin')
-                                    @isset(Auth::user()->nhanviens)
-                                        @foreach (Auth::user()->nhanviens as $nhanvien)
-                                            @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
-                                                <span>
-                                                    @include('phongs.modal.modalMieutaPhong')
-                                                </span>
-                                            @endif
-                                        @endforeach
-                                    @endisset
-                                @endhasrole
-                                @hasrole('MainAdmin')
-                                    <span>
-                                        @include('phongs.modal.modalMieutaPhong')
-                                    </span>
-                                @endhasrole
+                            <div class="overflow-auto" style="height: 200px">
+                                {!! $mieutaphong->mieutas->noidung !!}
+                            </div>
+                            @hasrole('Admin')
+                                @isset(Auth::user()->nhanviens)
+                                    @foreach (Auth::user()->nhanviens as $nhanvien)
+                                        @if ($nhanvien->chinhanhs->id == $phong->chinhanhs->id)
+                                            <span>
+                                                @include('phongs.modal.modalMieutaPhong')
+                                            </span>
+                                        @endif
+                                    @endforeach
+                                @endisset
+                            @endhasrole
                     @endforeach
+                    @hasrole('MainAdmin')
+                        <span>
+                            @include('phongs.modal.modalMieutaPhong')
+                        </span>
+                    @endhasrole
+
+                    </div>
                 </td>
                 <td>{{ $phong->chinhanhs->ten }}</td>
                 <td>
