@@ -6,12 +6,18 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <div class="d-flex">
+    <div class="d-flex gap-1">
         <div class="flex-grow-1">
             @include('layouts3.title', ['titlePage' => 'Quản lý đặt phòng'])
         </div>
         <div>
             <a class="btn btn-success" href="{{ route('datphongs.create') }}"><i class="fa fa-plus"></i> Đặt phòng</a>
+        </div>
+        <?php $today = date('Y-m-d');?>
+        <div>
+            <a href="/datphongs-kiemtra?ngaydat={{$today}}&ngaytra={{$today}}&soluong=1&tinhtrangthanhtoan=0&tinhtrangnhanphong=0"
+            class="btn btn-primary">
+                Hiện phòng trống</a>
         </div>
         {{-- @include('datphongs.option') --}}
     </div>
@@ -41,6 +47,8 @@
         </li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="dichvu-tab" data-bs-toggle="tab" href="#tab-dichvu"
                 role="tab" aria-controls="tab-dichvu" aria-selected="false" tabindex="-1">Dịch vụ</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="khachhang-tab" data-bs-toggle="tab" href="#tab-khachhang"
+                role="tab" aria-controls="tab-khachhang" aria-selected="false" tabindex="-1">Khách hàng</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="thanhtoan-tab" data-bs-toggle="tab"
                 href="#tab-thanhtoan" role="tab" aria-controls="tab-thanhtoan" aria-selected="false" tabindex="-1">Chi
                 tiết đặt phòng</a></li>
@@ -57,6 +65,9 @@
         </div>
         <div class="tab-pane fade" id="tab-dichvu" role="tabpanel" aria-labelledby="dichvu-tab">
             @include('datphongs.tab.tabDichvu')
+        </div>
+        <div class="tab-pane fade" id="tab-khachhang" role="tabpanel" aria-labelledby="khachhang-tab">
+            @include('datphongs.tab.tabKhachhang')
         </div>
         <div class="tab-pane fade" id="tab-thanhtoan" role="tabpanel" aria-labelledby="thanhtoan-tab">
             @include('datphongs.tab.tabThanhtoan')
