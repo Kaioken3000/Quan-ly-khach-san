@@ -17,5 +17,6 @@
         "type": "equirectangular",
         "panorama": "/client/images/{{ $virtualtour->hinh }}",
         "autoLoad": true,
+        "hfov": 120
     });
 </script>
