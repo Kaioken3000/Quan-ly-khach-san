@@ -54,7 +54,7 @@
                     {{-- @include('datphongs.history') --}}
                     <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->id, 'khachhangid' => $datphong->khachhangs->id]) }}"
                         target="_blank" class="badge bg-primary">
-                        Chi tiết
+                        Chi tiết <i class="fas fa-eye"></i>
                     </a>
 
                     {{-- Hien va xoa dich vu --}}

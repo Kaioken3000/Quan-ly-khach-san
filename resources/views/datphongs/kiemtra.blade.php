@@ -72,6 +72,13 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>Số phòng</th>
+                    <th>Loại phòng</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
     </div>

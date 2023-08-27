@@ -1,6 +1,6 @@
 <div class="d-flex">
-    <div class="flex-grow-1">
-        <h5 class="text-700 fw-semi-bold mx-3 mt-3">Thông tin chi tiết chi nhánh</h5>
+    <div class="flex-grow-1 mt-2">
+        <h4 class="card-title">Thông tin chi tiết chi nhánh</h4>
     </div>
     <div>
         @foreach ($chinhanhs as $chinhanh)

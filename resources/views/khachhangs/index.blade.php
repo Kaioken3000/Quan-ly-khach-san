@@ -32,7 +32,7 @@
                         <td>{{ $khachhang->ten }}</td>
                         <td>{{ $khachhang->sdt }}</td>
                         <td>{{ $khachhang->email }}</td>
-                        <td>{{ $khachhang->datphongid }}</td>
+                        <td>{{ $khachhang->datphongid ?? ''}}</td>
                         @hasanyrole('MainAdmin|Admin')
                             <td class="d-flex gap-1">
                                 @include('khachhangs.edit')
@@ -42,6 +42,18 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>Ten</th>
+                    <th>sdt</th>
+                    <th>email</th>
+                    <th>Mã đặt phòng</th>
+                    @hasanyrole('MainAdmin|Admin')
+                        <th class="datatable-nosort">Action</th>
+                    @endhasanyrole
+                </tr>
+            </tfoot>
         </table>
     </div>
 @endsection
