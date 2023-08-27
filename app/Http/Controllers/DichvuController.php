@@ -21,7 +21,7 @@ class DichvuController extends Controller
 
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $dichvus = Dichvu::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
                 $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();

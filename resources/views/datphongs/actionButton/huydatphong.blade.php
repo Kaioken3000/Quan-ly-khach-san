@@ -1,11 +1,11 @@
-<div class="col-4">
+@hasrole("MainAdmin")
+<div class="">
     <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#huydatphong{{ $datphong->id }}">
         <i class="fa fa-times"></i>
         {{ ($datphong->huydatphong == 0) ? ' Huỷ đặt' : ' Hoàn tác' }}
     </button>
 </div>
 <!-- Modal huỷ đặt phòng -->
-@hasrole("MainAdmin")
 <div class="modal fade" id="huydatphong{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered" role="document">
         <div class="modal-content">

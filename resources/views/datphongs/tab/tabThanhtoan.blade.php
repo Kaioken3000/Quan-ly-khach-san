@@ -164,6 +164,16 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Tiền đã thanh toán(VND)</th>
+            <th>Tình trạng xử lý</th>
+            <th>Tình trạng nhận phòng</th>
+            <th>Tình trạng thanh toán</th>
+            <th>Hủy đặt phòng</th>
+        </tr>
+    </tfoot>
 </table>
 <style>
     .card,

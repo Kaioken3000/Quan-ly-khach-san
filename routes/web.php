@@ -111,10 +111,19 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     Route::group(['middleware' => ['auth', 'role:MainAdmin']], function () {
+        //Role
+        Route::resource('roles', RoleController::class);
         // Chi nhanh Routes
         Route::resource('chinhanhs', ChinhanhController::class);
         Route::get('chinhanhs-search', 'ChinhanhController@search');
         Route::get('chinhanhs/chinhanhs-search', 'ChinhanhController@search');
+        Route::get('chinhanhs/chitiet/{chinhanhid}', 'ChinhanhController@showChinhanhChitiet');
+
+        // HinhChinhanh Route
+        Route::resource('hinh_chinhanh', HinhChinhanhController::class);
+
+        // MieutaChinhanh Route
+        Route::resource('mieuta_chinhanh', MieutaChinhanhController::class);
     });
 
     Route::group(['middleware' => ['auth', 'role:MainAdmin|Admin|User']], function () {
@@ -169,8 +178,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('mieutas/mieutas-search', 'MieutaController@search');
         // MieutaPhong Route
         Route::resource('mieuta_phong', MieutaPhongController::class);
-        // MieutaChinhanh Route
-        Route::resource('mieuta_chinhanh', MieutaChinhanhController::class);
+
 
         // Hinh Routes
         Route::resource('hinhs', HinhController::class);
@@ -178,8 +186,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('hinhs/hinhs-search', 'HinhController@search');
         // HinhPhong Route
         Route::resource('hinh_phong', HinhPhongController::class);
-        // HinhChinhanh Route
-        Route::resource('hinh_chinhanh', HinhChinhanhController::class);
+
 
         // Virtualtour Routes
         Route::resource('virtualtours', VirtualtourController::class);
@@ -224,9 +231,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
 
         Route::group(['middleware' => ['role:MainAdmin|Admin']], function () {
-            //Role
-            Route::resource('roles', RoleController::class);
-
             //Nhân viên
             Route::resource('nhanviens', NhanvienController::class);
             Route::get('nhanviens-search', 'NhanvienController@search');
@@ -318,7 +322,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Chi nhánh
     Route::get('client/chinhanh', 'IndexController@showChinhanhs');
     Route::get('client/chinhanhChitiet/{chinhanhid}', 'IndexController@showChinhanhChitiet');
-    
+
     // Search phong
     Route::get('client/search-phong', 'IndexController@searchPhong');
     Route::post('client/search-phong-with-many', 'IndexController@searchPhongWithManySearch');

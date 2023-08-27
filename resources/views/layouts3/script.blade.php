@@ -24,6 +24,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
 {{-- for edit text --}}
@@ -34,9 +35,31 @@
 {{-- flatpickr --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 <script>
-    let table = new DataTable('.table');
+    let table = new DataTable('.table', {
+        initComplete: function() {
+            this.api()
+                .columns()
+                .every(function() {
+                    let column = this;
+                    let title = column.footer().textContent;
+
+                    // Create input element
+                    let input = document.createElement('input');
+                    input.classList.add('form-control', 'form-control-sm');
+
+                    input.placeholder = title;
+                    column.footer().replaceChildren(input);
+
+                    // Event listener for user input
+                    input.addEventListener('keyup', () => {
+                        if (column.search() !== this.value) {
+                            column.search(input.value).draw();
+                        }
+                    });
+                });
+        },
+    });
     $(document).ready(function() {
 
         $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
@@ -91,6 +114,12 @@
 </script>
 
 <style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
     .dataTables_length label,
     .dataTables_filter label {
         display: flex;

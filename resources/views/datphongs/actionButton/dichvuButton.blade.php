@@ -1,4 +1,4 @@
-<div class="mb-3">
+<div class="">
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldichvu{{ $datphong->id }}">
         <i class="fa fa-wrench"></i> Dịch vụ
     </button>

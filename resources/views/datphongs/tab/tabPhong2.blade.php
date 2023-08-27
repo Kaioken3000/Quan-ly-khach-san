@@ -69,6 +69,15 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Phòng</th>
+            <th>Loại phòng</th>
+            <th>Giá (VND)</th>
+            <th> </th>
+        </tr>
+    </tfoot>
 </table>
 <style>
     .card,

@@ -4,9 +4,7 @@
             <th>Phòng</th>
             <th>Hình</th>
             <th></th>
-            @hasanyrole('MainAdmin|Admin')
-                <th>Action</th>
-            @endhasanyrole
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -36,4 +34,12 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Phòng</th>
+            <th>Hình</th>
+            <th></th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
 </table>

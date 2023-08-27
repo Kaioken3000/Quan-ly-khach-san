@@ -24,7 +24,7 @@ class NhanvienController extends Controller
     {
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $nhanviens = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
                 $allNhanvien = Nhanvien::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
@@ -49,7 +49,7 @@ class NhanvienController extends Controller
     {
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
             } else $nhanvien = [];
@@ -135,7 +135,7 @@ class NhanvienController extends Controller
     {
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
             } else $nhanvien = [];

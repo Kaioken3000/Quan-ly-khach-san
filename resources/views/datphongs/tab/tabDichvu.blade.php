@@ -86,6 +86,14 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Dịch vụ thường</th>
+            <th>Dịch vụ ăn uống</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
 </table>
 <style>
     .card,

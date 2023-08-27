@@ -10,7 +10,7 @@
         <div class="">
             <div class="d-flex">
                 <div class="flex-grow-1">
-                    @include('layouts3.title', ['titlePage'=>'Quản lý nhân viên'])
+                    @include('layouts3.title', ['titlePage' => 'Quản lý nhân viên'])
                 </div>
             </div>
             <table class="data-table table nowrap">
@@ -24,18 +24,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $key => $user)
+                    @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->username }}</td>
                             <td>
-                                @if (!empty($user->getRoleNames()))
-                                    @foreach ($user->getRoleNames() as $v)
-                                        <label
-                                            class="badge {{ $v == 'Admin' ? 'badge-success' : 'badge-warning' }}">{{ $v }}</label>
-                                    @endforeach
-                                @endif
+                                <label
+                                    class="badge {{ $user->getRoleNames()[0] == 'MainAdmin' ? 'bg-success' 
+                                    : 
+                                    ($user->getRoleNames()[0] == 'Admin' ? 'bg-danger' : 'bg-warning') }}">
+                                    {{ $user->getRoleNames()[0] }}</label>
                             </td>
                             <td>
                                 <form action="{{ route('users.destroy', $user->id) }}" method="Post">

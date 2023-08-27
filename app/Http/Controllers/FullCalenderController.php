@@ -35,7 +35,7 @@ class FullCalenderController extends Controller
         if ($request->ajax()) {
 
             $roleName = Auth::user()->roles[0]->name;
-            if ($roleName == "Admin")
+            if ($roleName == "Admin" || $roleName == "User")
                 if (isset(Auth::user()->nhanviens)) {
                     $data = CatrucNhanvien::whereDate('ngaybatdau', '>=', $request->start)
                         ->join('nhanviens', 'catruc_nhanviens.nhanvienid', '=', 'nhanviens.ma')

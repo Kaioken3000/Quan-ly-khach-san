@@ -35,6 +35,6 @@ class NhanphongController extends Controller
 
         $datphong->save();
 
-        return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
+        return redirect()->back()->withMessage('success', 'Datphong Has Been updated successfully');
     }
 }

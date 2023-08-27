@@ -95,4 +95,17 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th class="table-plus">Số phòng</th>
+            <th>Giường</th>
+            <th></th>
+            <th>Giá giường</th>
+            <th>Kích thước</th>
+            <th>Ghi chú</th>
+            @hasanyrole('MainAdmin|Admin')
+                <th class="datatable-nosort">Action</th>
+            @endhasanyrole
+        </tr>
+    </tfoot>
 </table>

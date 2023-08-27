@@ -61,7 +61,7 @@ class PhongController extends Controller
 
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
             } else $nhanvien = [];
@@ -160,10 +160,10 @@ class PhongController extends Controller
         $mieutas = Mieuta::all();
         $hinhs = Hinh::all();
         $virtualtours = Virtualtour::all();
-        
+
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
             } else $nhanvien = [];
@@ -246,7 +246,7 @@ class PhongController extends Controller
 
             HinhPhong::create($dich);
         }
-        
+
         // updatde virtualtour phong
         $virtualtourDel = VirtualtourPhong::where('phongid', $phong->so_phong);
         $virtualtourDel->delete();
@@ -291,7 +291,17 @@ class PhongController extends Controller
 
     public function roomDetail(Request $request)
     {
-        $phong = Phong::where("so_phong", $request->phongid)->first();
-        return view('phongs.roomDetail', compact('phong'));
+        // $phong = Phong::where("so_phong", $request->phongid)->first();
+
+        $phongs = Phong::where("so_phong", $request->phongid)->get();
+        $loaiphongs = Loaiphong::all();     
+        $hinhs = Hinh::all();
+        $thietbis = Thietbi::all();
+        $giuongs = Giuong::all();
+        $mieutas = Mieuta::all();
+        $chinhanhs = Chinhanh::all();
+        $virtualtours = Virtualtour::all();
+
+        return view('phongs.roomDetail', compact('phongs', 'loaiphongs', 'hinhs', 'thietbis', 'giuongs', 'mieutas', 'chinhanhs', 'virtualtours'));
     }
 }

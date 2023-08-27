@@ -21,6 +21,16 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Phòng</th>
+            <th>Khách hàng Id</th>
+            <th>Chi nhánh</th>
+            <th>Tên</th>
+            <th>Số điện thoại</th>
+            <th>Email</th>
+        </tr>
+    </tfoot>
 </table>
 <style>
     .card,

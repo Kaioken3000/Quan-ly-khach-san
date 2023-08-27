@@ -122,4 +122,13 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Phòng</th>
+            <th>Nội dung</th>
+            @hasanyrole('MainAdmin|Admin')
+                <th>Action</th>
+            @endhasanyrole
+        </tr>
+    </tfoot>
 </table>

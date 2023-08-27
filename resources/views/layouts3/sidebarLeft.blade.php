@@ -124,12 +124,6 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link">
-                                        <span class="micon fa fa-video"></span>
-                                        <span class="mtext">Video</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="/virtualtours"
                                         class="nav-link {{ Request::is('virtualtours') || Request::is('virtualtours*') ? 'active' : '' }}">
                                         <span class="micon fa fa-landmark"></span>
@@ -504,6 +498,8 @@
                             </a>
                         </span>
                     </li>
+                @endhasanyrole
+                @hasanyrole('MainAdmin')
                     <li class="nav-item">
                         <!-- parent pages--><span class="nav-item-wrapper">
                             <a class="nav-link {{ Request::is('roles') || Request::is('roles*') ? 'active' : '' }} dropdown-indicator label-1"

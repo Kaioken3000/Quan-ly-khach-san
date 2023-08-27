@@ -4,12 +4,11 @@
             <th class="table-plus">Số phòng</th>
             <th>Loại phòng</th>
             <th>Chi nhánh</th>
+            <th>Chi tiết</th>
             <th>Thiết bị</th>
             <th>Giừơng</th>
             <th>Miêu tả</th>
-            @hasanyrole('MainAdmin|Admin')
-                <th class="datatable-nosort">Action</th>
-            @endhasanyrole
+            <th class="datatable-nosort">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +17,8 @@
                 <td>{{ $phong->so_phong }} </td>
                 <td>{{ $phong->loaiphongs->ten }}</td>
                 <td>{{ $phong->chinhanhs->ten ?? '' }}</td>
+                <td><a href="/phongs/roomDetail/{{ $phong->so_phong }}" class="badge bg-primary" target="_blank">Chi
+                        tiết</a></td>
                 <td>
                     @foreach ($phong->thietbis as $thietbi)
                         <p>{{ $thietbi->ten ?? '' }}</p>
@@ -57,4 +58,16 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th class="table-plus">Số phòng</th>
+            <th>Loại phòng</th>
+            <th>Chi nhánh</th>
+            <th></th>
+            <th>Thiết bị</th>
+            <th>Giừơng</th>
+            <th>Miêu tả</th>
+            <th class="datatable-nosort">Action</th>
+        </tr>
+    </tfoot>
 </table>

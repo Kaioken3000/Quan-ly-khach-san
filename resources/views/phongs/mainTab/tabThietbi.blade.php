@@ -6,9 +6,7 @@
             <th></th>
             <th>Giá thiết bị (VND)</th>
             <th>Ghi chú</th>
-            @hasanyrole('MainAdmin|Admin')
-                <th class="datatable-nosort">Action</th>
-            @endhasanyrole
+            <th class="datatable-nosort">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -83,4 +81,14 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th class="table-plus">Số phòng</th>
+            <th>Thiết bị</th>
+            <th></th>
+            <th>Giá thiết bị (VND)</th>
+            <th>Ghi chú</th>
+            <th class="datatable-nosort">Action</th>
+        </tr>
+    </tfoot>
 </table>

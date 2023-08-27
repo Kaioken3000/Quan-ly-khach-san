@@ -204,4 +204,18 @@ class ChinhanhController extends Controller
             ->get();
         return view('chinhanhs.search', compact('chinhanhs'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showChinhanhChitiet(Request $request)
+    {
+        // $chinhanhs = Chinhanh::orderBy('ma','desc')->paginate(5);
+        $chinhanhs = Chinhanh::where("id", $request->chinhanhid)->get();
+        $hinhs = Hinh::get();
+        $mieutas = Mieuta::get();
+        return view('chinhanhs.chinhanhChitiet', compact('chinhanhs', 'hinhs', 'mieutas'));
+    }
 }

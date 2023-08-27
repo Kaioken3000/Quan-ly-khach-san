@@ -29,7 +29,7 @@ class DichvuDatphongController extends Controller
             DichvuDatphong::create($dich);
         }
 
-        return redirect()->route('datphongs.index')->with('success','Dich vu dat phong has been created successfully.');
+        return redirect()->back()->withMessage('success','Dich vu dat phong has been created successfully.');
     }
 
     /**

@@ -26,7 +26,7 @@ class BaocaoController extends Controller
         // $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin") {
+        if ($roleName == "Admin" || $roleName == "User") {
             $temp = [];
             if (isset(Auth::user()->nhanviens)) {
                 $datphongs = Datphong::where('tinhtrangthanhtoan', 1)->get();

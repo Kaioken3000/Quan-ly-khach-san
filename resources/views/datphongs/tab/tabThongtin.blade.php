@@ -64,7 +64,8 @@
 
                 </td>
                 <td>{{ $datphong->soluong }}</td>
-                <td>{{ $datphong->khachhangs->ten }}({{ $datphong->khachhangs->id }})</td>
+                <td>
+                    {{ $datphong->khachhangs->ten }}({{ $datphong->khachhangs->id }})</td>
 
                 {{-- 3 tinh trang --}}
                 <td>
@@ -83,16 +84,16 @@
                     @if ($check != 0)
                         {{-- @include('datphongs.actionButton.nhanphong') --}}
                         @if ($datphong->tinhtrangnhanphong == 0)
-                            <label class="badge bg-danger">
+                            <label class="badge bg-danger mt-2">
                                 Chưa
                             </label>
                         @else
-                            <label class="badge bg-success">
+                            <label class="badge bg-success mt-2">
                                 Xác nhận
                             </label>
                         @endif
                     @else
-                        <label class="badge bg-danger">
+                        <label class="badge bg-danger mt-2">
                             Chưa
                         </label>
                     @endif
@@ -100,12 +101,12 @@
                 <td>
                     @if ($check != 0)
                         @if ($datphong->tinhtrangthanhtoan == 0)
-                            <p class="badge bg-danger">Chưa</p>
+                            <p class="badge bg-danger mt-2">Chưa</p>
                         @else
-                            <p class="badge bg-success">Xác nhận</p>
+                            <p class="badge bg-success mt-2">Xác nhận</p>
                         @endif
                     @else
-                        <label class="badge bg-danger">
+                        <label class="badge bg-danger mt-2">
                             Chưa
                         </label>
                     @endif
@@ -116,39 +117,40 @@
                 <td>
 
                     <!-- các chức năng sửa, xoá, thanh toán, nhận phòng khi chưa thanh toán -->
-                    @if ($datphong->tinhtrangthanhtoan == 0)
-                        <div class="d-flex">
+                    @if ($datphong->huydatphong == 0)
+                        @if ($datphong->tinhtrangthanhtoan == 0)
+                            <div class="d-flex">
 
-                            <!-- Đổi phòng -->
-                            @include('datphongs.actionButton.doiphong')
+                                <!-- Đổi phòng -->
+                                @include('datphongs.actionButton.doiphong')
 
-                            <!-- Huỷ đặt phòng -->
-                            {{-- @include('datphongs.actionButton.huydatphong') --}}
+                                <!-- Huỷ đặt phòng -->
+                                {{-- @include('datphongs.actionButton.huydatphong') --}}
 
-                            <!-- Xoá -->
-                            @if ($datphong->tinhtrangnhanphong == 0)
-                                @hasanyrole('MainAdmin')
-                                    @include('datphongs.actionButton.xoa')
-                                @endhasanyrole
-                            @else
-                                <!-- Dịch vụ -->
-                                <div class="d-flex flex-column col-4">
-                                    {{-- @include('datphongs.actionButton.dichvuButton')
+                                <!-- Xoá -->
+                                @if ($datphong->tinhtrangnhanphong == 0)
+                                    @hasanyrole('MainAdmin')
+                                        @include('datphongs.actionButton.xoa')
+                                    @endhasanyrole
+                                @else
+                                    <!-- Dịch vụ -->
+                                    <div class="d-flex flex-column col-4">
+                                        {{-- @include('datphongs.actionButton.dichvuButton')
                                     @include('datphongs.actionButton.anUongButton') --}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="d-flex justify-content-start gap-2">
-                            @if ($check == 0)
-                                {{-- //Đặt cọc --}}
-                                <div class="my-1 col-6">
-                                    @foreach ($danhsachdatphongs as $danhsachdatphong)
-                                        <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
-                                            class="btn btn-success">Đặt cọc online</a>
-                                    @endforeach
-                                </div>
-                            @endif
-                            {{-- //Thanh toán
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="d-flex justify-content-start gap-2">
+                                @if ($check == 0)
+                                    {{-- //Đặt cọc --}}
+                                    <div class="my-1 col-6">
+                                        @foreach ($danhsachdatphongs as $danhsachdatphong)
+                                            <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
+                                                class="btn btn-success">Đặt cọc online</a>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                {{-- //Thanh toán
                             @if ($check != 0)
                                 @include('datphongs.actionButton.thanhtoan')
                             @endif
@@ -157,19 +159,35 @@
                             @if ($check != 0)
                                 @include('datphongs.actionButton.nhanphong')
                             @endif --}}
-                        </div>
+                            </div>
 
-                        <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
-                    @else
-                        {{-- <div class="d-flex justify-content-start gap-1"> --}}
-                        {{-- @can('role-edit')
+                            <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
+                        @else
+                            {{-- <div class="d-flex justify-content-start gap-1"> --}}
+                            {{-- @can('role-edit')
                                     @include('datphongs.actionButton.suathanhtoan')
                                 @endcan --}}
-                        @include('datphongs.actionButton.hoadon')
-                        {{-- </div> --}}
+                            @include('datphongs.actionButton.hoadon')
+                            {{-- </div> --}}
+                        @endif
+
                     @endif
                 </td>
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th>id</th>
+            <th>Phòng hiện tại</th>
+            <th>Chi nhánh</th>
+            <th>Chi tiết phòng</th>
+            <th style="width: 1px">Số lượng</th>
+            <th>Khách hàng(ID)</th>
+            <th>Xử lý</th>
+            <th>Nhận phòng</th>
+            <th>Thanh toán</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
 </table>

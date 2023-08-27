@@ -14,7 +14,7 @@ class AnuongController extends Controller
         // $anuongs = Anuong::orderBy('id','asc')->paginate(5);
         $roleName = Auth::user()->roles[0]->name;
 
-        if ($roleName == "Admin")
+        if ($roleName == "Admin" || $roleName == "User")
             if (isset(Auth::user()->nhanviens)) {
                 $anuongs = Anuong::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
                 $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();

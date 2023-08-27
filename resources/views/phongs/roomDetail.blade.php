@@ -1,75 +1,103 @@
 @extends('layouts3.app')
 
 @section('content')
-    <!-- Room Details Section Begin -->
-    <section class="room-details-section spad">
-        <div class="container">
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    {{-- <ul class="nav nav-underline" id="myTab" role="tablist" id="myTab">
+        <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
+                href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin</a></li>
+
+        <li class="nav-item" role="presentation"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab" href="#tab-hinh"
+                role="tab" aria-controls="tab-hinh" aria-selected="false" tabindex="-1">Hình</a>
+        </li>
+
+        <li class="nav-item" role="presentation"><a class="nav-link" id="thietbi-tab" data-bs-toggle="tab"
+                href="#tab-thietbi" role="tab" aria-controls="tab-thietbi" aria-selected="false" tabindex="-1">Thiết
+                bị</a></li>
+
+        <li class="nav-item" role="presentation"><a class="nav-link" id="giuong-tab" data-bs-toggle="tab" href="#tab-giuong"
+                role="tab" aria-controls="tab-giuong" aria-selected="false" tabindex="-1">Giường</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="mieuta-tab" data-bs-toggle="tab" href="#tab-mieuta"
+                role="tab" aria-controls="tab-mieuta" aria-selected="false" tabindex="-1">Miêu
+                tả</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="virtualTour-tab" data-bs-toggle="tab"
+                href="#tab-virtualTour" role="tab" aria-controls="tab-virtualTour" aria-selected="false"
+                tabindex="-1">Virtual Tour</a></li>
+    </ul> --}}
+    <ul class="nav nav-underline" id="myTab" role="tablist" id="myTab">
+        <li class="nav-item" role="presentation"><a class="nav-link active" id="thongtin-tab" data-bs-toggle="tab"
+                href="#tab-thongtin" role="tab" aria-controls="tab-thongtin" aria-selected="true">Thông tin - Thiết
+                bị</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="giuong-tab" data-bs-toggle="tab" href="#tab-giuong"
+                role="tab" aria-controls="tab-giuong" aria-selected="false" tabindex="-1">Giường - Miêu tả</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab" href="#tab-hinh"
+                role="tab" aria-controls="tab-hinh" aria-selected="false" tabindex="-1">Hình - Virtual Tours</a>
+        </li>
+    </ul>
+    <div class="tab-content mt-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="card" style="width: 18rem; border: 10px solid black;">
+                <div class="col-6">
+                    <div class="card border border-dark mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Chi tiết phòng {{ $phong->so_phong }}</h5>
-                            <div class="card mt-2 bg-primary text-white" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-white">Giá phòng:</h5>
-                                    <p class="card-text">{{ $phong->loaiphongs->gia }}VND<span>/Pernight</p>
-                                </div>
-                            </div>
-                            <div class="card mt-2 bg-success text-white" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-white">Loại phòng:</h5>
-                                    <p class="card-text">{{ $phong->loaiphongs->ten }}</p>
-                                </div>
-                            </div>
-                            <div class="card mt-2 bg-warning text-white" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-white">Số lượng:</h5>
-                                    <p class="card-text">{{ $phong->loaiphongs->soluong }} ngươi</p>
-                                </div>
-                            </div>
-                            <div class="card mt-2 bg-secondary text-white" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-white">Miêu tả:</h5>
-                                    <p class="card-text">{{ $phong->loaiphongs->mieuTa }}</p>
-                                </div>
-                            </div>
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabThongtin')
                         </div>
                     </div>
-
                 </div>
-                <div class="col-lg-8">
-                    <div class="room-details-item">
-                        {{-- content --}}
-                        <div id="carouselExample" class="carousel slide">
-                            <div class="carousel-inner">
-                                <?php $i = 0; ?>
-                                @foreach ($phong->hinhs as $hinh)
-                                    <div
-                                        class="carousel-item
-                                    <?php if ($i == 0) {
-                                        echo 'active';
-                                    } ?>
-                                    ">
-                                        <img src="/client/images/{{ $hinh->vitri }}" class="d-block w-100">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                <div class="col-6">
+                    <div class="card border border-dark mb-3">
+                        <div class="card-body">
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabThietbi')
                         </div>
-                        {{-- end content --}}
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Room Details Section End -->
+        <div class="tab-pane fade" id="tab-giuong" role="tabpanel" aria-labelledby="giuong-tab">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card border border-dark mb-3">
+                        <div class="card-body">
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabGiuong')
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card border border-dark mb-3">
+                        <div class="card-body">
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabMieuta')
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tab-hinh" role="tabpanel" aria-labelledby="hinh-tab">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card border border-dark mb-3">
+                        <div class="card-body">
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabHinh')
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card border border-dark mb-3">
+                        <div class="card-body">
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabVirtualTour')
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="/tableToList/style.css">
 @endsection
