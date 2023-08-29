@@ -36,7 +36,7 @@ class IndexController extends Controller
         return view('client.index', compact('phongs', 'chinhanhs'));
     }
 
-     /**
+    /**
      * Hien trang index cua client
      *
      * @return \Illuminate\Http\Response
@@ -166,7 +166,17 @@ class IndexController extends Controller
             'username' => 'required',
             'sdt' => 'required|numeric|digits:10',
         ]);
-        $user->fill($request->post())->save();
+        if ($request->diachi || $request->gioitinh || $request->vanbang) {
+            $user->fill([
+                'email' => $request->email,
+                'username' => $request->username,
+                'sdt' => $request->sdt,
+                'diachi' => $request->diachi,
+                'gioitinh' => $request->gioitinh,
+                'vanbang' => $request->vanbang,
+            ])->save();
+        } else
+            $user->fill($request->post())->save();
 
         return redirect('/client/khachhang')->with('success', 'Khách hàng Has Been updated successfully');
     }
@@ -194,12 +204,13 @@ class IndexController extends Controller
     public function danhsachdatphong(Request $request)
     {
         $userid = Auth::user()->id;
-        $datphongs = DB::table('datphongs')
-            ->join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        $datphongs = Datphong::
+            join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
             ->select('*', 'datphongs.id as datphongid')
             ->where('khachhangs.userid', $userid)
             ->where('huydatphong', 0)
             ->orderBy('datphongs.id', 'desc')->get();
+        
         $dichvus = Dichvu::get();
         $anuongs = Anuong::get();
         return view('client.danhsachdatphong', compact('datphongs', 'dichvus', 'anuongs'));

@@ -116,7 +116,6 @@
 <style>
     tfoot input {
         width: 100%;
-        padding: 3px;
         box-sizing: border-box;
     }
 

@@ -130,6 +130,7 @@ class ThanhtoanController extends Controller
             "loaitien" => $request->loaitien,
             "chuyenkhoan_token" => $request->vnp_TxnRef,
             "khachhangid" => $request->khachhangid,
+            "datphongid" => $request->datphongid,
             // chua co thoi gian
         ));
 

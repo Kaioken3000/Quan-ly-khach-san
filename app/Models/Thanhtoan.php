@@ -15,5 +15,6 @@ class Thanhtoan extends Model
         'loaitien',
         'chuyenkhoan_token',
         'khachhangid',
+        'datphongid',
     ];
 }

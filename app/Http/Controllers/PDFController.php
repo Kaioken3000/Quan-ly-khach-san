@@ -34,6 +34,7 @@ class PDFController extends Controller
         $danhsachdatphongs = Danhsachdatphong::where('datphongid', $datphong->id)->get();
 
         $dichvudatphongs = DichvuDatphong::where('datphongid', $datphong->id)->get();
+        $anuongdatphongs = AnuongDatphong::where('datphongid', $datphong->id)->get();
 
         $tiendatcoc = Thanhtoan::where("khachhangid", $khachhang->id)
             ->where("loaitien", "datcoc")
@@ -58,11 +59,13 @@ class PDFController extends Controller
         foreach ($dichvudatphongs as $dichvudatphong) {
             $tonggia += $dichvudatphong->dichvus->giatien;
         }
+        foreach ($anuongdatphongs as $anuongdatphong) {
+            $tonggia += $anuongdatphong->anuongs->gia;
+        }
 
         $nhanphongs = Nhanphong::where('datphongid', $request->datphongid)->get();
         $traphongs = Traphong::where('datphongid', $request->datphongid)->get();
         $huydatphongs = Huydatphong::where('datphongid', $request->datphongid)->get();
-        $anuongdatphongs = AnuongDatphong::where('datphongid', $request->datphongid)->get();
         $thanhtoans = Thanhtoan::where('khachhangid', $request->khachhangid)->get();
 
         $pdf = PDF::loadView('Hoadon', compact('datphong', 'khachhang', 'danhsachdatphongs', 'dichvudatphongs', 'tiendatcoc',

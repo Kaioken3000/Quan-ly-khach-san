@@ -19,7 +19,8 @@
             $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->id)->get();
             $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->id)->get();
             $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->id)->get();
-            $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
+            // $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
+            $thanhtoans = App\Models\Thanhtoan::where('datphongid', $datphong->id)->get();
             ?>
             {{-- KT co dat coc --}}
             <?php $check = 0;

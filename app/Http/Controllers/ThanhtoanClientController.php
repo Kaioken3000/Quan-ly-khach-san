@@ -27,6 +27,7 @@ class ThanhtoanClientController extends Controller
     public function create(Request $request)
     {
         require_once("config.php");
+        
         $vnp_TxnRef = rand(1, 10000); //Mã giao dịch thanh toán tham chiếu của merchant
         $vnp_Amount = $request->amount; // Số tiền thanh toán
         $vnp_Locale = $request->language; //Ngôn ngữ chuyển hướng thanh toán
@@ -36,6 +37,9 @@ class ThanhtoanClientController extends Controller
             . "ten=" . $request->ten .
             "&sdt=" . $request->sdt .
             "&email=" . $request->email .
+            "&diachi=" . $request->diachi .
+            "&gioitinh=" . $request->gioitinh .
+            "&vanbang=" . $request->vanbang .
             "&ngaydat=" . $request->ngaydat .
             "&ngaytra=" . $request->ngaytra .
             "&soluong=" . $request->soluong .
@@ -126,7 +130,7 @@ class ThanhtoanClientController extends Controller
 
         // $datphong->save();
 
-        $khachhang = $this->index_store($request);
+        $dat = $this->index_store($request);
         Log::info($request);
         // Luu thong tin chuyen khoan
         $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
@@ -136,7 +140,7 @@ class ThanhtoanClientController extends Controller
             "gia" => $request->vnp_Amount,
             "loaitien" => $request->loaitien,
             "chuyenkhoan_token" => $request->vnp_TxnRef,
-            "khachhangid" => $khachhang->id,
+            "datphongid" => $dat,
             // chua co thoi gian
         ));
 
@@ -152,6 +156,8 @@ class ThanhtoanClientController extends Controller
             'ten' => 'required',
             'sdt' => 'required',
             'email' => 'required',
+            'diachi' => 'required',
+            'vanbang' => 'required',
             'ngaydat' => 'required',
             'ngaytra' => 'required',
             'soluong' => 'required',
@@ -164,6 +170,9 @@ class ThanhtoanClientController extends Controller
             'ten' => $request->ten,
             'sdt' => $request->sdt,
             'email' => $request->email,
+            'diachi' => $request->diachi,
+            'vanbang' => $request->vanbang,
+            'gioitinh' => $request->gioitinh,
             'userid' => $request->khachhangid
         ]);
 
@@ -198,6 +207,6 @@ class ThanhtoanClientController extends Controller
         ]);
 
         // return redirect('client/index')->with('success', 'Datphong has been created successfully.');
-        return $khachhangs;
+        return $dat;
     }
 }

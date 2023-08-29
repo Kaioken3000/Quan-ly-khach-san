@@ -17,8 +17,8 @@
         <?php $i = 0; ?>
         @foreach ($datphongs as $datphong)
             <tr>
-                <td>{{ $datphong->id }}</td>
-                <td>
+                <td data-name="Id">{{ $datphong->id }}</td>
+                <td data-name="Phòng hiện tại">
                     <?php
                     $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)
                         ->orderBy('id', 'desc')
@@ -28,11 +28,11 @@
                         {{ $phongmax->phongid }}
                     @endif
                 </td>
-                <td>
+                <td data-name="Chi nhánh">
                     <p>{{ $datphong->phongs[count($datphong->phongs) - 1]->chinhanhs->ten }}</p>
                     <?php $i++; ?>
                 </td>
-                <td>
+                <td data-name="Chi tiết phòng">
                     <?php
                     $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)->get();
                     $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphong->id)->get();
@@ -40,7 +40,8 @@
                     $huydatphongs = App\Models\Huydatphong::where('datphongid', $datphong->id)->get();
                     $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphong->id)->get();
                     $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphong->id)->get();
-                    $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
+                    // $thanhtoans = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)->get();
+                    $thanhtoans = App\Models\Thanhtoan::where('datphongid', $datphong->id)->get();
                     ?>
                     {{-- KT co dat coc --}}
                     <?php $check = 0;
@@ -63,12 +64,12 @@
                     @endhasanyrole
 
                 </td>
-                <td>{{ $datphong->soluong }}</td>
-                <td>
+                <td data-name="Số lượng">{{ $datphong->soluong }}</td>
+                <td data-name="Khách hàng(ID)">
                     {{ $datphong->khachhangs->ten }}({{ $datphong->khachhangs->id }})</td>
 
                 {{-- 3 tinh trang --}}
-                <td>
+                <td data-name="Xử lý">
                     <form class="mt-1" action="{{ route('datphongs.xuly', $datphong->id) }}" method="Post">
                         @csrf
                         @method('PUT')
@@ -80,7 +81,7 @@
                         </button>
                     </form>
                 </td>
-                <td>
+                <td data-name="Nhận phòng">
                     @if ($check != 0)
                         {{-- @include('datphongs.actionButton.nhanphong') --}}
                         @if ($datphong->tinhtrangnhanphong == 0)
@@ -98,7 +99,7 @@
                         </label>
                     @endif
                 </td>
-                <td>
+                <td data-name="Thanh toán">
                     @if ($check != 0)
                         @if ($datphong->tinhtrangthanhtoan == 0)
                             <p class="badge bg-danger mt-2">Chưa</p>
@@ -114,64 +115,38 @@
                 {{-- 3 tình trang --}}
 
                 <!-- Action -->
-                <td>
+                <td data-name="Action">
 
                     <!-- các chức năng sửa, xoá, thanh toán, nhận phòng khi chưa thanh toán -->
-                    @if ($datphong->huydatphong == 0)
-                        @if ($datphong->tinhtrangthanhtoan == 0)
-                            <div class="d-flex">
-
+                    <div class="row">
+                        @if ($datphong->huydatphong == 0)
+                            @if ($datphong->tinhtrangthanhtoan == 0)
                                 <!-- Đổi phòng -->
-                                @include('datphongs.actionButton.doiphong')
-
-                                <!-- Huỷ đặt phòng -->
-                                {{-- @include('datphongs.actionButton.huydatphong') --}}
-
-                                <!-- Xoá -->
-                                @if ($datphong->tinhtrangnhanphong == 0)
-                                    @hasanyrole('MainAdmin')
-                                        @include('datphongs.actionButton.xoa')
-                                    @endhasanyrole
-                                @else
-                                    <!-- Dịch vụ -->
-                                    <div class="d-flex flex-column col-4">
-                                        {{-- @include('datphongs.actionButton.dichvuButton')
-                                    @include('datphongs.actionButton.anUongButton') --}}
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="d-flex justify-content-start gap-2">
-                                @if ($check == 0)
-                                    {{-- //Đặt cọc --}}
-                                    <div class="my-1 col-6">
-                                        @foreach ($danhsachdatphongs as $danhsachdatphong)
-                                            <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
-                                                class="btn btn-success">Đặt cọc online</a>
-                                        @endforeach
-                                    </div>
-                                @endif
-                                {{-- //Thanh toán
-                            @if ($check != 0)
-                                @include('datphongs.actionButton.thanhtoan')
+                                <div class="col-9">
+                                    @if ($check == 0)
+                                        {{-- //Đặt cọc --}}
+                                        <div class="my-1">
+                                            @foreach ($danhsachdatphongs as $danhsachdatphong)
+                                                <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
+                                                    class="btn btn-success">Đặt cọc online</a>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    @include('datphongs.actionButton.doiphong')
+                                </div>
+                            @else
+                                <div class="col-9">
+                                    @include('datphongs.actionButton.hoadon')
+                                </div>
                             @endif
-
-                            //Nhận phòng, sửa nhận phòng
-                            @if ($check != 0)
-                                @include('datphongs.actionButton.nhanphong')
-                            @endif --}}
-                            </div>
-
-                            <!-- các chức năng sửa thanh toán và in hoá đơn nhận phòng khi đã thanh toán -->
-                        @else
-                            {{-- <div class="d-flex justify-content-start gap-1"> --}}
-                            {{-- @can('role-edit')
-                                    @include('datphongs.actionButton.suathanhtoan')
-                                @endcan --}}
-                            @include('datphongs.actionButton.hoadon')
-                            {{-- </div> --}}
+                            <!-- Xoá -->
+                            @hasanyrole('MainAdmin')
+                                <div class="col-3">
+                                    @include('datphongs.actionButton.xoa')
+                                </div>
+                            @endhasanyrole
                         @endif
-
-                    @endif
+                    </div>
                 </td>
             </tr>
         @endforeach

@@ -403,6 +403,7 @@ class DatphongController extends Controller
             "loaitien" => $request->loaitien,
             "chuyenkhoan_token" => $request->stripeToken,
             "khachhangid" => $request->khachhang_id,
+            "datphongid" => $datphong->id,
         ));
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
     }

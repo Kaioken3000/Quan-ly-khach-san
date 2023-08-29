@@ -13,10 +13,10 @@
         <div>
             <a class="btn btn-success" href="{{ route('datphongs.create') }}"><i class="fa fa-plus"></i> Đặt phòng</a>
         </div>
-        <?php $today = date('Y-m-d');?>
+        <?php $today = date('Y-m-d'); ?>
         <div>
-            <a href="/datphongs-kiemtra?ngaydat={{$today}}&ngaytra={{$today}}&soluong=1&tinhtrangthanhtoan=0&tinhtrangnhanphong=0"
-            class="btn btn-primary">
+            <a href="/datphongs-kiemtra?ngaydat={{ $today }}&ngaytra={{ $today }}&soluong=1&tinhtrangthanhtoan=0&tinhtrangnhanphong=0"
+                class="btn btn-primary">
                 Hiện phòng trống</a>
         </div>
         {{-- @include('datphongs.option') --}}
@@ -47,8 +47,9 @@
         </li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="dichvu-tab" data-bs-toggle="tab" href="#tab-dichvu"
                 role="tab" aria-controls="tab-dichvu" aria-selected="false" tabindex="-1">Dịch vụ</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" id="khachhang-tab" data-bs-toggle="tab" href="#tab-khachhang"
-                role="tab" aria-controls="tab-khachhang" aria-selected="false" tabindex="-1">Khách hàng</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="khachhang-tab" data-bs-toggle="tab"
+                href="#tab-khachhang" role="tab" aria-controls="tab-khachhang" aria-selected="false"
+                tabindex="-1">Khách hàng</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" id="thanhtoan-tab" data-bs-toggle="tab"
                 href="#tab-thanhtoan" role="tab" aria-controls="tab-thanhtoan" aria-selected="false" tabindex="-1">Chi
                 tiết đặt phòng</a></li>
@@ -73,7 +74,6 @@
             @include('datphongs.tab.tabThanhtoan')
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

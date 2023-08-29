@@ -59,56 +59,77 @@ class KhachhangController extends Controller
 
         // Log::info($request);
 
-        Khachhang::create([
-            'ten' => $request->ten,
-            'sdt' => $request->sdt,
-            'email' => $request->email,
-            'diachi' => $request->diachi,
-            'gioitinh' => $request->gioitinh,
-            'vanbang' => $request->vanbang,
-        ]);
-
-        $khachhangs = Khachhang::max('id');
-
         $request->tinhtrangthanhtoan = 0;
         $request->tinhtrangnhanphong = 0;
         $request->tinhtrangxuly = 0;
         $request->huydatphong = 0;
-        Datphong::create([
-            'ngaydat' => $request->ngaydat,
-            'ngaytra' => $request->ngaytra,
-            'soluong' => $request->soluong,
-            'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
-            'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
-            'tinhtrangxuly' => $request->tinhtrangxuly,
-            'huydatphong' => $request->huydatphong,
-            'khachhangid' => $khachhangs,
-        ]);
 
-        $dat = Datphong::max('id');
+        $khachhangs = null;
+        $dat = null;
+        if (isset($request->thiskhachhangid)) {
 
-        $khachhangs = Khachhang::find($khachhangs);
-        $khachhangs->datphongid = $dat;
-        $khachhangs->save();
+            $dat = Datphong::create([
+                'ngaydat' => $request->ngaydat,
+                'ngaytra' => $request->ngaytra,
+                'soluong' => $request->soluong,
+                'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
+                'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
+                'tinhtrangxuly' => $request->tinhtrangxuly,
+                'huydatphong' => $request->huydatphong,
+                'khachhangid' => $request->thiskhachhangid,
+            ]);
+        } else {
 
+            $khachhangs = Khachhang::create([
+                'ten' => $request->ten,
+                'sdt' => $request->sdt,
+                'email' => $request->email,
+                'diachi' => $request->diachi,
+                'gioitinh' => $request->gioitinh,
+                'vanbang' => $request->vanbang,
+            ]);
+    
+            $dat = Datphong::create([
+                'ngaydat' => $request->ngaydat,
+                'ngaytra' => $request->ngaytra,
+                'soluong' => $request->soluong,
+                'tinhtrangthanhtoan' => $request->tinhtrangthanhtoan,
+                'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
+                'tinhtrangxuly' => $request->tinhtrangxuly,
+                'huydatphong' => $request->huydatphong,
+                'khachhangid' => $khachhangs->id,
+            ]);
+        }
         Danhsachdatphong::create([
             'phongid' => $request->phongid,
             'ngaybatdauo' => $request->ngaydat,
             'ngayketthuco' => $request->ngaytra,
-            'datphongid' => $dat,
+            'datphongid' => $dat->id,
         ]);
+
 
         // Luu thong tin chuyen khoan
         if ($request->hinhthucthanhtoan == "tructiep") {
-            Thanhtoan::create(array(
-                "hinhthuc" => $request->hinhthucthanhtoan,
-                "gia" => $request->tiendatcoc,
-                "loaitien" => $request->loaitien,
-                "chuyenkhoan_token" => $request->stripeToken,
-                "khachhangid" => $khachhangs->id,
-            ));
+            if (isset($request->thiskhachhangid)) {
+                Thanhtoan::create(array(
+                    "hinhthuc" => $request->hinhthucthanhtoan,
+                    "gia" => $request->tiendatcoc,
+                    "loaitien" => $request->loaitien,
+                    "chuyenkhoan_token" => $request->stripeToken,
+                    "khachhangid" => $request->thiskhachhangid,
+                    "datphongid" => $dat->id,
+                ));
+            } else {
+                Thanhtoan::create(array(
+                    "hinhthuc" => $request->hinhthucthanhtoan,
+                    "gia" => $request->tiendatcoc,
+                    "loaitien" => $request->loaitien,
+                    "chuyenkhoan_token" => $request->stripeToken,
+                    "khachhangid" => $khachhangs->id,
+                    "datphongid" => $dat->id,
+                ));
+            }
         }
-
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }
 

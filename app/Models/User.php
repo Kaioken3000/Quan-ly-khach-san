@@ -25,7 +25,10 @@ class User extends Authenticatable
         'password',
         'sdt',
         'google_id',
-        'facebook_id'
+        'facebook_id',
+        'diachi',
+        'gioitinh',
+        'vanbang',
     ];
 
     /**

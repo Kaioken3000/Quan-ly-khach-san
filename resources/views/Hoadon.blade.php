@@ -59,7 +59,7 @@
         <h3>Thông tin đặt phòng</h3>
         <table width="100%">
             <tr>
-                <td widdth="50%">
+                <td width="50%">
                     <strong>Mã đặt phòng:</strong> {{ $datphong->id }}<br>
                     <strong>Ngày đặt:</strong>{{ $datphong->ngaydat }}<br>
                     <strong>Ngày trả:</strong>{{ $datphong->ngaytra }}<br>
@@ -76,17 +76,67 @@
             </tr>
         </table><br>
         {{-- Kết thúc thông tin đặt phòng --}}
-        <div class="add-detail mt-10">
+        {{-- <div class="add-detail mt-10">
             <div class="w-50 float-left mt-10">
                 <h3>Dịch vụ sử dụng:</h3>
-                <?php $tongtiendv = 0; ?>
-                @foreach ($dichvudatphongs as $dichvudatphong)
-                    <?php $tongtiendv += $dichvudatphong->dichvus->giatien; ?>
-                    <p class="m-0 pt-5 text-bold w-100"><span class="gray-color">{{ $dichvudatphong->dichvus->ten }}:
-                            {{ $dichvudatphong->dichvus->giatien }} {{ $dichvudatphong->dichvus->donvi }}</span></p>
-                @endforeach
+                <?php //$tongtiendv = 0;
+                ?>
+                <div>
+                    <div>
+                        <h4>Dịch vụ thường: </h4>
+                        <ul>
+                            @foreach ($dichvudatphongs as $dichvudatphong)
+                                <?php //$tongtiendv += $dichvudatphong->dichvus->giatien;
+                                ?>
+                                <li class="m-0 pt-5 text-bold w-100"><span
+                                        class="gray-color">{{ $dichvudatphong->dichvus->ten }}:
+                                        {{ $dichvudatphong->dichvus->giatien }}
+                                        {{ $dichvudatphong->dichvus->donvi }}</span></li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4>Dịch vụ ăn uống: </h4>
+                        @foreach ($anuongdatphongs as $anuongdatphong)
+                            <?php //$tongtiendv += $anuongdatphong->anuongs->gia;
+                            ?>
+                            <p class="m-0 pt-5 text-bold w-100"><span
+                                    class="gray-color">{{ $anuongdatphong->anuongs->ten }}:
+                                    {{ $anuongdatphong->anuongs->gia }} VND - Số lượng:
+                                    {{ $anuongdatphong->soluong }}</span>
+                            </p>
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </div> --}}
+        <?php $tongtiendv = 0; ?>
+        <h3>Thông tin dịch vụ</h3>
+        <table width="100%" style="border-collapse: collapse;">
+            <tr>
+                <td width="50%" style="background:#eee;padding:20px;">
+                    <strong>Dịch vụ thường</strong><br>
+                    <strong></strong><br>
+                    @foreach ($dichvudatphongs as $dichvudatphong)
+                        <?php $tongtiendv += $dichvudatphong->dichvus->giatien; ?>
+                        <strong>{{ $dichvudatphong->dichvus->ten }}:</strong> {{ $dichvudatphong->dichvus->giatien }}
+                        {{ $dichvudatphong->dichvus->donvi }}<br>
+                    @endforeach
+                </td>
+                <td style="background:#eee;padding:20px;">
+                    <strong>Dịch vụ ăn uống</strong><br>
+                    <strong></strong><br>
+                    @foreach ($anuongdatphongs as $anuongdatphong)
+                        <?php $tongtiendv += $anuongdatphong->anuongs->gia * $anuongdatphong->soluong; ?>
+                        <strong>{{ $anuongdatphong->anuongs->ten }}:</strong> {{ $anuongdatphong->anuongs->gia }}
+                        VND -
+                        Số lượng: {{ $anuongdatphong->soluong }}<br>
+                    @endforeach
+                </td>
+            </tr>
+        </table><br>
         <br>
 
         <h3>Các phòng đã ở</h3>
@@ -146,11 +196,17 @@
                     <table width="180px" style="float:right">
                         <tr>
                             <td><strong>Tổng cộng:</strong></td>
-                            <td style="text-align:right">
+                            {{-- <td style="text-align:right">
                                 @if ($tiendatcoc)
                                     {{ $tonggia + $tongtiendv - $tiendatcoc->gia }}VND
                                 @else
                                     {{ $tonggia + $tongtiendv }}VND
+                                @endif
+                            </td> --}}
+                            <td style="text-align:right">
+                                <?php $thanhtoan = App\Models\Thanhtoan::where('datphongid', $datphong->id)->latest("id")->first(); ?>
+                                @if ($thanhtoan->loaitien == 'traphong')
+                                    {{ $thanhtoan->gia }} VND
                                 @endif
                             </td>
                         </tr>

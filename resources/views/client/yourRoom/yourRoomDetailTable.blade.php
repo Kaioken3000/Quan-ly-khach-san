@@ -112,17 +112,17 @@
                             <?php $check++; ?>
                         @endif
                     @endforeach
-
+                    {{-- {{$danhsachdatphongs}} --}}
                     @if ($check == 0)
+                        <?php $datphongsnew = App\Models\Datphong::where('khachhangid', $datphong->id)->first(); ?>
                         {{-- Đặt cọc --}}
                         <div class="mx-1">
-                            <a href="/client/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{ $datphong->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
+                            <a href="/client/thanhtoanvnpayview/{{ $datphong->datphongid }}/datcoc/{{ $datphong->id }}/{{ $datphongsnew->phongs[count($datphongsnew->phongs) - 1]->loaiphongs->gia/2 }}"
                                 class="btn btn-success">Đặt cọc online</a>
                         </div>
                     @endif
                 </td>
             </tr>
-
         @endforeach
     </tbody>
 </table>

@@ -2,14 +2,38 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Username</h5>
-                <p class="card-text">{{ auth()->user()->username }}</p>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex">
+                            <h5 class="card-title mr-2">Username:</h5>
+                            <p class="card-text">{{ auth()->user()->username }}</p>
+                        </div>
 
-                <h5 class="card-title">Email</h5>
-                <p class="card-text">{{ auth()->user()->email }}</p>
+                        <div class="d-flex">
+                            <h5 class="card-title mr-1">Email:</h5>
+                            <p class="card-text">{{ auth()->user()->email }}</p>
+                        </div>
 
-                <h5 class="card-title">Phone Number</h5>
-                <p class="card-text">0{{ auth()->user()->sdt }}</p>
+                        <div class="d-flex">
+                            <h5 class="card-title mr-1">Phone Number:</h5>
+                            <p class="card-text">0{{ auth()->user()->sdt }}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex">
+                            <h5 class="card-title mr-1">Address:</h5>
+                            <p class="card-text">{{ auth()->user()->diachi }}</p>
+                        </div>
+                        <div class="d-flex">
+                            <h5 class="card-title mr-1">Giới Tính:</h5>
+                            <p class="card-text">{{ auth()->user()->gioitinh }}</p>
+                        </div>
+                        <div class="d-flex">
+                            <h5 class="card-title mr-1">Văn Bằng:</h5>
+                            <p class="card-text">{{ auth()->user()->vanbang }}</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="mt-3">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#suataikhoan">
                         Cập nhật thông tin
@@ -27,31 +51,88 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex gap-1">
-                                        <form action="{{ route('client.khachhangedit', auth()->user()->id) }}" method="POST">
+                                        <form action="{{ route('client.khachhangedit', auth()->user()->id) }}"
+                                            method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="mb-3">
                                                 <label class="form-label" for="username">Username</label>
-                                                <input type="text" name="username" class="form-control" id="username" placeholder="VD: Admin" value="{{ auth()->user()->username }}" />
+                                                <input required type="text" name="username" class="form-control"
+                                                    id="username" placeholder="VD: Admin"
+                                                    value="{{ auth()->user()->username }}" />
                                                 @error('username')
-                                                <div class="alert alert-danger" user="alert">{{ $message }}</div>
+                                                    <div class="alert alert-danger" user="alert">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="email">Email</label>
-                                                <input type="email" name="email" class="form-control" id="email" placeholder="VD: Admin@gmail.com" value="{{ auth()->user()->email }}" />
+                                                <input required type="email" name="email" class="form-control"
+                                                    id="email" placeholder="VD: Admin@gmail.com"
+                                                    value="{{ auth()->user()->email }}" />
                                                 @error('email')
-                                                <div class="alert alert-danger" user="alert">{{ $message }}</div>
+                                                    <div class="alert alert-danger" user="alert">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="sdt">Số điện thoại</label>
-                                                <input type="sdt" name="sdt" class="form-control" id="sdt" placeholder="VD: Admin@gmail.com" value="0{{ auth()->user()->sdt }}" />
+                                                <input required type="sdt" name="sdt" class="form-control"
+                                                    id="sdt" placeholder="VD: Admin@gmail.com"
+                                                    value="0{{ auth()->user()->sdt }}" />
                                                 @error('sdt')
-                                                <div class="alert alert-danger" user="alert">{{ $message }}</div>
+                                                    <div class="alert alert-danger" user="alert">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
-                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                            <div class="mb-3 form-group">
+                                                <label class="form-label" for="diachi">Địa chỉ</label>
+                                                <input required type="diachi" name="diachi" class="form-control"
+                                                    id="diachi" placeholder="VD: Q.Ninh Kiều, TP.Cần Thơ"
+                                                    value="{{ auth()->user()->diachi }}" required />
+                                                @error('diachi')
+                                                    <div class="alert alert-danger" role="alert">{{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3 ">
+                                                <label class="form-label" for="gioitinh">Giới tính</label>
+                                                <div class="row mx-2">
+                                                    <div class="form-group col-3">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="gioitinh" id="gioitinnam" value="nam"
+                                                            {{ auth()->user()->gioitinh == 'nam' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="gioitinhnam">
+                                                            Nam
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group col-6">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="gioitinh" id="gioitinhnu" value="nu"
+                                                            {{ auth()->user()->gioitinh == 'nu' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="gioitinhnu">
+                                                            Nữ
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                @error('gioitinh')
+                                                    <div class="alert alert-danger" role="alert">{{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3 form-group">
+                                                <label class="form-label" for="vanbang">Số CMND hoặc Passport (hoặc
+                                                    các văn bằng khác
+                                                    có hình).</label>
+                                                <input required type="vanbang" name="vanbang" class="form-control"
+                                                    id="vanbang" placeholder="VD: 01234567891000"
+                                                    value="{{ auth()->user()->vanbang }}" required />
+                                                @error('vanbang')
+                                                    <div class="alert alert-danger" role="alert">{{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                data-dismiss="modal">
                                                 Cancel
                                             </button>
                                             <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -71,10 +152,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex gap-1">
-                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-dismiss="modal">
                                             No
                                         </button>
-                                        <form action="{{ route('client.xoakhachhang', auth()->user()->id) }}" method="Post">
+                                        <form action="{{ route('client.xoakhachhang', auth()->user()->id) }}"
+                                            method="Post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"> Yes</button>
