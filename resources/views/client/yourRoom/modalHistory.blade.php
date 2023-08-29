@@ -1,4 +1,4 @@
-<div class="modal fade" id="LichsuModal{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="LichsuModal{{ $datphongall->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,7 +22,7 @@
                                     <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
                                     <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}
                                     </p>
-                                    <p>Khách hàng: <b>{{ $datphong->ten }}</b></p>
+                                    <p>Khách hàng: <b>{{ $datphongall->ten }}</b></p>
                                     <hr>
                                 @endforeach
                             </div>

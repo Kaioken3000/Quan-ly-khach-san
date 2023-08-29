@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Datphong;
 use App\Models\Traphong;
 use App\Mail\MyTestEmail;
 use App\Models\Khachhang;
 use App\Models\Thanhtoan;
 use Illuminate\Http\Request;
+
 use App\Models\Danhsachdatphong;
 
 use Illuminate\Support\Facades\Log;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
@@ -27,7 +28,7 @@ class ThanhtoanClientController extends Controller
     public function create(Request $request)
     {
         require_once("config.php");
-        
+
         $vnp_TxnRef = rand(1, 10000); //Mã giao dịch thanh toán tham chiếu của merchant
         $vnp_Amount = $request->amount; // Số tiền thanh toán
         $vnp_Locale = $request->language; //Ngôn ngữ chuyển hướng thanh toán
@@ -44,8 +45,7 @@ class ThanhtoanClientController extends Controller
             "&ngaytra=" . $request->ngaytra .
             "&soluong=" . $request->soluong .
             "&phongid=" . $request->phongid .
-            "&loaitien=" . $request->loaitien .
-            "&khachhangid=" . $request->khachhangid . "";
+            "&khachhangid=" . $request->khachhangid;
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -131,21 +131,21 @@ class ThanhtoanClientController extends Controller
         // $datphong->save();
 
         $dat = $this->index_store($request);
-        Log::info($request);
+        Log::info($dat);
         // Luu thong tin chuyen khoan
         $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
         $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
         Thanhtoan::create(array(
             "hinhthuc" => "chuyenkhoan",
             "gia" => $request->vnp_Amount,
-            "loaitien" => $request->loaitien,
+            "loaitien" => "datcoc",
             "chuyenkhoan_token" => $request->vnp_TxnRef,
-            "datphongid" => $dat,
+            "datphongid" => $dat->id,
             // chua co thoi gian
         ));
 
         // Gui mail cho client
-        Mail::to(Auth::user()->email)->send(new MyTestEmail($request, $vnp_SecureHash, $secureHash));
+        // Mail::to(Auth::user()->email)->send(new MyTestEmail($request, $vnp_SecureHash, $secureHash));
 
         return view("client.thanhtoanvnpayreturn", compact('request', 'secureHash', 'vnp_SecureHash'));
     }
@@ -165,24 +165,41 @@ class ThanhtoanClientController extends Controller
         ]);
 
         // Log::info($request);
+        $khachhang = Khachhang::where("userid", $request->khachhangid)->first();
 
-        Khachhang::create([
-            'ten' => $request->ten,
-            'sdt' => $request->sdt,
-            'email' => $request->email,
-            'diachi' => $request->diachi,
-            'vanbang' => $request->vanbang,
-            'gioitinh' => $request->gioitinh,
-            'userid' => $request->khachhangid
-        ]);
+        if (isset($khachhang->diachi) || isset($khachhang->gioitinh) || isset($khachhang->vanbang)) {
+            $khachhang = Khachhang::find($khachhang->id);
+            $khachhang->diachi = $request->diachi;
+            $khachhang->gioitinh = $request->gioitinh;
+            $khachhang->vanbang = $request->vanbang;
+            $khachhang->save();
 
-        $khachhangs = Khachhang::max('id');
+            $user = User::find($request->khachhangid);
+            $user->diachi = $request->diachi;
+            $user->gioitinh = $request->gioitinh;
+            $user->vanbang = $request->vanbang;
+            $user->save();
+        }
+
+        if (!isset($khachhang)) {
+            $khachhang = Khachhang::create([
+                'ten' => $request->ten,
+                'sdt' => $request->sdt,
+                'email' => $request->email,
+                'diachi' => $request->diachi,
+                'vanbang' => $request->vanbang,
+                'gioitinh' => $request->gioitinh,
+                'userid' => $request->khachhangid
+            ]);
+        }
+
+        // $khachhangs = Khachhang::max('id');
 
         $request->tinhtrangthanhtoan = 0;
         $request->tinhtrangnhanphong = 0;
         $request->tinhtrangxuly = 0;
         $request->huydatphong = 0;
-        Datphong::create([
+        $dat = Datphong::create([
             'ngaydat' => $request->ngaydat,
             'ngaytra' => $request->ngaytra,
             'soluong' => $request->soluong,
@@ -190,20 +207,20 @@ class ThanhtoanClientController extends Controller
             'tinhtrangnhanphong' => $request->tinhtrangnhanphong,
             'tinhtrangxuly' => $request->tinhtrangxuly,
             'huydatphong' => $request->huydatphong,
-            'khachhangid' => $khachhangs,
+            'khachhangid' => $khachhang->id,
         ]);
 
-        $dat = Datphong::max('id');
+        // $dat = Datphong::max('id');
 
-        $khachhangs = Khachhang::find($khachhangs);
-        $khachhangs->datphongid = $dat;
-        $khachhangs->save();
+        // $khachhangs = Khachhang::find($khachhangs);
+        // $khachhangs->datphongid = $dat;
+        // $khachhangs->save();
 
         Danhsachdatphong::create([
             'phongid' => $request->phongid,
             'ngaybatdauo' => $request->ngaydat,
             'ngayketthuco' => $request->ngaytra,
-            'datphongid' => $dat,
+            'datphongid' => $dat->id,
         ]);
 
         // return redirect('client/index')->with('success', 'Datphong has been created successfully.');

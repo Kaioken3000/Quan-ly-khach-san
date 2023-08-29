@@ -1,12 +1,12 @@
 <!-- Dịch vụ -->
 <div class="m-1">
     <button type="button" class="w-100 btn btn-success" data-toggle="modal"
-        data-target="#modaldichvu{{ $datphong->datphongid }}">
+        data-target="#modaldichvu{{ $datphongall->id }}">
         <i class="bx bx-box mb-1"></i> Service
     </button>
 </div>
 <!-- Modal dịch vụ -->
-<div class="modal fade" id="modaldichvu{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modaldichvu{{ $datphongall->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,7 +18,7 @@
             <div class="modal-body">
                 <form action="{{ route('client.dichvu_satphong_store') }}" method="POST">
                     @csrf
-                    <input hidden type="text" value="{{ $datphong->datphongid }}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{ $datphongall->id }}" id="datphongid" name="datphongid">
                     <div class="mb-3">
                         <label class="form-label" for="ten">Dịch
                             vụ</label><br>

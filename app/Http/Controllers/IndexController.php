@@ -204,16 +204,17 @@ class IndexController extends Controller
     public function danhsachdatphong(Request $request)
     {
         $userid = Auth::user()->id;
-        $datphongs = Datphong::
-            join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
-            ->select('*', 'datphongs.id as datphongid')
-            ->where('khachhangs.userid', $userid)
-            ->where('huydatphong', 0)
-            ->orderBy('datphongs.id', 'desc')->get();
+        // $datphongs = Datphong::
+        //     join('khachhangs', 'datphongs.id', '=', 'khachhangs.datphongid')
+        //     ->select('*', 'datphongs.id as datphongid')
+        //     ->where('khachhangs.userid', $userid)
+        //     ->where('huydatphong', 0)
+        //     ->orderBy('datphongs.id', 'desc')->get();
+        $datphongalls = Datphong::where("huydatphong", 0)->get();
         
         $dichvus = Dichvu::get();
         $anuongs = Anuong::get();
-        return view('client.danhsachdatphong', compact('datphongs', 'dichvus', 'anuongs'));
+        return view('client.danhsachdatphong', compact( 'dichvus', 'anuongs', 'datphongalls'));
     }
 
     // kiem tra phong trong cua client

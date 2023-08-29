@@ -83,7 +83,7 @@
                         </div>
                         <div class="mb-3 col">
                             <?php
-                            $tiendatcoc = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangs->id)
+                            $tiendatcoc = App\Models\Thanhtoan::where('datphongid', $datphong->id)
                                 ->where('loaitien', 'datcoc')
                                 ->first();
                             ?>

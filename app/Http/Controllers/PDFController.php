@@ -66,7 +66,8 @@ class PDFController extends Controller
         $nhanphongs = Nhanphong::where('datphongid', $request->datphongid)->get();
         $traphongs = Traphong::where('datphongid', $request->datphongid)->get();
         $huydatphongs = Huydatphong::where('datphongid', $request->datphongid)->get();
-        $thanhtoans = Thanhtoan::where('khachhangid', $request->khachhangid)->get();
+        // $thanhtoans = Thanhtoan::where('khachhangid', $request->khachhangid)->get();
+        $thanhtoans = Thanhtoan::where('datphongid', $request->datphongid)->get();
 
         $pdf = PDF::loadView('Hoadon', compact('datphong', 'khachhang', 'danhsachdatphongs', 'dichvudatphongs', 'tiendatcoc',
         'nhanphongs', 'traphongs', 'huydatphongs', 'anuongdatphongs', 'thanhtoans'

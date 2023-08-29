@@ -1,10 +1,10 @@
 <div class="m-1">
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicModal{{ $datphong->datphongid }}">
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicModal{{ $datphongall->id }}">
         Delete
     </button>
 </div>
 <!-- Modal xoá phòng -->
-<div class="modal fade" id="basicModal{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="basicModal{{ $datphongall->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,7 +18,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
                         No
                     </button>
-                    <form action="{{ route('client.xoadatphong', $datphong->datphongid) }}" method="Post">
+                    <form action="{{ route('client.xoadatphong', $datphongall->id) }}" method="Post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">

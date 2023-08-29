@@ -1,11 +1,11 @@
 <div class="m-1">
     <button type="button" class="btn btn-success" data-toggle="modal"
-        data-target="#modalanuong{{ $datphong->datphongid }}">
+        data-target="#modalanuong{{ $datphongall->id }}">
         <i class="fa fa-utensils"></i> ăn uống
     </button>
 </div>
 <!-- Modal dịch vụ -->
-<div class="modal fade" id="modalanuong{{ $datphong->datphongid }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalanuong{{ $datphongall->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <form action="{{ route('anuong_datphong.store') }}" method="POST">
                     @csrf
-                    <input hidden type="text" value="{{ $datphong->datphongid }}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{ $datphongall->id }}" id="datphongid" name="datphongid">
                     <div class="row m-2">
                         @foreach ($anuongs as $anuong)
                             <div class="form-check col-4">
