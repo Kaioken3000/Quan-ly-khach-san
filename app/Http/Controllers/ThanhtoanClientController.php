@@ -86,13 +86,28 @@ class ThanhtoanClientController extends Controller
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
+        Log::info("nam");
 
+        //luu thong tin phong
+        $dat = $this->index_store($request);
+        Log::info($dat);
+        // Luu thong tin chuyen khoan
+        Thanhtoan::create(array(
+            "hinhthuc" => "chuyenkhoan",
+            "gia" => $request->vnp_Amount/100,
+            "loaitien" => "datcoc",
+            "chuyenkhoan_token" => $request->vnp_TxnRef,
+            "datphongid" => $dat->id,
+            // chua co thoi gian
+        ));
+        
         return redirect($vnp_Url);
     }
 
     public function return(Request $request)
     {
-        require_once("./config.php");
+        // require_once("./config.php");
+        $vnp_HashSecret = "MAQLLUKUJZTLCMYKGOANWCLOVAXAAHJE"; //Secret key
         $vnp_SecureHash = $_GET['vnp_SecureHash'];
         $inputData = array();
         foreach ($_GET as $key => $value) {
@@ -130,19 +145,7 @@ class ThanhtoanClientController extends Controller
 
         // $datphong->save();
 
-        $dat = $this->index_store($request);
-        Log::info($dat);
-        // Luu thong tin chuyen khoan
-        $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
-        $request->vnp_Amount = substr($request->vnp_Amount, 0, -1);
-        Thanhtoan::create(array(
-            "hinhthuc" => "chuyenkhoan",
-            "gia" => $request->vnp_Amount,
-            "loaitien" => "datcoc",
-            "chuyenkhoan_token" => $request->vnp_TxnRef,
-            "datphongid" => $dat->id,
-            // chua co thoi gian
-        ));
+
 
         // Gui mail cho client
         // Mail::to(Auth::user()->email)->send(new MyTestEmail($request, $vnp_SecureHash, $secureHash));
@@ -167,21 +170,7 @@ class ThanhtoanClientController extends Controller
         // Log::info($request);
         $khachhang = Khachhang::where("userid", $request->khachhangid)->first();
 
-        if (isset($khachhang->diachi) || isset($khachhang->gioitinh) || isset($khachhang->vanbang)) {
-            $khachhang = Khachhang::find($khachhang->id);
-            $khachhang->diachi = $request->diachi;
-            $khachhang->gioitinh = $request->gioitinh;
-            $khachhang->vanbang = $request->vanbang;
-            $khachhang->save();
-
-            $user = User::find($request->khachhangid);
-            $user->diachi = $request->diachi;
-            $user->gioitinh = $request->gioitinh;
-            $user->vanbang = $request->vanbang;
-            $user->save();
-        }
-
-        if (!isset($khachhang)) {
+        if (!($khachhang)) {
             $khachhang = Khachhang::create([
                 'ten' => $request->ten,
                 'sdt' => $request->sdt,
@@ -191,6 +180,19 @@ class ThanhtoanClientController extends Controller
                 'gioitinh' => $request->gioitinh,
                 'userid' => $request->khachhangid
             ]);
+        } else {
+            if (isset($khachhang->diachi) || isset($khachhang->gioitinh) || isset($khachhang->vanbang)) {
+                $khachhang->diachi = $request->diachi;
+                $khachhang->gioitinh = $request->gioitinh;
+                $khachhang->vanbang = $request->vanbang;
+                $khachhang->save();
+
+                $user = User::find($request->khachhangid);
+                $user->diachi = $request->diachi;
+                $user->gioitinh = $request->gioitinh;
+                $user->vanbang = $request->vanbang;
+                $user->save();
+            }
         }
 
         // $khachhangs = Khachhang::max('id');
@@ -222,6 +224,10 @@ class ThanhtoanClientController extends Controller
             'ngayketthuco' => $request->ngaytra,
             'datphongid' => $dat->id,
         ]);
+
+        //cap nhat diem cho khachhang
+        $khachhang->diem += 1000;
+        $khachhang->save();
 
         // return redirect('client/index')->with('success', 'Datphong has been created successfully.');
         return $dat;

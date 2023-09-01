@@ -28,6 +28,7 @@
                             <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->id}}">
                                 {{$dichvu->giatien}} {{$dichvu->donvi}}
                             </label>
+                            <input type="text" name="khachhangid" hidden value="{{ $datphong->khachhangs->id }}">
                         </div>
                         @endforeach
                         @error('ten')

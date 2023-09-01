@@ -14,6 +14,7 @@ class Dichvu extends Model
         'giatien',
         'donvi',
         'chinhanhid',
+        'diem',
     ];
 
     public function chinhanhs()

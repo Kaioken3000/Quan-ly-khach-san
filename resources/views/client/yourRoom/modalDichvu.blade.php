@@ -19,6 +19,7 @@
                 <form action="{{ route('client.dichvu_satphong_store') }}" method="POST">
                     @csrf
                     <input hidden type="text" value="{{ $datphongall->id }}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{ $datphongall->khachhangs->id }}" id="khachhangid" name="khachhangid">
                     <div class="mb-3">
                         <label class="form-label" for="ten">Dịch
                             vụ</label><br>

@@ -16,11 +16,16 @@ class Khachhang extends Model
         'diachi',
         'gioitinh',
         'vanbang',
-        'userid'
+        'userid',
+        'diem',
     ];
 
-    public function users(){
-        return $this->belongsTo(User::class);
+    // public function users(){
+    //     return $this->belongsTo(User::class);
+    // }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'userid', 'id');
     }
 
     public function datphongs()

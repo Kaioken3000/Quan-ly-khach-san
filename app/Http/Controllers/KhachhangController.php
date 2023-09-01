@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\Khachhang;
-use App\Models\Datphong;
-use App\Models\Danhsachdatphong;
 use App\Models\Phong;
-use App\Models\Chuyenkhoan;
+use App\Models\Anuong;
+use App\Models\Dichvu;
+use App\Models\Chinhanh;
+use App\Models\Datphong;
+use App\Models\Khachhang;
 use App\Models\Thanhtoan;
+use App\Models\Chuyenkhoan;
+use Illuminate\Http\Request;
+use App\Models\Danhsachdatphong;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Svg\Tag\Rect;
 
 class KhachhangController extends Controller
 {
@@ -20,10 +25,97 @@ class KhachhangController extends Controller
      */
     public function index()
     {
-        $datphong = Datphong::get();
         // $khachhangs = Khachhang::orderBy('id', 'asc')->paginate(5);
         $khachhangs = Khachhang::get();
-        return view('khachhangs.index', compact('khachhangs', 'datphong'));
+        return view('khachhangs.index', compact('khachhangs'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showChitietKhachhang(Request $request)
+    {
+        // $roleName = Auth::user()->roles[0]->name;
+
+        // if ($roleName == "MainAdmin") {
+        //     $datphongs = Datphong::where('huydatphong', 0)->get();
+        // }
+        // if ($roleName == "Admin" || $roleName == "User") {
+        //     $temp = [];
+        //     if (isset(Auth::user()->nhanviens)) {
+        //         $datphongs = Datphong::where('huydatphong', 0)->where()->get();
+        //         foreach ($datphongs as $datphong) {
+        //             foreach ($datphong->phongs as $phong) {
+        //                 if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
+        //                     $temp[] = $datphong;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     $datphongs = $temp;
+        // }
+
+        // $dichvus = Dichvu::get();
+        // $anuongs = Anuong::get();
+        // $phongs = Phong::get();
+        // $roleName = Auth::user()->roles[0]->name;
+
+        // if ($roleName == "Admin" || $roleName == "User")
+        //     if (isset(Auth::user()->nhanviens)) {
+        //         $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+        //     } else $nhanvien = [];
+        // if ($roleName == "MainAdmin") {
+        //     $chinhanhs = Chinhanh::get();
+        // }
+
+        $khachhangs = Khachhang::where("id", $request->khachhangid)->get();
+        return view('khachhangs.showChitietKhachhang', compact('khachhangs'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showDatphongCuaKhachhang(Request $request)
+    {
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "MainAdmin") {
+            $datphongs = Datphong::where('huydatphong', 0)->where("khachhangid", $request->khachhangid)->get();
+        }
+        if ($roleName == "Admin" || $roleName == "User") {
+            $temp = [];
+            if (isset(Auth::user()->nhanviens)) {
+                $datphongs = Datphong::where('huydatphong', 0)->where("khachhangid", $request->khachhangid)->get();
+                foreach ($datphongs as $datphong) {
+                    foreach ($datphong->phongs as $phong) {
+                        if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
+                            $temp[] = $datphong;
+                        }
+                    }
+                }
+            }
+            $datphongs = $temp;
+        }
+
+        $dichvus = Dichvu::get();
+        $anuongs = Anuong::get();
+        $phongs = Phong::get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin" || $roleName == "User")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
+
+        return view(
+            'khachhangs.showDatphongCuaKhachhang',
+            compact('datphongs', 'dichvus', 'anuongs', 'phongs', 'request', 'chinhanhs')
+        );
     }
 
     /**
@@ -78,6 +170,12 @@ class KhachhangController extends Controller
                 'huydatphong' => $request->huydatphong,
                 'khachhangid' => $request->thiskhachhangid,
             ]);
+
+
+            //cap nhat diem cho khachhang
+            $khachhang = Khachhang::find($request->thiskhachhangid);
+            $khachhang->diem += 1000;
+            $khachhang->save();
         } else {
 
             $khachhangs = Khachhang::create([
@@ -88,7 +186,7 @@ class KhachhangController extends Controller
                 'gioitinh' => $request->gioitinh,
                 'vanbang' => $request->vanbang,
             ]);
-    
+
             $dat = Datphong::create([
                 'ngaydat' => $request->ngaydat,
                 'ngaytra' => $request->ngaytra,
@@ -99,6 +197,11 @@ class KhachhangController extends Controller
                 'huydatphong' => $request->huydatphong,
                 'khachhangid' => $khachhangs->id,
             ]);
+
+            //cap nhat diem cho khachhang
+            $khachhang = Khachhang::find($khachhangs->id);
+            $khachhang->diem += 1000;
+            $khachhang->save();
         }
         Danhsachdatphong::create([
             'phongid' => $request->phongid,
@@ -130,6 +233,7 @@ class KhachhangController extends Controller
                 ));
             }
         }
+
         return redirect()->route('datphongs.index')->with('success', 'Datphong has been created successfully.');
     }
 
@@ -174,7 +278,7 @@ class KhachhangController extends Controller
 
         $khachhang->fill($request->post())->save();
 
-        return redirect()->route('khachhangs.index')->with('success', 'Khachhang Has Been updated successfully');
+        return redirect()->back()->withMessage('success', 'Khachhang Has Been updated successfully');
     }
 
     /**

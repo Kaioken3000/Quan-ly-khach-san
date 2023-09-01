@@ -1,6 +1,5 @@
 <div class="m-1">
-    <button type="button" class="btn btn-success" data-toggle="modal"
-        data-target="#modalanuong{{ $datphongall->id }}">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalanuong{{ $datphongall->id }}">
         <i class="fa fa-utensils"></i> ăn uống
     </button>
 </div>
@@ -16,6 +15,8 @@
                 <form action="{{ route('anuong_datphong.store') }}" method="POST">
                     @csrf
                     <input hidden type="text" value="{{ $datphongall->id }}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{ $datphongall->khachhangs->id }}" id="khachhangid"
+                        name="khachhangid">
                     <div class="row m-2">
                         @foreach ($anuongs as $anuong)
                             <div class="form-check col-4">
@@ -72,9 +73,7 @@
         max-width: 90%;
     }
 
-    .card:hover {
-        
-    }
+    .card:hover {}
 
     .form-check-input:checked+label>.card {
         border: 3px black solid;

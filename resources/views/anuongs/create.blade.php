@@ -68,7 +68,14 @@
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <div class="mb-3">
+                        <label class="form-label" for="diem">Điểm dịch vụ ăn uống</label>
+                        <input type="number" name="diem" class="form-control" id="diem" min=0 required
+                            value="1000" />
+                        @error('diem')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                        @enderror
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

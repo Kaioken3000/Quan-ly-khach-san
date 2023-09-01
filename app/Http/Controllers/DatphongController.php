@@ -405,7 +405,16 @@ class DatphongController extends Controller
             "khachhangid" => $request->khachhang_id,
             "datphongid" => $datphong->id,
         ));
+
+        if($request->tiendiem){
+            $khachhangdiem = Khachhang::find($request->khachhang_id);
+            $khachhangdiem->diem -= $request->sotiendiem;
+            $khachhangdiem->save();
+        }
+
         return redirect()->route('datphongs.index')->with('success', 'Datphong Has Been updated successfully');
+
+
     }
     /**
      * Chinh thanh toán.

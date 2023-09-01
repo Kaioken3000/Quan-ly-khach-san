@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuong;
+use App\Models\Dichvu;
+use App\Models\Khachhang;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\AnuongDatphong;
@@ -44,6 +46,13 @@ class AnuongDatphongController extends Controller
                     $temp++;
                     Log::info($temp . "temp");
                     $soluongconlai = $soluongtrongkho->soluong - $request->soluong[$i];
+
+                    //cap nhat diem cho khachhang
+                    $diem = Anuong::find($anuong);
+                    $khachhang = Khachhang::find($request->khachhangid);
+                    $khachhang->diem +=  ($diem->diem * $request->soluong[$i]);
+                    $khachhang->save(); 
+                    
                     break;
                 }
             }

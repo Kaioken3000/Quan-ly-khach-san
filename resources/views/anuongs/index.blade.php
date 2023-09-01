@@ -25,6 +25,7 @@
                     <th>Giá </th>
                     <th>Số lượng</th>
                     <th>Miêu tả </th>
+                    <th>Điểm</th>
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
                     @endhasanyrole
@@ -44,6 +45,7 @@
                         <td>{{ $anuong->gia }}</td>
                         <td>{{ $anuong->soluong }}</td>
                         <td>{{ $anuong->mieuTa }}</td>
+                        <td>{{ $anuong->diem }}</td>
                         @hasanyrole('MainAdmin|Admin')
                             <td>
                                 @include('anuongs.edit')
@@ -53,6 +55,21 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th class="table-plus">ID</th>
+                    <th>Tên</th>
+                    <th>Chi nhánh</th>
+                    <th>Hinh</th>
+                    <th>Giá </th>
+                    <th>Số lượng</th>
+                    <th>Miêu tả </th>
+                    <th>Điểm</th>
+                    @hasanyrole('MainAdmin|Admin')
+                        <th class="datatable-nosort">Action</th>
+                    @endhasanyrole
+                </tr>
+            </tfoot>
         </table>
     </div>
 @endsection

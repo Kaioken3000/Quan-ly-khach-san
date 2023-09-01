@@ -211,10 +211,10 @@ class IndexController extends Controller
         //     ->where('huydatphong', 0)
         //     ->orderBy('datphongs.id', 'desc')->get();
         $datphongalls = Datphong::where("huydatphong", 0)->get();
-        
+
         $dichvus = Dichvu::get();
         $anuongs = Anuong::get();
-        return view('client.danhsachdatphong', compact( 'dichvus', 'anuongs', 'datphongalls'));
+        return view('client.danhsachdatphong', compact('dichvus', 'anuongs', 'datphongalls'));
     }
 
     // kiem tra phong trong cua client
@@ -457,6 +457,13 @@ class IndexController extends Controller
             $dich['dichvuid'] = $dichvu;
 
             DichvuDatphong::create($dich);
+
+            //cap nhat diem cho khachhang
+            $diem = Dichvu::find($dichvu);
+            $diem = $diem->diem;
+            $khachhang = Khachhang::find($request->khachhangid);
+            $khachhang->diem +=  $diem;
+            $khachhang->save();
         }
 
         return redirect('/client/index');

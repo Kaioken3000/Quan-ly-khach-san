@@ -51,6 +51,7 @@ class AnuongController extends Controller
             'soluong' => 'required',
             'mieuTa' => 'required',
             'chinhanhid' => 'required',
+            'diem' => 'required',
         ]);
 
         Anuong::create($request->post());
@@ -95,6 +96,7 @@ class AnuongController extends Controller
             'soluong' => 'required',
             'mieuTa' => 'required',
             'chinhanhid' => 'required',
+            'diem' => 'required',
         ]);
 
         if ($request->hinh) {
@@ -106,6 +108,7 @@ class AnuongController extends Controller
                 'soluong' => $request->soluong,
                 'mieuTa' => $request->mieuTa,
                 'chinhanhid' => $request->chinhanhid,
+                'diem' => $request->diem,
             ])->save();
         }
 
@@ -141,6 +144,7 @@ class AnuongController extends Controller
             ->orWhere('hinh', 'LIKE', '%' . $request->search . "%")
             ->orWhere('gia', 'LIKE', '%' . $request->search . "%")
             ->orWhere('mieuTa', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
             ->get();
         return view('anuongs.search', compact('anuongs'));
     }

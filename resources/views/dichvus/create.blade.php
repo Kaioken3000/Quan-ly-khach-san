@@ -31,7 +31,7 @@
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     <div class="mb-3">
                         <label class="form-label" for="donvi">Đơn vị</label>
                         <input type="text" name="donvi" class="form-control" id="donvi" placeholder="VD: VNĐ"
@@ -54,6 +54,13 @@
                             @endforeach
                         </select>
                         @error('chinhanhid')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="diem">Điểm dịch vụ</label>
+                        <input type="number" name="diem" class="form-control" id="diem" min=0 required value="1000"/>
+                        @error('diem')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>

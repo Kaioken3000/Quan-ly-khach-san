@@ -22,6 +22,7 @@
                         <th>Tên dịch vụ</th>
                         <th>Chi nhánh</th>
                         <th>Giá </th>
+                        <th>Điểm</th>
                         @hasanyrole('MainAdmin|Admin')
                             <th class="datatable-nosort">Action</th>
                         @endhasanyrole
@@ -34,6 +35,7 @@
                             <td>{{ $dichvu->ten }}</td>
                             <td>{{ $dichvu->chinhanhs->ten ?? '' }}</td>
                             <td>{{ $dichvu->giatien }} {{ $dichvu->donvi }}</td>
+                            <td>{{ $dichvu->diem }}</td>
                             @hasanyrole('MainAdmin|Admin')
                                 <td>
                                     @include('dichvus.edit')
@@ -43,6 +45,18 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="table-plus">ID</th>
+                        <th>Tên dịch vụ</th>
+                        <th>Chi nhánh</th>
+                        <th>Giá </th>
+                        <th>Điểm </th>
+                        @hasanyrole('MainAdmin|Admin')
+                            <th class="datatable-nosort">Action</th>
+                        @endhasanyrole
+                    </tr>
+                </tfoot>
             </table>
         </div>
 @endsection

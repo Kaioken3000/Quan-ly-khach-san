@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Datphong;
 use App\Models\Traphong;
+use App\Models\Khachhang;
 use App\Models\Thanhtoan;
 use Illuminate\Http\Request;
 use App\Models\Danhsachdatphong;
-use Illuminate\Support\Facades\Log;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -27,7 +28,10 @@ class ThanhtoanController extends Controller
         $vnp_Locale = $request->language; //Ngôn ngữ chuyển hướng thanh toán
         $vnp_BankCode = $request->bankCode; //Mã phương thức thanh toán
         $vnp_IpAddr = $request->ip(); //IP Khách hàng thanh toán
-        $vnp_Returnurl = "http://quanlykhachsan-b1910261-new.local/vnpay_return?datphongid=" . $request->datphongid . "&loaitien=" . $request->loaitien . "&khachhangid=" . $request->khachhangid . "";
+        $vnp_Returnurl = "http://quanlykhachsan-b1910261-new.local/vnpay_return?datphongid="
+            . $request->datphongid . "&loaitien=" . $request->loaitien . "&khachhangid=" . $request->khachhangid
+            . "&tiendiem=" . $request->tiendiem . "&sotiendiem=" . $request->sotiendiem
+            . "";
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -133,6 +137,12 @@ class ThanhtoanController extends Controller
             "datphongid" => $request->datphongid,
             // chua co thoi gian
         ));
+
+        if ($request->tiendiem) {
+            $khachhangdiem = Khachhang::find($request->khachhangid);
+            $khachhangdiem->diem = ($khachhangdiem->diem - $request->sotiendiem);
+            $khachhangdiem->save();
+        }
 
         return view("thanhtoanvnpayreturn", compact('request', 'secureHash', 'vnp_SecureHash'));
     }

@@ -149,13 +149,29 @@
                         <?php $tongtien = $tonggia + $tongtiendv; ?>
                     @endif
 
+                    <h5> Trừ điểm vào tiền só tiền phải thanh toán </h5>
+                    <div class="form-check">
+                        <input class="form-check-input" id="tiendiem{{ $datphong->id }}" type="checkbox"
+                            name="tiendiem" value="{{ $datphong->khachhangs->diem }}"
+                            onclick="doiTongTien({{ $datphong->id }}, {{ $tongtien }})" />
+                        <div class="d-flex gap-1 w-50">
+                            <input type="number" value="{{ $datphong->khachhangs->diem }}" name="sotiendiem"
+                                id="sotiendiem{{ $datphong->id }}" class="form-control w-25"
+                                max="{{ $datphong->khachhangs->diem }}" min=0
+                                onchange="doiTongTien({{ $datphong->id }}, {{ $tongtien }})">
+                            <p>điểm</p>
+                        </div>
+                    </div>
+
                     <hr style="border: 1px black solid">
                     <h5> Tổng cộng toàn bộ só tiền phải thanh toán </h5>
-                    <input type="text" name="sotien" class="form-control w-25" id="sotien" placeholder="VD: 300"
-                        value="{{ $tongtien }}" readonly />
+                    <input type="text" name="sotien" class="form-control w-25" id="sotien{{ $datphong->id }}"
+                        placeholder="VD: 300" value="{{ $tongtien }}" />
                     @error('sotien')
                         <div class="alert alert-danger" role="alert">{{ $message }}</div>
                     @enderror
+
+
 
                     <input type="hidden" name="id" value="{{ $datphong->id }}">
                     <input type="hidden" name="khachhang_id" value="{{ $datphong->khachhangs->id }}">
@@ -167,13 +183,32 @@
                         <div class="bd-highlight">
                             <button type="submit" class="w-100 btn btn-warning"> Trực tiếp</button>
                         </div>
+                        <form action="" method="get"></form>
                         <div class="bd-highlight mx-3">
                             {{-- Thanh toan vnpay --}}
-                            <a
+                            {{-- <a
                                 href="/thanhtoanvnpayview/{{ $datphong->id }}/traphong/{{ $datphong->khachhangs->id }}/{{ $tongtien }}">
                                 <img src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929"
                                     width="150px" class="shadow-sm">
-                            </a>
+                            </a> --}}
+                            <form action="/thanhtoanvnpayview" method="get">
+                                <input hidden type="text" name="sotien" id="sotien2{{ $datphong->id }}"
+                                    value="{{ $tongtien }}">
+                                <input hidden type="text" name="datphongid" id=""
+                                    value="{{ $datphong->id }}">
+                                <input hidden type="text" name="loaitien" id="" value="traphong">
+                                <input hidden type="text" name="khachhangid" id=""
+                                    value="{{ $datphong->khachhangs->id }}">
+                                <input hidden class="form-check-input" id="tiendiem2{{ $datphong->id }}"
+                                    type="checkbox" name="tiendiem" value="{{ $datphong->khachhangs->diem }}"
+                                    id="tiendiem2{{ $datphong->id }}" />
+                                <input hidden type="number" value="{{ $datphong->khachhangs->diem }}"
+                                    name="sotiendiem" id="sotiendiem2{{ $datphong->id }}">
+
+                                <button type="submit" class="btn btn-link m-0 p-0"> <img
+                                        src="https://www.msb.com.vn/documents/20121/273143/VnPay_Topbanner1600x400px.png/ffc9c0b4-617a-2cb0-2f5c-d8e6e6dd5bab?t=1657103705929"
+                                        width="150px" class="shadow-sm"></button>
+                            </form>
                         </div>
                         <div class="ml-auto bd-highlight">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -187,3 +222,26 @@
         </div>
     </div>
 </div>
+<script>
+    function doiTongTien(id, tongtien) {
+        sotienInput = document.getElementById("sotien" + id);
+        sotien2Input = document.getElementById("sotien2" + id);
+        tiendiemInput = document.getElementById("tiendiem" + id);
+        tiendiem2Input = document.getElementById("tiendiem2" + id);
+        sotiendiemInput = document.getElementById("sotiendiem" + id);
+        sotiendiem2Input = document.getElementById("sotiendiem2" + id);
+        if (tiendiemInput.checked) {
+            sotienInput.value = tongtien
+            sotien2Input.value = tongtien
+            sotienInput.value = (parseInt(sotienInput.value) - parseInt(sotiendiemInput.value))
+            sotien2Input.value = (parseInt(sotien2Input.value) - parseInt(sotiendiemInput.value))
+
+            tiendiem2Input.checked = true
+        } else {
+            tiendiem2Input.checked = false
+            sotienInput.value = tongtien
+            sotien2Input.value = tongtien
+        }
+        sotiendiem2Input.value = sotiendiemInput.value;
+    }
+</script>

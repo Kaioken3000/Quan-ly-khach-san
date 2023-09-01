@@ -128,7 +128,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::group(['middleware' => ['auth', 'role:MainAdmin|Admin|User']], function () {
         // thanh toan vnpay
-        Route::get("/thanhtoanvnpayview/{datphongid}/{loaitien}/{khachhangid}/{sotien}", "ThanhtoanController@index");
+        Route::get("/thanhtoanvnpayview", "ThanhtoanController@index");
         Route::post("/thanhtoanvnpay", "ThanhtoanController@create")->name("thanhtoanvnpay");
         Route::get("/vnpay_return", "ThanhtoanController@return");
 
@@ -229,6 +229,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('khachhangs', KhachhangController::class);
         Route::get('khachhangs-search', 'KhachhangController@search');
         Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
+        Route::get('khachhangs/datphongs/{khachhangid}', 'KhachhangController@showDatphongCuaKhachhang');
+        Route::get('khachhangs/chitiet/{khachhangid}', 'KhachhangController@showChitietKhachhang');
 
         Route::group(['middleware' => ['role:MainAdmin|Admin']], function () {
             //Nhân viên

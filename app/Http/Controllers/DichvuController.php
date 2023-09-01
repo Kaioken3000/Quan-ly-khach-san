@@ -17,7 +17,6 @@ class DichvuController extends Controller
     public function index()
     {
         // $dichvus = Dichvu::orderBy('id','asc')->paginate(5);
-        
 
         $roleName = Auth::user()->roles[0]->name;
 
@@ -57,6 +56,7 @@ class DichvuController extends Controller
             'giatien' => 'required',
             'donvi' => 'required',
             'chinhanhid' => 'required',
+            'diem' => 'required',
         ]);
 
         Dichvu::create($request->post());
@@ -100,6 +100,7 @@ class DichvuController extends Controller
             'giatien' => 'required',
             'donvi' => 'required',
             'chinhanhid' => 'required',
+            'diem' => 'required',
         ]);
 
         $dichvu->fill($request->post())->save();
@@ -135,6 +136,7 @@ class DichvuController extends Controller
             ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
             ->orWhere('giatien', 'LIKE', '%' . $request->search . "%")
             ->orWhere('donvi', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
             ->get();
         return view('dichvus.search', compact('dichvus'));
     }

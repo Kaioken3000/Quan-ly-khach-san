@@ -32,7 +32,15 @@ class Datphong extends Model
     }
 
     public function dichvus(){
-        return $this->belongsToMany(Datphong::class,'dichvu_dichvu','datphongid','dichvuid');
+        return $this->belongsToMany(Dichvu::class,'dichvu_datphongs','datphongid','dichvuid');
+    }
+
+    public function anuongs(){
+        return $this->belongsToMany(Anuong::class,'anuong_datphongs','datphongid','anuongid');
+    }
+    public function anuongdatphongs()
+    {
+        return $this->hasMany(AnuongDatphong::class, 'datphongid');
     }
 
 }

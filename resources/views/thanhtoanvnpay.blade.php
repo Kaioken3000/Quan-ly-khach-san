@@ -1,11 +1,11 @@
 @extends('layouts3.app')
 
 @section('content')
-<?php require_once("config.php");?>
-<div class="card-box m-4">
-    <h3 class="card-header">Tạo mới đơn hàng</h3>
-    <div class="table-responsive card-body">
-        {{-- <form action="vnpay_create_payment.php" id="frmCreateOrder" method="post"> --}}
+    <?php require_once 'config.php'; ?>
+    <div class="card-box m-4">
+        <h3 class="card-header">Tạo mới đơn hàng</h3>
+        <div class="table-responsive card-body">
+            {{-- <form action="vnpay_create_payment.php" id="frmCreateOrder" method="post"> --}}
             <form action="{{ route('thanhtoanvnpay') }}" id="frmCreateOrder" method="post">
                 @csrf
                 @method('POST')
@@ -13,7 +13,7 @@
                     <label for="amount">Số tiền</label>
                     <input class="form-control" data-val="true" data-val-number="The field Amount must be a number."
                         data-val-required="The Amount field is required." id="amount" max="100000000" min="1"
-                        name="amount" type="number" value="{{$request->sotien}}" />
+                        name="amount" type="number" value="{{ $request->sotien }}" />
                 </div>
                 <h4>Chọn phương thức thanh toán </h4>
                 <div class="mb-3">
@@ -43,15 +43,17 @@
                 <button type="submit" class="btn btn-success" href>Thanh toán &nbsp; <i
                         class="fas fa-money-check"></i></button>
 
-                <input type="hidden" value="{{$request->datphongid}}" name="datphongid">
-                <input type="hidden" value="{{$request->loaitien}}" name="loaitien">
-                <input type="hidden" value="{{$request->khachhangid}}" name="khachhangid">
+                <input hidden type="text" value="{{ $request->datphongid }}" name="datphongid">
+                <input hidden type="text" value="{{ $request->loaitien }}" name="loaitien">
+                <input hidden type="text" value="{{ $request->khachhangid }}" name="khachhangid">
+                <input hidden type="text" value="{{ $request->tiendiem }}" name="tiendiem">
+                <input hidden type="text" value="{{ $request->sotiendiem }}" name="sotiendiem">
             </form>
-    </div>
-    <p>
-        &nbsp;
-    </p>
-    <footer class="card-footer">
-        <p>&copy; VNPAY 2020</p>
-    </footer>
-@endsection
+        </div>
+        <p>
+            &nbsp;
+        </p>
+        <footer class="card-footer">
+            <p>&copy; VNPAY 2020</p>
+        </footer>
+    @endsection

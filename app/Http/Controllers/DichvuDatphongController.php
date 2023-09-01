@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dichvu;
+use App\Models\Khachhang;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Models\DichvuDatphong;
+use Illuminate\Support\Facades\Log;
 
 class DichvuDatphongController extends Controller
 {
@@ -27,6 +29,13 @@ class DichvuDatphongController extends Controller
             $dich['dichvuid'] = $dichvu;
             
             DichvuDatphong::create($dich);
+
+            //cap nhat diem cho khachhang
+            $diem = Dichvu::find($dichvu);
+            $diem = $diem->diem;
+            $khachhang = Khachhang::find($request->khachhangid);
+            $khachhang->diem +=  $diem;
+            $khachhang->save();
         }
 
         return redirect()->back()->withMessage('success','Dich vu dat phong has been created successfully.');

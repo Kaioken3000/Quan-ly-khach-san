@@ -16,6 +16,7 @@ class Anuong extends Model
         'soluong',
         'mieuTa',
         'chinhanhid',
+        'diem',
     ];
 
     public function chinhanhs()

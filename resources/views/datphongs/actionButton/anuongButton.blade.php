@@ -46,6 +46,7 @@
                                         </div>
                                     </div>
                                 </label>
+                                <input type="text" name="khachhangid" hidden value="{{ $datphong->khachhangs->id }}">
                             </div>
                         @endforeach
                         @error('anuongid')
