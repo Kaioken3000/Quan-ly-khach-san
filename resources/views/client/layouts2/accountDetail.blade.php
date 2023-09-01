@@ -33,6 +33,10 @@
                             <p class="card-text">{{ auth()->user()->vanbang }}</p>
                         </div>
                     </div>
+                    <div class="d-flex col">
+                        <h5 class="card-title mr-1">Số điểm Tích được:</h5>
+                        <p class="card-text">{{ auth()->user()->khachhangs[0]->diem }} point</p>
+                    </div>
                 </div>
                 <div class="mt-3">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#suataikhoan">

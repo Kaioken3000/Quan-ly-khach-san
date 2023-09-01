@@ -6,7 +6,7 @@
 </div>
 <!-- Modal thanh toán -->
 <div class="modal fade" id="modalthanhtoan{{ $datphong->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered w-75" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel1"> Bạn có chắc chắn muốn thanh toán</h5>
@@ -88,7 +88,7 @@
                                 ->first();
                             ?>
                             <h5 class="">Tổng số tiền phòng</h5>
-                            <input type="text" name="tongsotien" class="form-control" id="tongsotien"
+                            <input readonly  type="text" name="tongsotien" class="form-control" id="tongsotien"
                                 placeholder="VD: 300" value="{{ $tonggia }}" readonly />
                             @error('tongsotien')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
@@ -97,11 +97,11 @@
                             {{-- tien dat coc --}}
                             @if ($tiendatcoc)
                                 <h5 class="mt-3">-Trừ số tiền đặt cọc</h5>
-                                <input type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
+                                <input readonly  type="text" name="tiendatcoc" class="form-control" id="tiendatcoc"
                                     placeholder="VD: 300" value="{{ $tiendatcoc->gia }}" readonly />
                             @endif
                             <h5 class="mt-3">Còn lại</h5>
-                            <input type="text" class="form-control" value="<?php echo $tonggia - $tiendatcoc->gia; ?>">
+                            <input readonly  type="text" class="form-control" value="<?php echo $tonggia - $tiendatcoc->gia; ?>">
                             <br>
                         </div>
                         <div class="col">
@@ -116,7 +116,7 @@
 
                                         <label class="form-label"
                                             for="tiendichvu">{{ $dichvudatphong->dichvus->ten }}</label>
-                                        <input type="text" name="tiendichvu" class="form-control" id="tiendichvu"
+                                        <input readonly  type="text" name="tiendichvu" class="form-control" id="tiendichvu"
                                             placeholder="VD: 300" value="{{ $dichvudatphong->dichvus->giatien }}"
                                             readonly />
                                     @endif
@@ -129,7 +129,7 @@
 
                                         <label class="form-label"
                                             for="tienanuong">{{ $anuongdatphong->soluong }}-{{ $anuongdatphong->anuongs->ten }}</label>
-                                        <input type="text" name="tienanuong" class="form-control" id="tienanuong"
+                                        <input readonly  type="text" name="tienanuong" class="form-control" id="tienanuong"
                                             placeholder="VD: 300" value="{{ $anuongdatphong->anuongs->gia }}"
                                             readonly />
                                     @endif
@@ -137,7 +137,7 @@
                             @endif
 
                             <h5 class="mt-3">Tổng số tiền dịch vụ</h5>
-                            <input type="text" name="tongtiendichvu" class="form-control" id="tongtiendichvu"
+                            <input readonly  type="text" name="tongtiendichvu" class="form-control" id="tongtiendichvu"
                                 placeholder="VD: 300" value="{{ $tongtiendv }}" readonly />
                         </div>
                     </div>
@@ -151,11 +151,11 @@
 
                     <h5> Trừ điểm vào tiền só tiền phải thanh toán </h5>
                     <div class="form-check">
-                        <input class="form-check-input" id="tiendiem{{ $datphong->id }}" type="checkbox"
+                        <input  class="form-check-input" id="tiendiem{{ $datphong->id }}" type="checkbox"
                             name="tiendiem" value="{{ $datphong->khachhangs->diem }}"
                             onclick="doiTongTien({{ $datphong->id }}, {{ $tongtien }})" />
                         <div class="d-flex gap-1 w-50">
-                            <input type="number" value="{{ $datphong->khachhangs->diem }}" name="sotiendiem"
+                            <input  type="number" value="{{ $datphong->khachhangs->diem }}" name="sotiendiem"
                                 id="sotiendiem{{ $datphong->id }}" class="form-control w-25"
                                 max="{{ $datphong->khachhangs->diem }}" min=0
                                 onchange="doiTongTien({{ $datphong->id }}, {{ $tongtien }})">
@@ -165,7 +165,7 @@
 
                     <hr style="border: 1px black solid">
                     <h5> Tổng cộng toàn bộ só tiền phải thanh toán </h5>
-                    <input type="text" name="sotien" class="form-control w-25" id="sotien{{ $datphong->id }}"
+                    <input readonly  type="text" name="sotien" class="form-control w-25" id="sotien{{ $datphong->id }}"
                         placeholder="VD: 300" value="{{ $tongtien }}" />
                     @error('sotien')
                         <div class="alert alert-danger" role="alert">{{ $message }}</div>
@@ -173,10 +173,10 @@
 
 
 
-                    <input type="hidden" name="id" value="{{ $datphong->id }}">
-                    <input type="hidden" name="khachhang_id" value="{{ $datphong->khachhangs->id }}">
-                    <input type="hidden" name="loaitien" value="traphong">
-                    <input type="hidden" name="hinhthucthanhtoan" value="tructiep">
+                    <input readonly  type="hidden" name="id" value="{{ $datphong->id }}">
+                    <input readonly  type="hidden" name="khachhang_id" value="{{ $datphong->khachhangs->id }}">
+                    <input readonly  type="hidden" name="loaitien" value="traphong">
+                    <input readonly  type="hidden" name="hinhthucthanhtoan" value="tructiep">
 
                     {{-- btn xac nhan, cancel --}}
                     <div class="d-flex bd-highlight my-3">
@@ -192,17 +192,17 @@
                                     width="150px" class="shadow-sm">
                             </a> --}}
                             <form action="/thanhtoanvnpayview" method="get">
-                                <input hidden type="text" name="sotien" id="sotien2{{ $datphong->id }}"
+                                <input readonly  hidden type="text" name="sotien" id="sotien2{{ $datphong->id }}"
                                     value="{{ $tongtien }}">
-                                <input hidden type="text" name="datphongid" id=""
+                                <input readonly  hidden type="text" name="datphongid" id=""
                                     value="{{ $datphong->id }}">
-                                <input hidden type="text" name="loaitien" id="" value="traphong">
-                                <input hidden type="text" name="khachhangid" id=""
+                                <input readonly  hidden type="text" name="loaitien" id="" value="traphong">
+                                <input readonly  hidden type="text" name="khachhangid" id=""
                                     value="{{ $datphong->khachhangs->id }}">
-                                <input hidden class="form-check-input" id="tiendiem2{{ $datphong->id }}"
+                                <input  hidden class="form-check-input" id="tiendiem2{{ $datphong->id }}"
                                     type="checkbox" name="tiendiem" value="{{ $datphong->khachhangs->diem }}"
                                     id="tiendiem2{{ $datphong->id }}" />
-                                <input hidden type="number" value="{{ $datphong->khachhangs->diem }}"
+                                <input  hidden type="number" value="{{ $datphong->khachhangs->diem }}"
                                     name="sotiendiem" id="sotiendiem2{{ $datphong->id }}">
 
                                 <button type="submit" class="btn btn-link m-0 p-0"> <img
