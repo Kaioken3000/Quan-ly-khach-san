@@ -9,14 +9,14 @@
     <thead>
         <tr>
             <th>Mã</th>
-            <th>Date Set</th>
+            <th>Ngày đặt</th>
             <th>Ngày trả</th>
-            <th>Number of people</th>
+            <th>Số người ở</th>
             <th colspan="2">Phòng hiện đang ở</th>
             <th>Tình trạng xử lý</th>
             <th>Thanh Toán</th>
             <th>Nhận phòng</th>
-            <th>Action</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -49,7 +49,7 @@
                         <!-- Button trigger modal -->
                         <button type="button" class="badge badge-info border-info text-white" data-toggle="modal"
                             data-target="#LichsuModal{{ $datphongall->id }}">
-                            History
+                            Chi tiết
                         </button>
 
                         <!-- Modal -->
@@ -84,7 +84,7 @@
                                 <form class="m-1" action="hiendoiphongclient" method="get">
                                     <input type="hidden" name="datphongid" value="{{ $datphongall->id }}">
                                     <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i>
-                                        Change Room</button>
+                                        Đổi phòng</button>
                                 </form>
 
                                 <!-- Xoá -->

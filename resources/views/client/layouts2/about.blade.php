@@ -5,15 +5,17 @@
             <div class="col-lg-6">
                 <div class="about-text">
                     <div class="section-title">
-                        <span>About Us</span>
-                        <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                        <span>Về chúng tôi</span>
+                        <h2>Liên lục địa LA <br />Khách sạn Hồ Tây</h2>
                     </div>
-                    <p class="f-para">Sona.com is a leading online accommodation site. We're passionate about
-                        travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
-                        languages.</p>
-                    <p class="s-para">So when it comes to booking the perfect hotel, vacation rental, resort,
-                        apartment, guest house, or tree house, we've got you covered.</p>
-                    <a href="#" class="primary-btn about-btn">Read More</a>
+                    <p class="f-para">Sona.com là trang web cung cấp chỗ ở trực tuyến hàng đầu. Chúng tôi đam mê
+                        du lịch. Mỗi ngày, chúng tôi truyền cảm hứng và tiếp cận hàng triệu khách du lịch trên 90 trang
+                        web địa phương ở 41
+                        ngôn ngữ.</p>
+                    <p class="s-para">
+                        Vì vậy, khi nói đến việc đặt phòng khách sạn, nhà nghỉ dưỡng, khu nghỉ dưỡng hoàn hảo,
+                        căn hộ, nhà khách hoặc nhà trên cây, chúng tôi sẽ hỗ trợ bạn.</p>
+                    <a href="#" class="primary-btn about-btn">Đọc thêm</a>
                 </div>
             </div>
             <div class="col-lg-6">

@@ -54,7 +54,7 @@
 
             recognition.onstart = function(event) {
                 // toggleButton.textContent = "Stop Speech Recognition";
-                statusDiv.textContent = "Speech recognition in progress...";
+                statusDiv.textContent = "Đang lắng nghe...";
                 hearingDiv.style.display = "";
             };
 

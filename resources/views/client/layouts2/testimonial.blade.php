@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <span>Testimonials</span>
-                    <h2>What Customers Say?</h2>
+                    <span>Lời chứng thực</span>
+                    <h2>Khách hàng nói gì?</h2>
                 </div>
             </div>
         </div>
@@ -13,10 +13,10 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="testimonial-slider owl-carousel">
                     <div class="ts-item">
-                        <p>After a construction project took longer than expected, my husband, my daughter and I
-                            needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                            city, neighborhood and the types of housing options available and absolutely love our
-                            vacation at Sona Hotel.</p>
+                        <p>Sau khi một dự án xây dựng kéo dài hơn dự kiến, chồng tôi, con gái tôi và tôi
+                            cần một nơi để ở lại một vài đêm. Là cư dân Chicago, chúng tôi biết rất nhiều về
+                            thành phố, vùng lân cận và các loại lựa chọn nhà ở hiện có và hoàn toàn yêu thích chúng tôi
+                            kỳ nghỉ tại khách sạn Sona.</p>
                         <div class="ti-author">
                             <div class="rating">
                                 <i class="icon_star"></i>
@@ -30,10 +30,10 @@
                         <img src="/client2/img/testimonial-logo.png" alt="">
                     </div>
                     <div class="ts-item">
-                        <p>After a construction project took longer than expected, my husband, my daughter and I
-                            needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                            city, neighborhood and the types of housing options available and absolutely love our
-                            vacation at Sona Hotel.</p>
+                        <p>Sau khi một dự án xây dựng kéo dài hơn dự kiến, chồng tôi, con gái tôi và tôi
+                            cần một nơi để ở lại một vài đêm. Là cư dân Chicago, chúng tôi biết rất nhiều về
+                            thành phố, vùng lân cận và các loại lựa chọn nhà ở hiện có và hoàn toàn yêu thích chúng tôi
+                            kỳ nghỉ tại khách sạn Sona.</p>
                         <div class="ti-author">
                             <div class="rating">
                                 <i class="icon_star"></i>

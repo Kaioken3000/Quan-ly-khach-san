@@ -33,7 +33,8 @@ class IndexController extends Controller
     {
         $phongs = Phong::get();
         $chinhanhs = Chinhanh::get();
-        return view('client.index', compact('phongs', 'chinhanhs'));
+        $anuongs = Anuong::get();
+        return view('client.index', compact('phongs', 'chinhanhs', 'anuongs'));
     }
 
     /**
@@ -65,7 +66,8 @@ class IndexController extends Controller
             ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
             ->get();
         $loaiphongs = Loaiphong::all();
-        return view('client.roomSearch', compact('phongs', 'loaiphongs'));
+        $chinhanhs = Chinhanh::all();
+        return view('client.roomSearch', compact('phongs', 'loaiphongs', 'chinhanhs'));
     }
     public function searchPhongWithManySearch(Request $request)
     {

@@ -10,7 +10,7 @@
                             <div class="mb-3 form-group">
                                 <label class="form-label" for="ten">Họ Tên</label>
                                 <input type="text" name="ten" class="form-control" id="ten"
-                                    placeholder="VD: Lý Nhựt Nam" value="{{auth()->user()->username}}" required/>
+                                    placeholder="VD: Lý Nhựt Nam" value="{{ auth()->user()->username }}" required />
                                 @error('ten')
                                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                 @enderror
@@ -18,7 +18,7 @@
                             <div class="mb-3 form-group">
                                 <label class="form-label" for="sdt">Số điện thoại</label>
                                 <input type="text" name="sdt" class="form-control" id="sdt"
-                                    placeholder="VD: 0123456789" value="{{auth()->user()->sdt}}" required/>
+                                    placeholder="VD: 0123456789" value="{{ auth()->user()->sdt }}" required />
                                 @error('sdt')
                                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                 @enderror
@@ -26,7 +26,7 @@
                             <div class="mb-3 form-group">
                                 <label class="form-label" for="email">Email</label>
                                 <input type="email" name="email" class="form-control" id="email"
-                                    placeholder="example@mail.com" value="{{auth()->user()->email}}" required/>
+                                    placeholder="example@mail.com" value="{{ auth()->user()->email }}" required />
                                 @error('email')
                                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                 @enderror
@@ -36,24 +36,25 @@
                             <div class="mb-3 form-group">
                                 <label class="form-label" for="diachi">Địa chỉ</label>
                                 <input type="diachi" name="diachi" class="form-control" id="diachi"
-                                    placeholder="VD: Q.Ninh Kiều, TP.Cần Thơ" value="{{auth()->user()->diachi}}" required/>
+                                    placeholder="VD: Q.Ninh Kiều, TP.Cần Thơ" value="{{ auth()->user()->diachi }}"
+                                    required />
                                 @error('diachi')
                                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3 ">
-                                <label class="form-label" for="gioitinh">Giới tính</label> 
+                                <label class="form-label" for="gioitinh">Giới tính</label>
                                 <div class="row mx-2">
                                     <div class="form-group col-3">
-                                        <input class="form-check-input" type="radio" name="gioitinh" id="gioitinnam" 
-                                            value="nam" {{(auth()->user()->gioitinh == 'nam' ? 'checked': '')}}>
+                                        <input class="form-check-input" type="radio" name="gioitinh" id="gioitinnam"
+                                            value="nam" {{ auth()->user()->gioitinh == 'nam' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gioitinhnam">
                                             Nam
                                         </label>
                                     </div>
                                     <div class="form-group col-6">
                                         <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhnu"
-                                            value="nu" {{(auth()->user()->gioitinh == 'nu' ? 'checked': '')}}>
+                                            value="nu" {{ auth()->user()->gioitinh == 'nu' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gioitinhnu">
                                             Nữ
                                         </label>
@@ -67,7 +68,7 @@
                                 <label class="form-label" for="vanbang">Số CMND hoặc Passport (hoặc các văn bằng khác
                                     có hình).</label>
                                 <input type="vanbang" name="vanbang" class="form-control" id="vanbang"
-                                    placeholder="VD: 01234567891000" value="{{auth()->user()->vanbang}}" required/>
+                                    placeholder="VD: 01234567891000" value="{{ auth()->user()->vanbang }}" required />
                                 @error('vanbang')
                                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                 @enderror
@@ -109,7 +110,8 @@
                         <input class="form-control" data-val="true" readonly
                             data-val-number="The field Amount must be a number."
                             data-val-required="The Amount field is required." id="amount" max="100000000"
-                            min="1" name="amount" type="number" value="{{ $phong->loaiphongs->gia / 2 }}" />
+                            min="1" name="amount" type="number"
+                            value="{{ $phong->loaiphongs->gia / 2 }}" />
                     </div>
                     <h4>Chọn phương thức thanh toán </h4>
                     <div class="mb-3">
@@ -151,9 +153,9 @@
                 </form>
             </div>
             <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-                <div class="row">
+                <div lớp="hàng">
                     <div class="col-md-10 ml-auto contact-info">
-                        <p><span class="d-block">Địa chỉ:</span> <span class="text-black"> 98 West 21th Street, Suite
+                        <p><span class="d-block"> Địa chỉ:</span> <span class="text-black"> 98 Phố 21 Tây, Phòng Suite
                                 721 New York NY 10016</span></p>
                         <p><span class="d-block">Số điện thoại:</span> <span class="text-black"> (+1) 435 3533</span>
                         </p>

@@ -15,27 +15,27 @@
                     <div class="m-3 d-flex">
                         <label class="form-label mx-2 my-2">Chi nhánh: </label>
                         <select class="form-select" aria-label="Default select example" name="chinhanhid">
-                            <option value=" ">All</option>
+                            <option value=" ">Tất cả</option>
                             @foreach ($chinhanhs as $chinhanh)
                                 <option value="{{ $chinhanh->id }}">{{ $chinhanh->ten }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="m-3 d-flex">
-                        <label class="form-label mx-2 my-2">Room category: </label>
+                        <label class="form-label mx-2 my-2">Loại phòng: </label>
                         <select class="form-select" aria-label="Default select example" name="tenphong">
-                            <option value=" ">All</option>
+                            <option value=" ">Tất cả</option>
                             @foreach ($loaiphongs as $loaiphong)
                                 <option value="{{ $loaiphong->ma }}">{{ $loaiphong->ten }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="m-3 d-flex">
-                        <label class="form-label mx-2 my-2">Room price</label>
+                        <label class="form-label mx-2 my-2">Giá phòng</label>
                         <select class="form-select" aria-label="Default select example" name="tuychonggia">
-                            <option value=">">More than</option>
+                            <option value=">">Nhiều hơn</option>
                             <option value="=">Bằng</option>
-                            <option value="<">Smaller than</option>
+                            <option value="<">Nhỏ hơn</option>
                         </select>
                         <select class="form-select" aria-label="Default select example" name="giaphong">
                             <option value="100000">100000 VNĐ</option>
@@ -47,9 +47,9 @@
                         </select>
                     </div>
                     <div class="m-3 d-flex">
-                        <label class="form-label mx-2 my-2">Number of people in room:</label>
+                        <label class="form-label mx-2 my-2">Số người ở:</label>
                         <select class="form-select" aria-label="Default select example" name="songuoiphong">
-                            <option value="">All</option>
+                            <option value="">Tất cả</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -59,7 +59,7 @@
                         </select>
                     </div>
                     <div class="py-3">
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="submit" class="btn btn-primary">Tìm kiếm <i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </form>

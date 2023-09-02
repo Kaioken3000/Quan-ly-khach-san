@@ -43,8 +43,7 @@
                                 <h3>{{ $phong->loaiphongs->ten }}-{{ $phong->so_phong }}</h3>
                                 <div class="rdt-right">
                                     <a href="/client/previewVirtualTour/{{ $phong->virtualtours[0]->id }}"
-                                        target="_blank">Xem Virtual
-                                        Tour
+                                        target="_blank">Xem tham quan ảo
                                         <i class="fa fa-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -52,15 +51,15 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td class="r-o">Category:</td>
+                                        <td class="r-o">Loại phòng:</td>
                                         <td>{{ $phong->loaiphongs->ten }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">Quantity:</td>
-                                        <td>{{ $phong->loaiphongs->soluong }} people</td>
+                                        <td class="r-o">Tối đa:</td>
+                                        <td>{{ $phong->loaiphongs->soluong }} người ở</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-0" style="width: 500px">Device in room:</td>
+                                        <td class="r-0" style="width: 500px">Thiết bị:</td>
                                         <td>
                                             <div class="d-flex flex-column">
                                                 @foreach ($phong->thietbiphongs as $thietbiphong)
@@ -72,7 +71,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="r-0 d-flex justify-content-start align-items-start">Bed:</td>
+                                        <td class="r-0 d-flex justify-content-start align-items-start">Giường:</td>
                                         <td>
                                             @foreach ($phong->giuongphongs as $giuongphong)
                                                 <?php $giuong = App\Models\Giuong::where('id', $giuongphong->giuongid)->first();
@@ -101,7 +100,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="room-booking">
-                    <h3>Book now</h3>
+                    <h3>Đặt phòng ngay</h3>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
@@ -127,7 +126,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="soluong">Number Of People In the room:</label>
+                            <label for="soluong">Số người ở tối đa trong phòng:</label>
                             <input type="number" name="soluong" id="soluong"
                                 class="form-control form-control-lg-border" min=1 required value="1">
                             @error('soluong')

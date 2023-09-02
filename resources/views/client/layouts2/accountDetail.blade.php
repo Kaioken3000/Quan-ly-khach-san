@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="d-flex">
-                            <h5 class="card-title mr-2">Username:</h5>
+                            <h5 class="card-title mr-2">Tên tài khoản:</h5>
                             <p class="card-text">{{ auth()->user()->username }}</p>
                         </div>
 
@@ -15,13 +15,13 @@
                         </div>
 
                         <div class="d-flex">
-                            <h5 class="card-title mr-1">Phone Number:</h5>
+                            <h5 class="card-title mr-1">Số điện thoại:</h5>
                             <p class="card-text">0{{ auth()->user()->sdt }}</p>
                         </div>
                     </div>
                     <div class="col">
                         <div class="d-flex">
-                            <h5 class="card-title mr-1">Address:</h5>
+                            <h5 class="card-title mr-1">Địa chỉ:</h5>
                             <p class="card-text">{{ auth()->user()->diachi }}</p>
                         </div>
                         <div class="d-flex">
@@ -156,10 +156,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex gap-1">
-                                        <button type="button" class="btn btn-outline-secondary"
-                                            data-dismiss="modal">
-                                            No
-                                        </button>
+                                        <div>
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                data-dismiss="modal">
+                                                No
+                                            </button>
+                                        </div>
                                         <form action="{{ route('client.xoakhachhang', auth()->user()->id) }}"
                                             method="Post">
                                             @csrf

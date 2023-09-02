@@ -94,14 +94,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Virtual tour</span>
-                        <h2>Enjoy our virtual tour show</h2>
+                        <span>Tham quan ảo</span>
+                        <h2>Thưởng thức chương trình tham quan ảo của chúng tôi</h2>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="container">
+    <div class="container rounded-1">
         {{-- <iframe src="https://www.vrwix.com/vr/hotel/IND/Tamil_Nadu/Chennai/Hilton-Chennai" frameborder="0" allowfullscreen></iframe> --}}
         <iframe src="https://www.vrwix.com/vr/hotel/IND/Kerala/Thiruvananthapuram/Wayanad-Silverwoods-Resorts?isAutoPlay=true&isHotelDetails=true" frameborder="0" allowfullscreen></iframe>
     </div>

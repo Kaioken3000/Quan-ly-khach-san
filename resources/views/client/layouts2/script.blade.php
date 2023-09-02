@@ -8,7 +8,11 @@
 <script src="/client2/js/owl.carousel.min.js"></script>
 <script src="/client2/js/main.js"></script>
 
-<div id="google_translate_element"></div>
+{{-- flatpickr --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+{{-- <div id="google_translate_element"></div>
 <script>
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
@@ -50,4 +54,4 @@
         display: none;
     }
 
-</style>
+</style> --}}

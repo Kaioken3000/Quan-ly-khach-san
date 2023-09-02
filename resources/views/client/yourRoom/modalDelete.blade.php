@@ -1,6 +1,6 @@
 <div class="m-1">
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicModal{{ $datphongall->id }}">
-        Delete
+        Xóa
     </button>
 </div>
 <!-- Modal xoá phòng -->
@@ -16,13 +16,13 @@
             <div class="modal-body">
                 <div class="d-flex gap-1">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
-                        No
+                        Không
                     </button>
                     <form action="{{ route('client.xoadatphong', $datphongall->id) }}" method="Post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            Yes</button>
+                            Có</button>
                     </form>
                 </div>
             </div>

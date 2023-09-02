@@ -1,5 +1,5 @@
 @include('client.layouts2.searchBar')
-@include('client.layouts2.breadcrumb', ['titlePage' => 'All room'])
+@include('client.layouts2.breadcrumb', ['titlePage' => 'Tất cả phòng'])
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
     <div class="container">
@@ -34,24 +34,44 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td class="r-o">Category:</td>
+                                        <td class="r-o">Loại phòng:</td>
                                         <td>{{ $phong->loaiphongs->ten }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>{{ $phong->loaiphongs->soluong }}</td>
+                                        <td class="r-o">Tối đa:</td>
+                                        <td>{{ $phong->loaiphongs->soluong }} người ở</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-0">Thiết bị:</td>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                @foreach ($phong->thietbiphongs as $thietbiphong)
+                                                    <?php $thietbi = App\Models\Thietbi::where('id', $thietbiphong->thietbiid)->first();
+                                                    ?>
+                                                    {{ $thietbi->ten }},
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Giường:</td>
+                                        <td>
+                                            @foreach ($phong->giuongs as $giuong)
+                                                {{ $giuong->ten }}
+                                            @endforeach
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                             @if ($check == 0)
-                                <a href="/client/chitietphong/{{ $phong->so_phong }}" target="_blank" class="primary-btn">More
-                                    Details</a>
+                                <a href="/client/chitietphong/{{ $phong->so_phong }}" target="_blank"
+                                    class="primary-btn">Xem chi tiết</a>
                             @else
                                 <div class="d-flex">
-                                    <p class="mb-0"> Room is booked: &nbsp;</p>
+                                    <p class="mb-0"> Phòng đã được đặt: &nbsp;</p>
                                     <div class="me-0">
-                                        <p class="mb-0"> since: {{ $ngayvaodadat }}</p>
-                                        <p class="mb-0"> to: {{ $ngayradadat }}</p>
+                                        <p class="mb-0"> Từ: {{ $ngayvaodadat }}</p>
+                                        <p class="mb-0"> đến: {{ $ngayradadat }}</p>
                                     </div>
                                 </div>
                             @endif

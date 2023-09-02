@@ -25,14 +25,13 @@
                     }
                     ?>
                     <div class="col-lg-3 col-md-6 list-item">
-                        <div class="hp-room-item set-bg"
-                            data-setbg="/client/images/<?php 
-                                foreach ($phong->hinhphongs as $hinhphong){
-                                    $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first();
-                                        echo $hinh->vitri ;
-                                    break;
-                                }
-                            ?>">
+                        <div class="hp-room-item set-bg" data-setbg="/client/images/<?php
+                        foreach ($phong->hinhphongs as $hinhphong) {
+                            $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first();
+                            echo $hinh->vitri;
+                            break;
+                        }
+                        ?>">
                             <div class="hr-text">
                                 <h3>{{ $phong->loaiphongs->ten }} - {{ $phong->so_phong }}</h3>
                                 <h2>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h2>
@@ -42,10 +41,10 @@
                                     <br>
                                 @else
                                     <div class="d-flex">
-                                        <p class="mb-0 text-light"> Room is booked: &nbsp;</p>
+                                        <p class="mb-0 text-light"> Phòng đã được đặt: &nbsp;</p>
                                         <div class="me-0">
-                                            <p class="mb-0 text-light"> since: {{ $ngayvaodadat }}</p>
-                                            <p class="mb-0 text-light"> to: {{ $ngayradadat }}</p>
+                                            <p class="mb-0 text-light"> Từ: {{ $ngayvaodadat }}</p>
+                                            <p class="mb-0 text-light"> đến: {{ $ngayradadat }}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -54,17 +53,27 @@
                                         <br>
                                         <br>
                                         <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
                                         <tr>
-                                            <td class="r-o">Category:</td>
+                                            <td class="r-o">Loại phòng:</td>
                                             <td>{{ $phong->loaiphongs->ten }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion {{ $phong->loaiphongs->soluong }}</td>
+                                            <td class="r-o">Giường:</td>
+                                            @foreach ($phong->giuongs as $giuong)
+                                                <td>{{ $giuong->ten }}</td>
+                                            @endforeach
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Thiết bị:</td>
+                                            <td>
+                                                @foreach ($phong->thietbis as $thietbi)
+                                                    {{ $thietbi->ten }},
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tối đa:</td>
+                                            <td>{{ $phong->loaiphongs->soluong }} người ở</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Virtual tour</h2>
+                    <h2>Chuyến tham quan ảo</h2>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="card-box m-4">
+    <div class="card my-3">
         <div class="card-header">
-            <h3 class="text-muted">VNPAY RESPONSE</h3>
+            PHẢN HỒI TỪ VNPAY
         </div>
         <div class="card-body">
             <div class="mb-3">
@@ -15,37 +15,37 @@
 
                 <label class="form-label">Số tiền:</label>
                 <label class="form-label">
-                    {{ $request->vnp_Amount}}
+                    {{ $request->vnp_Amount/100 }} VNĐ
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nội dung thanh toán:</label>
                 <label class="form-label">
-                    {{ $request->vnp_OrderInfo}}
+                    {{ $request->vnp_OrderInfo }}
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">Mã phản hồi (vnp_ResponseCode):</label>
                 <label class="form-label">
-                    {{ $request->vnp_ResponseCode}}
+                    {{ $request->vnp_ResponseCode }}
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">Mã GD Tại VNPAY:</label>
                 <label class="form-label">
-                    {{ $request->vnp_TransactionNo}}
+                    {{ $request->vnp_TransactionNo }}
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">Mã Ngân hàng:</label>
                 <label class="form-label">
-                    {{ $request->vnp_BankCode}}
+                    {{ $request->vnp_BankCode }}
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">Thời gian thanh toán:</label>
                 <label class="form-label">
-                    {{ $request->vnp_PayDate}}
+                    {{ $request->vnp_PayDate }}
                 </label>
             </div>
             <div class="mb-3">
@@ -65,12 +65,9 @@
                 </label>
             </div>
         </div>
-        <p>
-            &nbsp;
-        </p>
         <footer class="card-footer">
             <p>&copy; VNPAY
-                <?php echo date('Y')?>
+                <?php echo date('Y'); ?>
             </p>
         </footer>
     </div>
