@@ -68,7 +68,7 @@ td.status span.pending {
     /* display: flex; */
     width: 100%;
     flex-wrap: wrap;
-    padding: 4px;
+    /* padding: 4px; */
 }
 
 #toggleView:checked~table tbody tr,
@@ -103,8 +103,8 @@ td.status span.pending {
     /* border: 1px solid #E7E7E7; */
     /* border: 1px solid black; */
     border-radius: 7px;
-    padding: 8px;
-    margin: 4px;
+    /* padding: 8px;
+    margin: 4px; */
 }
 
 

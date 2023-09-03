@@ -35,7 +35,7 @@
                         <td>{{ $thietbi->ten }}</td>
                         <td style="width: 10%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $thietbi->hinh }}" src="/client/images/{{ $thietbi->hinh }}" class="img-fluid">
+                                title="{{ $thietbi->hinh }}" src="/client/images/{{ $thietbi->hinh }}" class="img-fluid rounded ">
                         </td>
                         <td>{{ $thietbi->gia }}</td>
                         <td>{{ $thietbi->mieuTa }}</td>

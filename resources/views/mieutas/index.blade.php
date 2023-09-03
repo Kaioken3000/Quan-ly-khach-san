@@ -35,7 +35,7 @@
                             {!! $mieuta->noidung !!}
                         <td style="width: 10%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $mieuta->hinh }}" src="/client/images/{{ $mieuta->hinh }}" class="img-fluid">
+                                title="{{ $mieuta->hinh }}" src="/client/images/{{ $mieuta->hinh }}" class="img-fluid rounded ">
                         </td>
                         @hasanyrole('MainAdmin|Admin')
                             <td>

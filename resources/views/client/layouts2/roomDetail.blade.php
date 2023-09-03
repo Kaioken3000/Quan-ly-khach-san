@@ -78,7 +78,7 @@
                                                 ?>
                                                 {{ $giuong->ten }}
                                                 <br>
-                                                <img src="/client/images/{{ $giuong->hinh }}" class="img-fluid"
+                                                <img src="/client/images/{{ $giuong->hinh }}" class="img-fluid rounded "
                                                     style="max-width: 300px">
                                             @endforeach
                                         </td>

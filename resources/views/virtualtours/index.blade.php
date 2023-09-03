@@ -36,7 +36,7 @@
                                 class="badge bg-primary">Preview</a></td>
                         <td style="width: 90%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $virtualtour->hinh }}" src="/client/images/{{ $virtualtour->hinh }}" class="img-fluid">
+                                title="{{ $virtualtour->hinh }}" src="/client/images/{{ $virtualtour->hinh }}" class="img-fluid rounded ">
                         </td>
                         @hasanyrole('MainAdmin|Admin')
                             <td>

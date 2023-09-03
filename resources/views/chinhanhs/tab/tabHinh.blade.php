@@ -15,7 +15,7 @@
                 }
                 ?>
                     onclick="changeBoder('hinhDetail{{ $hinh->id }}','hinh{{ $hinh->id }}')">
-                    <img class="img-fluid" style="object-fit: cover; width: 300px;  max-height: 200px"
+                    <img class="img-fluid rounded " style="object-fit: cover; width: 300px;  max-height: 200px"
                         src="/client/images/{{ $hinh->vitri }}">
                     <div class="d-flex">
                         @include('hinhs.edit')

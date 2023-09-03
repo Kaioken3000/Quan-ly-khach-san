@@ -40,7 +40,7 @@
                         <td style="width: 10%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                 title="{{ $anuong->hinh }}" src="/client/images/{{ $anuong->hinh }}"
-                                class="img-fluid">
+                                class="img-fluid rounded ">
                         </td>
                         <td>{{ $anuong->gia }}</td>
                         <td>{{ $anuong->soluong }}</td>

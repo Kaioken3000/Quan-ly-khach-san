@@ -15,7 +15,7 @@
                     @foreach ($phong->hinhphongs as $hinhphong)
                         <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                             title="{{ $hinhphong->hinhs->vitri }}" src="/client/images/{{ $hinhphong->hinhs->vitri }}"
-                            class="img-fluid" style="max-width: 200px">
+                            class="img-fluid rounded " style="max-width: 200px">
                         @hasrole('Admin')
                             @isset(Auth::user()->nhanviens)
                                 @foreach (Auth::user()->nhanviens as $nhanvien)

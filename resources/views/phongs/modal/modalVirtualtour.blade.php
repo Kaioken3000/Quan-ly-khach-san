@@ -28,7 +28,7 @@
                                     for="virtualtour{{ $virtualtour->id }}{{ $phong->so_phong }}">
                                     <div class="card p-0 m-0">
                                         <p class="card-header">{{ $virtualtour->hinh }}</p>
-                                        <img class="img-fluid" style="object-fit: cover;"
+                                        <img class="img-fluid rounded " style="object-fit: cover;"
                                             src="/client/images/{{ $virtualtour->hinh }}">
                                         <a href="/virtualtours-showpreview/{{ $virtualtour->id }}" target="_blank"
                                             class="badge bg-primary mt-3 py-3">Xem chi tiết</a>

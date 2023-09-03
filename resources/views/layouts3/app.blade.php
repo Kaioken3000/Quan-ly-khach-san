@@ -11,7 +11,7 @@
 
             @include('layouts3.header')
             
-            <div class="content bg-white">
+            <div class="content ">
 
                 <!-- ===============================================-->
                 <!--    Main Content-->

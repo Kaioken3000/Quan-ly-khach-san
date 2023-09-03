@@ -26,7 +26,7 @@
                                     value="{{ $hinh->id }}">
                                 <label class="form-check-label" for="hinh{{ $hinh->id }}{{ $chinhanh->id }}">
                                     <div class="card p-0 m-0">
-                                        <img class="img-fluid" style="object-fit: cover;"
+                                        <img class="img-fluid rounded " style="object-fit: cover;"
                                             src="/client/images/{{ $hinh->vitri }}">
                                     </div>
                                 </label>

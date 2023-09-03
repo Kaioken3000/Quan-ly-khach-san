@@ -40,16 +40,16 @@
     <div class="tab-content mt-3" id="myTabContent">
         <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
             <div class="row">
-                <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                <div class="col-6 mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabThongtin')
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                <div class="col-6 mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabThietbi')
@@ -61,7 +61,7 @@
         <div class="tab-pane fade" id="tab-giuong" role="tabpanel" aria-labelledby="giuong-tab">
             <div class="row">
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabGiuong')
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabMieuta')
@@ -81,7 +81,7 @@
         <div class="tab-pane fade" id="tab-hinh" role="tabpanel" aria-labelledby="hinh-tab">
             <div class="row">
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabHinh')
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabVirtualTour')

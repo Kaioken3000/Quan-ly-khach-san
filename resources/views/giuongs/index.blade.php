@@ -37,7 +37,7 @@
                         <td>{{ $giuong->kichthuoc }} {{ $giuong->donvi }}</td>
                         <td style="width: 10%">
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                                title="{{ $giuong->hinh }}" src="/client/images/{{ $giuong->hinh }}" class="img-fluid">
+                                title="{{ $giuong->hinh }}" src="/client/images/{{ $giuong->hinh }}" class="img-fluid rounded ">
                         </td>
                         <td>{{ $giuong->gia }}</td>
                         <td>{{ $giuong->mieuTa }}</td>

@@ -16,7 +16,7 @@
                     @foreach ($chinhanh->hinhchinhanhs as $hinhchinhanh)
                         <?php $hinh = App\Models\Hinh::where('id', $hinhchinhanh->hinhid)->first(); ?>
                         <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                            title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid"
+                            title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid rounded "
                             style="max-width: 200px">
                         <!-- Button trigger modal -->
                         <button type="button" class="badge bg-danger" data-bs-toggle="modal"
@@ -82,7 +82,7 @@
                                                     <label class="form-check-label"
                                                         for="hinh{{ $hinh->id }}{{ $chinhanh->id }}">
                                                         <div class="card p-0 m-0">
-                                                            <img class="img-fluid" style="object-fit: cover;"
+                                                            <img class="img-fluid rounded " style="object-fit: cover;"
                                                                 src="/client/images/{{ $hinh->vitri }}">
                                                         </div>
                                                     </label>

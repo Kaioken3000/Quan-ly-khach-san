@@ -18,13 +18,13 @@
         <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
             <div class="row">
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('chinhanhs.mainTabChitiet.tabThongtin')
                         </div>
                     </div>
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('chinhanhs.mainTabChitiet.tabMieuta')
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 {{-- <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             
@@ -40,7 +40,7 @@
                     </div>
                 </div> --}}
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('chinhanhs.mainTabChitiet.tabHinh')

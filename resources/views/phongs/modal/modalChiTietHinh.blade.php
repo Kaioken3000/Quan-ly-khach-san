@@ -17,7 +17,7 @@
                 @foreach ($phong->hinhphongs as $hinhphong)
                     <?php $hinh = App\Models\Hinh::where('id', $hinhphong->hinhid)->first(); ?>
                     <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                        title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid"
+                        title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid rounded "
                         style="max-width: 300px">
                 @endforeach
             </div>

@@ -28,7 +28,7 @@
                                 <?php $hinh = App\Models\Hinh::where('id', $hinhchinhanh->hinhid)->first(); ?>
                                 <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                     title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}"
-                                    class="img-fluid" style="max-width: 180px">
+                                    class="img-fluid rounded " style="max-width: 180px">
                                 <div class="d-flex mt-1">
                                     <p class="flex-grow-1">{{ $hinh->vitri }}</p>
                                     <div>

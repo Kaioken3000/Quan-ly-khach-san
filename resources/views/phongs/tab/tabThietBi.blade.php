@@ -19,7 +19,7 @@
 
                     <div class="row g-0">
                         <div class="col-md-4 d-flex">
-                            <img class="img-fluid" style="object-fit: cover;" src="/client/images/{{ $thietbi->hinh }}">
+                            <img class="img-fluid rounded " style="object-fit: cover;" src="/client/images/{{ $thietbi->hinh }}">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">

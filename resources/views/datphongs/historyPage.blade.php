@@ -21,7 +21,7 @@
         <div class="tab-pane fade show active" id="tab-phong" role="tabpanel" aria-labelledby="phong-tab">
             <div class="row">
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <h4 class="card-title">Thông tin chi tiết phòng</h4>
                             <input type="checkbox" name="" id="toggleView" checked hidden />
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <h4 class="card-title">Thông tin khách hàng</h4>
                             <input type="checkbox" name="" id="toggleView" checked hidden />
@@ -44,7 +44,7 @@
         <div class="tab-pane fade" id="tab-thanhtoan" role="tabpanel" aria-labelledby="thanhtoan-tab">
             <div class="row">
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('datphongs.tabChitiet.tabThanhtoan')
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border border-dark mb-3">
+                    <div class="card border mb-3 h-100">
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('datphongs.tabChitiet.tabDichvu')

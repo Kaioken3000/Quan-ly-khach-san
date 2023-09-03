@@ -37,7 +37,7 @@
                         <td>{{ $loaiphong->gia }} VND</td>
                         <td style="width: 10%"><img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom"
                                 data-bs-placement="top" title="{{ $loaiphong->hinh }}"
-                                src="/client/images/{{ $loaiphong->hinh }}" class="img-fluid"></td>
+                                src="/client/images/{{ $loaiphong->hinh }}" class="img-fluid rounded "></td>
                         <td>{{ $loaiphong->soluong }}</td>
                         <td>{{ $loaiphong->mieuTa }}</td>
                         @hasanyrole('MainAdmin|Admin')

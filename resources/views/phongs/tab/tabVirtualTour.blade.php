@@ -15,7 +15,7 @@
                 }
                 ?>
                     onclick="changeBoder('virtualtourDetail{{ $virtualtour->id }}','virtualtour{{ $virtualtour->id }}')">
-                    <img class="img-fluid" style="object-fit: cover; width: 300px;  max-height: 200px"
+                    <img class="img-fluid rounded " style="object-fit: cover; width: 300px;  max-height: 200px"
                         src="/client/images/{{ $virtualtour->hinh }}">
                 </div>
             </label>
