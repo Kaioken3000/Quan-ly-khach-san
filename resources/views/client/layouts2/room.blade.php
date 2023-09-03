@@ -36,8 +36,8 @@
                                 <h3>{{ $phong->loaiphongs->ten }} - {{ $phong->so_phong }}</h3>
                                 <h2>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h2>
                                 @if ($check == 0)
-                                    <a href="/client/chitietphong/{{ $phong->so_phong }}" class="primary-btn">More
-                                        Details</a>
+                                    <a href="/client/chitietphong/{{ $phong->so_phong }}" class="primary-btn">Xem chi
+                                        tiết</a>
                                     <br>
                                 @else
                                     <div class="d-flex">

@@ -29,9 +29,11 @@
             @include('chinhanhs.mainTab.tabThongtin')
         </div>
         <div class="tab-pane fade" id="tab-hinh" role="tabpanel" aria-labelledby="hinh-tab">
+            @include('hinhs.create')
             @include('chinhanhs.mainTab.tabHinh')
         </div>
         <div class="tab-pane fade" id="tab-mieuta" role="tabpanel" aria-labelledby="mieuta-tab">
+            @include('mieutas.create')
             @include('chinhanhs.mainTab.tabMieuta')
         </div>
     </div>

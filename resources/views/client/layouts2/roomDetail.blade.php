@@ -83,6 +83,12 @@
                                             @endforeach
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Chi nhánh:</td>
+                                        <td>
+                                            {{ $phong->chinhanhs->ten }}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                             {{-- <p class="f-para"><i class="fa fa-check text-warning"></i> {{ $phong->loaiphongs->mieuTa }}</p> --}}

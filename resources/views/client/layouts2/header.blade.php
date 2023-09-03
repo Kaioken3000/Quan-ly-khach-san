@@ -1,5 +1,5 @@
 <!-- Header Section Begin -->
-<header class="header-section">
+<header class="header-section header-normal">
     <div class="top-nav">
         <div class="container-xxl mx-5">
             <div class="row">

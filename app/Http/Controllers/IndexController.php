@@ -76,13 +76,22 @@ class IndexController extends Controller
         if ($request->songuoiphong == null || $request->songuoiphong == "") {
             $request->songuoiphong = "1";
         }
-        $phongs = Phong
-            ::where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
-            ->where('loaiphongs.gia', $request->tuychonggia, $request->giaphong)
-            ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
-            ->where('phongs.chinhanhid', '=', $request->chinhanhid)
-            ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
-            ->get();
+        if ($request->chinhanhid) {
+            $phongs = Phong
+                ::where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
+                ->where('loaiphongs.gia', $request->tuychonggia, $request->giaphong)
+                ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
+                ->where('phongs.chinhanhid', '=', $request->chinhanhid)
+                ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+                ->get();
+        } else {
+            $phongs = Phong
+                ::where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
+                ->where('loaiphongs.gia', $request->tuychonggia, $request->giaphong)
+                ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
+                ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+                ->get();
+        }
         $loaiphongs = Loaiphong::all();
         $chinhanhs = Chinhanh::get();
         return view('client.roomSearch', compact('phongs', 'loaiphongs', 'chinhanhs'));

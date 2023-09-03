@@ -49,6 +49,8 @@
 
     @include('client.layouts2.room')
 
+    @include('client.layouts2.branch')
+
     @include('client.layouts2.testimonial')
 
     @include('client.layouts2.blog')

@@ -1,8 +1,8 @@
-@include('client.layouts2.searchBar')
 @include('client.layouts2.breadcrumb', ['titlePage' => 'Tất cả phòng'])
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
     <div class="container">
+        @include('client.layouts2.searchBar')
         <div class="row list-wrapper">
             {{-- Room list start --}}
             @foreach ($phongs as $phong)
@@ -59,6 +59,12 @@
                                             @foreach ($phong->giuongs as $giuong)
                                                 {{ $giuong->ten }}
                                             @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chi nhánh:</td>
+                                        <td>
+                                            {{ $phong->chinhanhs->ten }}
                                         </td>
                                     </tr>
                                 </tbody>

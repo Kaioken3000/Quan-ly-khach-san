@@ -1,6 +1,6 @@
 <!-- Services Section End -->
 <section>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
