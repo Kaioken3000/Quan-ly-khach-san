@@ -62,7 +62,7 @@
     </div>
 
     <div class="">
-        <table class="table" id="baocaotable">
+        <table class="table fs--1" id="baocaotable">
             <thead>
                 <tr>
                     <th>id</th>

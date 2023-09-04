@@ -1,6 +1,6 @@
 @hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreateThietbi">
-        <i class="fas fa-plus"></i> Create Thiết bị
+        <i class="fas fa-plus"></i> Tạo Thiết bị
     </button>
 @endhasanyrole
 <!-- Modal Create -->

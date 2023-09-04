@@ -1,7 +1,7 @@
  {{-- <section class="section">
      <div class="container" data-aos="fade-up" data-aos-offset="-200">
          <div class="table-responsive text-nowrap">
-             <table class="table">
+             <table class="table fs--1">
                  <thead>
                      <tr>
                          <th>Số phòng</th>

@@ -15,7 +15,7 @@
                 @include('loaiphongs.create')
             </div>
         </div>
-        <table class="table">
+        <table class="table fs--1">
             <thead>
                 <tr>
                     <th class="table-plus">Mã loại phòng</th>
@@ -49,6 +49,19 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th class="table-plus">Mã loại phòng</th>
+                    <th>Tên loại phòng</th>
+                    <th>Giá </th>
+                    <th>Hinh</th>
+                    <th>Số lượng</th>
+                    <th>Miêu tả loại phòng</th>
+                    @hasanyrole('MainAdmin|Admin')
+                        <th class="datatable-nosort">Action</th>
+                    @endhasanyrole
+                </tr>
+            </tfoot>
         </table>
     </div>
 @endsection

@@ -15,7 +15,7 @@
                 @include('thietbis.create')
             </div>
         </div>
-        <table class="table">
+        <table class="table fs--1">
             <thead>
                 <tr>
                     <th class="table-plus">ID</th>

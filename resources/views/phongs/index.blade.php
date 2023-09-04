@@ -12,7 +12,7 @@
         </div>
         <div>
             {{-- @include('phongs.create') --}}
-            <a href="{{ route('phongs.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create Phòng</a>
+            <a href="{{ route('phongs.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Tạo Phòng</a>
         </div>
     </div>
     <div class="d-flex gap-1 mb-3">

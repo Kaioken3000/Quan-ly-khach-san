@@ -40,9 +40,11 @@
         @foreach ($phongs as $phong)
             <tr>
                 <td data-name='Thiết bị'>
+                    <?php $i = 1; ?>
                     @foreach ($phong->thietbis as $thietbi)
-                        <li class="d-flex justify-content-between align-items-center">
-                            <div class="row flex-grow-1">
+                        <li class="list-group-items d-flex justify-content-between align-items-center">
+                            {{ $i }}.
+                            <div class="row flex-grow-1 mx-1">
                                 <div class="col">{{ $thietbi->ten ?? '' }}</div>
                                 <div class="col"> Giá: {{ $thietbi->gia ?? '' }} VND </div>
                             </div>
@@ -67,6 +69,7 @@
                                 @endif
                             @endforeach
                         </li>
+                        <?php $i++; ?>
                     @endforeach
                 </td>
             </tr>

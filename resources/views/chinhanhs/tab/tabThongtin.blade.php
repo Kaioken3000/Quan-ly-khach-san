@@ -23,7 +23,7 @@
         @enderror
     </div>
     <div class="mb-3">
-        <span>Thành phố</span>
+        <label class="form-label" for="thanhpho">Thành phố</label>
         <select data-child="niv1" class="selectdata form-control custom-select" name="thanhpho">
             @foreach ($response as $item)
                 <option value="{{ $item['name'] }}">{{ $item['name'] }}</option>
@@ -34,7 +34,7 @@
         @enderror
     </div>
     <div class="mb-3">
-        <span>Quận</span>
+        <label class="form-label" for="thanhpho">Quận</label>
         <select id="niv1" data-child="niv2" class="selectdata form-control custom-select" name="quan">
             @foreach ($response as $item)
                 @foreach ($item['districts'] as $i)

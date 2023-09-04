@@ -12,11 +12,11 @@
                 @include('layouts3.title', ['titlePage' => 'Quản lý loại phòng'])
             </div>
             <div>
-                <a class="btn btn-success mb-4" href="{{ route('roles.create') }}"><i class="fas fa-plus"></i> Create
+                <a class="btn btn-success mb-4" href="{{ route('roles.create') }}"><i class="fas fa-plus"></i> Tạo
                     Role</a>
             </div>
         </div>
-        <table class="table">
+        <table class="table fs--1">
             <thead>
                 <tr>
                     <th>Id</th>

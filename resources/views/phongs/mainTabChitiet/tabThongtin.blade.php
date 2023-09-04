@@ -44,18 +44,18 @@
                 <td data-name='Loại phòng: '>{{ $phong->loaiphongs->ten }}</td>
                 <td data-name='Chi nhánh'>{{ $phong->chinhanhs->ten ?? '' }}</td>
                 <td data-name='Thiết bị' class="d-flex align-items-start">
-                    <ul class="list-group">
+                    <ol class="list-group mx-3">
                         @foreach ($phong->thietbis as $thietbi)
                             <li>{{ $thietbi->ten ?? '' }}</li>
                         @endforeach
-                    </ul>
+                    </ol>
                 </td>
                 <td data-name='Giừơng' class="d-flex align-items-start">
-                    <ul class="list-group">
+                    <ol class="list-group mx-3">
                         @foreach ($phong->giuongs as $giuong)
                             <li>{{ $giuong->ten ?? '' }}</li>
                         @endforeach
-                    </ul>
+                    </ol>
                 </td>
                 <td data-name='Miêu tả' style="width: 400px">
                     <div class="overflow-auto" style="height: 200px">

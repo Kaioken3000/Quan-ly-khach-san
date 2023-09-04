@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table fs--1">
     <thead>
         <tr>
             <th>Id</th>

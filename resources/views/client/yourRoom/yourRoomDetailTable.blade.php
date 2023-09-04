@@ -5,7 +5,7 @@
         </div>
     @endif
 </div>
-<table class="table">
+<table class="table fs--1">
     <thead>
         <tr>
             <th>Mã</th>

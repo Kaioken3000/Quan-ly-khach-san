@@ -42,7 +42,7 @@
                 <p>{{ $message }}</p>
             </div>
         @endif
-        <table class="table">
+        <table class="table fs--1">
             <thead>
                 <tr>
                     <th>Số phòng</th>

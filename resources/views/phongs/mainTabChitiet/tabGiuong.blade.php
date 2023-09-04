@@ -43,11 +43,12 @@
         @foreach ($phongs as $phong)
             <tr>
                 <td>
+                    <?php $i = 1; ?>
                     @foreach ($phong->giuongphongs as $giuongphong)
-                        <li class="  d-flex justify-content-between align-items-center">
+                        <li class="d-flex justify-content-between align-items-center">
                             <div class="row flex-grow-1">
                                 <div class="col">
-                                    <p> {{ $giuongphong->giuongs->ten }} </p>
+                                    <p> {{ $i }}. {{ $giuongphong->giuongs->ten }} </p>
                                 </div>
                                 <div class="col">
                                     <p>Giá: {{ $giuongphong->giuongs->gia }} VND</p>
@@ -56,7 +57,7 @@
                                     <p>Kích thước: {{ $giuongphong->giuongs->kichthuoc }}
                                         {{ $giuongphong->giuongs->donvi }}</p>
                                 </div>
-                                <div class="col">
+                                <div class="col-1">
                                     @hasrole('Admin')
                                         @isset(Auth::user()->nhanviens)
                                             @foreach (Auth::user()->nhanviens as $nhanvien)
@@ -76,6 +77,7 @@
                                 </div>
                             </div>
                         </li>
+                        <?php $i++; ?>
                     @endforeach
                 </td>
             </tr>

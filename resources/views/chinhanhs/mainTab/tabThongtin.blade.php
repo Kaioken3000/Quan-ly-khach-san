@@ -1,8 +1,8 @@
-<table class="table">
+<table class="table fs--1">
     <thead>
         <tr>
             <th class="table-plus">Mã chi nhánh</th>
-            <th>Chi tiết</th>
+            {{-- <th>Chi tiết</th> --}}
             <th>Tên chi nhánh</th>
             <th>Số lượng (phòng) </th>
             <th>Thành phố</th>
@@ -17,11 +17,13 @@
         @foreach ($chinhanhs as $chinhanh)
             <tr>
                 <td>{{ $chinhanh->id }}</td>
-                <td>
+                {{-- <td>
                     <a href="/chinhanhs/chitiet/{{ $chinhanh->id }}" class="badge bg-primary" target="_blank">Chi tiết <i
                             class="fas fa-eye"></i></a>
+                </td> --}}
+                <td>
+                    <a href="/chinhanhs/chitiet/{{ $chinhanh->id }}" target="_blank">{{ $chinhanh->ten }}</a>
                 </td>
-                <td>{{ $chinhanh->ten }}</td>
                 <td>{{ $chinhanh->soluong }}</td>
                 <td>{{ $chinhanh->thanhpho }}</td>
                 <td>{{ $chinhanh->quan }}</td>
@@ -40,7 +42,7 @@
     <tfoot>
         <tr>
             <th class="table-plus">Mã chi nhánh</th>
-            <th>Chi tiết</th>
+            {{-- <th>Chi tiết</th> --}}
             <th>Tên chi nhánh</th>
             <th>Số lượng (phòng) </th>
             <th>Thành phố</th>

@@ -12,7 +12,7 @@
         </div>
         <div>
             {{-- @include('chinhanhs.create') --}}
-            <a href="{{ route('chinhanhs.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create Chi
+            <a href="{{ route('chinhanhs.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Tạo Chi
                 nhánh</a>
         </div>
     </div>

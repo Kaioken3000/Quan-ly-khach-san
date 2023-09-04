@@ -1,6 +1,6 @@
 @hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreateMieuta">
-        <i class="fas fa-plus"></i> Create Miêu tả
+        <i class="fas fa-plus"></i> Tạo Miêu tả
     </button>
 @endhasanyrole
 <!-- Modal Create -->

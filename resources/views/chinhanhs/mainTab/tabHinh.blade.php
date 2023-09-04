@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table fs--1">
     <thead>
         <tr>
             <th>Chi nhánh</th>
@@ -12,17 +12,21 @@
         @foreach ($chinhanhs as $chinhanh)
             <tr>
                 <td>{{ $chinhanh->id }}</td>
-                <td>
+                <td class="row">
                     @foreach ($chinhanh->hinhchinhanhs as $hinhchinhanh)
                         <?php $hinh = App\Models\Hinh::where('id', $hinhchinhanh->hinhid)->first(); ?>
-                        <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
-                            title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid rounded "
-                            style="max-width: 200px">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="badge bg-danger" data-bs-toggle="modal"
-                            data-bs-target="#hinhchinhanhxoa{{ $hinhchinhanh->id }}">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <div class="col-4">
+                            <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
+                                title="{{ $hinh->vitri }}" src="/client/images/{{ $hinh->vitri }}" class="img-fluid rounded "
+                                style="max-width: 200px">
+                            <!-- Button trigger modal -->
+                            <div class="mt-1">
+                                <button type="button" class="badge bg-danger" data-bs-toggle="modal"
+                                    data-bs-target="#hinhchinhanhxoa{{ $hinhchinhanh->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
 
                         <!-- Modal -->
                         <div class="modal fade" id="hinhchinhanhxoa{{ $hinhchinhanh->id }}" tabindex="-1"

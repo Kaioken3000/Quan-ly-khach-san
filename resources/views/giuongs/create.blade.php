@@ -1,6 +1,6 @@
 @hasanyrole('MainAdmin|Admin')
     <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#ModalCreateGiuong">
-        <i class="fas fa-plus"></i> Create Giường
+        <i class="fas fa-plus"></i> Tạo Giường
     </button>
 @endhasanyrole
 <!-- Modal Create -->
