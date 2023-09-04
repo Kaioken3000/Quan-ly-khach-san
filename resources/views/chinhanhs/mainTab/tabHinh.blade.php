@@ -1,4 +1,4 @@
-<table class="table fs--1">
+<table class="table">
     <thead>
         <tr>
             <th>Chi nhánh</th>

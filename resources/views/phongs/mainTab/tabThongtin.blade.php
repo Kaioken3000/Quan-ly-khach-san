@@ -1,4 +1,4 @@
-<table class="table fs--1">
+<table class="table">
     <thead>
         <tr>
             <th class="table-plus">Số phòng</th>
@@ -54,7 +54,7 @@
                         @endforeach
                     </div>
                 </td>
-                <td>
+                <td class="d-flex">
                     @hasrole('Admin')
                         @isset(Auth::user()->nhanviens)
                             @foreach (Auth::user()->nhanviens as $nhanvien)

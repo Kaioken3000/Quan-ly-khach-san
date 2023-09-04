@@ -22,7 +22,7 @@
         </div>
         <div>
             <a class="btn btn-success mb-4" href="{{ route('nhanviens.create') }}"><i class="fas fa-plus"></i>
-                Create Nhân viên</a>
+                Tạo nhân viên</a>
         </div>
     </div>
 
@@ -52,6 +52,7 @@
             @include('nhanviens.mainTab.tabNhanvien')
         </div>
         <div class="tab-pane fade" id="tab-catruc" role="tabpanel" aria-labelledby="catruc-tab">
+            @include('catrucs.create')
             @include('nhanviens.mainTab.tabCatruc')
         </div>
         <script>

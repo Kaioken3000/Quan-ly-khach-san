@@ -12,7 +12,7 @@
                 @include('layouts3.title', ['titlePage' => 'Quản lý khách hàng'])
             </div>
         </div>
-        <table class="table fs--1">
+        <table class="table">
             <thead>
                 <tr>
                     <th>id</th>

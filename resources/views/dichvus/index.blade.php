@@ -15,7 +15,7 @@
                     @include('dichvus.create')
                 </div>
             </div>
-            <table class="table fs--1">
+            <table class="table">
                 <thead>
                     <tr>
                         <th class="table-plus">ID</th>

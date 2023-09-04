@@ -100,7 +100,8 @@
                             {{ Request::is('thietbis') || Request::is('thietbis*') ? 'show' : '' }}
                             {{ Request::is('giuongs') || Request::is('giuongs*') ? 'show' : '' }}
                             {{ Request::is('mieutas') || Request::is('mieutas*') ? 'show' : '' }}
-                            {{ Request::is('hinhs') || Request::is('hinhs*') ? 'show' : '' }}"
+                            {{ Request::is('hinhs') || Request::is('hinhs*') ? 'show' : '' }}
+                            {{ Request::is('virtualtours') || Request::is('virtualtours*') ? 'show' : '' }}"
                                 data-bs-parent="#chiTietPhong" id="project-managementChiTietPhong">
                                 <li class="nav-item">
                                     <a href="/thietbis"
@@ -259,14 +260,14 @@
                             <ul class="nav collapse parent" data-bs-parent="#xulyNav" id="project-management1">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuaxuly" name="notLink"
-                                        onclick="setFilter('chuaxulyOnly', 'Chưa', 5)">
+                                        onclick="setFilter('chuaxulyOnly', 'Chưa', 6)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa xử lý</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="daxuly" name="notLink"
-                                        onclick="setFilter('xulyOnly', 'Xác nhận', 5)">
+                                        onclick="setFilter('xulyOnly', 'Xác nhận', 6)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã xử lý</span>
                                     </a>
@@ -297,14 +298,14 @@
                             <ul class="nav collapse parent" data-bs-parent="#nhanphongNav" id="project-management3">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuanhanphong" name="notLink"
-                                        onclick="setFilter('chuanhanphongOnly', 'Chưa', 6)">
+                                        onclick="setFilter('chuanhanphongOnly', 'Chưa', 7)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa nhận phòng</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="danhanphong" name="notLink"
-                                        onclick="setFilter('nhanphongOnly', 'Xác nhận', 6)">
+                                        onclick="setFilter('nhanphongOnly', 'Xác nhận', 7)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã nhận phòng</span>
                                     </a>
@@ -335,14 +336,14 @@
                             <ul class="nav collapse parent" data-bs-parent="#thanhtoanNav" id="project-management2">
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="chuathanhtoan" name="notLink"
-                                        onclick="setFilter('chuathanhtoanOnly', 'Chưa', 7)">
+                                        onclick="setFilter('chuathanhtoanOnly', 'Chưa', 8)">
                                         <span class="micon fa fa-times"></span>
                                         <span class="mtext">Chưa thanh toán</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:;" class="nav-link" id="dathanhtoan" name="notLink"
-                                        onclick="setFilter('thanhtoanOnly', 'Xác nhận', 7)">
+                                        onclick="setFilter('thanhtoanOnly', 'Xác nhận', 8)">
                                         <span class="micon fa fa-check"></span>
                                         <span class="mtext">Đã thanh toán</span>
                                     </a>
@@ -493,7 +494,7 @@
                                     <span class="nav-link-icon">
                                         <i class="fas fa-user-circle"></i>
                                     </span>
-                                    <span class="nav-link-text">Account</span>
+                                    <span class="nav-link-text">Tài khoản</span>
                                 </div>
                             </a>
                         </span>
@@ -511,7 +512,7 @@
                                     <span class="nav-link-icon">
                                         <i class="fas fa-cog"></i>
                                     </span>
-                                    <span class="nav-link-text">Role</span>
+                                    <span class="nav-link-text">Vai trò</span>
                                 </div>
                             </a>
                         </span>

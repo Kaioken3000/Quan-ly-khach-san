@@ -35,7 +35,7 @@
                 <div class="tab-content mt-3" id="myTabContent">
                     <div class="overflow-auto tab-pane fade show active" id="tab-thongtin" role="tabpanel"
                         aria-labelledby="thongtin-tab">
-                        <form action="{{ route('phongs.update', $phong->so_phong) }}" method="POST">
+                        <form action="{{ route('phongs.update', $phong->so_phong) }}" method="POST" class="w-25">
                             @csrf
                             @method('PUT')
                             @foreach ($thietbis as $thietbi)

@@ -1,4 +1,4 @@
-<table class="table fs--1">
+<table class="table">
     <thead>
         <tr>
             <th class="table-plus">Mã chi nhánh</th>
@@ -29,7 +29,7 @@
                 <td>{{ $chinhanh->quan }}</td>
                 <td>{{ $chinhanh->sdt }}</td>
                 @hasanyrole('MainAdmin|Admin')
-                    <td>
+                    <td class="d-flex">
                         {{-- @include('chinhanhs.edit') --}}
                         <a href="{{ route('chinhanhs.edit', $chinhanh->id) }}" class="btn btn-link"><i
                                 class="fas fa-edit"></i></a>

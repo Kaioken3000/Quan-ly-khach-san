@@ -62,7 +62,7 @@
     </div>
 
     <div class="">
-        <table class="table fs--1" id="baocaotable">
+        <table class="table" id="baocaotable">
             <thead>
                 <tr>
                     <th>id</th>
@@ -92,7 +92,7 @@
                             {{ $phongmax->phongid }}
                         </td>
                         <td>
-                            <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->datphongid, 'khachhangid' => $datphong->khachhangid]) }}"
+                            <a href="{{ route('datphongs.showHistoryPage', ['datphongid' => $datphong->id, 'khachhangid' => $datphong->khachhangs->id]) }}"
                                 target="_blank" class="badge bg-primary">
                                 Chi tiết
                             </a>

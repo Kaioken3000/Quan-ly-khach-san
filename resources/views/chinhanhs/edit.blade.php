@@ -11,7 +11,7 @@
                     role="tab" aria-controls="tab-mieuta" aria-selected="true">Miêu tả</a></li>
         </ul>
         <div class="tab-content mt-3" id="myTabContent">
-            <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
+            <div class="tab-pane fade show active " id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
                 <form action="{{ route('chinhanhs.update', $chinhanh->id) }}" method="POST" class="w-25">
                     @csrf
                     @method('PUT')
@@ -72,7 +72,7 @@
                         @enderror
                     </div> --}}
                     <div class="mb-3">
-                        <span>Thành phố</span>
+                        <label class="form-label" for="thanhpho">Thành phố</label>
                         <select data-child="niv1" class="selectdata form-control custom-select" name="thanhpho">
                             @foreach ($response as $item)
                                 <option value="{{ $item['name'] }}"
@@ -82,7 +82,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <span>Quận</span>
+                        <label class="form-label" for="quan">Quận</label>
                         <select id="niv1" data-child="niv2" class="selectdata form-control custom-select" name="quan">
                             @foreach ($response as $item)
                                 @foreach ($item['districts'] as $i)
