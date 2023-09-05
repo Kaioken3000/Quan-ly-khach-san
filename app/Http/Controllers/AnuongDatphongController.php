@@ -69,7 +69,7 @@ class AnuongDatphongController extends Controller
         if (!str_contains(strval(app('url')->current()), $url)) {
             return redirect()->back()->withMessage('success', 'Dich vu dat phong has been created successfully.');
         } else {
-            return redirect()->route('client.danhsachdatphong')->with('success', 'Dich vu dat phong has been created successfully.');
+            return redirect()->back()->withMessage('success', 'Dich vu dat phong has been created successfully.');
         }
     }
 

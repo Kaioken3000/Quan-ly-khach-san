@@ -5,7 +5,7 @@
         </div>
     @endif
 </div>
-<table class="table">
+<table>
     <thead>
         <tr>
             <th>Mã</th>
@@ -23,67 +23,50 @@
         @foreach ($datphongalls as $datphongall)
             @if ($datphongall->khachhangs->userid == Auth::user()->id)
                 <tr>
-                    <td>{{ $datphongall->id }}</td>
-                    <td>{{ $datphongall->ngaydat }}</td>
-                    <td>{{ $datphongall->ngaytra }}</td>
-                    <td>{{ $datphongall->soluong }}</td>
-                    <td>
-                        <?php
-                        $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphongall->id)
-                            ->orderBy('id', 'desc')
-                            ->first();
-                        ?>
-                        @if ($phongmax)
-                            {{ $phongmax->phongid }}
-                        @endif
-                    </td>
-                    <td>
-                        <?php
-                        $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphongall->id)->get();
-                        $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphongall->id)->get();
-                        $traphongs = App\Models\Traphong::where('datphongid', $datphongall->id)->get();
-                        $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphongall->id)->get();
-                        $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphongall->id)->get();
-                        $thanhtoans = App\Models\Thanhtoan::where('datphongid', $datphongall->id)->get();
-                        ?>
-                        <!-- Button trigger modal -->
-                        {{-- <button type="button" class="badge badge-info border-info text-white" data-toggle="modal"
-                            data-target="#LichsuModal{{ $datphongall->id }}">
-                            Chi tiết
-                        </button> --}}
-                        <a href="/client/datphongChitiet/{{ $datphongall->id }}" class="badge badge-primary"
-                            target="_blank">Chi tiết</a>
-
-                        <!-- Modal -->
-                        @include('client.yourRoom.modalHistory')
-                    </td>
-                    <td>
+                    <td data-name='Mã: '>{{ $datphongall->id }}</td>
+                    <td data-name='Ngày đặt: '>{{ $datphongall->ngaydat }}</td>
+                    <td data-name='Ngày trả: '>{{ $datphongall->ngaytra }}</td>
+                    <td data-name='Số người ở: '>{{ $datphongall->soluong }}</td>
+                    <?php
+                    $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphongall->id)
+                        ->orderBy('id', 'desc')
+                        ->first();
+                    ?>
+                    <?php
+                    $danhsachdatphongs = App\Models\Danhsachdatphong::where('datphongid', $datphongall->id)->get();
+                    $nhanphongs = App\Models\Nhanphong::where('datphongid', $datphongall->id)->get();
+                    $traphongs = App\Models\Traphong::where('datphongid', $datphongall->id)->get();
+                    $dichvudatphongs = App\Models\DichvuDatphong::where('datphongid', $datphongall->id)->get();
+                    $anuongdatphongs = App\Models\AnuongDatphong::where('datphongid', $datphongall->id)->get();
+                    $thanhtoans = App\Models\Thanhtoan::where('datphongid', $datphongall->id)->get();
+                    ?>
+                    <td data-name='Tình trạng xử lý: '>
                         <label
                             class="text-white badge {{ $datphongall->tinhtrangxuly == 0 ? 'bg-danger' : 'bg-success' }}">
                             {{ $datphongall->tinhtrangxuly == 0 ? 'Chưa' : 'Xác nhận' }}
                         </label>
                     </td>
-                    <td>
+                    <td data-name='Thanh toán: '>
                         <label
                             class="text-white badge {{ $datphongall->tinhtrangthanhtoan == 0 ? 'bg-danger' : 'bg-success' }}">
                             {{ $datphongall->tinhtrangthanhtoan == 0 ? 'Chưa' : 'Xác nhận' }}
                         </label>
                     </td>
-                    <td>
+                    <td data-name='Nhận phòng: '>
                         <label
                             class="text-white badge {{ $datphongall->tinhtrangnhanphong == 0 ? 'bg-danger' : 'bg-success' }}">
                             {{ $datphongall->tinhtrangnhanphong == 0 ? 'Chưa' : 'Xác nhận' }}
                         </label>
                     </td>
                     <!-- Action -->
-                    <td>
+                    <td data-name='Hành động: '>
 
                         <!-- các chức năng sửa, xoá, thanh toán, nhận phòng khi chưa thanh toán -->
                         @if ($datphongall->tinhtrangthanhtoan == 0)
                             <div class="d-flex">
 
                                 <!-- Đổi phòng -->
-                                <form class="m-1" action="hiendoiphongclient" method="get">
+                                <form class="my-1" action="hiendoiphongclient" method="get">
                                     <input type="hidden" name="datphongid" value="{{ $datphongall->id }}">
                                     <button class="w-100 btn btn-primary" type="submit"><i class="bx bx-key mb-1"></i>
                                         Đổi phòng</button>

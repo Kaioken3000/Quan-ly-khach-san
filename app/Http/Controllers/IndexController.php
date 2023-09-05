@@ -227,6 +227,16 @@ class IndexController extends Controller
         $anuongs = Anuong::get();
         return view('client.danhsachdatphong', compact('dichvus', 'anuongs', 'datphongalls'));
     }
+    // Hien thi danh sach datphong cua client
+    public function datphongChitiet(Request $request)
+    {
+        $userid = Auth::user()->id;
+        $datphongalls = Datphong::where("huydatphong", 0)->where("id", $request->datphongid)->get();
+
+        $dichvus = Dichvu::get();
+        $anuongs = Anuong::get();
+        return view('client.datphongChitiet',  compact('dichvus', 'anuongs', 'datphongalls', "request"));
+    }
 
     // kiem tra phong trong cua client
     public function checkroom(Request $request)
@@ -477,7 +487,8 @@ class IndexController extends Controller
             $khachhang->save();
         }
 
-        return redirect('/client/index');
+        // return redirect('/client/index');
+        return redirect()->back()->withMessage('success', 'Dich vu dat phong has been created successfully.');
     }
 
 

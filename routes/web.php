@@ -305,6 +305,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Danh sách các phòng đã đặt
         Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
         Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong')->name("client.danhsachdatphong");
+        Route::get('client/datphongChitiet/{datphongid}', 'IndexController@datphongChitiet');
     });
     // AnuongDatphong
     Route::resource('anuong_datphong', AnuongDatphongController::class);
