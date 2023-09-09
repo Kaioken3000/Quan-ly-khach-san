@@ -26,10 +26,10 @@
                 <td data-name='Địa chỉ:'>{{ $khachhang->diachi }}</td>
                 <td data-name='Văn bằng:'>{{ $khachhang->vanbang }}</td>
                 <td data-name='Giới tính:'>{{ $khachhang->gioitinh }}</td>
-                <td data-name='Thuộc tài khoản-userid:'>{{ $khachhang->users->username ?? '' }}-{{ $khachhang->users->id ?? '' }}</td>
+                <td data-name='Điểm:'>{{ $khachhang->diem }}</td>
+                {{-- <td data-name='Thuộc tài khoản-userid:'>{{ $khachhang->users->username ?? '' }}-{{ $khachhang->users->id ?? '' }}</td> --}}
                 <td data-name='Chi tiết đặt phòng:'>
-                    <a href="/khachhangs/datphongs/{{ $khachhang->id }}" class="badge bg-info" target="_blank">Chi
-                        tiết
+                    <a href="/khachhangs/datphongs/{{ $khachhang->id }}" class="badge bg-info" target="_blank">Chi tiết
                         các đặt phòng</a>
                 </td>
                 @hasanyrole('MainAdmin|Admin')

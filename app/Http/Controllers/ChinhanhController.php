@@ -196,13 +196,16 @@ class ChinhanhController extends Controller
         //                         ->orWhere('hinh','LIKE','%'.$request->search."%")
         //                         ->orWhere('mieuTa','LIKE','%'.$request->search."%")
         //                         ->orderBy('ma','asc')->paginate(5);
-        $chinhanhs = Chinhanh::where('ten', 'LIKE', '%' . $request->search . "%")
+        $chinhanhs = Chinhanh::where('id', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
             ->orWhere('soluong', 'LIKE', '%' . $request->search . "%")
             ->orWhere('thanhpho', 'LIKE', '%' . $request->search . "%")
             ->orWhere('quan', 'LIKE', '%' . $request->search . "%")
             ->orWhere('sdt', 'LIKE', '%' . $request->search . "%")
             ->get();
-        return view('chinhanhs.search', compact('chinhanhs'));
+        $hinhs = Hinh::get();
+        $mieutas = Mieuta::get();
+        return view('chinhanhs.search', compact('chinhanhs', 'hinhs', 'mieutas'));
     }
 
     /**

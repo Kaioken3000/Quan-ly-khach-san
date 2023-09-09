@@ -230,7 +230,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('khachhangs-search', 'KhachhangController@search');
         Route::get('khachhangs/khachhangs-search', 'KhachhangController@search');
         Route::get('khachhangs/datphongs/{khachhangid}', 'KhachhangController@showDatphongCuaKhachhang');
-        Route::get('khachhangs/chitiet/{khachhangid}', 'KhachhangController@showChitietKhachhang');
+        Route::get('khachhangs/chitiet/{khachhangid}/{view}', 'KhachhangController@showChitietKhachhang');
 
         Route::group(['middleware' => ['role:MainAdmin|Admin']], function () {
             //Nhân viên

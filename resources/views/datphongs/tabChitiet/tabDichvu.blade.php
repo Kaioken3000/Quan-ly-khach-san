@@ -3,7 +3,7 @@
     @foreach ($datphongs as $datphong)
         @if ($datphong->tinhtrangthanhtoan == 0)
             @if ($datphong->tinhtrangnhanphong == 0)
-                Chưa nhận phòng nên không thể chọn dịch vụ
+                {{-- Chưa nhận phòng nên không thể chọn dịch vụ --}}
             @else
                 @include('datphongs.actionButton.dichvuButton')
                 @include('datphongs.actionButton.anuongButton')

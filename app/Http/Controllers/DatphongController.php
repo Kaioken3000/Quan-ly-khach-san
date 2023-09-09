@@ -366,8 +366,21 @@ class DatphongController extends Controller
                     ->get();
             }
         }
+
         $dichvus = Dichvu::get();
-        return view('datphongs.search', compact('datphongs', 'dichvus'));
+        $anuongs = Anuong::get();
+        $phongs = Phong::get();
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin" || $roleName == "User")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
+
+        return view('datphongs.search', compact('datphongs', 'dichvus', 'anuongs', 'phongs', 'request', 'chinhanhs'));
     }
 
     /**
@@ -406,15 +419,13 @@ class DatphongController extends Controller
             "datphongid" => $datphong->id,
         ));
 
-        if($request->tiendiem){
+        if ($request->tiendiem) {
             $khachhangdiem = Khachhang::find($request->khachhang_id);
             $khachhangdiem->diem -= $request->sotiendiem;
             $khachhangdiem->save();
         }
 
         return redirect()->back()->withMessage('success', 'Datphong Has Been updated successfully');
-
-
     }
     /**
      * Chinh thanh toán.

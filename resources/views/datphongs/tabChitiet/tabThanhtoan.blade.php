@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center">
     <div class="flex-grow-1">
-        <h4 class="card-title flex-grow-1">Thông tin chi tình trạng đặt phòng</h4>
+        <h4 class="card-title flex-grow-1">Thông tin chi tiết tình trạng đặt phòng</h4>
     </div>
 </div>
 <table>

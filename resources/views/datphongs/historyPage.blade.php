@@ -6,6 +6,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    @include('layouts3.title', ['titlePage' => 'Đặt phòng '.$datphongs[0]->id])
     <ul class="nav nav-underline" id="myTab" role="tablist" id="myTab">
         <li class="nav-item" role="presentation"><a class="nav-link active" id="phong-tab" data-bs-toggle="tab" href="#tab-phong"
                 role="tab" aria-controls="tab-phong" aria-selected="false" tabindex="-1">Phòng - Khách hàng</a>
@@ -35,7 +36,7 @@
                             <h4 class="card-title">Thông tin khách hàng</h4>
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('datphongs.tabChitiet.tabKhachhang')
-                            @include('datphongs.tabChitiet.tabThongtin')
+                            {{-- @include('datphongs.tabChitiet.tabThongtin') --}}
                         </div>
                     </div>
                 </div>

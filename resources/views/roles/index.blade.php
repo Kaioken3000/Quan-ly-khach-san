@@ -33,11 +33,11 @@
                             @can('role-delete')
                                 <form action="{{ route('roles.destroy', $role->id) }}" method="Post">
                                     <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}"><i
-                                            class="bx bx-edit mb-1"></i> Edit</a>
+                                            class="bx bx-edit mb-1"></i> Cập nhật</a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger"><i class="bx bx-trash mb-1"></i>
-                                        Delete</button>
+                                        Xóa</button>
                                 </form>
                             @endcan
                         </td>

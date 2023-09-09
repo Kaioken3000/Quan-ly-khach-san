@@ -132,12 +132,35 @@ class DichvuController extends Controller
         //                         ->orWhere('giatien','LIKE','%'.$request->search."%")
         //                         ->orWhere('donvi','LIKE','%'.$request->search."%")
         //                         ->orderBy('id','asc')->paginate(5);
-        $dichvus = Dichvu::where('id', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('giatien', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('donvi', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
-            ->get();
-        return view('dichvus.search', compact('dichvus'));
+        // $dichvus = Dichvu::where('id', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('giatien', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('donvi', 'LIKE', '%' . $request->search . "%")
+        //     ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
+        //     ->get();
+
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin" || $roleName == "User")
+            if (isset(Auth::user()->nhanviens)) {
+                $dichvus = Dichvu::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)
+                    ->where('id', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('giatien', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('donvi', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
+                    ->get();
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $dichvus = Dichvu::where('id', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('giatien', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('donvi', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
+                ->get();
+            $chinhanhs = Chinhanh::get();
+        }
+        return view('dichvus.search', compact('dichvus', 'chinhanhs'));
     }
 }

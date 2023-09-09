@@ -146,6 +146,31 @@ class AnuongController extends Controller
             ->orWhere('mieuTa', 'LIKE', '%' . $request->search . "%")
             ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
             ->get();
-        return view('anuongs.search', compact('anuongs'));
+
+        $roleName = Auth::user()->roles[0]->name;
+
+        if ($roleName == "Admin" || $roleName == "User")
+            if (isset(Auth::user()->nhanviens)) {
+                $anuongs = Anuong::where("chinhanhid", Auth::user()->nhanviens[0]->chinhanhs->id)
+                    ->where('id', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('hinh', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('gia', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('mieuTa', 'LIKE', '%' . $request->search . "%")
+                    ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
+                    ->get();
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $anuongs = Anuong::where('id', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('ten', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('hinh', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('gia', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('mieuTa', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('diem', 'LIKE', '%' . $request->search . "%")
+                ->get();
+            $chinhanhs = Chinhanh::get();
+        }
+        return view('anuongs.search', compact('anuongs', 'chinhanhs'));
     }
 }

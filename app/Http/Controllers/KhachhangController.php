@@ -36,41 +36,42 @@ class KhachhangController extends Controller
      */
     public function showChitietKhachhang(Request $request)
     {
-        // $roleName = Auth::user()->roles[0]->name;
+        $roleName = Auth::user()->roles[0]->name;
 
-        // if ($roleName == "MainAdmin") {
-        //     $datphongs = Datphong::where('huydatphong', 0)->get();
-        // }
-        // if ($roleName == "Admin" || $roleName == "User") {
-        //     $temp = [];
-        //     if (isset(Auth::user()->nhanviens)) {
-        //         $datphongs = Datphong::where('huydatphong', 0)->where()->get();
-        //         foreach ($datphongs as $datphong) {
-        //             foreach ($datphong->phongs as $phong) {
-        //                 if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
-        //                     $temp[] = $datphong;
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     $datphongs = $temp;
-        // }
+        if ($roleName == "MainAdmin") {
+            $datphongs = Datphong::where('huydatphong', 0)->where("khachhangid", $request->khachhangid)->get();
+        }
+        if ($roleName == "Admin" || $roleName == "User") {
+            $temp = [];
+            if (isset(Auth::user()->nhanviens)) {
+                $datphongs = Datphong::where('huydatphong', 0)->where("khachhangid", $request->khachhangid)->get();
+                foreach ($datphongs as $datphong) {
+                    foreach ($datphong->phongs as $phong) {
+                        if ($phong->chinhanhid == Auth::user()->nhanviens[0]->chinhanhs->id) {
+                            $temp[] = $datphong;
+                        }
+                    }
+                }
+            }
+            $datphongs = $temp;
+        }
 
-        // $dichvus = Dichvu::get();
-        // $anuongs = Anuong::get();
-        // $phongs = Phong::get();
-        // $roleName = Auth::user()->roles[0]->name;
+        $dichvus = Dichvu::get();
+        $anuongs = Anuong::get();
+        $phongs = Phong::get();
+        $roleName = Auth::user()->roles[0]->name;
 
-        // if ($roleName == "Admin" || $roleName == "User")
-        //     if (isset(Auth::user()->nhanviens)) {
-        //         $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
-        //     } else $nhanvien = [];
-        // if ($roleName == "MainAdmin") {
-        //     $chinhanhs = Chinhanh::get();
-        // }
+        if ($roleName == "Admin" || $roleName == "User")
+            if (isset(Auth::user()->nhanviens)) {
+                $chinhanhs = Chinhanh::where("id", Auth::user()->nhanviens[0]->chinhanhs->id)->get();
+            } else $nhanvien = [];
+        if ($roleName == "MainAdmin") {
+            $chinhanhs = Chinhanh::get();
+        }
 
         $khachhangs = Khachhang::where("id", $request->khachhangid)->get();
-        return view('khachhangs.showChitietKhachhang', compact('khachhangs'));
+
+        return view('khachhangs.showChitietKhachhang', compact('khachhangs', 'datphongs', 'dichvus', 'anuongs', 'phongs', 'request', 'chinhanhs'));
     }
     /**
      * Display a listing of the resource.

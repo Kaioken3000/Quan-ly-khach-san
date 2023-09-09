@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1">
                     <div class="ft-newslatter">
-                        <h6> Mới nhất mới nhất</h6>
+                        <h6> Thông tin mới nhất</h6>
                         <p>Nhận thông tin cập nhật và ưu đãi mới nhất.</p>
                         <form action="#" class="fn-form">
                             <input type="text" placeholder="Email">

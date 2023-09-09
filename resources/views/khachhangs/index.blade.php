@@ -23,7 +23,7 @@
                     <th>Văn bằng</th>
                     <th>Giới tính</th>
                     <th>Điểm</th>
-                    <th>Chi tiết</th>
+                    {{-- <th>Chi tiết</th> --}}
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
                     @endhasanyrole
@@ -33,7 +33,10 @@
                 @foreach ($khachhangs as $khachhang)
                     <tr>
                         <td>{{ $khachhang->id }}</td>
-                        <td>{{ $khachhang->ten }}</td>
+                        <td>
+                            <a href="/khachhangs/chitiet/{{ $khachhang->id }}/list"
+                                target="_blank">{{ $khachhang->ten }}</a>
+                        </td>
                         <td>{{ $khachhang->sdt }}</td>
                         <td>{{ $khachhang->email }}</td>
                         <td>{{ $khachhang->diachi }}</td>
@@ -64,10 +67,10 @@
                                 @endforeach
                             </ul>   
                         </td> --}}
-                        <td>
-                            <a href="/khachhangs/chitiet/{{ $khachhang->id }}" class="badge bg-info" target="_blank">Chi
+                        {{-- <td>
+                            <a href="/khachhangs/chitiet/{{ $khachhang->id }}/list" class="badge bg-info" target="_blank">Chi
                                 tiết</a>
-                        </td>
+                        </td> --}}
                         @hasanyrole('MainAdmin|Admin')
                             <td>
                                 <div class="d-flex gap-1">
@@ -90,7 +93,7 @@
                     <th>Văn bằng</th>
                     <th>Giới tính</th>
                     <th>Điểm</th>
-                    <th></th>
+                    {{-- <th></th> --}}
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
                     @endhasanyrole
