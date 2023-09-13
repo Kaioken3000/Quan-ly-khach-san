@@ -131,17 +131,17 @@
             <span class="fas fa-search search-box-icon"></span>
         </form>
     @else
-        <form action="#" class="position-relative" data-bs-toggle="search" data-bs-display="static"
+        {{-- <form action="#" class="position-relative" data-bs-toggle="search" data-bs-display="static"
             aria-expanded="false" method="get">
             <input class="form-control form-control-sm rounded-pill search-input fuzzy-search" type="search"
                 placeholder="Tìm kiếm..." aria-label="Search" name="search">
             <span class="fas fa-search search-box-icon"></span>
-        </form>
+        </form> --}}
     @endif
 
-    <div class="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none"
+    {{-- <div class="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none"
         data-bs-dismiss="search">
         <button type="submit" class="btn btn-link btn-close-falcon p-0" aria-label="Close">
         </button>
-    </div>
+    </div> --}}
 </div>

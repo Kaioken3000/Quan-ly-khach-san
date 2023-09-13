@@ -13,11 +13,10 @@
             </div>
             <!--/.bg-holder-->
             <div class="row flex-center position-relative min-vh-100 g-0 py-5">
-                <div class="col-11 col-sm-10 col-xl-8">
-                    <div class="card border border-200 auth-card">
-                        <div class="card-body pe-md-0">
+                <div class="col-11 col-sm-10 col-xl-3">
+                        <div class="pe-md-0">
                             <div class="row align-items-center gx-0 gy-7">
-                                <div
+                                {{-- <div
                                     class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative overflow-hidden auth-title-box">
                                     <div class="bg-holder" style="background-image:url(/phoenix/assets/img/bg/38.png);">
                                     </div>
@@ -46,7 +45,7 @@
                                             class="auth-title-box-img d-light-none"
                                             src="/phoenix/assets/img/spot-illustrations/auth-dark.png" alt="" />
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col mx-auto">
                                     <div class="auth-form-box">
                                         <div class="text-center mb-7">
@@ -57,22 +56,22 @@
                                                         width="58" />
                                                 </div>
                                             </a>
-                                            <h3 class="text-1000">Sign Up</h3>
-                                            <p class="text-700">Create your account today</p>
+                                            <h3 class="text-1000">Đăng ký</h3>
+                                            <p class="text-700">Tạo tài khoản ngay hôm nay</p>
                                         </div><a class="btn btn-phoenix-secondary w-100 mb-3"
                                             href="{{ route('auth.google') }}">
                                             <span class="fab fa-google text-danger me-2 fs--1">
                                             </span>
-                                            Sign in with google
+                                            Đăng nhập với google
                                         </a>
                                         <a class="btn btn-phoenix-secondary w-100" href="{{ url('auth/facebook') }}">
                                             <span class="fab fa-facebook text-primary me-2 fs--1">
                                             </span>
-                                            Sign in with facebook
+                                            Đăng nhập với facebook
                                         </a>
                                         <div class="position-relative">
                                             <hr class="bg-200 mt-5 mb-4" />
-                                            <div class="divider-content-center bg-white">or use email</div>
+                                            <div class="divider-content-center bg-white">hoặc email</div>
                                         </div>
                                         {{-- <div class="mb-3 text-start"><label class="form-label" for="email">Email
                                                 address</label>
@@ -104,14 +103,13 @@
                                         {{-- End form --}}
                                         <div class="text-center">
                                             <a class="fs--1 fw-bold" href="{{ route('login.perform') }}">
-                                                Sign in to an existing account
+                                                Đăng nhập bằng tài khoản đã tạo
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

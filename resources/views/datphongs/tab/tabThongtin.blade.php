@@ -127,8 +127,33 @@
                                         {{-- //Đặt cọc --}}
                                         <div class="my-1">
                                             @foreach ($danhsachdatphongs as $danhsachdatphong)
-                                                <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
-                                                    class="btn btn-success">Đặt cọc online</a>
+                                                {{-- <a href="/thanhtoanvnpayview/{{ $datphong->id }}/datcoc/{{ $datphong->khachhangs->id }}/{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}"
+                                                    class="btn btn-success">Đặt cọc online</a> --}}
+                                                <form action="/thanhtoanvnpayview" method="get">
+                                                    {{-- Số tiền --}}
+                                                    <input readonly hidden type="text" name="sotien"
+                                                        id="sotien2{{ $datphong->id }}" value="{{ $danhsachdatphong->phongs->loaiphongs->gia / 2 }}">
+                                                    {{-- Đặt phòng id --}}
+                                                    <input readonly hidden type="text" name="datphongid"
+                                                    id="" value="{{ $datphong->id }}">
+                                                    {{-- loại tiền --}}
+                                                    <input readonly hidden type="text" name="loaitien" id=""
+                                                    value="datcoc">
+                                                    {{-- khách hàng id --}}
+                                                    <input readonly hidden type="text" name="khachhangid"
+                                                    id="" value="{{ $datphong->khachhangs->id }}">
+                                                    {{-- checkbox --}}
+                                                    <input hidden class="form-check-input"
+                                                    id="tiendiem2{{ $datphong->id }}" type="checkbox"
+                                                    name="tiendiem" value="{{ $datphong->khachhangs->diem }}"
+                                                    id="tiendiem2{{ $datphong->id }}" />
+                                                    {{-- so diem --}}
+                                                    <input hidden type="number"
+                                                        value="{{ $datphong->khachhangs->diem }}" name="sotiendiem"
+                                                        id="sotiendiem2{{ $datphong->id }}">
+
+                                                    <button type="submit" class="btn btn-success">Đặt cọc online</button>
+                                                </form>
                                             @endforeach
                                         </div>
                                     @endif

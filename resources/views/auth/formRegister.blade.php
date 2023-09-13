@@ -22,7 +22,7 @@
     </div>
 
     {{-- SDT --}}
-    <label for="sdt" class="form-label">Phone Number</label>
+    <label for="sdt" class="form-label">Số Điện Thoại</label>
     <div class="mb-3 text-start">
         <input type="text" class="form-control" id="sdt" name="sdt" value="{{ old('sdt') }}"
             placeholder="Enter your phone number" required="required"
@@ -33,7 +33,7 @@
     </div>
 
     {{-- Password --}}
-    <label class="form-label" for="password">Password</label>
+    <label class="form-label" for="password">Mật khẩu</label>
     <div class="mb-3 text-start">
         <input type="password" id="password" class="form-control" name="password" value="{{ old('password') }}"
             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -44,7 +44,7 @@
     </div>
 
     {{-- Password confirm --}}
-    <label class="form-label" for="password_confirmation">Password confirm</label>
+    <label class="form-label" for="password_confirmation">Xác nhận mật khẩu</label>
     <div class="mb-3 text-start">
         <input type="password" id="password_confirmation" class="form-control" name="password_confirmation"
             value="{{ old('password_confirmation') }}"
@@ -56,10 +56,10 @@
     </div>
 
     {{-- Checkbox --}}
-    <div class="form-check mb-3"><input class="form-check-input" id="termsService" type="checkbox"><label
+    {{-- <div class="form-check mb-3"><input class="form-check-input" id="termsService" type="checkbox"><label
             class="form-label fs--1 text-none" for="termsService">I accept the <a href="#!">terms </a>and <a
-                href="#!">privacy policy</a></label></div>
+                href="#!">privacy policy</a></label></div> --}}
 
     {{-- Sign up --}}
-    <button class="btn btn-primary d-grid w-100">Sign up</button>
+    <button class="btn btn-primary d-grid w-100">Đăng ký</button>
 </form>

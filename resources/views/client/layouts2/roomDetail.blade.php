@@ -117,16 +117,20 @@
                         @csrf
                         <div class="check-date">
                             <label for="ngaydat">Ngày vào</label>
-                            <input type="date" name="ngaydat" id="ngaydat"
-                                class="form-control form-control-lg-border" required>
+                            {{-- <input type="date" name="ngaydat" id="ngaydat"
+                                class="form-control form-control-lg-border" required> --}}
+                            <input class="form-control datetimepicker" type="text" placeholder="yyyy-mm-dd"
+                                name="ngaydat" required />
                             @error('ngaydat')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="check-date">
                             <label for="ngaytra">Ngày ra</label>
-                            <input type="date" name="ngaytra" id="ngaytra"
-                                class="form-control form-control-lg-border" required>
+                            {{-- <input type="date" name="ngaytra" id="ngaytra"
+                                class="form-control form-control-lg-border" required> --}}
+                            <input class="form-control datetimepicker" type="text" placeholder="yyyy-mm-dd"
+                                name="ngaytra" required />
                             @error('ngaytra')
                                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
                             @enderror

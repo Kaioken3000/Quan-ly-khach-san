@@ -1,43 +1,4 @@
-{{-- <section class="section">
-    <div class="container" data-aos="fade-up" data-aos-offset="-200">
-        <div class="table-responsive text-nowrap">
-            <table class="table" id="myTable">
-                <thead>
-                    <tr >
-                        <th>Số phòng</th>
-                        <th>Loại phòng</th>
-                        <th class="datatable-nosort">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($phongs as $phong)
-                    <tr>
-                        <td>{{ $phong->so_phong }}</td>
-<td><button class="btn btn link" data-toggle="modal" data-target="#LoaiphongModal{{ $phong->loaiphongs->ma }}">
-        {{ $phong->loaiphongs->ten }}
-    </button></td>
-<td>
-    <form action="doiphongclient" method="POST">
-        @csrf
-        @method('POST')
-        <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
-        <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
-        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Đổi
-            phòng</button>
-    </form>
-</td>
-</tr>
-@endforeach
-<tr>
-    <td>
-    </td>
-</tr>
-</tbody>
-</table>
-</div>
-</section> --}}
-
-@include('client.layouts2.breadcrumb', ['titlePage' => 'Bookable Rooms'])
+@include('client.layouts2.breadcrumb', ['titlePage' => 'Danh sách các phòng có thể đổi'])
 
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
@@ -45,28 +6,28 @@
         <div class="row">
             {{-- Room list start --}}
             @error('soluong')
-            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
             @foreach ($phongs as $phong)
-            <div class="col-lg-4 col-md-6">
-                <div class="room-item">
-                    <img src="/client/images/{{$phong->picture_1}}" alt="">
-                    <div class="ri-text">
-                        <h4>{{$phong->so_phong}}</h4>
-                        <h3>{{$phong->loaiphongs->gia}}VND<span>/Pernight</span></h3>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="r-o">Category:</td>
-                                    <td>{{$phong->loaiphongs->ten}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="r-o">Capacity:</td>
-                                    <td>{{$phong->loaiphongs->soluong}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        {{-- <form action="/client/reservation" method="get">
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                        <img src="/client/images/{{ $phong->hinhs[0]->vitri }}" alt="">
+                        <div class="ri-text">
+                            <h4>Phòng: {{ $phong->so_phong }}</h4>
+                            <h3>{{ number_format($phong->loaiphongs->gia, 0, '', '.') }}đ<span>/Pernight</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Loại phòng:</td>
+                                        <td>{{ $phong->loaiphongs->ten }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Số lượng:</td>
+                                        <td>{{ $phong->loaiphongs->soluong }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {{-- <form action="/client/reservation" method="get">
                             <input hidden type="date" name="ngaydat" value="{{ $request->ngaydat }}">
                         <input hidden type="date" name="ngaytra" value="{{ $request->ngaytra }}">
                         <input hidden type="number" name="soluong" value="{{ $request->soluong }}" min=1>
@@ -83,19 +44,19 @@
                         <button type="submit" class="primary-btn border-0 bg-white text-dark">Đặt phòng</button>
                         </form> --}}
 
-                        <form action="doiphongclient" method="POST">
-                            @csrf
-                            @method('POST')
-                            <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
-                            <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
-                            <button type="submit" class="primary-btn border-0 bg-white text-dark">
-                                <i class="fas fa-plus"></i> 
-                                Change Room
-                            </button>
-                        </form>
+                            <form action="doiphongclient" method="POST">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
+                                <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
+                                <button type="submit" class="primary-btn border-0 bg-white text-dark">
+                                    <i class="fa fa-edit"></i>
+                                    Đổi phòng
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>

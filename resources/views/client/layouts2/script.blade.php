@@ -11,7 +11,12 @@
 {{-- flatpickr --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+<script>
+    $(".datetimepicker").flatpickr({
+        minDate: "today",
+        dateFormat: "Y-m-d",
+    });
+</script>
 {{-- <div id="google_translate_element"></div>
 <script>
     function googleTranslateElementInit() {

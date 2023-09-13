@@ -15,14 +15,14 @@
         @endif
     </div>
     <div class="mb-3">
-        <label for="sdt" class="form-label">Phone</label>
+        <label for="sdt" class="form-label">Số điện thoại</label>
         <input type="text" class="form-control" id="sdt" name="sdt" value="{{ old('sdt') }}" placeholder="Enter your phone number" required="required" />
         @if ($errors->has('sdt'))
         <div class="alert alert-danger" role="alert">{{ $errors->first('sdt') }}</div>
         @endif
     </div>
     <div class="mb-3 form-password-toggle">
-        <label class="form-label" for="password">Password</label>
+        <label class="form-label" for="password">Mật khẩu</label>
         <div class="input-group input-group-merge">
             <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" required="required" />
             @if ($errors->has('password'))
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="mb-3 form-password-toggle">
-        <label class="form-label" for="password_confirmation">Password confirm</label>
+        <label class="form-label" for="password_confirmation">Xác nhận mật khẩu</label>
         <div class="input-group input-group-merge">
             <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password_confirmation" required="required" />
             @if ($errors->has('password_confirmation'))
@@ -41,8 +41,8 @@
     </div>
     <p class="text-center">
         <a href="{{ route('client.showclient') }}" class="primary-btn text-dark">
-            <span>Sign in instead</span>
+            <span>Đăng nhập</span>
         </a>
     </p>
-    <button class="btn btn-primary d-grid w-100">Sign up</button>
+    <button class="btn btn-primary d-grid w-100">Xác nhận</button>
 </form>

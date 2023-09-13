@@ -94,7 +94,7 @@ class ThanhtoanClientController extends Controller
         // Luu thong tin chuyen khoan
         Thanhtoan::create(array(
             "hinhthuc" => "chuyenkhoan",
-            "gia" => $request->vnp_Amount/100,
+            "gia" => $vnp_Amount,
             "loaitien" => "datcoc",
             "chuyenkhoan_token" => $request->vnp_TxnRef,
             "datphongid" => $dat->id,

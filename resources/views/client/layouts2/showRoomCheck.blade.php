@@ -1,42 +1,4 @@
- {{-- <section class="section">
-     <div class="container" data-aos="fade-up" data-aos-offset="-200">
-         <div class="table-responsive text-nowrap">
-             <table class="table">
-                 <thead>
-                     <tr>
-                         <th>Số phòng</th>
-                         <th>Loại phòng</th>
-                         <th width="280px">Hành động</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     @foreach ($phongs as $phong)
-                         <tr>
-                             <td>{{ $phong->so_phong }}</td>
-                             <td>
-                                 <button class="btn btn link" data-toggle="modal"
-                                     data-target="#LoaiphongModal{{ $phong->loaiphongs->ma }}">
-                                     {{ $phong->loaiphongs->ten }}
-                                 </button>
-                             </td>
-                             <td>
-                                 <form action="/client/reservation" method="get">
-                                     <input hidden type="date" name="ngaydat" value="{{ $request->ngaydat }}">
-                                     <input hidden type="date" name="ngaytra" value="{{ $request->ngaytra }}">
-                                     <input hidden type="number" name="soluong" value="{{ $request->soluong }}" min=1>
-                                     <input hidden type="int" name="sophong" value="{{ $phong->so_phong }}">
-                                     <button type="submit" class="primary-btn border-0 bg-white text-dark">Đặt
-                                         phòng</button>
-                                 </form>
-                             </td>
-                         </tr>
-                     @endforeach
-                 </tbody>
-             </table>
-         </div>
- </section> --}}
-
- @include('client.layouts2.breadcrumb', ['titlePage' => 'Bookable Rooms'])
+ @include('client.layouts2.breadcrumb', ['titlePage' => 'Danh sách các phòng có thể đặt'])
 
  <!-- Rooms Section Begin -->
  <section class="rooms-section spad">
@@ -49,18 +11,18 @@
              @foreach ($phongs as $phong)
                  <div class="col-lg-4 col-md-6">
                      <div class="room-item">
-                         <img src="/client/images/{{ $phong->picture_1 }}" alt="">
+                         <img src="/client/images/{{ $phong->hinhs[0]->vitri }}" alt="">
                          <div class="ri-text">
-                             <h4>{{ $phong->so_phong }}</h4>
-                             <h3>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h3>
+                             <h4>Phòng: {{ $phong->so_phong }}</h4>
+                             <h3>{{ number_format($phong->loaiphongs->gia, 0, '', '.') }}đ<span>/Đêm</span></h3>
                              <table>
                                  <tbody>
                                      <tr>
-                                         <td class="r-o">Category:</td>
+                                         <td class="r-o">Loại phòng:</td>
                                          <td>{{ $phong->loaiphongs->ten }}</td>
                                      </tr>
                                      <tr>
-                                         <td class="r-o">Capacity:</td>
+                                         <td class="r-o">Số lượng:</td>
                                          <td>{{ $phong->loaiphongs->soluong }}</td>
                                      </tr>
                                  </tbody>
@@ -85,11 +47,10 @@
                                  @endauth
 
                                  <div class="d-flex justify-content-between">
-                                     <button type="submit" class="primary-btn border-0 bg-white text-dark">Set
-                                         Room</button>
-    
-                                     <a href="/client/chitietphong/{{ $phong->so_phong }}" class="primary-btn" target="_blank">Watch
-                                         Details</a>
+                                     <button type="submit" class="primary-btn border-0 bg-white text-dark">Đặt phòng</button>
+
+                                     <a href="/client/chitietphong/{{ $phong->so_phong }}" class="primary-btn"
+                                         target="_blank">Xem chi tiết</a>
                                  </div>
 
                              </form>
