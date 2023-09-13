@@ -30,9 +30,9 @@
                     <ul>
                         @foreach ($thanhtoans as $thanhtoan)
                             @if ($thanhtoan->loaitien == 'traphong')
-                                <p>Tiền trả phòng: <b>{{ $thanhtoan->gia }} VND</b></p>
+                                <p>Tiền trả phòng: <b>{{ number_format($thanhtoan->gia, 0, '', '.') }} VND</b></p>
                             @else
-                                <p>Tiền đặt cọc: <b>{{ $thanhtoan->gia }}VND</b></p>
+                                <p>Tiền đặt cọc: <b>{{ number_format($thanhtoan->gia, 0, '', '.') }}VND</b></p>
                             @endif
                         @endforeach
                     </ul>
@@ -49,7 +49,7 @@
                                         @endisset
                                     </b>
                                 </p>
-                                <p>Thời gian xử lý: <b>{{ $xuly->created_at }}</b>
+                                <p>Thời gian xử lý: <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $xuly->created_at)->format('d-m-Y H:i:s') }}</b>
                                 </p>
                             @endforeach
                         @endif
@@ -78,7 +78,7 @@
                                             {{ $nhanphong->users->username }}
                                         @endisset
                                     </b></p>
-                                <p>Thời gian nhận: <b>{{ $nhanphong->created_at }}</b></p>
+                                <p>Thời gian nhận: <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $nhanphong->created_at)->format('d-m-Y H:i:s') }}</b></p>
                             @endforeach
                         @endif
                         <p>
@@ -105,7 +105,7 @@
                                     </b>
                                 </p>
                                 <p>Thời gian trả phòng:
-                                    <b>{{ $traphong->created_at }}</b>
+                                    <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $traphong->created_at)->format('d-m-Y H:i:s') }}</b>
                                 </p>
                             @endforeach
                         @endif
@@ -145,7 +145,7 @@
                             <p>Họ tên người huỷ đặt phòng: <b>{{ $huydatphong->ten }}</b>
                             </p>
                             <p>Thời gian huỷ đặt phòng:
-                                <b>{{ $huydatphong->created_at }}</b>
+                                <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $huydatphong->created_at)->format('d-m-Y H:i:s') }}</b>
                             </p>
                         @endforeach
                     @endif
@@ -157,9 +157,9 @@
         @endforeach
     </tbody>
 </table>
-<style>
+{{-- <style>
     .card,
     hr {
         border: 1px black solid;
     }
-</style>
+</style> --}}

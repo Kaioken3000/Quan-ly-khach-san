@@ -19,8 +19,8 @@
             <thead>
                 <tr>
                     <th class="table-plus">ID</th>
-                    <th>Hình</th>
                     <th>Vị trí</th>
+                    <th>Hình</th>
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
                     @endhasanyrole

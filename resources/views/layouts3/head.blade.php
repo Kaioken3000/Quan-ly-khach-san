@@ -1,5 +1,5 @@
 <merlin-component id="merlin-context-btn" class="merlin context-btn"><template shadowrootmode="open">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/da4e510802.js" crossorigin="anonymous"></script>
 
     <style>
       *,

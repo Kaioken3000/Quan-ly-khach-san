@@ -21,7 +21,7 @@
                     <th class="table-plus">ID</th>
                     <th>Tên</th>
                     <th>Hình</th>
-                    <th>Giá </th>
+                    <th>Giá(VNĐ)</th>
                     <th>Miêu tả </th>
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
@@ -37,7 +37,8 @@
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                 title="{{ $thietbi->hinh }}" src="/client/images/{{ $thietbi->hinh }}" class="img-fluid rounded ">
                         </td>
-                        <td>{{ $thietbi->gia }}</td>
+                        <td>
+                            {{ number_format($thietbi->gia, 0, '', '.') }}</td>
                         <td>{{ $thietbi->mieuTa }}</td>
                         @hasanyrole('MainAdmin|Admin')
                             <td>

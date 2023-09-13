@@ -21,7 +21,7 @@
                         @foreach ($phong->giuongphongs as $giuongphong)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ $giuongphong->giuongs->ten }}
-                                <span class="badge badge-light-primary rounded-pill">Tình trạng</span>
+                                {{-- <span class="badge badge-light-primary rounded-pill">Tình trạng</span> --}}
                             </li>
                         @endforeach
                     </ul>
@@ -31,7 +31,7 @@
                     <ul class="list-group">
                         @foreach ($phong->giuongphongs as $giuongphong)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ $giuongphong->giuongs->gia }} VND
+                                {{ number_format($giuongphong->giuongs->gia, 0, '', '.') }} VND
                             </li>
                         @endforeach
                     </ul>

@@ -34,7 +34,7 @@
                             <td>{{ $dichvu->id }}</td>
                             <td>{{ $dichvu->ten }}</td>
                             <td>{{ $dichvu->chinhanhs->ten ?? '' }}</td>
-                            <td>{{ $dichvu->giatien }} {{ $dichvu->donvi }}</td>
+                            <td>{{ number_format($dichvu->giatien, 0, '', '.') }} {{ $dichvu->donvi }}</td>
                             <td>{{ $dichvu->diem }}</td>
                             @hasanyrole('MainAdmin|Admin')
                                 <td>

@@ -9,7 +9,7 @@
     <div class="">
         <div class="d-flex">
             <div class="flex-grow-1">
-                @include('layouts3.title', ['titlePage' => 'Quản lý loại phòng'])
+                @include('layouts3.title', ['titlePage' => 'Quản lý vai trò'])
             </div>
             <div>
                 <a class="btn btn-success mb-4" href="{{ route('roles.create') }}"><i class="fas fa-plus"></i> Tạo
@@ -20,7 +20,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
+                    <th>Tên</th>
                     <th class="datatable-nosort">Action</th>
                 </tr>
             </thead>

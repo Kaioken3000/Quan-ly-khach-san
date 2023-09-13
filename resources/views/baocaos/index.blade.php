@@ -68,7 +68,7 @@
                     <th>id</th>
                     <th>Ngày đặt</th>
                     <th>Ngày trả</th>
-                    <th>Số luọng</th>
+                    <th>Số lượng</th>
                     <th style="width: 1px"></th>
                     <th>Phòng hiện tại</th>
                     <th>Khách hàng</th>
@@ -82,6 +82,8 @@
                         <td>{{ $datphong->id }}</td>
                         <td>{{ $datphong->ngaydat }}</td>
                         <td>{{ $datphong->ngaytra }}</td>
+                        {{-- <td>{{  Carbon\Carbon::createFromFormat('Y-m-d', $datphong->ngaydat)->format('d-m-Y') }}</td>
+                        <td>{{  Carbon\Carbon::createFromFormat('Y-m-d', $datphong->ngaytra)->format('d-m-Y') }}</td> --}}
                         <td>{{ $datphong->soluong }}</td>
                         <td>
                             <?php
@@ -119,6 +121,19 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>Ngày đặt</th>
+                    <th>Ngày trả</th>
+                    <th>Số lượng</th>
+                    <th style="width: 1px"></th>
+                    <th>Phòng hiện tại</th>
+                    <th>Khách hàng</th>
+                    <th>Hoá đơn</th>
+                    <th>Tổng tiền</th>
+                </tr>
+            </tfoot>
         </table>
         <div class="d-flex justify-content-end">
             <p id="tongcong">Tổng cộng: {{ $tonggiatatca }} VND</p>

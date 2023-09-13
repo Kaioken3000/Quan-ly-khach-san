@@ -1,7 +1,7 @@
 <!-- Header Section Begin -->
-<header class="header-section">
+<header class="header-section header-normal">
     <div class="top-nav">
-        <div class="container">
+        <div class="container-xxl mx-5">
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="tn-left">
@@ -34,64 +34,54 @@
         </div>
     </div>
     <div class="menu-item">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
+        <div class="container-xxl mx-5">
+            <div class="row align-items-center">
+                <div class="col-lg-1">
                     <div class="logo">
                         <a href="/client/index">
                             <img src="/client2/img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-11">
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="{{ Request::is('client/index') ? 'active':'' }}"><a href="/client/index">Home</a></li>
-                                <li class="{{ Request::is('client/phong') ? 'active':'' }}"><a href="/client/phong">Room</a></li>
-                                <li class="{{ Request::is('client/virtualTour') ? 'active':'' }}"><a href="/client/virtualTour">Virtual tour</a></li>
-                                <li class="{{ Request::is('chatify') ? 'active':'' }}"><a href="/chatify/">Chat</a></li>
-                                {{-- <li><a href="./pages.html">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./room-details.html">Room Details</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                    <li><a href="#">Family Room</a></li>
-                                    <li><a href="#">Premium Room</a></li>
-                                </ul>
-                            </li> --}}
+                                <li class="{{ Request::is('client/index') ? 'active' : '' }}"><a
+                                        href="/client/index">Trang chủ</a></li>
+                                <li class="{{ Request::is('client/chinhanh*') ? 'active' : '' }}"><a
+                                        href="/client/chinhanh">Chi nhánh</a></li>
+                                <li class="{{ Request::is('client/phong') ? 'active' : '' }}"><a
+                                        href="/client/phong">Phòng</a></li>
+                                <li class="{{ Request::is('client/virtualTour') ? 'active' : '' }}"><a
+                                        href="/client/virtualTour">Tham quan ảo</a></li>
+                                <li class="{{ Request::is('chatify') ? 'active' : '' }}"><a href="/chatify/">Nhắn tin</a></li>
                                 @auth
-                                <li>
-                                    <form action="/client/danhsachdatphong" method="post">
-                                        @csrf
-                                        <input type="hidden" value="{{auth()->user()->id}}" name="clientid">
-                                <li>
-                                    <a href="#" class="btn btn-link text-dark">
-                                        <input class="border-0 bg-white pe-auto m-0 p-0 
-                                                    {{ Request::is('client/danhsachdatphong') ? 'text-primary':'' }}" type="submit" value="Your Room">
-                                    </a>
-                                </li>
-                                </form>
-                                </li>
-                                <li><a href="#">Account</a>
-                                    <ul class="dropdown">
-                                        <li><a href="/client/khachhang">{{auth()->user()->username}}</a></li>
-                                        <li><a href="/chatify">Chat</a></li>
-                                        <li>
-                                            <a href="{{ route('client.logout') }}">
-                                                <i class="fas fa-sign-out-alt"></i><span class="align-middle"> Log out</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    <li>
+                                    <li class="{{ Request::is('client/danhsachdatphong') ? 'active' : '' }}"><a
+                                            href="/client/danhsachdatphong">Danh sách đặt phòng</a></li>
+                                    </li>
+                                    <li><a href="#">Tài khoản</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/client/khachhang">{{ auth()->user()->username }}</a></li>
+                                            <li>
+                                                <a href="{{ route('client.logout') }}">
+                                                    <i class="fas fa-sign-out-alt"></i><span class="align-middle">Đăng xuất</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 @endauth
                                 @guest
-                                <li class="{{ Request::is('client/login') ? 'active':'' }}"><a href="/client/login"> Đăng nhập </a></li>
-                                <li class="{{ Request::is('client/register') ? 'active':'' }}"><a href="/client/register"> Đăng ký </a></li>
+                                    <li class="{{ Request::is('client/login') ? 'active' : '' }}"><a href="/client/login">
+                                            Đăng nhập </a></li>
+                                    <li class="{{ Request::is('client/register') ? 'active' : '' }}"><a
+                                            href="/client/register"> Đăng ký </a></li>
                                 @endguest
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
-                            <i class="icon_search"></i>
+                            @include('client.layouts2.searchMenu')
                         </div>
                     </div>
                 </div>

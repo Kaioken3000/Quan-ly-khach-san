@@ -35,6 +35,8 @@
 {{-- flatpickr --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{{-- <link rel="stylesheet" href="/flatpickr/flatpickr.min.css">
+<script src="/flatpickr/flatpickr.js"></script> --}}
 <script>
     let table = new DataTable('.table', {
         initComplete: function() {

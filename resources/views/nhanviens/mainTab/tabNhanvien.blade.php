@@ -16,7 +16,7 @@
                 <td>
                     {{ $nhanvien->chinhanhs->ten ?? '' }}
                 </td>
-                <td>{{ $nhanvien->luong }} VND</td>
+                <td>{{ number_format($nhanvien->luong, 0, '', '.') }} VND</td>
                 <td>
                     <form action="{{ route('nhanviens.destroy', $nhanvien->ma) }}" method="Post" class="d-flex">
                         <a class="btn btn-link" href="{{ route('nhanviens.edit', $nhanvien->ma) }}">

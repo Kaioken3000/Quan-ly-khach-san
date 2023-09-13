@@ -4,7 +4,7 @@
         <div class="search-close-switch"><i class="icon_close"></i></div>
         <form action="/client/search-phong" method="get" class="search-model-form">
             @csrf
-            <input type="text" id="search-input" placeholder="Search here....." name="search">
+            <input type="text" id="search-input" placeholder="Tìm kiếm phòng....." name="search">
 
             <div class="d-flex px-1 align-items-center">
                 <div id="status" class="text-white"></div>

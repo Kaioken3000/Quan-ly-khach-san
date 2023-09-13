@@ -51,7 +51,7 @@
                                     <p> {{ $i }}. {{ $giuongphong->giuongs->ten }} </p>
                                 </div>
                                 <div class="col">
-                                    <p>Giá: {{ $giuongphong->giuongs->gia }} VND</p>
+                                    <p>Giá: {{ number_format($giuongphong->giuongs->gia, 0, '', '.') }} VND</p>
                                 </div>
                                 <div class="col">
                                     <p>Kích thước: {{ $giuongphong->giuongs->kichthuoc }}

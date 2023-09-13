@@ -18,7 +18,7 @@
                         @foreach ($phong->thietbis as $thietbi)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ $thietbi->ten ?? '' }}
-                                <span class="badge badge-light-primary rounded-pill">Tình trạng</span>
+                                {{-- <span class="badge badge-light-primary rounded-pill">Tình trạng</span> --}}
                             </li>
                         @endforeach
                     </ul>
@@ -28,7 +28,7 @@
                     <ul class="list-group">
                         @foreach ($phong->thietbis as $thietbi)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ $thietbi->gia ?? '' }}
+                                {{ number_format($thietbi->gia, 0, '', '.') ?? ''}}
                             </li>
                         @endforeach
                     </ul>

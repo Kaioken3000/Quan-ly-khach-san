@@ -48,11 +48,11 @@
                                     @endhasanyrole
                                     <p>{{ $dichvudatphong->dichvus->ten }}:</p>
                                 </div>
-                                <p class="col">{{ $dichvudatphong->dichvus->giatien }}VND
+                                <p class="col">{{ number_format($dichvudatphong->dichvus->giatien, 0, '', '.') }}
                                     {{ $dichvudatphong->dichvus->donvi }}
                                 </p>
                                 <p class="col">
-                                    <b>{{ $dichvudatphong->created_at }} </b>
+                                    <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dichvudatphong->created_at)->format('d-m-Y H:i:s') }}</b>
                                 </p>
                             </div>
                         @endforeach
@@ -72,10 +72,10 @@
                                     <p>{{ $anuongdatphong->anuongs->ten }}:</p>
                                 </div>
                                 <p class="col">
-                                    <b>{{ $anuongdatphong->anuongs->gia }} VND</b>
+                                    <b>{{ number_format($anuongdatphong->anuongs->gia*$anuongdatphong->soluong, 0, '', '.') }} VND</b>
                                 </p>
                                 <p class="col">
-                                    <b>{{ $anuongdatphong->created_at }} </b>
+                                    <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $anuongdatphong->created_at)->format('d-m-Y H:i:s') }} </b>
                                 </p>
                                 <p class="col">
                                     Số lượng:
@@ -90,9 +90,9 @@
         @endforeach
     </tbody>
 </table>
-<style>
+{{-- <style>
     .card,
     hr {
         border: 1px black solid;
     }
-</style>
+</style> --}}

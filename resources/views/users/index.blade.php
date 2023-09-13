@@ -10,7 +10,7 @@
         <div class="">
             <div class="d-flex">
                 <div class="flex-grow-1">
-                    @include('layouts3.title', ['titlePage' => 'Quản lý nhân viên'])
+                    @include('layouts3.title', ['titlePage' => 'Quản lý tài khoản'])
                 </div>
             </div>
             <table class="data-table table nowrap">
@@ -19,7 +19,7 @@
                         <th>Id</th>
                         <th>Email</th>
                         <th>Username</th>
-                        <th>Role</th>
+                        <th>Vai trò</th>
                         <th class="datatable-nosort">Action</th>
                     </tr>
                 </thead>

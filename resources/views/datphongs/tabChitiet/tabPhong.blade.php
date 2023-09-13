@@ -230,9 +230,9 @@
         </tr>
     </tfoot>
 </table>
-<style>
+{{-- <style>
     .card,
     hr {
         border: 1px black solid;
     }
-</style>
+</style> --}}

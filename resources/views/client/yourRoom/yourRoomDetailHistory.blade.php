@@ -26,9 +26,13 @@
                                         @foreach ($danhsachdatphongs as $danhsachdatphong)
                                             <p>Phòng: {{ $danhsachdatphong->phongid }} -
                                                 {{ $danhsachdatphong->phongs->loaiphongs->ten }} -
-                                                {{ $danhsachdatphong->phongs->loaiphongs->gia }} VND</p>
-                                            <p>Ngày bắt đầu ở: {{ $danhsachdatphong->ngaybatdauo }}</p>
-                                            <p>Ngày kết thúc ở: {{ $danhsachdatphong->ngayketthuco }}
+                                                {{ number_format($danhsachdatphong->phongs->loaiphongs->gia, 0, '', '.') }}
+                                                VND</p>
+                                            <p>Ngày bắt đầu ở:
+                                                {{ Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngaybatdauo)->format('d-m-Y') }}
+                                            </p>
+                                            <p>Ngày kết thúc ở:
+                                                {{ Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngayketthuco)->format('d-m-Y') }}
                                             </p>
                                             <p>Khách hàng: <b>{{ $datphongall->ten }}</b></p>
                                             <hr>
@@ -44,9 +48,11 @@
                                     <div class="card-body">
                                         @foreach ($thanhtoans as $thanhtoan)
                                             @if ($thanhtoan->loaitien == 'traphong')
-                                                <p>Tiền trả phòng: <b>{{ $thanhtoan->gia }} VND</b></p>
+                                                <p>Tiền trả phòng: <b>{{ number_format($thanhtoan->gia, 0, '', '.') }}
+                                                        VND</b></p>
                                             @else
-                                                <p>Tiền đặt cọc: <b>{{ $thanhtoan->gia }} VND</b></p>
+                                                <p>Tiền đặt cọc: <b>{{ number_format($thanhtoan->gia, 0, '', '.') }}
+                                                        VND</b></p>
                                             @endif
                                         @endforeach
 
@@ -58,7 +64,8 @@
                                                             {{ $nhanphong->users->username }}
                                                         @endisset
                                                     </b></p>
-                                                <p>Thời gian nhận: <b>{{ $nhanphong->created_at }}</b>
+                                                <p>Thời gian nhận:
+                                                    <b>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $nhanphong->created_at)->format('d-m-Y H:i:s') }}</b>
                                                 </p>
                                             @endforeach
                                         @endif
@@ -73,7 +80,9 @@
                                                         {{ $traphong->users->username }}
                                                     @endisset
                                                 </p>
-                                                <p>Thời gian trả phòng: {{ $traphong->created_at }}</p>
+                                                <p>Thời gian trả phòng:
+                                                    {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $traphong->created_at)->format('d-m-Y H:i:s') }}
+                                                </p>
                                             @endforeach
                                         @endif
                                     </div>
@@ -86,21 +95,22 @@
                                     </div>
                                     <div class="card-body">
                                         @if (count($dichvudatphongs) > 0)
-                                            <b class="font-weight-bold">Used service</b>
+                                            <b class="font-weight-bold">Lịch sử dịch vụ đã sử dụng</b>
                                             @foreach ($dichvudatphongs as $dichvudatphong)
                                                 <p>{{ $dichvudatphong->dichvus->ten }}:
-                                                    <b>{{ $dichvudatphong->dichvus->giatien }}
+                                                    <b>{{ number_format($dichvudatphong->dichvus->giatien, 0, '', '.') }}
                                                         {{ $dichvudatphong->dichvus->donvi }}</b>
                                                 </p>
                                             @endforeach
                                         @endif
                                         @if (count($anuongdatphongs) > 0)
-                                            <b class="font-weight-bold">Used Food service</b>
+                                            <b class="font-weight-bold">Lịch sử dịch vụ ăn uống đã sử dụng</b>
                                             @foreach ($anuongdatphongs as $anuongdatphong)
                                                 <div class="d-flex justify-content-between">
                                                     <div>
                                                         <p>{{ $anuongdatphong->anuongs->ten }}:
-                                                            <b>{{ $anuongdatphong->anuongs->gia }} VND</b>
+                                                            <b>{{ number_format($anuongdatphong->anuongs->gia*$anuongdatphong->soluong, 0, '', '.') }}
+                                                                VND</b>
                                                         </p>
                                                     </div>
                                                     <div>

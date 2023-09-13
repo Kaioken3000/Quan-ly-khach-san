@@ -25,6 +25,8 @@
                                 <p class="card-text">{{ $giuong->kichthuoc }}
                                     {{ $giuong->donvi }}
                                 </p>
+                                <p class="card-text">{{ number_format($giuong->gia, 0, '', '.') }} VNĐ
+                                </p>
                                 <p class="card-text"> <small class="text-muted">{{ $giuong->mieuTa }}</small>
                                 </p>
                                 @include('giuongs.edit')

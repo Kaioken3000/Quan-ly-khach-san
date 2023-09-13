@@ -64,10 +64,10 @@
         </div>
     </div>
     <link rel="stylesheet" href="/tableToList/style.css">
-    <style>
+    {{-- <style>
         .card,
         hr {
             border: 1px black solid;
         }
-    </style>
+    </style> --}}
 @endsection

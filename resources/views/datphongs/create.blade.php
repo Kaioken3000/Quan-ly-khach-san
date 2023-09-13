@@ -18,11 +18,11 @@
             <input type="date" name="ngaydat" class="form-control" id="ngaydat" required/> --}}
 
             <label class="form-label" for="ngaydat">Ngày vào</label>
-            <input class="form-control datetimepicker flatpickr-input" type="date" id="ngaydat"
-                type="text" name="ngaydat" placeholder="yyyy-mm-dd"
-                data-options="{'disableMobile':true,'dateFormat':'Y-m-d'}"
-                required>
-            
+            {{-- <input class="form-control datetimepicker flatpickr-input" id="ngaydat" type="text" name="ngaydat"
+                placeholder="dd-mm-yyyy" data-options="{'minDate':'today','disableMobile':true,'dateFormat':'d-m-Y'}"
+                required> --}}
+            <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="yyyy-mm-dd"
+                name="ngaydat" data-options='{"minDate":"today","disableMobile":true,"dateFormat":"Y-m-d"}' />
             @error('ngaydat')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>
             @enderror
@@ -32,10 +32,11 @@
             <input type="date" name="ngaytra" class="form-control" id="ngaytra" required /> --}}
 
             <label class="form-label" for="ngaytra">Ngày ra</label>
-            <input class="form-control datetimepicker flatpickr-input" type="date" id="ngaytra"
-                type="text" name="ngaytra" placeholder="yyyy-mm-dd"
-                data-options="{'disableMobile':true,'dateFormat':'Y-m-d'}"
-                required>
+            {{-- <input class="form-control datetimepicker flatpickr-input" id="ngaytra" type="text" name="ngaytra"
+                placeholder="dd-mm-yyyy" data-options="{'minDate':'today','disableMobile':true,'dateFormat':'d-m-Y'}"
+                required> --}}
+            <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="yyyy-mm-dd"
+                name="ngaytra" data-options='{"minDate":"today","disableMobile":true,"dateFormat":"Y-m-d"}' />
 
             @error('ngaytra')
                 <div class="alert alert-danger" role="alert">{{ $message }}</div>

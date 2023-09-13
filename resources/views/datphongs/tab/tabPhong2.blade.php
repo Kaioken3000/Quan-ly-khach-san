@@ -53,7 +53,7 @@
                 <td>
                     <ul class="list-group">
                         @foreach ($danhsachdatphongs as $danhsachdatphong)
-                            <li class="list-group-item"><b>{{ $danhsachdatphong->phongs->loaiphongs->gia }}</b></li>
+                            <li class="list-group-item"><b>{{ number_format($danhsachdatphong->phongs->loaiphongs->gia, 0, '', '.') }}</b></li>
                         @endforeach
                     </ul>
                 </td>
@@ -61,8 +61,10 @@
                     <ul class="list-group">
                         @foreach ($danhsachdatphongs as $danhsachdatphong)
                             <li class="list-group-item d-flex justify-content-between align-items-start gap-1">
-                                <b>{{ $danhsachdatphong->ngaybatdauo }}</b>
-                                <b>{{ $danhsachdatphong->ngayketthuco }}</b>
+                                {{-- <b>{{ $danhsachdatphong->ngaybatdauo }}</b> --}}
+                                {{-- <b>{{ $danhsachdatphong->ngayketthuco }}</b> --}}
+                                <b>{{  Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngaybatdauo)->format('d-m-Y') }}</b>
+                                <b>{{  Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngayketthuco)->format('d-m-Y') }}</b>
                             </li>
                         @endforeach
                     </ul>
@@ -80,9 +82,3 @@
         </tr>
     </tfoot>
 </table>
-<style>
-    .card,
-    hr {
-        border: 1px black solid;
-    }
-</style>

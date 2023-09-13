@@ -20,7 +20,7 @@
                 <tr>
                     <th class="table-plus">Mã loại phòng</th>
                     <th>Tên loại phòng</th>
-                    <th>Giá </th>
+                    <th>Giá (VNĐ)</th>
                     <th>Hinh</th>
                     <th>Số lượng</th>
                     <th>Miêu tả loại phòng</th>
@@ -34,7 +34,7 @@
                     <tr>
                         <td>{{ $loaiphong->ma }}</td>
                         <td>{{ $loaiphong->ten }}</td>
-                        <td>{{ $loaiphong->gia }} VND</td>
+                        <td>{{ number_format($loaiphong->gia, 0, '', '.') }} </td>
                         <td style="width: 10%"><img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom"
                                 data-bs-placement="top" title="{{ $loaiphong->hinh }}"
                                 src="/client/images/{{ $loaiphong->hinh }}" class="img-fluid rounded "></td>

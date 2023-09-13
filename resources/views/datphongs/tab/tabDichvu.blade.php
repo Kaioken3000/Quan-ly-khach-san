@@ -27,11 +27,12 @@
                             @foreach ($dichvudatphongs as $dichvudatphong)
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <p>{{ $dichvudatphong->dichvus->ten }}:
-                                        <b>{{ $dichvudatphong->dichvus->giatien }}
+                                        <b>
+                                            {{ number_format($dichvudatphong->dichvus->giatien, 0, '', '.') }}
                                             {{ $dichvudatphong->dichvus->donvi }}</b>
                                     </p>
                                     <p>
-                                        <b>{{ $dichvudatphong->created_at }} </b>
+                                        <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dichvudatphong->created_at)->format('d-m-Y H:i:s') }}</b>
                                     </p>
                                     @hasanyrole('MainAdmin|Admin')
                                         <!-- xoa dich vu -->
@@ -51,13 +52,13 @@
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <p>
                                         {{ $anuongdatphong->anuongs->ten }}:
-                                        <b>{{ $anuongdatphong->anuongs->gia }} VND</b>
+                                        <b>{{ number_format($anuongdatphong->anuongs->gia, 0, '', '.') }} VND</b>
                                         <br>
                                         Số lượng:
                                         <b>{{ $anuongdatphong->soluong }}</b>
                                     </p>
                                     <p>
-                                        <b>{{ $anuongdatphong->created_at }} </b>
+                                        <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $anuongdatphong->created_at)->format('d-m-Y H:i:s') }} </b>
                                     </p>
                                     @hasanyrole('MainAdmin|Admin')
                                         <!-- xoa dich vu an uong -->
@@ -96,9 +97,9 @@
         </tr>
     </tfoot>
 </table>
-<style>
+{{-- <style>
     .card,
     hr {
         border: 1px black solid;
     }
-</style>
+</style> --}}

@@ -24,8 +24,12 @@
             @if ($datphongall->khachhangs->userid == Auth::user()->id)
                 <tr>
                     <td data-name='Mã: '>{{ $datphongall->id }}</td>
-                    <td data-name='Ngày đặt: '>{{ $datphongall->ngaydat }}</td>
-                    <td data-name='Ngày trả: '>{{ $datphongall->ngaytra }}</td>
+                    <td data-name='Ngày đặt: '>
+                        {{ Carbon\Carbon::createFromFormat('Y-m-d', $datphongall->ngaydat)->format('d-m-Y') }}
+                    </td>
+                    <td data-name='Ngày trả: '>
+                        {{ Carbon\Carbon::createFromFormat('Y-m-d', $datphongall->ngaytra)->format('d-m-Y') }}
+                    </td>
                     <td data-name='Số người ở: '>{{ $datphongall->soluong }}</td>
                     <?php
                     $phongmax = App\Models\Danhsachdatphong::where('datphongid', $datphongall->id)

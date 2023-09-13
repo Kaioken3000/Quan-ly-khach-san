@@ -2,7 +2,7 @@
 <div class="h-100 d-flex align-items-center justify-content-center">
     <form action="/client/search-phong" method="get">
         @csrf
-        <input type="text" id="search-input" placeholder="Search here....." name="search"
+        <input type="text" id="search-input" placeholder="Tìm kiếm phòng....." name="search"
             class="form-control form-control-lg-border">
 
         <div class="d-flex px-1 align-items-center">

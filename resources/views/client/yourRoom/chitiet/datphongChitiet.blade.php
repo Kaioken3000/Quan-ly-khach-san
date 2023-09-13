@@ -35,12 +35,17 @@
                                 <h4 class="card-title">Danh sách các phòng đã và đang ở</h4>
                                 @foreach ($danhsachdatphongs as $danhsachdatphong)
                                     <p class="card-text"><b>Phòng:</b> {{ $danhsachdatphong->phongid }}</p>
-                                    <p class="card-text"><b>Loại phòng</b>: {{ $danhsachdatphong->phongs->loaiphongs->ten }}
+                                    <p class="card-text"><b>Loại phòng</b>:
+                                        {{ $danhsachdatphong->phongs->loaiphongs->ten }}
                                     </p>
-                                    <p class="card-text"><b>Giá phòng</b>: {{ $danhsachdatphong->phongs->loaiphongs->gia }} VND
+                                    <p class="card-text"><b>Giá phòng</b>:
+                                        {{ number_format($danhsachdatphong->phongs->loaiphongs->gia, 0, '', '.') }} VND
                                     </p>
-                                    <p class="card-text"><b>Ngày bắt đầu ở: </b>  {{ $danhsachdatphong->ngaybatdauo }}</p>
-                                    <p class="card-text"><b>Ngày kết thúc ở:</b>  {{ $danhsachdatphong->ngayketthuco }}
+                                    <p class="card-text"><b>Ngày bắt đầu ở: </b>
+                                        {{ Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngaybatdauo)->format('d-m-Y') }}
+                                    </p>
+                                    <p class="card-text"><b>Ngày kết thúc ở:</b>
+                                        {{ Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngayketthuco)->format('d-m-Y') }}
                                     </p>
                                 @endforeach
                             </div>

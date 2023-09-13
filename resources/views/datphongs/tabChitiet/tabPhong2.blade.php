@@ -40,13 +40,14 @@
                         <b>{{ $danhsachdatphong->phongs->loaiphongs->ten }}</b>
                     </td>
                     <td data-name="Giá:" class="d-flex align-items-center">
-                        <b>{{ $danhsachdatphong->phongs->loaiphongs->gia }}</b>
+                        <b>
+                            {{ number_format($danhsachdatphong->phongs->loaiphongs->gia, 0, '', '.') }} VNĐ</b>
                     </td>
-                    <td data-name="Ngày bắt đầu ở:" class="Ngày bắt đầu ở:">
-                        <b>{{ $danhsachdatphong->ngaybatdauo }}</b>
+                    <td data-name="Ngày bắt đầu ở:" class="Ngày bắt đầu ở:">    
+                        <b>{{  Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngaybatdauo)->format('d-m-Y') }}</b>
                     </td>
                     <td data-name="Ngày kết thúc ở:" class="Ngày kết thúc ở:">
-                        <b>{{ $danhsachdatphong->ngayketthuco }}</b>
+                        <b>{{  Carbon\Carbon::createFromFormat('Y-m-d', $danhsachdatphong->ngayketthuco)->format('d-m-Y') }}</b>
                     </td>
                     <td></td>
                 @endforeach
@@ -54,9 +55,9 @@
         @endforeach
     </tbody>
 </table>
-<style>
+{{-- <style>
     .card,
     hr {
         border: 1px black solid;
     }
-</style>
+</style> --}}

@@ -22,7 +22,7 @@
                     <th>Tên</th>
                     <th>Kích thước</th>
                     <th>Hình</th>
-                    <th>Giá </th>
+                    <th>Giá(VNĐ)</th>
                     <th>Miêu tả </th>
                     @hasanyrole('MainAdmin|Admin')
                         <th class="datatable-nosort">Action</th>
@@ -39,7 +39,7 @@
                             <img data-bs-toggle="tooltip" data-bs-popup="tooltip-custom" data-bs-placement="top"
                                 title="{{ $giuong->hinh }}" src="/client/images/{{ $giuong->hinh }}" class="img-fluid rounded ">
                         </td>
-                        <td>{{ $giuong->gia }}</td>
+                        <td>{{ number_format($giuong->gia, 0, '', '.') }}</td>
                         <td>{{ $giuong->mieuTa }}</td>
                         @hasanyrole('MainAdmin|Admin')
                             <td>

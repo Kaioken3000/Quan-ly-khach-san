@@ -22,7 +22,7 @@
                     <th>Tên</th>
                     <th>Chi nhánh</th>
                     <th>Hinh</th>
-                    <th>Giá </th>
+                    <th>Giá(VNĐ)</th>
                     <th>Số lượng</th>
                     <th>Miêu tả </th>
                     <th>Điểm</th>
@@ -42,7 +42,7 @@
                                 title="{{ $anuong->hinh }}" src="/client/images/{{ $anuong->hinh }}"
                                 class="img-fluid rounded ">
                         </td>
-                        <td>{{ $anuong->gia }}</td>
+                        <td>{{ number_format($anuong->gia, 0, '', '.') }}</td>
                         <td>{{ $anuong->soluong }}</td>
                         <td>{{ $anuong->mieuTa }}</td>
                         <td>{{ $anuong->diem }}</td>

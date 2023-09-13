@@ -46,7 +46,7 @@
                             {{ $i }}.
                             <div class="row flex-grow-1 mx-1">
                                 <div class="col">{{ $thietbi->ten ?? '' }}</div>
-                                <div class="col"> Giá: {{ $thietbi->gia ?? '' }} VND </div>
+                                <div class="col"> Giá: {{ number_format($thietbi->gia, 0, '', '.') ?? '' }} VND </div>
                             </div>
                             @foreach ($phong->thietbiphongs as $thietbiphong)
                                 @if ($thietbiphong->thietbiid == $thietbi->id)

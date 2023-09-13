@@ -24,7 +24,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h4 class="card-title">{{ $thietbi->ten }}</h4>
-                                <p class="card-text">{{ $thietbi->gia }} VND</p>
+                                <p class="card-text">{{ number_format($thietbi->gia, 0, '', '.') }} VNĐ</p>
                                 <p class="card-text"> <small class="text-muted">{{ $thietbi->mieuTa }}</small>
                                 </p>
                                 @include('thietbis.edit')

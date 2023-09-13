@@ -24,8 +24,8 @@
             @if ($datphongall->khachhangs->userid == Auth::user()->id)
                 <tr>
                     <td>{{ $datphongall->id }}</td>
-                    <td>{{ $datphongall->ngaydat }}</td>
-                    <td>{{ $datphongall->ngaytra }}</td>
+                    <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $datphongall->ngaydat)->format('d-m-Y') }}</td>
+                    <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $datphongall->ngaytra)->format('d-m-Y') }}</td>
                     <td>{{ $datphongall->soluong }}</td>
                     <td>
                         <?php

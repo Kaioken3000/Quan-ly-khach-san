@@ -36,9 +36,9 @@
                     <ul class="list-group">
                         @foreach ($thanhtoans as $thanhtoan)
                             @if ($thanhtoan->loaitien == 'traphong')
-                                <li class="list-group-item">Tiền trả phòng: <b>{{ $thanhtoan->gia }}</b></li>
+                                <li class="list-group-item">Tiền trả phòng: <b>{{ number_format($thanhtoan->gia, 0, '', '.') }}VND</b></li>
                             @else
-                                <li class="list-group-item">Tiền đặt cọc: <b>{{ $thanhtoan->gia }}</b></li>
+                                <li class="list-group-item">Tiền đặt cọc: <b>{{ number_format($thanhtoan->gia, 0, '', '.') }}VND</b></li>
                             @endif
                         @endforeach
                     </ul>
@@ -53,7 +53,7 @@
                                         @endisset
                                     </b>
                                 </li>
-                                <li class="list-group-item">Thời gian xử lý: <b>{{ $xuly->created_at }}</b>
+                                <li class="list-group-item">Thời gian xử lý: <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $xuly->created_at)->format('d-m-Y H:i:s') }}</b>
                                 </li>
                             @endforeach
                         @endif
@@ -83,7 +83,7 @@
                                             {{ $nhanphong->users->username }}
                                         @endisset
                                     </b></li>
-                                <li class="list-group-item">Thời gian nhận: <b>{{ $nhanphong->created_at }}</b></li>
+                                <li class="list-group-item">Thời gian nhận: <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $nhanphong->created_at)->format('d-m-Y H:i:s') }}</b></li>
                             @endforeach
                         @endif
                         <li class="list-group-item">
@@ -110,7 +110,7 @@
                                     </b>
                                 </li>
                                 <li class="list-group-item">Thời gian trả phòng:
-                                    <b>{{ $traphong->created_at }}</b>
+                                    <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $traphong->created_at)->format('d-m-Y H:i:s') }}</b>
                                 </li>
                             @endforeach
                         @endif
@@ -151,7 +151,7 @@
                                 <li class="list-group-item">Họ tên người huỷ đặt phòng: <b>{{ $huydatphong->ten }}</b>
                                 </li>
                                 <li class="list-group-item">Thời gian huỷ đặt phòng:
-                                    <b>{{ $huydatphong->created_at }}</b>
+                                    <b>{{  Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $huydatphong->created_at)->format('d-m-Y H:i:s') }}</b>
                                 </li>
                             @endforeach
                         @endif
@@ -176,9 +176,4 @@
         </tr>
     </tfoot>
 </table>
-<style>
-    .card,
-    hr {
-        border: 1px black solid;
-    }
-</style>
+
