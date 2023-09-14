@@ -46,14 +46,14 @@
                 <td data-name='Thiết bị' class="d-flex align-items-start">
                     <ol class="list-group mx-3">
                         @foreach ($phong->thietbis as $thietbi)
-                            <li>{{ $thietbi->ten ?? '' }}</li>
+                            <li class="px-3">{{ $thietbi->ten ?? '' }}</li>
                         @endforeach
                     </ol>
                 </td>
                 <td data-name='Giừơng' class="d-flex align-items-start">
                     <ol class="list-group mx-3">
                         @foreach ($phong->giuongs as $giuong)
-                            <li>{{ $giuong->ten ?? '' }}</li>
+                            <li class="px-3">{{ $giuong->ten ?? '' }}</li>
                         @endforeach
                     </ol>
                 </td>
