@@ -504,6 +504,13 @@ class DatphongController extends Controller
                 $xacnhan = 0;
                 if ($request->soluong > $phong->loaiphongs->soluong) {
                     $xacnhan++;
+                } else if (count($phong->datphongs) > 0) {
+                    if (
+                        $phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong
+                        && $phong->datphongs->last()->tinhtrangthanhtoan == 0
+                    ) {
+                        $xacnhan++;
+                    }
                 } else {
                     foreach ($datphongs as $datphong) {
                         $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->latest()->first();
@@ -597,6 +604,13 @@ class DatphongController extends Controller
                 $xacnhan = 0;
                 if ($phongdat->soluong > $phong->loaiphongs->soluong) {
                     $xacnhan++;
+                } else if (count($phong->datphongs) > 0) {
+                    if (
+                        $phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong
+                        && $phong->datphongs->last()->tinhtrangthanhtoan == 0
+                    ) {
+                        $xacnhan++;
+                    }
                 } else {
                     foreach ($datphongs as $datphong) {
                         $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->latest()->first();
