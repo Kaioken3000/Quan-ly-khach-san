@@ -81,7 +81,8 @@
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
-                            @include('client.layouts2.searchMenu')
+                            {{-- @include('client.layouts2.searchMenu') --}}
+                            @include('client.layouts2.searchMenu2')
                         </div>
                     </div>
                 </div>

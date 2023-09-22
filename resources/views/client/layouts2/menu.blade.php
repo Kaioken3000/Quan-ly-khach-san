@@ -8,7 +8,7 @@
         <i class="icon_close"></i>
     </div>
     <div class="search-icon  search-switch">
-        @include('client.layouts2.searchMenu')
+        @include('client.layouts2.searchMenu2')
     </div>
     <div class="header-configure-area">
         <div class="language-option">
