@@ -8,12 +8,12 @@
         <i class="icon_close"></i>
     </div>
     <div class="search-icon  search-switch">
-        <i class="icon_search"></i>
+        @include('client.layouts2.searchMenu')
     </div>
     <div class="header-configure-area">
         <div class="language-option">
-            <img src="/client2/img/flag.jpg" alt="">
-            <span>EN <i class="fa fa-angle-down"></i></span>
+            <img src="/client2/img/vnflag.png" alt="">
+            <span>VI <i class="fa fa-angle-down"></i></span>
             <div class="flag-dropdown">
                 <ul>
                     <li><a href="#">Zi</a></li>
@@ -21,23 +21,39 @@
                 </ul>
             </div>
         </div>
-        <a href="#" class="bk-btn">Booking Now</a>
+        <a href="#" class="bk-btn">Đặt phòng ngay</a>
     </div>
     <nav class="mainmenu mobile-menu">
         <ul>
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./rooms.html">Rooms</a></li>
-            <li><a href="./about-us.html">About Us</a></li>
-            <li><a href="./pages.html">Pages</a>
-                <ul class="dropdown">
-                    <li><a href="./room-details.html">Room Details</a></li>
-                    <li><a href="#">Deluxe Room</a></li>
-                    <li><a href="#">Family Room</a></li>
-                    <li><a href="#">Premium Room</a></li>
-                </ul>
+            <li class="{{ Request::is('client/index') ? 'active' : '' }}"><a href="/client/index">Trang chủ</a></li>
+            <li class="{{ Request::is('client/chinhanh*') ? 'active' : '' }}"><a href="/client/chinhanh">Chi nhánh</a>
             </li>
-            <li><a href="./blog.html">News</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li class="{{ Request::is('client/phong') ? 'active' : '' }}"><a href="/client/phong">Phòng</a></li>
+            <li class="{{ Request::is('client/virtualTour') ? 'active' : '' }}"><a href="/client/virtualTour">Tham quan
+                    ảo</a></li>
+            <li class="{{ Request::is('chatify') ? 'active' : '' }}"><a href="/chatify/">Nhắn tin</a></li>
+            @auth
+                <li>
+                <li class="{{ Request::is('client/danhsachdatphong') ? 'active' : '' }}"><a
+                        href="/client/danhsachdatphong">Danh sách đặt phòng</a></li>
+                </li>
+                <li><a href="#">Tài khoản</a>
+                    <ul class="dropdown">
+                        <li><a href="/client/khachhang">{{ auth()->user()->username }}</a></li>
+                        <li>
+                            <a href="{{ route('client.logout') }}">
+                                <i class="fas fa-sign-out-alt"></i><span class="align-middle">Đăng xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endauth
+            @guest
+                <li class="{{ Request::is('client/login') ? 'active' : '' }}"><a href="/client/login">
+                        Đăng nhập </a></li>
+                <li class="{{ Request::is('client/register') ? 'active' : '' }}"><a href="/client/register"> Đăng ký </a>
+                </li>
+            @endguest
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>

@@ -294,7 +294,7 @@ class PhongController extends Controller
         // $phong = Phong::where("so_phong", $request->phongid)->first();
 
         $phongs = Phong::where("so_phong", $request->phongid)->get();
-        $loaiphongs = Loaiphong::all();     
+        $loaiphongs = Loaiphong::all();
         $hinhs = Hinh::all();
         $thietbis = Thietbi::all();
         $giuongs = Giuong::all();

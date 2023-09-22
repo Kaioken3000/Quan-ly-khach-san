@@ -24,9 +24,10 @@ use App\Http\Controllers\DichvuController;
 
 use App\Http\Controllers\GiuongController;
 use App\Http\Controllers\MieutaController;
+use App\Http\Controllers\MobileController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\MeetingController;
 
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ThietbiController;
 use App\Http\Controllers\ChinhanhController;
@@ -386,4 +387,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // The email sending is done using the to method on the Mail facade
         // Mail::to('namb1910261@student.ctu.edu.vn')->send(new MyTestEmail($name));
     });
+
+    // Mobile route
+    // Route::get('showtoken',   function () {
+    //     echo csrf_token();
+    // });
+    Route::get('mobile/client/index', 'MobileController@indexMobile');
+    Route::get('mobile/client/soPhong/{soPhong}', 'MobileController@indexMobileWithSoPhong');
+    Route::get('mobile/client/kiemtraphongtrong/ngaydat={ngaydat}/ngaytra={ngaytra}/soluong={soluong}', 'MobileController@kiemtraphongtrong');
+    Route::post('mobile/client/login', 'MobileController@loginMobile');
+    Route::post('mobile/client/register', 'MobileController@registerMobile');
+    Route::get('mobile/client/getUserById/{userid}', 'MobileController@getUserById');
+    Route::post('mobile/client/datphong', 'MobileController@datphong');
+    Route::get('mobile/client/getPaymentIntent/{sotien}', 'MobileController@getPaymentIntent');
 });
