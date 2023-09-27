@@ -392,12 +392,29 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('showtoken',   function () {
     //     echo csrf_token();
     // });
+    // load danh sach phong
     Route::get('mobile/client/index', 'MobileController@indexMobile');
+
+    // load 1 phong voi phong id
     Route::get('mobile/client/soPhong/{soPhong}', 'MobileController@indexMobileWithSoPhong');
+
+    // kiem tra phong trong
     Route::get('mobile/client/kiemtraphongtrong/ngaydat={ngaydat}/ngaytra={ngaytra}/soluong={soluong}', 'MobileController@kiemtraphongtrong');
+    
+    // lay thong tin user boi user id
+    Route::get('mobile/client/getUserById/{userid}', 'MobileController@getUserById');
+    
+    // lay thong tin dat phong boi khachhang id
+    Route::get('mobile/client/getDatphongByKhachhangid/{khachhangid}', 'MobileController@getDatphongByKhachhangid');
+
+
+    // thuc hien dat phong
+    Route::post('mobile/client/datphong', 'MobileController@datphong');
+
+    // lay paymentintent cua stripe
+    Route::get('mobile/client/getPaymentIntent/{sotien}', 'MobileController@getPaymentIntent');
+    
+    // auth
     Route::post('mobile/client/login', 'MobileController@loginMobile');
     Route::post('mobile/client/register', 'MobileController@registerMobile');
-    Route::get('mobile/client/getUserById/{userid}', 'MobileController@getUserById');
-    Route::post('mobile/client/datphong', 'MobileController@datphong');
-    Route::get('mobile/client/getPaymentIntent/{sotien}', 'MobileController@getPaymentIntent');
 });

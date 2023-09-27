@@ -42,6 +42,15 @@ class MobileController extends Controller
         return response()->json($phongs, 200);
     }
 
+
+    public function getDatphongByKhachhangid(Request $request)
+    {
+        $datphong = Datphong::with('phongs.giuongs')->with('phongs.thietbis')->with('phongs.loaiphongs')->with('phongs.hinhs')
+        ->with('phongs.mieutas')->with('phongs.chinhanhs')->with('dichvus')->with('anuongs')->with('thanhtoans')->where("khachhangid", $request->khachhangid)->get();
+
+        return response()->json($datphong, 200);
+    }
+
     public function kiemtraphongtrong(Request $request)
     {
         $phongslist = Phong::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')

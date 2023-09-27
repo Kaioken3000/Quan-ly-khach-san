@@ -23,7 +23,7 @@ class Datphong extends Model
 
     public function phongs()
     {
-        return $this->belongsToMany(Phong::class, 'danhsachdatphongs', 'datphongid','phongid');
+        return $this->belongsToMany(Phong::class, 'danhsachdatphongs', 'datphongid','phongid')->withPivot("ngaybatdauo", "ngayketthuco");
     }
 
     public function khachhangs()
@@ -36,11 +36,20 @@ class Datphong extends Model
     }
 
     public function anuongs(){
-        return $this->belongsToMany(Anuong::class,'anuong_datphongs','datphongid','anuongid');
+        return $this->belongsToMany(Anuong::class,'anuong_datphongs','datphongid','anuongid')->withPivot('soluong');
     }
     public function anuongdatphongs()
     {
         return $this->hasMany(AnuongDatphong::class, 'datphongid');
+    }
+    public function dichvudatphongs()
+    {
+        return $this->hasMany(DichvuDatphong::class, 'datphongid');
+    }
+
+    public function thanhtoans()
+    {
+        return $this->hasMany(Thanhtoan::class, 'datphongid');
     }
 
 }
