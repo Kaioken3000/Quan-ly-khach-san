@@ -7,6 +7,7 @@ use App\Models\Phong;
 use App\Models\Datphong;
 use App\Models\Khachhang;
 use App\Models\Thanhtoan;
+use App\Models\Comment;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Danhsachdatphong;
@@ -25,7 +26,7 @@ class MobileController extends Controller
     public function indexMobile()
     {
         $phongs = Phong::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
-            ->with('mieutas')->with('chinhanhs')->get();
+            ->with('mieutas')->with('chinhanhs')->with('comments.users')->get();
         return response()->json($phongs, 200);
     }
     public function getUserById(Request $request)
@@ -37,7 +38,7 @@ class MobileController extends Controller
     public function indexMobileWithSoPhong(Request $request)
     {
         $phongs = Phong::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
-            ->with('mieutas')->with('chinhanhs')->where("so_phong", $request->soPhong)->first();
+            ->with('mieutas')->with('chinhanhs')->with('comments.users')->where("so_phong", $request->soPhong)->first();
 
         return response()->json($phongs, 200);
     }
@@ -46,7 +47,7 @@ class MobileController extends Controller
     public function getDatphongByKhachhangid(Request $request)
     {
         $datphong = Datphong::with('phongs.giuongs')->with('phongs.thietbis')->with('phongs.loaiphongs')->with('phongs.hinhs')
-        ->with('phongs.mieutas')->with('phongs.chinhanhs')->with('dichvus')->with('anuongs')->with('thanhtoans')->where("khachhangid", $request->khachhangid)->get();
+            ->with('phongs.mieutas')->with('phongs.chinhanhs')->with('dichvus')->with('anuongs')->with('thanhtoans')->where("khachhangid", $request->khachhangid)->get();
 
         return response()->json($datphong, 200);
     }
@@ -112,13 +113,13 @@ class MobileController extends Controller
     public function registerMobile(LoginRequest $request)
     {
         $user = User::create([
-            'email'=>$request->email,
-            'username'=>$request->username,
-            'sdt'=>$request->sdt,
-            'password'=>$request->password,
+            'email' => $request->email,
+            'username' => $request->username,
+            'sdt' => $request->sdt,
+            'password' => $request->password,
         ]);
 
-        $role = Role::where('name','Khachhang')->first();
+        $role = Role::where('name', 'Khachhang')->first();
 
         $user->assignRole($role);
 
@@ -158,7 +159,7 @@ class MobileController extends Controller
         Log::info($request);
         $khachhang = Khachhang::where("userid", $request->khachhangid)->first();
         Log::info($khachhang);
-        
+
         if (!($khachhang)) {
             $khachhang = Khachhang::create([
                 'ten' => $request->ten,
@@ -234,5 +235,21 @@ class MobileController extends Controller
         ]);
 
         return $intent;
+    }
+
+    public function storeComment(Request $request)
+    {
+        Comment::create([
+            'noidung' => $request->noidung,
+            'userid' => $request->userid,
+            'phongid' => $request->phongid,
+        ]);
+
+        return response()->json("success", 200);
+    }
+    public function getComment(Request $request)
+    {
+        $comments = Comment::with('users')->where("phongid", $request->phongid)->get();
+        return response()->json($comments, 200);
     }
 }

@@ -37,6 +37,9 @@
         <li class="nav-item" role="presentation"><a class="nav-link" id="hinh-tab" data-bs-toggle="tab" href="#tab-hinh"
                 role="tab" aria-controls="tab-hinh" aria-selected="false" tabindex="-1">Hình - Virtual Tours</a>
         </li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="comment-tab" data-bs-toggle="tab" href="#tab-comment"
+                role="tab" aria-controls="tab-comment" aria-selected="false" tabindex="-1">Bình luận</a>
+        </li>
     </ul>
     <div class="tab-content mt-3" id="myTabContent">
         <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
@@ -94,6 +97,18 @@
                         <div class="card-body">
                             <input type="checkbox" name="" id="toggleView" checked hidden />
                             @include('phongs.mainTabChitiet.tabVirtualTour')
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tab-comment" role="tabpanel" aria-labelledby="comment-tab">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card border mb-3 h-100">
+                        <div class="card-body">
+                            <input type="checkbox" name="" id="toggleView" checked hidden />
+                            @include('phongs.mainTabChitiet.tabComment')
                         </div>
                     </div>
                 </div>

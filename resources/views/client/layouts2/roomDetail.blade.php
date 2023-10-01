@@ -103,6 +103,8 @@
                         </div>
                     </div>
                 </div>
+
+                @include("client.layouts2.roomComment")
             </div>
             <div class="col-lg-4">
                 <div class="room-booking">
@@ -160,6 +162,7 @@
                     </form>
                 </div>
             </div>
+
             <div class="col-lg-8">
                 <div id="fb-root"></div>
                 <script async defer crossorigin="anonymous"

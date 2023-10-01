@@ -47,6 +47,9 @@
         <li class="nav-item" role="presentation"><a class="nav-link" id="virtualTour-tab" data-bs-toggle="tab"
                 href="#tab-virtualTour" role="tab" aria-controls="tab-virtualTour" aria-selected="false"
                 tabindex="-1">Virtual Tour</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" id="comment-tab" data-bs-toggle="tab"
+                href="#tab-comment" role="tab" aria-controls="tab-comment" aria-selected="false"
+                tabindex="-1">Bình luận</a></li>
     </ul>
     <div class="tab-content mt-3" id="myTabContent">
         <div class="tab-pane fade show active" id="tab-thongtin" role="tabpanel" aria-labelledby="thongtin-tab">
@@ -71,6 +74,9 @@
         <div class="tab-pane fade" id="tab-virtualTour" role="tabpanel" aria-labelledby="virtualTour-tab">
             @include('virtualTours.create')
             @include('phongs.mainTab.tabVirtualTour')
+        </div>
+        <div class="tab-pane fade" id="tab-comment" role="tabpanel" aria-labelledby="comment-tab">
+            @include('phongs.mainTab.tabComment')
         </div>
     </div>
 @endsection

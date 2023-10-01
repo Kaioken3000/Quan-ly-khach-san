@@ -104,4 +104,9 @@ class Phong extends Model
     {
         return $this->hasMany(VirtualtourPhong::class, 'phongid');
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'phongid');
+    }
 }

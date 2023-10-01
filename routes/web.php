@@ -50,6 +50,8 @@ use App\Http\Controllers\DichvuDatphongController;
 use App\Http\Controllers\MieutaChinhanhController;
 use App\Http\Controllers\DanhsachdatphongController;
 use App\Http\Controllers\VirtualtourPhongController;
+use App\Http\Controllers\CommentController;
+use App\Models\Comment;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 /*
 |--------------------------------------------------------------------------
@@ -255,6 +257,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             // Catruc nhanvien Routes
             Route::resource('catruc_nhanviens', CatrucNhanvienController::class);
             Route::get('catruc_nhanvien/themCatruc/{nhanvienid}', 'CatrucNhanvienController@viewThemcatruc');
+
         });
 
         //Profile
@@ -307,7 +310,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('client/danhsachdatphong', 'IndexController@danhsachdatphong');
         Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong')->name("client.danhsachdatphong");
         Route::get('client/datphongChitiet/{datphongid}', 'IndexController@datphongChitiet');
+
     });
+
+    // comment
+    Route::resource('comments', CommentController::class);
+    
     // AnuongDatphong
     Route::resource('anuong_datphong', AnuongDatphongController::class);
 
@@ -400,10 +408,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // kiem tra phong trong
     Route::get('mobile/client/kiemtraphongtrong/ngaydat={ngaydat}/ngaytra={ngaytra}/soluong={soluong}', 'MobileController@kiemtraphongtrong');
-    
+
     // lay thong tin user boi user id
     Route::get('mobile/client/getUserById/{userid}', 'MobileController@getUserById');
-    
+
     // lay thong tin dat phong boi khachhang id
     Route::get('mobile/client/getDatphongByKhachhangid/{khachhangid}', 'MobileController@getDatphongByKhachhangid');
 
@@ -413,8 +421,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // lay paymentintent cua stripe
     Route::get('mobile/client/getPaymentIntent/{sotien}', 'MobileController@getPaymentIntent');
-    
+
     // auth
     Route::post('mobile/client/login', 'MobileController@loginMobile');
     Route::post('mobile/client/register', 'MobileController@registerMobile');
+    // comment
+    Route::post('mobile/client/storeComment', 'MobileController@storeComment');
+    Route::get('mobile/client/getComment/{phongid}', 'MobileController@getComment');
 });
