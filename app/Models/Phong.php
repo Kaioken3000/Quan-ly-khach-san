@@ -38,6 +38,11 @@ class Phong extends Model
         return $this->belongsToMany(Datphong::class, 'danhsachdatphongs', 'phongid','datphongid');
     }
 
+    public function danhsachdatphongs()
+    {
+        return $this->hasMany(Danhsachdatphong::class, 'phongid');
+    }
+
     /**
      * The thietbis that belong to the Phong
      *

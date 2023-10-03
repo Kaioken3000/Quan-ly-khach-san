@@ -26,7 +26,7 @@ class MobileController extends Controller
     public function indexMobile()
     {
         $phongs = Phong::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
-            ->with('mieutas')->with('chinhanhs')->with('comments.users')->get();
+            ->with('mieutas')->with('chinhanhs')->with('comments.users')->with('danhsachdatphongs')->with('datphongs')->get();
         return response()->json($phongs, 200);
     }
     public function getUserById(Request $request)
@@ -38,7 +38,7 @@ class MobileController extends Controller
     public function indexMobileWithSoPhong(Request $request)
     {
         $phongs = Phong::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
-            ->with('mieutas')->with('chinhanhs')->with('comments.users')->where("so_phong", $request->soPhong)->first();
+            ->with('mieutas')->with('chinhanhs')->with('comments.users')->with('danhsachdatphongs')->with('datphongs')->where("so_phong", $request->soPhong)->first();
 
         return response()->json($phongs, 200);
     }

@@ -11,6 +11,12 @@
                 $ngayvaodadat = '';
                 $ngayradadat = '';
                 $today = date('Y-m-d');
+                $xacnhan = 0;
+                if (count($phong->datphongs) > 0) {
+                    if ($phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong && $phong->datphongs->last()->tinhtrangthanhtoan == 0) {
+                        $xacnhan++;
+                    }
+                }
                 foreach ($datphongs as $datphong) {
                     $danhsachdatphong = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)
                         ->latest()
@@ -69,17 +75,24 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            @if ($check == 0)
+                            @if ($check == 0 && $xacnhan == 0)
                                 <a href="/client/chitietphong/{{ $phong->so_phong }}" target="_blank"
                                     class="primary-btn">Xem chi tiết</a>
                             @else
-                                <div class="d-flex">
-                                    <p class="mb-0"> Phòng đã được đặt: &nbsp;</p>
-                                    <div class="me-0">
-                                        <p class="mb-0"> Từ: {{ $ngayvaodadat }}</p>
-                                        <p class="mb-0"> đến: {{ $ngayradadat }}</p>
+                                @if ($xacnhan != 0)
+                                    <div class="d-flex">
+                                        <p class="mb-0"> Khách hàng vẫn chưa rời phòng&nbsp;</p>
                                     </div>
-                                </div>
+                                @endif
+                                @if ($check != 0)
+                                    <div class="d-flex">
+                                        <p class="mb-0"> Phòng đã được đặt: &nbsp;</p>
+                                        <div class="me-0">
+                                            <p class="mb-0"> Từ: {{ $ngayvaodadat }}</p>
+                                            <p class="mb-0"> đến: {{ $ngayradadat }}</p>
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     </div>

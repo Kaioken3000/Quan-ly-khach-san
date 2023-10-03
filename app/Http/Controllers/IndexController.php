@@ -268,10 +268,10 @@ class IndexController extends Controller
                         $danhsachdatphong = Danhsachdatphong::where('datphongid', $datphong->id)->orderBy('id', 'desc')->first();
                         if ($danhsachdatphong->phongid == $phong->so_phong && $request->ngaytra >= $request->ngaydat) {
                             if ($request->ngaydat >= $danhsachdatphong->ngaybatdauo && $request->ngaydat <= $danhsachdatphong->ngayketthuco) {
-                                $xacnhan++;
+                                // $xacnhan++;
                             } else if ($request->ngaytra >= $danhsachdatphong->ngaybatdauo && $request->ngaytra <= $danhsachdatphong->ngayketthuco) {
-                                $xacnhan++;
-                            }
+                                // $xacnhan++;
+                            } else $xacnhan++;
                         }
                     }
                 }
