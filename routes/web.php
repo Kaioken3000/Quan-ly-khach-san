@@ -428,4 +428,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // comment
     Route::post('mobile/client/storeComment', 'MobileController@storeComment');
     Route::get('mobile/client/getComment/{phongid}', 'MobileController@getComment');
+    
+    // Tìm kiếm phòng
+    Route::post('mobile/client/searchPhong', 'MobileController@searchPhong');
+    
+    // 
+    Route::get('mobile/client/loaiphongAll', 'MobileController@loaiphongAll');
+    Route::get('mobile/client/chinhanhAll', 'MobileController@chinhanhAll');
 });

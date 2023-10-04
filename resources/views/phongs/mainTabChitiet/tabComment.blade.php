@@ -19,17 +19,30 @@
                                     $response = $response->json();
                                     if (implode($response) == 'Tích cực') {
                                         echo '<span class="badge badge-light-primary rounded-pill">
-                                                                                    ' .
+                                                                            ' .
                                             implode($response) .
                                             '
-                                                                                </span>';
+                                                                        </span>';
                                     } else {
                                         echo '<span class="badge badge-light-danger rounded-pill">
-                                                                                    ' .
+                                                                            ' .
                                             implode($response) .
                                             '
-                                                                                </span>';
+                                                                        </span>';
                                     }
+                                } catch (\Throwable $th) {
+                                    //throw $th;
+                                }
+                                try {
+                                    $response = Http::connectTimeout(0.5)
+                                        ->timeout(0.5)
+                                        ->get('http://127.0.0.1:7000/apiv3/comment-classify/' . $comment->noidung);
+                                    $response = $response->json();
+                                    echo '<span class="mx-2 badge badge-light-success rounded-pill">
+                                                                                                                ' .
+                                        implode($response) .
+                                        '
+                                                                                                            </span>';
                                 } catch (\Throwable $th) {
                                     //throw $th;
                                 }

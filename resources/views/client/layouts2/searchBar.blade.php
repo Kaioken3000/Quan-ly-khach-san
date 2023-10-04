@@ -40,7 +40,7 @@
                         <select class="form-select" aria-label="Default select example" name="giaphong">
                             <option value="100000">100000 VNĐ</option>
                             <option value="200000">200000 VNĐ</option>
-                            <option value="300000">300000 VNĐ</option>
+                            <option value="300000">300000 VNĐ</option>  
                             <option value="400000">400000 VNĐ</option>
                             <option value="500000">500000 VNĐ</option>
                             <option value="600000">600000 VNĐ</option>

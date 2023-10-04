@@ -32,6 +32,15 @@
                                     } catch (\Throwable $th) {
                                         //throw $th;
                                     }
+                                    try {
+                                        $response = Http::connectTimeout(0.5)->timeout(0.5)->get('http://127.0.0.1:7000/apiv3/comment-classify/' . $comment->noidung);
+                                        $response = $response->json();
+                                            echo '<span class="mx-2 badge badge-light-success rounded-pill">
+                                                '.implode($response).'
+                                            </span>';
+                                    } catch (\Throwable $th) {
+                                        //throw $th;
+                                    }
                                     ?>
                                     {{ $comment->noidung }}
                                 </span>

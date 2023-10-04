@@ -11,10 +11,13 @@ use App\Models\Comment;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Danhsachdatphong;
+use App\Models\Loaiphong;
 use App\Http\Requests\LoginRequest;
+use App\Models\Chinhanh;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Svg\Tag\Rect;
 
 class MobileController extends Controller
 {
@@ -251,5 +254,46 @@ class MobileController extends Controller
     {
         $comments = Comment::with('users')->where("phongid", $request->phongid)->get();
         return response()->json($comments, 200);
+    }
+
+    public function searchPhong(Request $request)
+    {
+        // $phongs = Phong::where('so_phong', 'LIKE', '%' . $request->search . "%")
+        //                 ->orderBy('so_phong','asc')->paginate(5);
+        if ($request->songuoiphong == null || $request->songuoiphong == "") {
+            $request->songuoiphong = "1";
+        }
+        if ($request->chinhanhid) {
+            $phongs = Phong
+                ::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
+                ->with('mieutas')->with('chinhanhs')->with('comments.users')->with('danhsachdatphongs')->with('datphongs')
+                ->where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
+                ->where('loaiphongs.gia', $request->tuychonggia, $request->giaphong)
+                ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
+                ->where('phongs.chinhanhid', '=', $request->chinhanhid)
+                ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+                ->get();
+        } else {
+            $phongs = Phong
+                ::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
+                ->with('mieutas')->with('chinhanhs')->with('comments.users')->with('danhsachdatphongs')->with('datphongs')
+                ->where('loaiphongs.ma', 'LIKE', '%' . $request->tenphong . "%")
+                ->where('loaiphongs.gia', $request->tuychonggia, $request->giaphong)
+                ->where('loaiphongs.soluong', '>=', $request->songuoiphong)
+                ->join('loaiphongs', 'phongs.loaiphongid', '=', 'loaiphongs.ma')
+                ->get();
+        }
+        return response()->json($phongs, 200);
+    }
+
+    public function loaiphongAll()
+    {
+        $loaiphongs = Loaiphong::get();
+        return response()->json($loaiphongs, 200);
+    }
+    public function chinhanhAll()
+    {
+        $chinhanhs = Chinhanh::get();
+        return response()->json($chinhanhs, 200);
     }
 }
