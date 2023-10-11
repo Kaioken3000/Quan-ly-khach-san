@@ -16,15 +16,19 @@
 
 <div class="review-add">
     <h4>Thêm bình luận</h4>
-    <form action="{{ route('comments.store') }}" class="ra-form" method="post">
-        @csrf
-        <div class="row">
-            <div class="col-lg-12">
-                <input hidden type="text" value="{{ $phong->so_phong }}" name="phongid">
-                <input hidden type="text" value="{{ auth()->user()->id }}" name="userid">
-                <textarea placeholder="Bình luận của bạn" name="noidung" required></textarea>
-                <button type="submit">Xác nhận</button>
+    @auth
+        <form action="{{ route('comments.store') }}" class="ra-form" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-lg-12">
+                    <input hidden type="text" value="{{ $phong->so_phong }}" name="phongid">
+                    <input hidden type="text" value="{{ auth()->user()->id }}" name="userid">
+                    <textarea placeholder="Bình luận của bạn" name="noidung" required></textarea>
+                    <button type="submit">Xác nhận</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    @else
+        <p>Hãy đăng nhập để bình luận</p>
+    @endauth
 </div>

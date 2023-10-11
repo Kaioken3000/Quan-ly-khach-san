@@ -3,6 +3,7 @@
         <tr>
             <th class="table-plus">Số phòng</th>
             <th>Bình luận</th>
+            <th>Tên</th>
             {{-- <th>Phân loại</th> --}}
         </tr>
     </thead>
@@ -64,6 +65,17 @@
                         @endforeach
                     </ul>
                 </td>
+                <td>
+                    <ul class="list-group">
+                        @foreach ($phong->comments as $comment)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>
+                                    {{ $comment->users->username }}
+                                </span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </td>
             </tr>
         @endforeach
     </tbody>
@@ -71,6 +83,7 @@
         <tr>
             <th class="table-plus">Số phòng</th>
             <th>Bình luận</th>
+            <th>Tên </th>
             {{-- <th>Phân loại</th> --}}
         </tr>
     </tfoot>

@@ -17,14 +17,14 @@
                             <a href="#"><i class="fab fa-tripadvisor"></i></a>
                             <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
-                        <a href="#" class="bk-btn">Booking Now</a>
+                        <a href="#" class="bk-btn">Đặt phòng ngay</a>
                         <div class="language-option">
-                            <img src="/client2/img/flag.jpg" alt="">
-                            <span>EN <i class="fa fa-angle-down"></i></span>
+                            <img src="/client2/img/vnflag.png" alt="">
+                            <span>VI <i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
-                                    <li><a href="#">Zi</a></li>
-                                    <li><a href="#">Fr</a></li>
+                                    <li><a href="#">VI</a></li>
+                                    <li><a href="#">EN</a></li>
                                 </ul>
                             </div>
                         </div>

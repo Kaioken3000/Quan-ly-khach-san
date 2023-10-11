@@ -344,6 +344,8 @@ class IndexController extends Controller
 
         //get current date
         $today = date('y-m-d h:i:s');
+        Log::info($request->datphong);
+        Log::info($datphong);
         // $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
 
         //cap nhap ngay ket thuc cho phong truoc do

@@ -21,6 +21,8 @@ class DanhsachdatphongController extends Controller
 
         
         //get current date
+        Log::info($request->datphong);
+        Log::info($datphong);
         $today = date('y-m-d h:i:s');
         // $todaysub = date('Y-m-d', strtotime('-1 day', strtotime($today)));
 

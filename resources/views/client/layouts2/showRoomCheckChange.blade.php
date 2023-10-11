@@ -47,7 +47,7 @@
                             <form action="doiphongclient" method="POST">
                                 @csrf
                                 @method('POST')
-                                <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->id }}" />
+                                <input type="hidden" name="datphongid" id="datphongid" value="{{ $dat->datphongid }}" />
                                 <input type="hidden" name="phongid" id="phongid" value="{{ $phong->so_phong }}" />
                                 <button type="submit" class="primary-btn border-0 bg-white text-dark">
                                     <i class="fa fa-edit"></i>

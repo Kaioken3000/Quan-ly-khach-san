@@ -104,7 +104,7 @@
                     </div>
                 </div>
 
-                @include("client.layouts2.roomComment")
+                @include('client.layouts2.roomComment')
             </div>
             <div class="col-lg-4">
                 <div class="room-booking">
@@ -114,63 +114,107 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-                    {{-- <form action="/kiemtra-index-store" method="post"> --}}
-                    <form action="/client/reservation" method="post">
-                        @csrf
-                        <div class="check-date">
-                            <label for="ngaydat">Ngày vào</label>
-                            {{-- <input type="date" name="ngaydat" id="ngaydat"
+
+                    <?php $datphongs = App\Models\Datphong::get();
+                    $check = 0;
+                    $ngayvaodadat = '';
+                    $ngayradadat = '';
+                    $today = date('Y-m-d');
+                    $xacnhan = 0;
+                    if (count($phong->datphongs) > 0) {
+                        if ($phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong && $phong->datphongs->last()->tinhtrangthanhtoan == 0) {
+                            $xacnhan++;
+                        }
+                    }
+                    foreach ($datphongs as $datphong) {
+                        $danhsachdatphong = App\Models\Danhsachdatphong::where('datphongid', $datphong->id)
+                            ->latest()
+                            ->first();
+                        if ($danhsachdatphong->phongid == $phong->so_phong && $datphong->huydatphong == 0) {
+                            if ($danhsachdatphong->ngayketthuco > $today) {
+                                $check++;
+                                $ngayvaodadat = $danhsachdatphong->ngaybatdauo;
+                                $ngayradadat = $danhsachdatphong->ngayketthuco;
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+                    @if ($check == 0 && $xacnhan == 0)
+                        {{-- <form action="/kiemtra-index-store" method="post"> --}}
+                        <form action="/client/reservation" method="post">
+                            @csrf
+                            <div class="check-date">
+                                <label for="ngaydat">Ngày vào</label>
+                                {{-- <input type="date" name="ngaydat" id="ngaydat"
                                 class="form-control form-control-lg-border" required> --}}
-                            <input class="form-control datetimepicker" type="text" placeholder="yyyy-mm-dd"
-                                name="ngaydat" required />
-                            @error('ngaydat')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="check-date">
-                            <label for="ngaytra">Ngày ra</label>
-                            {{-- <input type="date" name="ngaytra" id="ngaytra"
+                                <input class="form-control datetimepicker" type="text" placeholder="yyyy-mm-dd"
+                                    name="ngaydat" required />
+                                @error('ngaydat')
+                                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="check-date">
+                                <label for="ngaytra">Ngày ra</label>
+                                {{-- <input type="date" name="ngaytra" id="ngaytra"
                                 class="form-control form-control-lg-border" required> --}}
-                            <input class="form-control datetimepicker" type="text" placeholder="yyyy-mm-dd"
-                                name="ngaytra" required />
-                            @error('ngaytra')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="soluong">Số người ở tối đa trong phòng:</label>
-                            <input type="number" name="soluong" id="soluong"
-                                class="form-control form-control-lg-border" min=1 required value="1">
-                            @error('soluong')
-                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <button type="submit">Đặt phòng</button>
-                        <input type="hidden" id="phongid" name="phongid" class="form-control"
-                            value="{{ $phong->so_phong }}">
-                        @auth
-                            <input type="hidden" id="sophong" name="sophong" class="form-control"
+                                <input class="form-control datetimepicker" type="text" placeholder="yyyy-mm-dd"
+                                    name="ngaytra" required />
+                                @error('ngaytra')
+                                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="soluong">Số người ở tối đa trong phòng:</label>
+                                <input type="number" name="soluong" id="soluong"
+                                    class="form-control form-control-lg-border" min=1 required value="1">
+                                @error('soluong')
+                                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <button type="submit">Đặt phòng</button>
+                            <input type="hidden" id="phongid" name="phongid" class="form-control"
                                 value="{{ $phong->so_phong }}">
-                            <input type="hidden" id="ten" name="ten" class="form-control "
-                                value="{{ auth()->user()->username }}">
-                            <input type="hidden" id="sdt" name="sdt" class="form-control "
-                                value="{{ auth()->user()->sdt }}">
-                            <input type="hidden" id="email" name="email" class="form-control "
-                                value="{{ auth()->user()->email }}">
-                            <input type="hidden" value="{{ auth()->user()->id }}" name="clientid">
-                        @endauth
-                    </form>
+                            @auth
+                                <input type="hidden" id="sophong" name="sophong" class="form-control"
+                                    value="{{ $phong->so_phong }}">
+                                <input type="hidden" id="ten" name="ten" class="form-control "
+                                    value="{{ auth()->user()->username }}">
+                                <input type="hidden" id="sdt" name="sdt" class="form-control "
+                                    value="{{ auth()->user()->sdt }}">
+                                <input type="hidden" id="email" name="email" class="form-control "
+                                    value="{{ auth()->user()->email }}">
+                                <input type="hidden" value="{{ auth()->user()->id }}" name="clientid">
+                            @endauth
+                        </form>
+                    @else
+                        @if ($xacnhan != 0)
+                            <div class="d-flex">
+                                <p class="mb-0"> Khách hàng vẫn chưa rời phòng&nbsp;</p>
+                            </div>
+                        @endif
+                        @if ($check != 0)
+                            <div class="d-flex">
+                                <p class="mb-0"> Phòng đã được đặt: &nbsp;</p>
+                                <div class="me-0">
+                                    <p class="mb-0"> Từ: {{ $ngayvaodadat }}</p>
+                                    <p class="mb-0"> đến: {{ $ngayradadat }}</p>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+
                 </div>
             </div>
 
-            <div class="col-lg-8">
+            {{-- <div class="col-lg-8">
                 <div id="fb-root"></div>
                 <script async defer crossorigin="anonymous"
                     src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=658955415606544&autoLogAppEvents=1"
                     nonce="sFzhTDa5"></script>
                 <div class="fb-comments" data-href="{{ Request::url() }}" data-width="100%" data-numposts="5">
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

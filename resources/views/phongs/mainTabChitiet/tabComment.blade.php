@@ -10,7 +10,8 @@
                 <td>
                     @foreach ($phong->comments as $comment)
                         <li class="d-flex justify-content-between align-items-center">
-                            <span>
+                            <span class="d-flex justify-content-between">
+                                User:  {{ $comment->users->username }} - 
                                 <?php
                                 try {
                                     $response = Http::connectTimeout(0.5)
@@ -47,7 +48,8 @@
                                     //throw $th;
                                 }
                                 ?>
-                                {{ $comment->noidung }}
+                                Bình luận: {{ $comment->noidung }}
+                                
                             </span>
                             @hasrole('Admin')
                                 @isset(Auth::user()->nhanviens)
@@ -68,7 +70,7 @@
                         </li>
                     @endforeach
                 </td>
-            </tr>
+            </tr>   
         @endforeach
     </tbody>
 </table>
