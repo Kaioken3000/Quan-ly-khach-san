@@ -2,7 +2,7 @@
 <div class="m-1">
     <button type="button" class="w-100 btn btn-success" data-toggle="modal"
         data-target="#modaldichvu{{ $datphongall->id }}">
-        <i class="bx bx-box mb-1"></i> Service
+        <i class="bx bx-box mb-1"></i> Dịch vụ
     </button>
 </div>
 <!-- Modal dịch vụ -->
