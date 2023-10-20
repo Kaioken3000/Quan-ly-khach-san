@@ -36,7 +36,7 @@
                         <img src="/client/images/{{ $phong->hinhs[0]->vitri }}" alt="">
                         <div class="ri-text">
                             <h4>{{ $phong->loaiphongs->ten }} - {{ $phong->so_phong }}</h4>
-                            <h3>{{ $phong->loaiphongs->gia }}VND<span>/Pernight</span></h3>
+                            <h3>{{ $phong->loaiphongs->gia }}VND<span>/Đêm</span></h3>
                             <table>
                                 <tbody>
                                     <tr>
