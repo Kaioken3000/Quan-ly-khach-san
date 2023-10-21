@@ -68,11 +68,12 @@
                     <th>id</th>
                     <th>Ngày đặt</th>
                     <th>Ngày trả</th>
-                    <th>Số lượng</th>
-                    <th style="width: 1px"></th>
+                    <th>Số lượng người ở</th>
                     <th>Phòng hiện tại</th>
+                    <th>Xem chi tiết</th>
                     <th>Khách hàng</th>
                     <th>Hoá đơn</th>
+                    <th style="display: none">Tổng tiền</th>
                     <th>Tổng tiền</th>
                 </tr>
             </thead>
@@ -99,7 +100,7 @@
                                 Chi tiết
                             </a>
                         </td>
-                        <td>{{ $datphong->khachhangid }}</td>
+                        <td>{{ $datphong->khachhangs->ten }}</td>
                         <td>
                             <form action="generate-invoice-pdf" method="get">
                                 @csrf
@@ -108,13 +109,25 @@
                                     Xem hoá đơn</button>
                             </form>
                         </td>
+                        <td style="display: none">
+                            <?php
+                            $thanhtoansss = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangid)->get();
+                            ?>
+                            @foreach ($thanhtoansss as $thanhtoanss)
+                                @if ($thanhtoanss->loaitien == 'traphong')
+                                    {{-- {{ number_format( $thanhtoanss->gia, 0, '', '.') }}đ --}}
+                                    {{$thanhtoanss->gia}}
+                                @endif
+                            @endforeach
+                        </td>
                         <td>
                             <?php
                             $thanhtoansss = App\Models\Thanhtoan::where('khachhangid', $datphong->khachhangid)->get();
                             ?>
                             @foreach ($thanhtoansss as $thanhtoanss)
                                 @if ($thanhtoanss->loaitien == 'traphong')
-                                    {{ $thanhtoanss->gia }} VND
+                                    {{ number_format( $thanhtoanss->gia, 0, '', '.') }}đ
+                                    {{-- {{$thanhtoanss->gia}} --}}
                                 @endif
                             @endforeach
                         </td>
@@ -127,16 +140,17 @@
                     <th>Ngày đặt</th>
                     <th>Ngày trả</th>
                     <th>Số lượng</th>
-                    <th style="width: 1px"></th>
                     <th>Phòng hiện tại</th>
+                    <th>Xem chi tiết</th>
                     <th>Khách hàng</th>
                     <th>Hoá đơn</th>
                     <th>Tổng tiền</th>
+                    <th style="display: none">Tổng tiền</th>
                 </tr>
             </tfoot>
         </table>
         <div class="d-flex justify-content-end">
-            <p id="tongcong">Tổng cộng: {{ $tonggiatatca }} VND</p>
+            <p id="tongcong">Tổng cộng: {{ number_format($tonggiatatca, 0, '', '.') }}đ</p>
         </div>
     </div>
     {{ Html::script('https://code.jquery.com/jquery-3.1.1.min.js') }}

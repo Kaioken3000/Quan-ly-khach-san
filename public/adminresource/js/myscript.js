@@ -55,7 +55,8 @@ function loctheothang() {
         }
     }
     var tongcong = document.getElementById('tongcong');
-    tongcong.textContent = "Tổng cộng: " + tongtien + " VND"
+    tongtien = tongtien.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    tongcong.textContent = "Tổng cộng: " + tongtien
 }
 
 function loctheonam() {
@@ -111,7 +112,8 @@ function loctheonam() {
         }
     }
     var tongcong = document.getElementById('tongcong');
-    tongcong.textContent = "Tổng cộng: " + tongtien + " VND"
+    tongtien = tongtien.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    tongcong.textContent = "Tổng cộng: " + tongtien
 }
 
 function loctheothangvanam() {
@@ -151,7 +153,8 @@ function loctheothangvanam() {
             }
         }
         var tongcong = document.getElementById('tongcong');
-        tongcong.textContent = "Tổng cộng: " + tongtien + " VND"
+        tongtien = tongtien.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+        tongcong.textContent = "Tổng cộng: " + tongtien
     } else {
         loctheonam();
     }
@@ -210,5 +213,6 @@ function loctheoquy() {
         }
     }
     var tongcong = document.getElementById('tongcong');
-    tongcong.textContent = "Tổng cộng: " + tongtien + " VND"
+    tongtien = tongtien.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    tongcong.textContent = "Tổng cộng: " + tongtien
 }

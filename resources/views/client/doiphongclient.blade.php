@@ -138,7 +138,7 @@
 
     @include('client.layouts2.header')
 
-    @include('client.layouts2.menu')
+    {{-- @include('client.layouts2.menu') --}}
 
     @include('client.layouts2.showRoomCheckChange')
 

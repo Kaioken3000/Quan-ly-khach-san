@@ -9,6 +9,7 @@
     </div>
     <div class="search-icon  search-switch">
         @include('client.layouts2.searchMenu2')
+        {{-- @include('client.layouts2.speechrecognition') --}}
     </div>
     <div class="header-configure-area">
         <div class="language-option">

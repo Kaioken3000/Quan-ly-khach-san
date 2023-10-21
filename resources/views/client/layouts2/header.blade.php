@@ -55,7 +55,8 @@
                                         href="/client/phong">Phòng</a></li>
                                 <li class="{{ Request::is('client/virtualTour') ? 'active' : '' }}"><a
                                         href="/client/virtualTour">Tham quan ảo</a></li>
-                                <li class="{{ Request::is('chatify') ? 'active' : '' }}"><a href="/chatify/">Nhắn tin</a></li>
+                                <li class="{{ Request::is('chatify') ? 'active' : '' }}"><a href="/chatify/">Nhắn
+                                        tin</a></li>
                                 @auth
                                     <li>
                                     <li class="{{ Request::is('client/danhsachdatphong') ? 'active' : '' }}"><a
@@ -66,7 +67,8 @@
                                             <li><a href="/client/khachhang">{{ auth()->user()->username }}</a></li>
                                             <li>
                                                 <a href="{{ route('client.logout') }}">
-                                                    <i class="fas fa-sign-out-alt"></i><span class="align-middle">Đăng xuất</span>
+                                                    <i class="fas fa-sign-out-alt"></i><span class="align-middle">Đăng
+                                                        xuất</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -83,6 +85,7 @@
                         <div class="nav-right search-switch">
                             {{-- @include('client.layouts2.searchMenu') --}}
                             @include('client.layouts2.searchMenu2')
+                            {{-- @include('client.layouts2.speechrecognition') --}}
                         </div>
                     </div>
                 </div>

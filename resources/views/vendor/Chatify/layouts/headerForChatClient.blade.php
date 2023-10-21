@@ -82,6 +82,7 @@
                         </nav>
                         <div class="nav-right search-switch">
                             @include('client.layouts2.searchMenu2')
+                            {{-- @include('client.layouts2.speechrecognition') --}}
                         </div>
                     </div>
                 </div>
