@@ -257,7 +257,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             // Catruc nhanvien Routes
             Route::resource('catruc_nhanviens', CatrucNhanvienController::class);
             Route::get('catruc_nhanvien/themCatruc/{nhanvienid}', 'CatrucNhanvienController@viewThemcatruc');
-
         });
 
         //Profile
@@ -311,11 +310,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('client/danhsachdatphong', 'IndexController@danhsachdatphong')->name("client.danhsachdatphong");
         Route::get('client/datphongChitiet/{datphongid}', 'IndexController@datphongChitiet');
 
+        Route::get('client/game', 'IndexController@game');
+        Route::get('client/game1', 'IndexController@game1');
+        Route::get('client/game2', 'IndexController@game2');
+        Route::get('client/game3', 'IndexController@game3');
+        Route::get('client/game4', 'IndexController@game4');
+
+        Route::post('mobile/game/capnhatdiem', 'IndexController@capnhatdiem');
     });
 
     // comment
     Route::resource('comments', CommentController::class);
-    
+
     // AnuongDatphong
     Route::resource('anuong_datphong', AnuongDatphongController::class);
 
@@ -428,11 +434,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // comment
     Route::post('mobile/client/storeComment', 'MobileController@storeComment');
     Route::get('mobile/client/getComment/{phongid}', 'MobileController@getComment');
-    
+
     // Tìm kiếm phòng
     Route::post('mobile/client/searchPhong', 'MobileController@searchPhong');
-    
+
     // 
     Route::get('mobile/client/loaiphongAll', 'MobileController@loaiphongAll');
     Route::get('mobile/client/chinhanhAll', 'MobileController@chinhanhAll');
+    Route::get('mobile/client/dichvuAll', 'MobileController@dichvuAll');
+    Route::get('mobile/client/anuongAll', 'MobileController@anuongAll');
 });

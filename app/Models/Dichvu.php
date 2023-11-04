@@ -26,4 +26,9 @@ class Dichvu extends Model
     {
         return $this->belongsToMany(Datphong::class, 'dichvu_datphong', 'datphongid', 'dichvuid');
     }
+    
+    public function dichvuDatphongs()
+    {
+        return $this->hasMany(DichvuDatphong::class, 'dichvuid');
+    }
 }

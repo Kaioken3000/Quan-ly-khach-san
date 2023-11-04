@@ -10,29 +10,32 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalDichvu">Chọn dịch vụ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            
+
                 </button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('dichvu_datphong.store') }}" method="POST">
                     @csrf
-                    <input hidden type="text" value="{{$datphong->id}}" id="datphongid" name="datphongid">
+                    <input hidden type="text" value="{{ $datphong->id }}" id="datphongid" name="datphongid">
                     <div class="mb-3">
                         <label class="form-label" for="ten">Dịch vụ</label><br>
-                        @foreach($dichvus as $dichvu)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dichvu{{$dichvu->id}}{{$datphong->id}}" name="dichvuid[]" value="{{$dichvu->id}}">
-                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->id}}">
-                                {{$dichvu->ten}}:
-                            </label>
-                            <label class="form-check-label" for="dichvu{{$dichvu->id}}{{$datphong->id}}">
-                                {{$dichvu->giatien}} {{$dichvu->donvi}}
-                            </label>
-                            <input type="text" name="khachhangid" hidden value="{{ $datphong->khachhangs->id }}">
-                        </div>
+                        @foreach ($dichvus as $dichvu)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                    id="dichvu{{ $dichvu->id }}{{ $datphong->id }}" name="dichvuid[]"
+                                    value="{{ $dichvu->id }}">
+                                <label class="form-check-label" for="dichvu{{ $dichvu->id }}{{ $datphong->id }}">
+                                    {{ $dichvu->ten }}:
+                                </label>
+                                <label class="form-check-label" for="dichvu{{ $dichvu->id }}{{ $datphong->id }}">
+                                    {{ $dichvu->giatien }} {{ $dichvu->donvi }}
+                                </label>
+                                <input type="text" name="khachhangid" hidden
+                                    value="{{ $datphong->khachhangs->id }}">
+                            </div>
                         @endforeach
                         @error('ten')
-                        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror
                     </div>
             </div>

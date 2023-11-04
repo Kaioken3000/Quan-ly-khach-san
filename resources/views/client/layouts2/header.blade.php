@@ -55,6 +55,8 @@
                                         href="/client/phong">Phòng</a></li>
                                 <li class="{{ Request::is('client/virtualTour') ? 'active' : '' }}"><a
                                         href="/client/virtualTour">Tham quan ảo</a></li>
+                                <li class="{{ Request::is('client/game') ? 'active' : '' }}"><a
+                                        href="/client/game">Games</a></li>  
                                 <li class="{{ Request::is('chatify') ? 'active' : '' }}"><a href="/chatify/">Nhắn
                                         tin</a></li>
                                 @auth

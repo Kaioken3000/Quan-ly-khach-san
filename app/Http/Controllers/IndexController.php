@@ -616,4 +616,27 @@ class IndexController extends Controller
 
         return redirect('/profile')->with('success', 'User Has Been updated successfully');
     }
+
+    public function game() {
+        return view('client.game');
+    }
+    public function game1() {
+        return view('client.game1');
+    }
+    public function game2() {
+        return view('client.game2');
+    }
+    public function game3() {
+        return view('client.game3');
+    }
+    public function game4() {
+        return view('client.game4');
+    }
+
+    public function capnhatdiem (Request $request) {
+        $khachhang = Khachhang::find($request->khachhangid);
+        $khachhang->diem +=  $request->diem;
+        $khachhang->save();
+        return response()->json("OK", 200);
+    }
 }

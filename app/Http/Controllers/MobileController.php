@@ -14,6 +14,8 @@ use App\Models\Danhsachdatphong;
 use App\Models\Loaiphong;
 use App\Http\Requests\LoginRequest;
 use App\Models\Chinhanh;
+use App\Models\Dichvu;
+use App\Models\Anuong;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -295,5 +297,16 @@ class MobileController extends Controller
     {
         $chinhanhs = Chinhanh::get();
         return response()->json($chinhanhs, 200);
+    }
+
+    public function dichvuAll()
+    {
+        $dichvus = Dichvu::with('dichvuDatphongs')->get();
+        return response()->json($dichvus, 200);
+    }
+    public function anuongAll()
+    {
+        $anuongs = Anuong::get();
+        return response()->json($anuongs, 200);
     }
 }
