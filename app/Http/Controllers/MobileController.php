@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DichvuDatphong;
+use App\Models\AnuongDatphong;
 use App\Models\User;
 use App\Models\Phong;
 use App\Models\Datphong;
@@ -57,7 +59,7 @@ class MobileController extends Controller
         return response()->json($datphong, 200);
     }
 
-    public function kiemtraphongtrong(Request $request) 
+    public function kiemtraphongtrong(Request $request)
     {
         $phongslist = Phong::with('giuongs')->with('thietbis')->with('loaiphongs')->with('hinhs')
             ->with('mieutas')->with('chinhanhs')->with('danhsachdatphongs')->with('datphongs')->get();
@@ -104,7 +106,7 @@ class MobileController extends Controller
     {
         $credentials = $request->getCredentials();
 
-        if (!Auth::validate($credentials)) :
+        if (!Auth::validate($credentials)):
             return response()->json("error", 404);
         endif;
 
@@ -147,14 +149,16 @@ class MobileController extends Controller
     {
         $dat = $this->index_store($request);
         Log::info($dat);
-        Thanhtoan::create(array(
-            "hinhthuc" => "chuyenkhoan",
-            "gia" => $request->sotien,
-            "loaitien" => "datcoc",
-            "chuyenkhoan_token" => $request->stripeToken,
-            "datphongid" => $dat->id,
-            // chua co thoi gian
-        ));
+        Thanhtoan::create(
+            array(
+                "hinhthuc" => "chuyenkhoan",
+                "gia" => $request->sotien,
+                "loaitien" => "datcoc",
+                "chuyenkhoan_token" => $request->stripeToken,
+                "datphongid" => $dat->id,
+                // chua co thoi gian
+            )
+        );
 
         return response()->json("success", 200);
     }
@@ -308,5 +312,49 @@ class MobileController extends Controller
     {
         $anuongs = Anuong::get();
         return response()->json($anuongs, 200);
+    }
+    public function dichvu_datphong_store(Request $request)
+    {
+        $request->validate([
+            'datphongid' => 'required',
+            'dichvuid' => 'required',
+        ]);
+
+        foreach ($request->dichvuid as $dichvu) {
+            $dich = array();
+            $dich['datphongid'] = $request->datphongid;
+            $dich['dichvuid'] = $dichvu;
+
+            DichvuDatphong::create($dich);
+
+            //cap nhat diem cho khachhang
+            $diem = Dichvu::find($dichvu);
+            $diem = $diem->diem;
+            $khachhang = Khachhang::find($request->khachhangid);
+            $khachhang->diem += $diem;
+            $khachhang->save();
+        }
+
+        return response()->json("OK", 200);
+    }
+
+    public function anuong_datphong_store(Request $request)
+    {
+
+        $dich = array();
+        $dich['datphongid'] = $request->datphongid;
+        $dich['soluong'] = $request->soluong;
+        $dich['anuongid'] = $request->anuongid;
+
+        AnuongDatphong::create($dich);
+
+        //cap nhat diem cho khachhang
+        $diem = Anuong::find($request->anuongid);
+        $diem = $diem->diem;
+        $khachhang = Khachhang::find($request->khachhangid);
+        $khachhang->diem += $diem;
+        $khachhang->save();
+
+        return response()->json("OK", 200);
     }
 }
