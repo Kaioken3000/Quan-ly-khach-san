@@ -359,7 +359,7 @@
         .attr("x", 0)
         .attr("y", 15)
         .attr("text-anchor", "middle")
-        .text("SPIN")
+        .text("XOAY")
         .style({
             "font-weight": "bold",
             "font-size": "30px"

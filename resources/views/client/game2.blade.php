@@ -133,13 +133,13 @@
                 2), flyHeight, ...size);
             flyHeight = (canvas.height / 2) - (size[1] / 2);
             // text accueil
-            ctx.fillText(`Best score : ${bestScore}`, 85, 245);
-            ctx.fillText('Click to play', 90, 535);
+            ctx.fillText(`Điểm cao nhất : ${bestScore}`, 85, 245);
+            ctx.fillText('Nhấn để chơi', 90, 535);
             ctx.font = "bold 30px courier";
         }
 
-        document.getElementById('bestScore').innerHTML = `Best : ${bestScore}`;
-        document.getElementById('currentScore').innerHTML = `Current : ${currentScore}`;
+        document.getElementById('bestScore').innerHTML = `Cao nhat : ${bestScore}`;
+        document.getElementById('currentScore').innerHTML = `Điem : ${currentScore}`;
         // tell the browser to perform anim
         window.requestAnimationFrame(render);
 

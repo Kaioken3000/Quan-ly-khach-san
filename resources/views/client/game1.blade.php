@@ -1,17 +1,17 @@
 <link rel="stylesheet" href="style.css">
 <div class="container">
     <header class="title">
-        <h2>JavaScript Snake Game</h2>
-        <h3 id="score">Score: </h3>
+        <h2>Rắn săn mồi</h2>
+        <h3 id="score">Điểm: </h3>
     </header>
 </div>
 
 <div class="container">
     <section class="overlay">
         <div class="gameOverGrid">
-            <h3 id="gameOver">You lose!</h3>
+            <h3 id="gameOver">Bạn thua!</h3>
         </div>
-        <button class="gameOverGrid btn">Play</button>
+        <button class="gameOverGrid btn">Chơi</button>
     </section>
     <section id="gameBoard"></section>
 </div>
@@ -122,6 +122,7 @@
 
     body {
         line-height: 1;
+        background: -webkit-linear-gradient(top, #7fc5c9, #deabbe);
     }
 
     ol,
@@ -195,9 +196,10 @@
         width: 600px;
         height: 600px;
         margin: 0 auto;
-        border: 2px groove #000;
+        /* border: 2px groove #000; */
         box-sizing: content-box;
-        background: #a8c899;
+        /* background: #a8c899; */
+        background: white;
     }
 
     .gameOverGrid {
@@ -210,6 +212,7 @@
         width: 15px;
         height: 15px;
         box-sizing: border-box;
+        /* border: 1px solid #eaeef4; */
     }
 
     .snakePixel {

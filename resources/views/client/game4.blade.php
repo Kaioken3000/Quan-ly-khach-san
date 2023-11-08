@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ô nhó</title>
+    <title>Ô nhớ</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -93,12 +93,12 @@
         <!-- Modal content -->
         <div class="modal-content">
 
-            <h1 id="modal-heading">Congratulation You Won !</h1>
+            <h1 id="modal-heading">Xin chúc mừng bạn đã chiến thắng trò chơi !</h1>
             <div class="result-board">
-                <h1 class='board-heading'>Leader Board</h1>
+                <h1 class='board-heading'>Bảng thành tích</h1>
                 <p id="result" class="result-text"></p>
             </div>
-            <button id="play-again" tabindex ="-1" class="play-again-button">Play again</button>
+            <button id="play-again" tabindex ="-1" class="play-again-button">Chơi lại</button>
 
         </div>
     </div>
@@ -699,8 +699,8 @@
     /* When the user clicks on the last card the modal opens */
     function gameEnds() {
         modalMessage = document.createElement('p');
-        modalMessage.innerHTML = '<p>Your time ' + timer.textContent + ', ' + moves + ' Moves and ' + starN +
-            ' Stars !</br> WOOO!</p>';
+        modalMessage.innerHTML = '<p>Thời gian của bạn là ' + timer.textContent + ', ' + moves + ' Lượt and ' + starN +
+            ' Sao !</br> WOOO!</p>';
         modalMessage.classList.add('modal-text');
         modalHeading.appendChild(modalMessage);
         modal.style.display = 'block';
