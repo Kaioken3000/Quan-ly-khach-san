@@ -316,7 +316,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('client/game3', 'IndexController@game3');
         Route::get('client/game4', 'IndexController@game4');
 
-        Route::post('mobile/game/capnhatdiem', 'IndexController@capnhatdiem');
     });
 
     // comment
@@ -443,8 +442,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('mobile/client/chinhanhAll', 'MobileController@chinhanhAll');
     Route::get('mobile/client/dichvuAll', 'MobileController@dichvuAll');
     Route::get('mobile/client/anuongAll', 'MobileController@anuongAll');
+    Route::get('mobile/client/virtualtourByPhongId/{phongid}', 'MobileController@virtualtourByPhongId');
     
     // 
     Route::post('mobile/client/dichvu_datphong_store', 'MobileController@dichvu_datphong_store');
     Route::post('mobile/client/anuong_datphong_store', 'MobileController@anuong_datphong_store');
+
+    Route::post('mobile/game/capnhatdiem', 'IndexController@capnhatdiem');
 });

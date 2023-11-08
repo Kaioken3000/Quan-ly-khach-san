@@ -18,6 +18,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\Chinhanh;
 use App\Models\Dichvu;
 use App\Models\Anuong;
+use App\Models\Virtualtour;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -356,5 +357,12 @@ class MobileController extends Controller
         $khachhang->save();
 
         return response()->json("OK", 200);
+    }
+
+        public function virtualtourByPhongId(Request $request)
+    {
+        $virtualTour = Virtualtour::with("virtualtourphongs")->whereRelation('virtualtourphongs', 'phongid', $request->phongid)->first();
+
+        return response()->json($virtualTour, 200);
     }
 }

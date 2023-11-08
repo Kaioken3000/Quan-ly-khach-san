@@ -550,7 +550,7 @@
     function capnhatdiem() {
         data = JSON.stringify({
             khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
-            diem: gamePoints,
+            diem: gamePoints,   
         })
         console.log(data);
         fetch("http://khachsan-b1910261.local/mobile/game/capnhatdiem", {
