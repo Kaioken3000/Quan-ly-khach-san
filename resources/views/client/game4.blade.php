@@ -3,6 +3,18 @@
 <head>
     <meta charset="utf-8">
     <title>Ô nhớ</title>
+    <div class="option" style="display: flex; justify-content: center; align-items: center">
+        <div>
+            <h4 id="diemtichluy">Điểm tích luỹ: {{ Auth::user()->khachhangs[0]->diem }}</h4>
+            <h4 id="luot"></h4>
+            <select id="luotoption">
+                <option value="1">1 lượt</option>
+                <option value="5">5 lượt</option>
+                <option value="10">10 lượt</option>
+            </select>
+            <button id="muabutton">Mua lượt chơi</button>
+        </div>
+    </div>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -475,6 +487,9 @@
         }
     }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     let card = document.getElementsByClassName('card');
     let cards = [...card];
@@ -494,8 +509,54 @@
     const modalHeading = document.querySelector('#modal-heading');
     let modalMessage = '';
 
+    var luot = 0;
+    var diemtichluy = {!! Auth::user()->khachhangs[0]->diem !!}
+    diemtichluy = parseInt(diemtichluy)
+    var option = $("#luotoption").val();
     window.onload = function() {
         newGame();
+
+        var luotget = localStorage.getItem("luot");
+        if (luotget == null || luotget < 0) {
+            localStorage.setItem("luot", 0)
+            luotget = 0;
+        }
+        luot = parseInt(luotget)
+        $("#luot").text("Lượt: " + parseInt(luot));
+
+        $("#muabutton").click(function(e) {
+            e.preventDefault();
+
+            luot = luot + parseInt(option);
+            if (option == "1") {
+                diemtichluy -= 100
+                trudiem(100)
+            } else if (option == "5") {
+                diemtichluy -= 500
+                trudiem(500)
+            } else if (option == "10") {
+                diemtichluy -= 1000
+                trudiem(1000)
+            }
+            $("#diemtichluy").text("Điểm tích luỹ: " + (diemtichluy));
+            localStorage.setItem("luot", parseInt(luot))
+            $("#luot").text("Lượt: " + parseInt(luot));
+        });
+
+        function trudiem(diemtru) {
+            datatrudiem = JSON.stringify({
+                khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
+                diem: diemtru,
+            })
+            fetch("http://khachsan-b1910261.local/mobile/game/trudiem", {
+                method: "POST",
+                body: datatrudiem,
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+        }
+
     };
 
     /* RESTART THE GAME */
@@ -566,59 +627,63 @@
 
     /* once the card is clicked the time and comparison initialise */
     function clickedCards() {
-        showCard();
-        addToOpenCards();
-        timeTiger++
-        if (timeTiger === 1) {
-            startTimer();
-        }
-        if (openedCards.length === 2) {
-            addMoves();
-            if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
-                matchCount++;
-                console.log(matchCount);
-                stopClock();
-                match();
-            } else {
-                notMatch();
+        if(luot>0){
+            showCard();
+            addToOpenCards();
+            timeTiger++
+            if (timeTiger === 1) {
+                startTimer();
             }
-        }
-
-
-        /* display the card's symbol */
-        function showCard() {
-            // console.log(event.target.tagName);
-            debugger;
-            const cardTagName = event.target
-            if (cardTagName.tagName === 'LI') {
-                if (openedCards.length < 2) {
-                    event.target.classList.add('open', 'show');
-                    console.log(event.target);
+            if (openedCards.length === 2) {
+                addMoves();
+                if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+                    matchCount++;
+                    console.log(matchCount);
+                    stopClock();
+                    match();
+                } else {
+                    notMatch();
                 }
             }
-        }
-
-        /* add the card to a *list* of "open" cards */
-        function addToOpenCards() {
-            openedCards.push(event.target);
-            // if (openedCards.length < 2);
-        }
-
-        /* check whether the two cards match or not */
-        function match() {
-            openedCards[0].classList.add('match', 'trick');
-            event.target.classList.add('match', 'trick');
-            openedCards[0].classList.remove('show', 'open');
-            event.target.classList.remove('show', 'open');
-            openedCards = [];
-        }
-
-        function notMatch() {
-            setTimeout(function() {
-                openedCards[0].classList.remove('open', 'show');
-                openedCards[1].classList.remove('open', 'show');
+    
+    
+            /* display the card's symbol */
+            function showCard() {
+                // console.log(event.target.tagName);
+                debugger;
+                const cardTagName = event.target
+                if (cardTagName.tagName === 'LI') {
+                    if (openedCards.length < 2) {
+                        event.target.classList.add('open', 'show');
+                        console.log(event.target);
+                    }
+                }
+            }
+    
+            /* add the card to a *list* of "open" cards */
+            function addToOpenCards() {
+                openedCards.push(event.target);
+                // if (openedCards.length < 2);
+            }
+    
+            /* check whether the two cards match or not */
+            function match() {
+                openedCards[0].classList.add('match', 'trick');
+                event.target.classList.add('match', 'trick');
+                openedCards[0].classList.remove('show', 'open');
+                event.target.classList.remove('show', 'open');
                 openedCards = [];
-            }, 500);
+            }
+    
+            function notMatch() {
+                setTimeout(function() {
+                    openedCards[0].classList.remove('open', 'show');
+                    openedCards[1].classList.remove('open', 'show');
+                    openedCards = [];
+                }, 500);
+            }
+        } else {
+            alert("Bạn cần mua thêm lượt!")
         }
     };
 
@@ -699,14 +764,19 @@
     /* When the user clicks on the last card the modal opens */
     function gameEnds() {
         modalMessage = document.createElement('p');
-        modalMessage.innerHTML = '<p>Thời gian của bạn là ' + timer.textContent + ', ' + moves + ' Lượt and ' + starN +
+        modalMessage.innerHTML = '<p>Thời gian của bạn là ' + timer.textContent + ', ' + moves + ' Lượt và ' + starN +
             ' Sao !</br> WOOO!</p>';
         modalMessage.classList.add('modal-text');
         modalHeading.appendChild(modalMessage);
         modal.style.display = 'block';
 
-        alert("Bạn {!! auth()->user()->username !!} được cộng " + 5 + " điểm vào điểm tích luỹ");
-        capnhatdiem(5);
+        alert("Bạn {!! auth()->user()->username !!} được cộng " + 100 + " điểm vào điểm tích luỹ");
+        luot--;
+        localStorage.setItem("luot", luot);
+        $("#luot").text("Lượt: " + luot);
+        diemtichluy += 100
+        $("#diemtichluy").text("Điểm tích luỹ: " + (parseInt(diemtichluy)));
+        capnhatdiem(100);
     }
 
     // cap nhat diem

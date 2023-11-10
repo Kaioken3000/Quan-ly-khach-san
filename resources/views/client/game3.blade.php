@@ -4,17 +4,18 @@
         <h1></h1>
     </div>
     <div class="container">
-        <div class="content">
-            <h1>Vòng xoay may mắn</h1>
-            {{-- <p>
-                This demo uses a CSS box shadow
-                to highlight the content. The
-                shadow colors are animated using
-                a CSS custom property registered
-                with either the @property CSS at-rule
-                or the CSS.registerProperty JavaScipt
-                function..
-            </p> --}}
+        <div class="content" style="display: flex">
+            <div class="option">
+                <h1>Vòng xoay may mắn</h1>
+                <h4 id="diemtichluy">Điểm tích luỹ: {{ Auth::user()->khachhangs[0]->diem }}</h4>
+                <h4 id="luot"></h4>
+                <select id="luotoption">
+                    <option value="1">1 lượt</option>
+                    <option value="5">5 lượt</option>
+                    <option value="10">10 lượt</option>
+                </select>
+                <button id="muabutton">Mua lượt chơi</button>
+            </div>
         </div>
     </div>
 </body>
@@ -35,6 +36,11 @@
         display: flex;
         min-height: 93dvh;
         /* background-color: hsl(224, 15%, 12%); */
+    }
+
+    .option {
+        position: absolute;
+        right: 400;
     }
 
     .content {
@@ -130,7 +136,56 @@
         transform: translate(0, -50%);
     }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    var luot = 0;
+    var diemtichluy = {!! Auth::user()->khachhangs[0]->diem !!}
+    diemtichluy = parseInt(diemtichluy)
+
+    var luotget = localStorage.getItem("luot");
+    if (luotget == null || luotget < 0) {
+        localStorage.setItem("luot", 0)
+        luotget = 0;
+    }
+    luot = parseInt(luotget)
+    $("#luot").text("Lượt: " + parseInt(luot));
+
+    $("#muabutton").click(function(e) {
+        e.preventDefault();
+
+        var option = $("#luotoption").val();
+        luot = luot + parseInt(option);
+        if (option == "1") {
+            diemtichluy -= 100
+            trudiem(100)
+        } else if (option == "5") {
+            diemtichluy -= 500
+            trudiem(500)
+        } else if (option == "10") {
+            diemtichluy -= 1000
+            trudiem(1000)
+        }
+        $("#diemtichluy").text("Điểm tích luỹ: " + diemtichluy);
+        localStorage.setItem("luot", parseInt(luot))
+        $("#luot").text("Lượt: " + parseInt(luot));
+    });
+
+    function trudiem(diemtru) {
+        datatrudiem = JSON.stringify({
+            khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
+            diem: diemtru,
+        })
+        fetch("http://khachsan-b1910261.local/mobile/game/trudiem", {
+            method: "POST",
+            body: datatrudiem,
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+    }
+
     var padding = {
             top: 20,
             right: 40,
@@ -290,52 +345,59 @@
     container.on("click", spin);
 
     function spin(d) {
-
-        container.on("click", null);
-        //all slices have been seen, all done
-        console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
-        if (oldpick.length == data.length) {
-            console.log("done");
+        if (luot > 0) {
             container.on("click", null);
-            return;
-        }
-        var ps = 360 / data.length,
-            pieslice = Math.round(1440 / data.length),
-            rng = Math.floor((Math.random() * 1440) + 360);
-
-        rotation = (Math.round(rng / ps) * ps);
-
-        picked = Math.round(data.length - (rotation % 360) / ps);
-        picked = picked >= data.length ? (picked % data.length) : picked;
-        if (oldpick.indexOf(picked) !== -1) {
-            d3.select(this).call(spin);
-            return;
+            //all slices have been seen, all done
+            console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+            if (oldpick.length == data.length) {
+                console.log("done");
+                container.on("click", null);
+                return;
+            }
+            var ps = 360 / data.length,
+                pieslice = Math.round(1440 / data.length),
+                rng = Math.floor((Math.random() * 1440) + 360);
+    
+            rotation = (Math.round(rng / ps) * ps);
+    
+            picked = Math.round(data.length - (rotation % 360) / ps);
+            picked = picked >= data.length ? (picked % data.length) : picked;
+            if (oldpick.indexOf(picked) !== -1) {
+                d3.select(this).call(spin);
+                return;
+            } else {
+                oldpick.push(picked);
+            }
+            rotation += 90 - Math.round(ps / 2);
+            vis.transition()
+                .duration(3000)
+                .attrTween("transform", rotTween)
+                .each("end", function() {
+                    //mark question as seen
+                    d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                    // .attr("fill", "#111");
+                    //populate question
+                    d3.select("#question h1")
+                        .text(data[picked].question);
+                    oldrotation = rotation;
+    
+                    /* Get the result value from object "data" */
+    
+                    /* Comment the below line for restrict spin to sngle time */
+                    container.on("click", spin);
+    
+                    // thông báo và cập nhật điểm
+                    alert("Bạn {!! auth()->user()->username !!} được cộng " + data[picked].value + " điểm vào điểm tích luỹ");
+                    luot--;
+                    localStorage.setItem("luot", luot);
+                    $("#luot").text("Lượt: " + luot);
+                    diemtichluy += parseInt(data[picked].value);
+                    $("#diemtichluy").text("Điểm tích luỹ: " + (parseInt(diemtichluy)));
+                    capnhatdiem(data[picked].value);
+                });
         } else {
-            oldpick.push(picked);
+            alert("Bạn cần mua thêm lượt để chơi!")
         }
-        rotation += 90 - Math.round(ps / 2);
-        vis.transition()
-            .duration(3000)
-            .attrTween("transform", rotTween)
-            .each("end", function() {
-                //mark question as seen
-                d3.select(".slice:nth-child(" + (picked + 1) + ") path")
-                // .attr("fill", "#111");
-                //populate question
-                d3.select("#question h1")
-                    .text(data[picked].question);
-                oldrotation = rotation;
-
-                /* Get the result value from object "data" */
-                console.log(data[picked].value)
-
-                /* Comment the below line for restrict spin to sngle time */
-                container.on("click", spin);
-
-                // thông báo và cập nhật điểm
-                alert("Bạn {!! auth()->user()->username !!} được cộng " + data[picked].value + " điểm vào điểm tích luỹ");
-                capnhatdiem(data[picked].value);
-            });
     }
     //make arrow
     svg.append("g")
@@ -391,14 +453,14 @@
 
     // cap nhat diem
     function capnhatdiem(diemchon) {
-        data = JSON.stringify({
+        datacapnhat = JSON.stringify({
             khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
             diem: diemchon,
         })
         // console.log(data);
         fetch("http://khachsan-b1910261.local/mobile/game/capnhatdiem", {
             method: "POST",
-            body: data,
+            body: datacapnhat,
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }

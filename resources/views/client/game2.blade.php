@@ -1,5 +1,17 @@
 <header>
+    <div style="position: absolute; right: 200">
+        <h4 id="diemtichluy">Điem tich luy: {{ Auth::user()->khachhangs[0]->diem }}</h4>
+        <h4 id="luot"></h4>
+        <select id="luotoption">
+            <option value="1">1 lượt</option>
+            <option value="5">5 lượt</option>
+            <option value="10">10 lượt</option>
+        </select>
+        <button id="muabutton">Mua lượt chơi</button>
+    </div>
     <h1>Floppy Bird</h1>
+    <button id="startbutton"
+        style="position: absolute; left: 548; padding: 338 214; background-color: transparent; border"></button>
     <div class="score-container">
         <div id="bestScore"></div>
         <div id="currentScore"></div>
@@ -34,7 +46,55 @@
         background: #5EE270;
     }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    var luot = 0;
+    var diemtichluy = {!! Auth::user()->khachhangs[0]->diem !!}
+    diemtichluy = parseInt(diemtichluy)
+    var luotget = localStorage.getItem("luot");
+    if (luotget == null || luotget < 0) {
+        localStorage.setItem("luot", 0)
+        luotget = 0;
+    }
+    luot = parseInt(luotget)
+    $("#luot").text("Lượt: " + parseInt(luot));
+
+    $("#muabutton").click(function(e) {
+        e.preventDefault();
+
+        var option = $("#luotoption").val();
+        luot = luot + parseInt(option);
+        if (option == "1") {
+            diemtichluy -= 100
+            trudiem(100)
+        } else if (option == "5") {
+            diemtichluy -= 500
+            trudiem(500)
+        } else if (option == "10") {
+            diemtichluy -= 1000
+            trudiem(1000)
+        }
+        $("#diemtichluy").text("Điểm tích luỹ: " + diemtichluy);
+        localStorage.setItem("luot", parseInt(luot))
+        $("#luot").text("Lượt: " + parseInt(luot));
+    });
+
+    function trudiem(diemtru) {
+        datatrudiem = JSON.stringify({
+            khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
+            diem: diemtru,
+        })
+        fetch("http://khachsan-b1910261.local/mobile/game/trudiem", {
+            method: "POST",
+            body: datatrudiem,
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+    }
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const img = new Image();
@@ -116,8 +176,14 @@
                         pipe[1] > flyHeight || pipe[1] + pipeGap < flyHeight + size[1]
                     ].every(elem => elem)) {
                     gamePlaying = false;
-                    // alert('nam');
-                    alert("Bạn {!! auth()->user()->username !!} được cộng " + currentScore +" điểm vào điểm tích luỹ");
+                    alert("Bạn {!! auth()->user()->username !!} được cộng " + currentScore +
+                        " điểm vào điểm tích luỹ");
+                    luot--;
+                    localStorage.setItem("luot", luot);
+                    $("#luot").text("Lượt: " + luot);
+                    diemtichluy += parseInt(currentScore-1);
+                    $("#diemtichluy").text("Điểm tích luỹ: " + (parseInt(diemtichluy) + parseInt(
+                        currentScore)));
                     capnhatdiem();
                     setup();
                 }
@@ -133,8 +199,8 @@
                 2), flyHeight, ...size);
             flyHeight = (canvas.height / 2) - (size[1] / 2);
             // text accueil
-            ctx.fillText(`Điểm cao nhất : ${bestScore}`, 85, 245);
-            ctx.fillText('Nhấn để chơi', 90, 535);
+            ctx.fillText(`Điểm cao nhất : ${bestScore}`, 70, 245);
+            ctx.fillText('Nhấn để chơi', 110, 535);
             ctx.font = "bold 30px courier";
         }
 
@@ -150,8 +216,17 @@
     img.onload = render;
 
     // start game
-    document.addEventListener('click', () => gamePlaying = true);
-    window.onclick = () => flight = jump;
+    // document.addEventListener('click', () => gamePlaying = true);
+    $("#startbutton").click(function (e) { 
+        e.preventDefault();
+        if(luot>0){
+            gamePlaying = true
+            flight = jump;
+        } else {
+            alert("Bạn cần mua thêm lượt để chơi!")
+        }
+    });
+    // window.onclick = () => flight = jump;
 
     // cap nhat diem
     function capnhatdiem() {

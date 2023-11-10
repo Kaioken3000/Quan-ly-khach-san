@@ -449,4 +449,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('mobile/client/anuong_datphong_store', 'MobileController@anuong_datphong_store');
 
     Route::post('mobile/game/capnhatdiem', 'IndexController@capnhatdiem');
+    Route::post('mobile/game/trudiem', 'IndexController@trudiem');
 });

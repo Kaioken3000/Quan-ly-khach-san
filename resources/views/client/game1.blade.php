@@ -1,7 +1,16 @@
-<link rel="stylesheet" href="style.css">
 <div class="container">
+    <div>
+        <h4 id="diemtichluy">Điểm tích luỹ: {{ Auth::user()->khachhangs[0]->diem }}</h4>
+        <h4 id="luot"></h4>
+        <select id="luotoption">
+            <option value="1">1 lượt</option>
+            <option value="5">5 lượt</option>
+            <option value="10">10 lượt</option>
+        </select>
+        <button id="muabutton">Mua lượt chơi</button>
+    </div>
     <header class="title">
-        <h2>Rắn săn mồi</h2>
+        {{-- <h2>Rắn săn mồi</h2> --}}
         <h3 id="score">Điểm: </h3>
     </header>
 </div>
@@ -345,6 +354,7 @@
 
     h4 {
         font-size: 0.707rem;
+        margin: 0
     }
 
     h5 {
@@ -390,12 +400,48 @@
     var gameBoardSize = 40;
     var gamePoints = 0;
     var gameSpeed = 100;
+    var luot = 0;
+    var diemtichluy = {!! Auth::user()->khachhangs[0]->diem !!}
+    diemtichluy = parseInt(diemtichluy)
 
     $(document).ready(function() {
         console.log("Ready Player One!");
         createBoard();
         $(".btn").click(function() {
-            startGame();
+            if(luot>0){
+                startGame();
+            } else {
+                alert("Bạn cần mua thêm lượt để chơi!")
+            }
+        });
+
+        var luotget = localStorage.getItem("luot");
+        if (luotget == null || luotget < 0) {
+            localStorage.setItem("luot", 0)
+            luotget = 0;
+        }
+        luot = parseInt(luotget)
+        $("#luot").text("Lượt: " + parseInt(luot));
+
+        $("#muabutton").click(function(e) {
+            e.preventDefault();
+            
+            var option = $("#luotoption").val();
+            luot += parseInt(option);
+            console.log(luot)
+            if(option == "1"){
+                trudiem(100)
+                diemtichluy-=100
+            } else if(option == "5"){
+                diemtichluy-=500
+                trudiem(500)
+            } else if (option == "10"){
+                diemtichluy-=1000
+                trudiem(1000)
+            }
+            $("#diemtichluy").text("Điểm tích luỹ: " + (diemtichluy));
+            localStorage.setItem("luot", parseInt(luot))
+            $("#luot").text("Lượt: " + parseInt(luot));
         });
     });
 
@@ -553,10 +599,24 @@
     function capnhatdiem() {
         data = JSON.stringify({
             khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
-            diem: gamePoints,   
+            diem: gamePoints,
         })
         console.log(data);
         fetch("http://khachsan-b1910261.local/mobile/game/capnhatdiem", {
+            method: "POST",
+            body: data,
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+    }
+    function trudiem(diemtru) {
+        data = JSON.stringify({
+            khachhangid: {!! auth()->user()->khachhangs[0]->id !!},
+            diem: diemtru,
+        })
+        console.log(data);
+        fetch("http://khachsan-b1910261.local/mobile/game/trudiem", {
             method: "POST",
             body: data,
             headers: {
@@ -568,8 +628,15 @@
     function gameOver() {
         Snake.alive = false;
         console.log("Game Over!");
+        
         alert("Bạn {!! auth()->user()->username !!} được cộng " + gamePoints + " điểm vào điểm tích luỹ");
+        luot--;
+        localStorage.setItem("luot", luot);
+        $("#luot").text("Lượt: " + luot);
+        diemtichluy+=gamePoints
+        $("#diemtichluy").text("Điểm tích luỹ: " + (diemtichluy));
         capnhatdiem();
+        
         $(".overlay").show();
         $("#gameOver").show();
         var blink = function() {

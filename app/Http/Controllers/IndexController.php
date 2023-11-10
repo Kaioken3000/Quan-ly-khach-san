@@ -639,4 +639,10 @@ class IndexController extends Controller
         $khachhang->save();
         return response()->json("OK", 200);
     }
+    public function trudiem (Request $request) {
+        $khachhang = Khachhang::find($request->khachhangid);
+        $khachhang->diem -=  $request->diem;
+        $khachhang->save();
+        return response()->json("OK", 200);
+    }
 }
