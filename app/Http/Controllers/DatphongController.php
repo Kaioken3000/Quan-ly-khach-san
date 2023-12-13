@@ -508,6 +508,7 @@ class DatphongController extends Controller
                     if (
                         $phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong
                         && $phong->datphongs->last()->tinhtrangthanhtoan == 0
+                        && $phong->datphongs->last()->huydatphong == 0
                     ) {
                         $xacnhan++;
                     }
@@ -608,6 +609,7 @@ class DatphongController extends Controller
                     if (
                         $phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong
                         && $phong->datphongs->last()->tinhtrangthanhtoan == 0
+                        && $phong->datphongs->last()->huydatphong == 0
                     ) {
                         $xacnhan++;
                     }

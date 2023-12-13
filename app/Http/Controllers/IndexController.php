@@ -259,7 +259,8 @@ class IndexController extends Controller
                 } else if (count($phong->datphongs) > 0) {
                     if (
                         $phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong
-                        && $phong->datphongs->last()->tinhtrangthanhtoan == 0
+                        && $phong->datphongs->last()->tinhtrangthanhtoan == 0 
+                        && $phong->datphongs->last()->huydatphong == 0
                     ) {
                         $xacnhan++;
                     }

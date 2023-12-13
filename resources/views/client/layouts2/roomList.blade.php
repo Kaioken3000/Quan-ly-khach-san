@@ -13,7 +13,8 @@
                 $today = date('Y-m-d');
                 $xacnhan = 0;
                 if (count($phong->datphongs) > 0) {
-                    if ($phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong && $phong->datphongs->last()->tinhtrangthanhtoan == 0) {
+                    if ($phong->datphongs->last()->phongs->last()->so_phong == $phong->so_phong && $phong->datphongs->last()->tinhtrangthanhtoan == 0
+                     && $phong->datphongs->last()->huydatphong == 0) {
                         $xacnhan++;
                     }
                 }
@@ -76,9 +77,10 @@
                                 </tbody>
                             </table>
                             {{-- @else --}}
+                            
                             @if ($xacnhan != 0)
                                 <div class="d-flex">
-                                    <p class="mb-0"> Khách hàng vẫn chưa rời phòng&nbsp;</p>
+                                    <p class="mb-0">Khách hàng vẫn chưa rời phòng&nbsp;</p>
                                 </div>
                             @endif
                             @if ($check != 0)
